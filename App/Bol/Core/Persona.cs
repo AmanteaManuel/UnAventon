@@ -59,14 +59,7 @@ namespace Bol
             }
         }
 
-
-
-
-
-
-
-
-        #region      
+        #endregion
 
         #region " Views "
         #endregion

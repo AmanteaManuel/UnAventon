@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Dal.Core.Support;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Dal
 {
-    class Vehiculo
+    class Vehiculo : ConxionBd
     {
     }
 }

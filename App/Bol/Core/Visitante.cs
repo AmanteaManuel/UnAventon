@@ -6,5 +6,6 @@ namespace Bol
 {
     public class Visitante : Persona
     {
+
     }
 }
