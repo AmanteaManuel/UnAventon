@@ -1,14 +1,15 @@
-<!doctype html>
+﻿<!doctype html>
 <html class="no-js" lang="es-419">
 <head>
+    <!--<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">-->
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
     <title> Home </title>
 
     <!--ESTO VA A LA MASTER-->
-    
+
     <meta charset="UTF-8">
 
-    
+
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
     <script src="../Scripts/bootstrap.min.js"></script>
     <link href="../Content/bootstrap.min.css" rel="stylesheet" />
@@ -21,6 +22,16 @@
             background-attachment: fixed;
             background-size: cover;
             background-color: #464646;
+        }
+
+        /*h4 {
+            font-family: Lobster;
+        }*/
+        h4{
+            text-shadow: 
+                3px 3px 5px #000000, 
+                6px 6px 5px #464646, 
+                9px 9px 5px #808080;
         }
     </style>
 
@@ -36,10 +47,10 @@
             <h1 class="text-center" style="color:white"><big> Bienvenido a Un Aventón</big></h1>
         </div>
     </div>
-    <p class="text-center" style="color:white"><strong><big>En está página podrá buscar y compartir viajes con los demás usuarios<big></strong></p>
+    <p class="text-center" style="color:white" ><strong><big>En está página podrá buscar y compartir viajes con los demás usuarios<big></strong></p>
     <hr />
-    <h4 class="text-center" style="color:white"> Por favor, ingresé los datos solicitados a continuación para poder usar la página o puede <a style="color:white" href="#" id="#"><b>continuar como invitado</b></a></h4><!-- cambiar ID-->
-    <!--<div>
+        <h4 class="text-center"  style="color:white" > Por favor, ingresé los datos solicitados a continuación para poder usar la página o puede <a style="color:orangered" href="#" id="#"><b>continuar como invitado</b></a></h4><!-- cambiar ID-->
+        <!--<div>
         <p class="text-center" style="color: white">Email</p>
         <input style="margin-left:40%" type= "text:center"required placeholder= "ejemplo@gmail.com">
         <p class="text-center" style="color: white">contraseña</p>
@@ -52,14 +63,7 @@
             <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-login">
                     <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <a style="color:white" href="#" class="active" id="login-form-link">Iniciar sesión / </a>
-                            </div>
-                            <div class="col-xs-6">
-                                <a style="color:white" href="#" id="register-form-link"> Regístrate ahora</a>
-                            </div>
-                        </div>
+                        
                         <hr>
                     </div>
                     <div class="panel-body">
@@ -72,23 +76,26 @@
                                     <div class="form-group">
                                         <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Contraseña">
                                     </div>
-                                    <div class="form-group text-center">
+                                    <!--<div class="form-group text-center">
                                         <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
                                         <label style="color:black" for="remember"> Recordarme</label>
-                                    </div>
+                                    </div>-->
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-6 col-sm-offset-3">
                                                 <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Iniciar sesión">
+                                            </div>
+                                            <div class="col-sm-6 col-sm-offset-3">
+                                                <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Registrarse">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <div class="text-center">
+                                                <!--<div class="text-center">
                                                     <a style="color:black" href="http://phpoll.com/recover" tabindex="5" class="forgot-password">¿Has olvidado tu contraseña?</a>
-                                                </div>
+                                                </div>-->
                                             </div>
                                         </div>
                                     </div>
