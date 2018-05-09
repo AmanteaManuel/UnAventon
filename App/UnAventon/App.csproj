@@ -68,6 +68,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="%24trash\Cerrar sesion.php" />
     <Content Include="%24trash\htmleve\html css js\editarcontra.js" />
     <Content Include="%24trash\htmleve\html css js\editarinformacion.html" />
     <Content Include="%24trash\htmleve\html css js\editarprodvalidar.js" />
