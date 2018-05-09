@@ -12,6 +12,11 @@ namespace Bol
         private int _id;
         private int _codigo;
         private string _descripcion;
+        private string _nombre;
+        private string _apellido;
+        private DateTime _fechaNacimiento;
+        private string _email;
+
 
 
         #endregion
@@ -59,9 +64,71 @@ namespace Bol
             }
         }
 
+        /// <summary>
+        /// Nombre de la persona
+        /// </summary>
+        public string Nombre
+        {
+            get
+            {
+                return _nombre;
+            }
+            set
+            {
+                _nombre = value;
+            }
+        }
+
+        /// <summary>
+        /// Apellido de la persona
+        /// </summary>
+        public string Apellido
+        {
+            get
+            {
+                return _apellido;
+            }
+            set
+            {
+                _apellido = value;
+            }
+        }
+
+        /// <summary>
+        /// Fecha de nacimiento de la persona
+        /// </summary>
+        public DateTime FechaNacimiento
+        {
+            get
+            {
+                return _fechaNacimiento;
+            }
+            set
+            {
+                _fechaNacimiento = value;
+            }
+        }
+
+        /// <summary>
+        /// email de la persona
+        /// </summary>
+        public string Email
+        {
+            get
+            {
+                return _email;
+            }
+            set
+            {
+                _email = value;
+            }
+        }
+
         #endregion
 
         #region " Views "
+
+
         #endregion
     }
 }

@@ -1,0 +1,125 @@
+<!doctype html>
+<html class="no-js" lang="es-419">
+<head>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+    <title> Home </title>
+
+    <!--ESTO VA A LA MASTER-->
+    
+    <meta charset="UTF-8">
+
+    
+    <script src="../Scripts/jquery-3.3.1.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            background-image: url("fondo.jpg");
+            background-position: center center;
+            backgroun-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-color: #464646;
+        }
+    </style>
+
+</head>
+<!------------------------------------Separacion del head y el style---------------------------------------------------------------------------->
+<!------------------------------------Separacion del style con el body--------------------------------------------------------------------------->
+<body>
+    <div class="rows">
+        <div class="col-md-8">
+            <img style="margin-left:5%" src="PicsArt_05-05-10.35.48.png" height="8%" width="8%" alt="Logo Un Aventón">
+        </div>
+        <div class="col-md-16">
+            <h1 class="text-center" style="color:white"><big> Bienvenido a Un Aventón</big></h1>
+        </div>
+    </div>
+    <p class="text-center" style="color:white"><strong><big>En está página podrá buscar y compartir viajes con los demás usuarios<big></strong></p>
+    <hr />
+    <h4 class="text-center" style="color:white"> Por favor, ingresé los datos solicitados a continuación para poder usar la página o puede <a style="color:white" href="#" id="#"><b>continuar como invitado</b></a></h4><!-- cambiar ID-->
+    <!--<div>
+        <p class="text-center" style="color: white">Email</p>
+        <input style="margin-left:40%" type= "text:center"required placeholder= "ejemplo@gmail.com">
+        <p class="text-center" style="color: white">contraseña</p>
+        <input style="margin-left:40%" type= "text-center"required placeholder= "contraseña">
+        <hr>
+        <button style="margin-left:45%" type "submit"> Registrarse </button>
+    </div>-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-login">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <a style="color:white" href="#" class="active" id="login-form-link">Iniciar sesión / </a>
+                            </div>
+                            <div class="col-xs-6">
+                                <a style="color:white" href="#" id="register-form-link"> Regístrate ahora</a>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-16">
+                                <div id="login-form" action="http://phpoll.com/login/process" method="post" role="form" style="display: block;">
+                                    <div class="form-group">
+                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Usuario" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Contraseña">
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+                                        <label style="color:black" for="remember"> Recordarme</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-sm-offset-3">
+                                                <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Iniciar sesión">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="text-center">
+                                                    <a style="color:black" href="http://phpoll.com/recover" tabindex="5" class="forgot-password">¿Has olvidado tu contraseña?</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form id="register-form" action="http://phpoll.com/register/process" method="post" role="form" style="display: none;">
+                                    <div class="form-group">
+                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Usuario" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Correo electronico" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Contraseña">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirmar contraseña">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-sm-offset-3">
+                                                <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Crear cuenta">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

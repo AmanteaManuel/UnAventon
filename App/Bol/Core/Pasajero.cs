@@ -11,6 +11,7 @@ namespace Bol
         private int _id;
         private int _codigo;
         private string _descripcion;
+        private int _reputacion;
 
 
         #endregion
@@ -58,9 +59,43 @@ namespace Bol
             }
         }
 
+        /// <summary>
+        /// propiedad que manejara la reputacion de un Pasajero
+        /// </summary>
+        public int Reputacion
+        {
+            get
+            {
+                return _reputacion;
+            }
+            set
+            {
+                _reputacion = value;
+            }
+        }
+
         #endregion
 
         #region " Views "
+
+        /// <summary>
+        /// Metodo que aumenta la reputacion 1 punto
+        /// </summary>
+        /// <param name="chofer"></param>
+        public void SubirReputacion()
+        {
+            this.Reputacion = this.Reputacion ++;
+        }
+
+        /// <summary>
+        /// Metodo que baja la reputacion 1 punto
+        /// </summary>
+        /// <param name="chofer"></param>
+        public void BajarReputacion()
+        {
+            this.Reputacion = this.Reputacion --;
+        }
+
         #endregion
     }
 }

@@ -11,7 +11,7 @@ namespace Bol
         private int _id;
         private int _codigo;
         private string _descripcion;
-
+        private Respuesta _respuesta;
 
         #endregion
 
