@@ -135,6 +135,7 @@
     <Content Include="%24trash\htmleve\php\usuario.php" />
     <Content Include="%24trash\htmleve\php\vende.php" />
     <Content Include="%24trash\htmleve\php\vendealta.php" />
+    <Content Include="%24trash\Iniciar sesion.php" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
