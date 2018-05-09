@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" href="../img/icono.ico"/>
+	<title>Reversa | Registrarse</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="estilo1.css">
+</head>
+<script type="text/javascript" src="perfilvalidar.js"></script>
+<body>
+	<div id="global">
+		<header>
+			<div class="banner">
+				<a href="index.html" title="Volver al inicio">
+					<img class="banner" src="../img/banner.png" alt="Reversa">
+				</a>
+			</div>	
+			<!--<div id="buscador">
+				<form id="search_mini_form" action="http://www.reversa.com.ar/catalogsearch/result/" method="get">
+    				<input id="search" type="text" name="q" class="input-text" maxlength="128" placeholder="Buscar">
+    				<button type="submit" title="Buscar" class="button">Buscar</button>
+				</form>
+			</div>-->
+			<nav>
+				<ul>
+					<li>
+						<a href="index.html">INICIO</a>
+					</li>
+					<li>
+						<a href="tienda.html">TIENDA ONLINE</a>
+					</li>
+					<li>
+						<a href="perfil.html">REGISTRARSE</a>
+					</li>
+					<li>
+						<a href="vende.html">VENDÉ LO TUYO</a>
+					</li>
+					<li>
+						<a href="ingresar.html">INGRESAR</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<article>
+			
+			<section>
+				<form class="contact_form" action="#" method="get" name="contact_form">
+					<div> 
+						<ul> 
+							<li> 
+								<h3>DATOS PERSONALES</h3>
+								<span class="required_notification">* Datos requeridos</span> 
+							</li>
+							<li> 
+								<label for="name"><em>*</em>Nombre:</label>
+								<input type="text" name="nombre" required />
+							</li>
+							<li> 
+								<label for="surname"><em>*</em>Apellido:</label>
+								<input type="text" name="apellido" required/>
+							</li> 
+							<li>
+								<label for="email"><em>*</em>Email:</label>
+								<input type="email" name="email" required />
+								<span class="form_hint"></span>
+							</li>
+							<li> 
+								<label for="phone"><em>*</em>Teléfono:</label>
+								<input name="telefono" required/>
+							</li>
+							<li> 
+								<label for="name"><em>*</em>Nombre usuario:</label>
+								<input type="text" name="nombredeusuario" required/>
+							</li>
+							<!--
+							<li>
+								<label for="tipo"><em>*</em>Genero:</label>
+
+								<select id="gender" name="gender" title="Género" class="validate-select" required/>
+                                    <option value="" selected="selected"></option>
+                    				<option value="1">Hombre</option>
+                    				<option value="2">Mujer</option>
+            					</select>
+
+							</li><-->
+							<li>
+								<div class="field">
+                        			<label for="password" class="required"><em>*</em>Clave:</label>
+                        			
+                        			<div class="input-box">
+                            			<input type="password" name="claveactual" id="password" title="Contraseña" class="input-text required-entry validate-password" required/>
+                        			</div> 
+                    			</div>
+                    		</li>
+                    		<li>
+                    			<div class="field">
+                        			<label for="confirmation" ><em>*</em>Confirmar clave:</label>
+                        			
+                        			<div class="input-box">
+                            			<input type="password" name="confirmarclave" title="Confirmar la contraseña" id="confirmation" class="input-text required-entry validate-cpassword" required/>
+                        			</div>
+                    			</div>
+                    		</li>
+							<li>
+								<button class="submit" type="submit" onClick="runSubmit(this.form)">REGISTRARME</button>
+							</li> 							
+						</ul> 
+					</div>
+				</form>			
+			</section>	
+		</article>
+		<hr color="#666">
+			<div id="contenedor">
+				<div id="contenido">
+					<img src="../img/mark2.jpg">
+				</div>
+			</div>	
+		</article>
+		<div id="footer">
+			<p id="pie">&copy; Reversa - Todos los derechos reservados 2015-2016</p>
+		</div>
+	</div>
+</body>
+
+</html>

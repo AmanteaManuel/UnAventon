@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" href="../img/icono.ico"/>
+	<title>Reversa | Vendé lo tuyo</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="estilo1.css">
+</head>
+<body>
+	<div id="global">
+	<?php
+		include('header.php');
+	?>
+		<article>
+
+			<section>
+					<p><strong>¿Qué quieres publicar?</strong></p>
+					<form id="search_mini_form" action="http://www.reversa.com.ar/catalogsearch/result/" method="get">
+						<select id="gender" name="gender" title="Categoría" class="validate-select" required/>
+							<option value="" selected="selected"></option>
+							<option value="1">Abrigos</option>
+							<option value="2">Accesorios</option>
+							<option value="3">Calzados</option>
+							<option value="4">Monos</option>
+							<option value="5">Pantalones</option>
+							<option value="6">Remeras y Camisas</option>
+							<option value="7">Shorts y Polleras</option>
+							<option value="8">Trajes de baño</option>
+							<option value="9">Vestidos</option>
+							<option value="10">Todos</option>
+						</select>	
+					</form>
+				
+				<form class="contact_form" action="" method="post" name="contact_form">
+					<div> 
+						<p><strong>Detalla y publica tu aviso</strong></p>
+						<ul> 
+							<li> 
+								<label>Título producto:</label>
+								<input type="text" name="titulo" required/>
+							</li> 
+							<li>
+								<label>Precio en pesos:</label>
+								<input type="text" name="precio" required />
+							</li>
+							<li>
+								<label>Fecha publicación:</label>
+								<input type="date" inputmode="numeric" id="day" name="fechapublicacion" value="" title="Día/Mes/Año" required>
+							</li>
+							<li>
+								<label>Fecha caducidad:</label>
+								<input type="date" inputmode="numeric" id="day" name="fechacaducidad" value="" title="Día/Mes/Año" required>
+							</li>
+							<li> 
+								<label>Descripción:</label>
+								<textarea type="text" name="descripcion" id="desc" rows=5 cols=20 > </textarea>
+							</li>
+							<li>
+								<div class="fotoasubir">
+									<label>Foto:</label>
+									<input></input>
+									<button type="submit" title="Agregar foto" class="button">Agregar foto</button>
+								</div>
+							</li>	
+							<li>
+								<button class="submit" type="submit" onClick="runSubmit(this.form)">PUBLICA</button>
+							</li> 
+												
+						</ul> 
+					</div>
+				</form>	
+
+			</section>	
+						
+		</article>
+		<?php 
+			include('footer.php');
+		?>
+		
+		
+	</div>
+</body>
+<script language="JavaScript">
+	function runSubmit (form)  {
+		if (form.titulo.value == ""){
+			alert("Ingrese título");
+			return false;
+		}
+		if (form.precio.value == ""){
+			alert("Ingresar precio");
+			return false;
+		}
+		if (form.fechapublicacion.value == "") {
+			alert("Ingresar DD/MM/AAAA");
+			return false;
+		}
+		if (form.fechacaducidad.value == "") {
+			alert("Ingresar DD/MM/AAAA");
+			return false;
+		}
+		if (form.descripcion.value == ""){
+			alert("Ingrese descripción");
+			return false;
+		}
+		return true;	
+	}	
+	
+</script>
+</html>

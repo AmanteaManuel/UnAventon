@@ -68,6 +68,75 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="%24trash\Cerrar sesion.php" />
+    <Content Include="%24trash\htmleve\html css js\editarcontra.js" />
+    <Content Include="%24trash\htmleve\html css js\editarinformacion.html" />
+    <Content Include="%24trash\htmleve\html css js\editarprodvalidar.js" />
+    <Content Include="%24trash\htmleve\html css js\editarvalidar.js" />
+    <Content Include="%24trash\htmleve\html css js\estilo1.css" />
+    <Content Include="%24trash\htmleve\html css js\index.html" />
+    <Content Include="%24trash\htmleve\html css js\ingresar.html" />
+    <Content Include="%24trash\htmleve\html css js\ingresarvalidar.js" />
+    <Content Include="%24trash\htmleve\html css js\micuenta.html" />
+    <Content Include="%24trash\htmleve\html css js\perfil.html" />
+    <Content Include="%24trash\htmleve\html css js\perfilvalidar.js" />
+    <Content Include="%24trash\htmleve\html css js\producto.html" />
+    <Content Include="%24trash\htmleve\html css js\tienda.html" />
+    <Content Include="%24trash\htmleve\html css js\validarcategoria.js" />
+    <Content Include="%24trash\htmleve\html css js\validarvende.js" />
+    <Content Include="%24trash\htmleve\html css js\vende.html" />
+    <Content Include="%24trash\htmleve\img\abrigo.png" />
+    <Content Include="%24trash\htmleve\img\accesorios.png" />
+    <Content Include="%24trash\htmleve\img\backend.jpg" />
+    <Content Include="%24trash\htmleve\img\backend.png" />
+    <Content Include="%24trash\htmleve\img\banner.png" />
+    <Content Include="%24trash\htmleve\img\calzados.png" />
+    <Content Include="%24trash\htmleve\img\fondo-de-cebra.jpg" />
+    <Content Include="%24trash\htmleve\img\gif.gif" />
+    <Content Include="%24trash\htmleve\img\icono - copia.png" />
+    <Content Include="%24trash\htmleve\img\icono.ico" />
+    <Content Include="%24trash\htmleve\img\mark2.jpg" />
+    <Content Include="%24trash\htmleve\img\monos.png" />
+    <Content Include="%24trash\htmleve\img\pantalones.png" />
+    <Content Include="%24trash\htmleve\img\polleras.png" />
+    <Content Include="%24trash\htmleve\img\remeras.png" />
+    <Content Include="%24trash\htmleve\img\small-5452-56fc25e2a8196.png" />
+    <Content Include="%24trash\htmleve\img\trajes.png" />
+    <Content Include="%24trash\htmleve\img\vestidos.png" />
+    <Content Include="%24trash\htmleve\php\agregarusuario.php" />
+    <Content Include="%24trash\htmleve\php\backend.php" />
+    <Content Include="%24trash\htmleve\php\borrarcategoria.php" />
+    <Content Include="%24trash\htmleve\php\borrarproducto.php" />
+    <Content Include="%24trash\htmleve\php\categoriaalta.php" />
+    <Content Include="%24trash\htmleve\php\categoriaalta2.php" />
+    <Content Include="%24trash\htmleve\php\categorias.php" />
+    <Content Include="%24trash\htmleve\php\conexion.php" />
+    <Content Include="%24trash\htmleve\php\desconectar_usuario.php" />
+    <Content Include="%24trash\htmleve\php\editarcategoria.php" />
+    <Content Include="%24trash\htmleve\php\editarcategoria2.php" />
+    <Content Include="%24trash\htmleve\php\editarcontrasena.php" />
+    <Content Include="%24trash\htmleve\php\editarcontrasena2.php" />
+    <Content Include="%24trash\htmleve\php\editarinformacion.php" />
+    <Content Include="%24trash\htmleve\php\editarinformacion2.php" />
+    <Content Include="%24trash\htmleve\php\editarproducto.php" />
+    <Content Include="%24trash\htmleve\php\editarproducto2.php" />
+    <Content Include="%24trash\htmleve\php\footer.php" />
+    <Content Include="%24trash\htmleve\php\header.php" />
+    <Content Include="%24trash\htmleve\php\index.php" />
+    <Content Include="%24trash\htmleve\php\ingresar.php" />
+    <Content Include="%24trash\htmleve\php\menu.php" />
+    <Content Include="%24trash\htmleve\php\micuenta.php" />
+    <Content Include="%24trash\htmleve\php\mostrarImagen.php" />
+    <Content Include="%24trash\htmleve\php\paginador2.php" />
+    <Content Include="%24trash\htmleve\php\perfil.php" />
+    <Content Include="%24trash\htmleve\php\producto.php" />
+    <Content Include="%24trash\htmleve\php\script_acceso_usuario.php" />
+    <Content Include="%24trash\htmleve\php\tienda.php" />
+    <Content Include="%24trash\htmleve\php\tusproductos.php" />
+    <Content Include="%24trash\htmleve\php\usuario.php" />
+    <Content Include="%24trash\htmleve\php\vende.php" />
+    <Content Include="%24trash\htmleve\php\vendealta.php" />
+    <Content Include="%24trash\Iniciar sesion.php" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -80,6 +149,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="%24trash\htmleve\img\img - Acceso directo.lnk" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -143,6 +213,7 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
