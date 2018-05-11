@@ -43,13 +43,11 @@
     <Compile Include="Core\Chofer.cs" />
     <Compile Include="Core\Log.cs" />
     <Compile Include="Core\Pasajero.cs" />
-    <Compile Include="Core\Persona.cs" />
     <Compile Include="Core\Pregunta.cs" />
     <Compile Include="Core\Respuesta.cs" />
     <Compile Include="Core\Usuario.cs" />
     <Compile Include="Core\Vehiculo.cs" />
     <Compile Include="Core\Viaje.cs" />
-    <Compile Include="Core\Visitante.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

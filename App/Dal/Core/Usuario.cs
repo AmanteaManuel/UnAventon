@@ -14,7 +14,7 @@ namespace Dal.Core
         /// <summary>
         /// query que inserta en la base una persona
         /// </summary>
-        private const string INSERT_PERSONA = @"INSERT INTO Persona (NumeroDocumento,
+        private const string INSERT_PERSONA = @"INSERT INTO Usuario (NumeroDocumento,
                                                     Sexo,
                                                     TipoDocumentoId,
                                                     Apellido,

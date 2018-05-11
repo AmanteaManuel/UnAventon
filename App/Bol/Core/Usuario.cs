@@ -11,6 +11,13 @@ namespace Bol
     {
         #region " atributes "
 
+        private int _id;
+        private int _codigo;
+        private string _descripcion;
+        private string _nombre;
+        private string _apellido;
+        private DateTime _fechaNacimiento;
+        private string _email;
         private string _nombreUsuario;
         private string _contraseña;
         private Chofer _chofer;
@@ -34,7 +41,6 @@ namespace Bol
                 _nombreUsuario = value;
             }
         }
-
 
         public Chofer Chofer
         {
@@ -75,17 +81,124 @@ namespace Bol
             }
         }
 
+        /// <summary>
+        /// Identificador univoco de la bd
+        /// </summary>
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+            }
+        }
+
+        /// <summary>
+        /// Codigo de la persona
+        /// </summary>
+        public int Codigo
+        {
+            get
+            {
+                return _codigo;
+            }
+            set
+            {
+                _codigo = value;
+            }
+        }
+
+        /// <summary>
+        /// Descripcion de la persona
+        /// </summary>
+        public string Descripcion
+        {
+            get
+            {
+                return _descripcion;
+            }
+            set
+            {
+                _descripcion = value;
+            }
+        }
+
+        /// <summary>
+        /// Nombre de la persona
+        /// </summary>
+        public string Nombre
+        {
+            get
+            {
+                return _nombre;
+            }
+            set
+            {
+                _nombre = value;
+            }
+        }
+
+        /// <summary>
+        /// Apellido de la persona
+        /// </summary>
+        public string Apellido
+        {
+            get
+            {
+                return _apellido;
+            }
+            set
+            {
+                _apellido = value;
+            }
+        }
+
+        /// <summary>
+        /// Fecha de nacimiento de la persona
+        /// </summary>
+        public DateTime FechaNacimiento
+        {
+            get
+            {
+                return _fechaNacimiento;
+            }
+            set
+            {
+                _fechaNacimiento = value;
+            }
+        }
+
+        /// <summary>
+        /// email de la Usuario
+        /// </summary>
+        public string Email
+        {
+            get
+            {
+                return _email;
+            }
+            set
+            {
+                _email = value;
+            }
+        }
+
         #endregion
 
         #region " Constructor "
 
         public Usuario() { }
         
-        public  Usuario (string nombre, string apellido, string mail)
+        public  Usuario (string nombre, string apellido, string email, DateTime fechaNacimiento, string nombreUsuario)
         {
             this.Nombre = nombre;
             this.Apellido = apellido;
-            this.Email = mail;
+            this.Email = email;
+            this.FechaNacimiento = fechaNacimiento;
+            this.NombreUsuario = nombreUsuario;
             //todos los campos;
         }
         #endregion
@@ -120,7 +233,7 @@ namespace Bol
         }
 
         /// <summary>
-        /// Recupera una lista con todas las personas
+        /// Recupera una lista con todas los Usuario
         /// </summary>
         /// <param name="ds"></param>
         /// <returns></returns>
@@ -148,7 +261,7 @@ namespace Bol
         }
 
         /// <summary>
-        /// Obtengo la persona del Id.
+        /// Obtengo el Usuario del Id.
         /// </summary>
         /// <param name="personaId"></param>
         /// <returns></returns>
@@ -163,9 +276,9 @@ namespace Bol
         #region " CRUD "
 
         /// <summary>
-        /// Este metodo crea una persona en la base
+        /// Este metodo crea un usuario en la base
         /// </summary>
-        /// <param name="persona">persona que se quiere crear</param>
+        /// <param name="Usuario">persona que se quiere crear</param>
         /// <returns>retorna el id de la persona en caso de exito -1 en caso que no se haya agregado</returns>
         internal static int Create(Usuario usuario)
         {
@@ -191,9 +304,9 @@ namespace Bol
         }
 
         /// <summary>
-        /// este metodo actualiza una persona en la base
+        /// este metodo actualiza un Usuario en la base
         /// </summary>
-        /// <param name="persona">persona que se quiere actualizar</param>
+        /// <param name="Usuario">Usuario que se quiere actualizar</param>
         internal static void Update(Usuario usuario)
         {
             try
