@@ -5,6 +5,43 @@ namespace Dal.Core.Support
 {
     public class ConxionBd
     {
+        // Select Command text
+        private string _SelectCommandText;
+
+        //Colección de parámetros para operaciones CRUD
+        private SqlCommand _ExecuteParameters = new SqlCommand();
+
+        private string _executeCommandText;
+
+        #region Properties
+
+        /// <summary>
+        /// Command Text
+        /// </summary>
+        protected string SelectCommandText
+        {
+            get { return _SelectCommandText; }
+            set { _SelectCommandText = value; }
+        }
+
+        /// <summary>
+        /// Command Text para operaciones CRUD
+        /// </summary>
+        protected string ExecuteCommandText
+        {
+            get { return _executeCommandText; }
+            set { _executeCommandText = value; }
+        }
+
+        /// <summary>
+        /// Colección de parámetros para operaciones CRUD
+        /// </summary>
+        protected SqlCommand ExecuteParameters
+        {
+            get { return _ExecuteParameters; }
+            set { _ExecuteParameters = value; }
+        }
+
         //Cadena de conexion de la base de datos
         string cadena = "Data Source=(localdb)\\Servidor;Initial Catalog=UnAventon; Integrated Security=True";
 
@@ -104,5 +141,6 @@ namespace Dal.Core.Support
             }
         }
 
+        #endregion
     }
 }

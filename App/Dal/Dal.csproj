@@ -50,6 +50,7 @@
     <Compile Include="Core\Vehiculo.cs" />
     <Compile Include="Core\Viaje.cs" />
     <Compile Include="Core\Visitante.cs" />
+    <Compile Include="DalBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

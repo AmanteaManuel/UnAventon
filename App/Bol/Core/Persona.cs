@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace Bol
@@ -31,7 +32,11 @@ namespace Bol
             get
             {
                 return _id;
-            }            
+            }           
+            set
+            {
+                _id = value;
+            }
         }
 
         /// <summary>
@@ -128,6 +133,12 @@ namespace Bol
 
         #region " Views "
 
+
+        #endregion
+
+        #region " Fill "
+
+        
 
         #endregion
     }
