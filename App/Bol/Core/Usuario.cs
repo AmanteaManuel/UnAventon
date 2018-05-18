@@ -7,7 +7,7 @@ using Dal.Core;
 namespace Bol
 {
     [Serializable]
-    public class Usuario : Persona
+    public class Usuario
     {
         #region " atributes "
 
@@ -22,6 +22,8 @@ namespace Bol
         private string _contraseña;
         private Chofer _chofer;
         private Pasajero _pasajero;
+        private string _dni;
+        private bool _siActivo;
 
         #endregion
 
@@ -96,6 +98,18 @@ namespace Bol
             }
         }
 
+        public string Dni
+        {
+            get
+            {
+                return _dni;
+            }
+            set
+            {
+                _dni = value;
+            }
+        }
+
         /// <summary>
         /// Codigo de la persona
         /// </summary>
@@ -153,6 +167,21 @@ namespace Bol
             set
             {
                 _apellido = value;
+            }
+        }
+
+        /// <summary>
+        /// Apellido de la persona
+        /// </summary>
+        public bool SiActivo
+        {
+            get
+            {                
+                return _siActivo;
+            }
+            set
+            {
+                _siActivo = value;
             }
         }
 
@@ -280,7 +309,7 @@ namespace Bol
         /// </summary>
         /// <param name="Usuario">persona que se quiere crear</param>
         /// <returns>retorna el id de la persona en caso de exito -1 en caso que no se haya agregado</returns>
-        internal static int Create(Usuario usuario)
+        public static int Create(Usuario usuario)
         {
             int outId = 0;
             try
@@ -290,12 +319,16 @@ namespace Bol
                 if (usuario.Chofer != null)
                     ChoferId = usuario.Chofer.Id;
 
-                outId = new Dal.Core.Usuario().Create(usuario.Nombre,
+                outId = new Dal.Core.Usuario().Create(
+                    usuario.NombreUsuario,
                     usuario.Nombre,
-                    usuario.Apellido,
-                    ChoferId,
+                    usuario.Apellido,                   
+                    usuario.Dni,
                     usuario.FechaNacimiento,
-                    usuario.Contraseña);            
+                    usuario.Email,                    
+                    usuario.Contraseña,
+                    usuario.SiActivo                    
+                    );            
                                    
                 usuario.Id = outId;
                 return outId;
@@ -311,17 +344,17 @@ namespace Bol
         {
             try
             {
-                //Objetos
-                int? ObjetoId = null;
-                if (usuario.Chofer != null)
-                    ObjetoId = usuario.Chofer.Id;
+                ////Objetos
+                //int? ObjetoId = null;
+                //if (usuario.Chofer != null)
+                //    ObjetoId = usuario.Chofer.Id;
 
-                new Dal.Core.Usuario().Create(usuario.Nombre,
-                    usuario.Nombre,
-                    usuario.Apellido,
-                    ObjetoId,
-                    usuario.FechaNacimiento,
-                    usuario.Contraseña);
+                //new Dal.Core.Usuario().Create(usuario.Nombre,
+                //    usuario.Nombre,
+                //    usuario.Apellido,
+                //    ObjetoId,
+                //    usuario.FechaNacimiento,
+                //    usuario.Contraseña);
             }
             catch (Exception e) { throw new Exception("Error en Update" + e.Message); }
         }

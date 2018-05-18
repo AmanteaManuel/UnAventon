@@ -12,7 +12,7 @@ namespace Dal
 
         // Base provider
         // [NonSerialized()]
-        protected static string ConnectionString = "localHost(Servidor)";
+        protected static string ConnectionString = "Data Source=(localdb)\\Servidor;Initial Catalog=UnAventon; Integrated Security=True";
 
         // [NonSerialized()]
         // internal static SqlConnection new SqlConnection(ConnectionString) = new SqlConnection(ConnectionString);

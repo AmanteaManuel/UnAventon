@@ -16,6 +16,10 @@ ul li {
     background-color: #f44336; /* Red */
     color: white;
     margin-bottom: 15px;
+    align-content:center;
+    width:50%;
+    margin:auto;
+
 }
 
 /* The close button */

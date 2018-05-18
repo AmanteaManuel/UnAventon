@@ -14,25 +14,26 @@ namespace Dal.Core
         /// <summary>
         /// query que inserta en la base una persona
         /// </summary>
-        private const string INSERT_PERSONA = @"INSERT INTO Usuario (NumeroDocumento,
-                                                    Sexo,
-                                                    TipoDocumentoId,
-                                                    Apellido,
+        private const string INSERT_USUARIO = @"INSERT INTO Usuario (
+                                                    NombreUsuario,
                                                     Nombre,
-                                                    DomicilioRealId,
+                                                    Apellido,
+                                                    Dni,
                                                     FechaNacimiento,
-                                                    Mail,
-                                                    GUID)
-                                                output INSERTED.PersonaId
-                                                VALUES (@parDocumento,
-                                                    @parSexo,
-                                                    @parTipoDocumentoId,
-                                                    @parApellido,
+                                                    Email,
+                                                    Contraseña,
+                                                    SiActivo
+                                                    )
+                                                output INSERTED.Id
+                                                VALUES (
+                                                    @parNombreUsuario,
                                                     @parNombre,
-                                                    @parDomicilioRealId,
+                                                    @parApellido,
+                                                    @parDni,
                                                     @parFechaNacimiento,
-                                                    @parMail,
-                                                    @parGUID)";
+                                                    @parEmail,
+                                                    @parContraseña,
+                                                    @parSiActivo)";
 
         private const string GET_USUARIO_BY_ID = "Select * from Usuario where Id = {0}";
 
@@ -45,58 +46,61 @@ namespace Dal.Core
         /// </summary>
         /// <param name="numeroDocumento">numero de documento de una persona</param>
         /// <returns>dataset con los datos de la persona</returns>
-        public DataSet GetInstance(int id)
+        public DataSet GetInstanceById(int id)
         {
             this.SelectCommandText = string.Format(GET_USUARIO_BY_ID, id);
             return this.Load();
+        }
+
+        public DataSet GetAll()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
 
         #region " CRUD "
 
-        public int Create(string nombre,
-            string mail,
+        public int Create(
+            string nombreUsuario,
+            string nombre,
             string apellido,
-            int? domicilioRealId,
-            DateTime? fechaNacimiento,
-            string numeroDocumento,
-            int tipoDocumentoId,
-            int sexo,
-            string guid)
+            string dni,
+            DateTime fechaNacimiento,
+            string email,            
+            string contraseña,
+            bool siActivo               
+            )
         {
             //query a ejecutar
-            this.ExecuteCommandText = INSERT_PERSONA;
+            this.ExecuteCommandText = INSERT_USUARIO;
 
             //Limpio los parámetros
             this.ExecuteParameters.Parameters.Clear();
 
             //parámetros
             //documento
-            this.ExecuteParameters.Parameters.AddWithValue("@parDocumento", numeroDocumento);            
- 
+            this.ExecuteParameters.Parameters.AddWithValue("@parNombreUsuario", nombreUsuario);
 
-            //fechaNaciemiento
-            if (fechaNacimiento != null && fechaNacimiento != DateTime.MinValue)
-                this.ExecuteParameters.Parameters.AddWithValue("@parFechaNacimiento", fechaNacimiento);
-            else
-                this.ExecuteParameters.Parameters.AddWithValue("@parFechaNacimiento", DBNull.Value);
+            this.ExecuteParameters.Parameters.AddWithValue("@parNombre", nombre);
 
-            //mail
-            if (mail != null)
-                ExecuteParameters.Parameters.AddWithValue("@parMail", mail);
-            else
-                ExecuteParameters.Parameters.AddWithValue("@parMail", DBNull.Value);
+            this.ExecuteParameters.Parameters.AddWithValue("@parApellido", apellido);
 
-            //domicilioRealId
-            if (domicilioRealId != null)
-                this.ExecuteParameters.Parameters.AddWithValue("@parDomicilioRealId", domicilioRealId);
-            else
-                this.ExecuteParameters.Parameters.AddWithValue("@parDomicilioRealId", DBNull.Value);           
+            this.ExecuteParameters.Parameters.AddWithValue("@parDni", dni);
 
+            this.ExecuteParameters.Parameters.AddWithValue("@parFechaNacimiento", fechaNacimiento);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parEmail", email);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parContraseña", contraseña);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parSiActivo", siActivo);            
+            
             //ejecución, retorna el valor del parámetro de retorno
             return this.ExecuteNonEscalar();
         }
+
+
 
         #endregion
     }

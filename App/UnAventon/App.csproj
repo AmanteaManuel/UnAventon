@@ -206,6 +206,7 @@
     <Content Include="%24trash\Home.html" />
     <Content Include="Usuario\alta-Usuario.aspx" />
     <Content Include="Vehiculos\AgregarVehiculo.aspx" />
+    <Content Include="Viajes\Listado-de-Viajes.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -234,6 +235,13 @@
     <Compile Include="Vehiculos\AgregarVehiculo.aspx.designer.cs">
       <DependentUpon>AgregarVehiculo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Viajes\Listado-de-Viajes.aspx.cs">
+      <DependentUpon>Listado-de-Viajes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Viajes\Listado-de-Viajes.aspx.designer.cs">
+      <DependentUpon>Listado-de-Viajes.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
@@ -241,7 +249,16 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Bol\Bol.csproj">
+      <Project>{58e13eb3-f77a-478b-83a2-4ddaefbfedce}</Project>
+      <Name>Bol</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dal\Dal.csproj">
+      <Project>{6cbcb651-7254-4804-9927-9daeaa1dedc0}</Project>
+      <Name>Dal</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

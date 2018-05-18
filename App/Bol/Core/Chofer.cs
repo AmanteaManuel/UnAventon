@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace Bol
 {
     public class Chofer
@@ -13,7 +14,7 @@ namespace Bol
         private string _descripcion;
         private int _reputacion;
 
-
+        
         #endregion
 
         #region " Properties "
