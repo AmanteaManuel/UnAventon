@@ -19,8 +19,8 @@ namespace UnAventon.Usuario
             try
             {
                 Validate("CrearUsuario");
-                if (!Page.IsValid)
-                    throw new Exception("Verifique los datos");
+                if (!Page.IsValid);
+                    //throw new Exception("Verifique los datos");
             }
             catch (Exception ex)
             {
@@ -29,21 +29,19 @@ namespace UnAventon.Usuario
             }
             
         }
+
         #region " Validate "
 
         protected void cvNombreUsuario_ServerValidate(object source, ServerValidateEventArgs args)
         {
+            tbNombreUsuario.Attributes.Add("class", "form-group");
+            cvNombreUsuario.ErrorMessage = string.Empty;
+
             if (string.IsNullOrEmpty(tbNombreUsuario.Text) || string.IsNullOrWhiteSpace(tbNombreUsuario.Text))
             {
                 args.IsValid = false;
                 tbNombreUsuario.Attributes.Add("class", "form-group has-error");   
             }
-            else
-            {
-                tbNombreUsuario.Attributes.Add("class", "form-group");
-                cvNombreUsuario.ErrorMessage = string.Empty;
-            }
-
         }
 
         protected void cvNombre_ServerValidate(object source, ServerValidateEventArgs args)

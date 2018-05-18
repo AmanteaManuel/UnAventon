@@ -7,7 +7,11 @@
 
 <div id="global">	
 	<article>
-		<section>				
+		<section>	
+            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                This is an alert box.
+            </div>
 		    <div> 
 			    <div>
 				    <div> 
@@ -17,41 +21,43 @@
 				    </div>
                     <br />  
 
-                    <div  id="divNombreusuario" class="form-group has-error has-feedback" runat="server"> 
-					    <asp:TextBox runat="server" ID="tbNombreUsuario" PlaceHolder="Nombre de Usuario" Cssclass="form-control has-error"/>
+                    <div  id="divNombreusuario" class="form-group has-error help-block" runat="server"> 
+
+					    <asp:TextBox runat="server" ID="tbNombreUsuario" PlaceHolder="Nombre de Usuario" Cssclass="form-control has-error" width="175"/>
                         <asp:CustomValidator ErrorMessage="Campo invalido" id="cvNombreUsuario" runat="server" ValidationGroup="CrearUsuario" OnServerValidate="cvNombreUsuario_ServerValidate" Cssclass="help-block"/>
 				    </div>                   
 
 				    <div  class="form-group" > 
-                        <asp:TextBox runat="server" ID="tbNombre" PlaceHolder="Nombre"  Cssclass="form-control"/>
+                        <asp:TextBox runat="server" ID="tbNombre" PlaceHolder="Nombre" Cssclass="form-control" width="175"/>
                         <asp:CustomValidator ErrorMessage="Campo invalido" id="cvNombre" runat="server" ValidationGroup="CrearUsuario" OnServerValidate="cvNombre_ServerValidate" />
 				    </div>
 
 
 				    <div class="form-group" > 
-					    <asp:TextBox runat="server" ID="tbApellido" PlaceHolder="Apellido"  Cssclass="form-control" />
+					    <asp:TextBox runat="server" ID="tbApellido" PlaceHolder="Apellido"  Cssclass="form-control" width="175"/>
                         <asp:CustomValidator ErrorMessage="Campo invalido" id="cvApellido" runat="server" ValidationGroup="CrearUsuario" OnServerValidate="cvApellido_ServerValidate"/>
 				    </div> 
 
 
 				    <div class="form-group" >
-					    <asp:TextBox runat="server" ID="tbEmail" PlaceHolder="Email"  Cssclass="form-control"/>
+					    <asp:TextBox runat="server" ID="tbEmail" PlaceHolder="Email"  Cssclass="form-control" width="175"/>
                         <asp:CustomValidator ErrorMessage="Campo invalido"  id="cvEmail" runat="server" ValidationGroup="CrearUsuario" OnServerValidate="cvEmail_ServerValidate"/>
 				    </div>
 
 
 				    <div class="form-group" > 
-					    <asp:TextBox runat="server" ID="tbContrasenia" PlaceHolder="Contraseña"  Cssclass="form-control"/>
+					    <asp:TextBox runat="server" ID="tbContrasenia" PlaceHolder="Contraseña"  Cssclass="form-control" width="175"/>
                         <asp:CustomValidator ErrorMessage="Campo invalido" id="cvContrasenia" runat="server" ValidationGroup="CrearUsuario" OnServerValidate="cvContrasenia_ServerValidate"/>
 				    </div>
 
 
                     <div class="form-group" > 
-					    <asp:TextBox runat="server" ID="tbRepitaContraseña" PlaceHolder="Repita Contraseña"   Cssclass="control-label"/>
+					    <asp:TextBox runat="server" ID="tbRepitaContraseña" PlaceHolder="Repita Contraseña" Cssclass="form-control" width="175"/>
                         <asp:CustomValidator ErrorMessage="Campo invalido" id="cvRepitaContraseña" runat="server" ValidationGroup="CrearUsuario" OnServerValidate="cvRepitaContraseña_ServerValidate"/>
 				    </div>
 
-                    <div class="form-group"   Cssclass="form-control">
+                    <div class="form-group" >
+                        
                         <asp:Button Text="Aceptar" runat="server" ID="btnAceptar" OnClick="btnAceptar_Click" />
 				    </div> 	
                             

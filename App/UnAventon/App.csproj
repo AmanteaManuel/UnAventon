@@ -202,9 +202,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="%24trash\fondo.jpg" />
-    <Content Include="img\PicsArt_05-05-10.35.48.png" />
+    <Content Include="img\Logo.png" />
     <Content Include="%24trash\Home.html" />
     <Content Include="Usuario\alta-Usuario.aspx" />
+    <Content Include="Vehiculos\AgregarVehiculo.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -225,6 +226,13 @@
     </Compile>
     <Compile Include="Usuario\alta-Usuario.aspx.designer.cs">
       <DependentUpon>alta-Usuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vehiculos\AgregarVehiculo.aspx.cs">
+      <DependentUpon>AgregarVehiculo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vehiculos\AgregarVehiculo.aspx.designer.cs">
+      <DependentUpon>AgregarVehiculo.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
