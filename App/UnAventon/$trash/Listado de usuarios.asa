@@ -1,0 +1,81 @@
+<div class="panel panel-default panel-container-dnst">						
+				<div class="panel-body listadoUsuarios">
+                    <asp:UpdatePanel UpdateMode="Always" runat="server">
+                        <ContentTemplate>
+                           <!-- fila que dice los campos a listar-->
+							<div class="row">
+								<div class="col-xs-12 col-md-12 col-lg-12">
+									<ul id="ulHeader" class="listadoGral header" runat="server">
+										<li class="selectItem header">
+											<div class="col-sm-4">
+												<span>Agente</span>
+											</div>											
+											<div class="col-sm-2">
+												<span>Email</span>
+											</div>
+											<div class="col-sm-2">
+												<span>Nombre de usuario</span>
+											</div>
+											<div class="col-sm-2">
+												<span>Tipo</span>
+											</div>
+											<div class="col-sm-2">
+												<span>Centro Prestacional</span>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						      <--!EMPYTY STATE-->
+							<div class="row">
+                                <div class="col-xs-12 col-md-12 col-lg-12">
+                                    <ul class="listadoGral body-list scroll">
+                                        <li id="liEmptyState" visible="false" runat="server">
+                                            <div class="empty-state-card">
+                                                <i class="zmdi zmdi-info-outline"></i>
+                                                <span>No Se encontraron resultados</span>
+                                            </div>
+                                        </li>
+
+                                        <--!DATOS QUE SE VAN A REPETIR(VIAJES)-->
+                                        <asp:Repeater ID="rptUsuarios" OnItemDataBound="rptUsuarios_ItemDataBound" runat="server">
+                                            <ItemTemplate>
+                                                <asp:HyperLink ID="hlIrDetalleUsuario" runat="server">
+                                                    <li class="selectItem list-usuario">
+                                                        <div class="col-sm-1">
+                                                            <asp:Image ID="imgUsuario" CssClass="img-circle user-avatar" runat="server" />
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="media">
+                                                                <h4 class="title">
+                                                                    <asp:Literal ID="litApellidoNombre" runat="server" />
+                                                                </h4>
+                                                                <p class="summary">
+                                                                    <asp:Literal ID="litNumeroTipoDocumentoSexo" runat="server" />
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <span class="result-table">
+                                                                <asp:Literal ID="litEmail" runat="server" /></span>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <asp:Literal ID="litNombreUsuario" runat="server" />
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <asp:Literal ID="litTipoUsuario" runat="server" />
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <asp:Literal ID="litCentroPrestacional" runat="server" />
+                                                        </div>
+                                                    </li>
+                                                </asp:HyperLink>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </ul>
+                                </div>
+                            </div>                           
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+				</div>
+			</div>
