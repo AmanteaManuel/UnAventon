@@ -35,7 +35,20 @@ namespace Dal.Core
                                                     @parContraseña,
                                                     @parSiActivo)";
 
+        private const string UPDATE_USUARIO = @"UPDATE Usuario SET 
+				                                        NombreUsuario = @parNombreUsuario,
+				                                        Nombre = @parNombre,
+				                                        Apellido = @parApellido,
+				                                        Dni = @parDni,
+				                                        FechaNacimiento = @parFechaNacimiento,
+				                                        Email = @parEmail,
+				                                        Contraseña = @parContraseña
+				                                    WHERE UsuarioId = @parUsuarioId";
+
         private const string GET_USUARIO_BY_ID = "Select * from Usuario where Id = {0}";
+
+        private const string GET_USUARIO_BY_EMAIL = "Select * from Usuario where Email = {0}";
+
 
         #endregion
 
@@ -49,6 +62,12 @@ namespace Dal.Core
         public DataSet GetInstanceById(int id)
         {
             this.SelectCommandText = string.Format(GET_USUARIO_BY_ID, id);
+            return this.Load();
+        }
+
+        public DataSet GetUsuarioByEmail(string email)
+        {
+            this.SelectCommandText = string.Format(GET_USUARIO_BY_EMAIL, email);
             return this.Load();
         }
 
@@ -98,6 +117,44 @@ namespace Dal.Core
             
             //ejecución, retorna el valor del parámetro de retorno
             return this.ExecuteNonEscalar();
+        }
+
+        public void Update(
+            string nombreUsuario,
+            string nombre,
+            string apellido,
+            string dni,
+            DateTime fechaNacimiento,
+            string email,
+            string contraseña,
+            bool siActivo)
+        {
+            //query a ejecutar
+            this.ExecuteCommandText = UPDATE_USUARIO;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            //parámetros
+            //documento
+            this.ExecuteParameters.Parameters.AddWithValue("@parNombreUsuario", nombreUsuario);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parNombre", nombre);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parApellido", apellido);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parDni", dni);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parFechaNacimiento", fechaNacimiento);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parEmail", email);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parContraseña", contraseña);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parSiActivo", siActivo);
+
+            //ejecución, retorna el valor del parámetro de retorno
+            this.ExecuteNonQuery();
         }
 
 

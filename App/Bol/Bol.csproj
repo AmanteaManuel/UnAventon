@@ -45,6 +45,7 @@
     <Compile Include="Core\Pasajero.cs" />
     <Compile Include="Core\Pregunta.cs" />
     <Compile Include="Core\Respuesta.cs" />
+    <Compile Include="Core\Service\Tools.cs" />
     <Compile Include="Core\Usuario.cs" />
     <Compile Include="Core\Vehiculo.cs" />
     <Compile Include="Core\Viaje.cs" />

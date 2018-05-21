@@ -252,9 +252,6 @@ namespace Bol
                 if (dr.Table.Columns.Contains("Nombre") && !Convert.IsDBNull(dr["Nombre"]))
                     oBol.Nombre = Convert.ToString(dr["Nombre"]);
 
-
-
-
             }
             catch (Exception ex) { throw new Exception("Error en el metodo Fill" + ex.Message); }
 
@@ -294,10 +291,15 @@ namespace Bol
         /// </summary>
         /// <param name="personaId"></param>
         /// <returns></returns>
-        internal Usuario GetInstanceById(int usuarioId)
+        public Usuario GetInstanceById(int usuarioId)
         {
             return FillObject(
                 (new Dal.Core.Usuario().GetInstanceById(usuarioId)).Tables[0].Rows[0]);
+        }
+
+        public Usuario GetUsuarioByEmail(string email)
+        {
+            return FillObject(new Dal.Core.Usuario().GetUsuarioByEmail(email).Tables[0].Rows[0]);
         }
 
         #endregion
@@ -314,24 +316,24 @@ namespace Bol
             int outId = 0;
             try
             {
-                //Objetos
-                int? ChoferId = null;
-                if (usuario.Chofer != null)
-                    ChoferId = usuario.Chofer.Id;
+            //Bol.Usuario u = new Bol.Usuario().GetUsuarioByEmail(usuario.Email);
 
                 outId = new Dal.Core.Usuario().Create(
-                    usuario.NombreUsuario,
-                    usuario.Nombre,
-                    usuario.Apellido,                   
-                    usuario.Dni,
-                    usuario.FechaNacimiento,
-                    usuario.Email,                    
-                    usuario.Contraseña,
-                    usuario.SiActivo                    
-                    );            
-                                   
+                usuario.NombreUsuario,
+                usuario.Nombre,
+                usuario.Apellido,
+                usuario.Dni,
+                usuario.FechaNacimiento,
+                usuario.Email,
+                usuario.Contraseña,
+                usuario.SiActivo
+                );
+
                 usuario.Id = outId;
-                return outId;
+
+                Bol.Pasajero.Create(usuario.Id);
+                Bol.Chofer.Create(usuario.Id);
+                return usuario.Id;
             }
             catch (Exception e) { throw new Exception("Error en Insert" + e.Message); }
         }
@@ -340,21 +342,21 @@ namespace Bol
         /// este metodo actualiza un Usuario en la base
         /// </summary>
         /// <param name="Usuario">Usuario que se quiere actualizar</param>
-        internal static void Update(Usuario usuario)
+        public static void Update(Usuario usuario)
         {
             try
             {
-                ////Objetos
-                //int? ObjetoId = null;
-                //if (usuario.Chofer != null)
-                //    ObjetoId = usuario.Chofer.Id;
+                //Objetos
 
-                //new Dal.Core.Usuario().Create(usuario.Nombre,
-                //    usuario.Nombre,
-                //    usuario.Apellido,
-                //    ObjetoId,
-                //    usuario.FechaNacimiento,
-                //    usuario.Contraseña);
+                new Dal.Core.Usuario().Update(
+                    usuario.NombreUsuario,
+                    usuario.Nombre,
+                    usuario.Apellido,
+                    usuario.Dni,
+                    usuario.FechaNacimiento,
+                    usuario.Email,
+                    usuario.Contraseña,
+                    usuario.SiActivo);
             }
             catch (Exception e) { throw new Exception("Error en Update" + e.Message); }
         }

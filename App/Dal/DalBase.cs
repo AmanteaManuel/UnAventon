@@ -17,6 +17,7 @@ namespace Dal
         // [NonSerialized()]
         // internal static SqlConnection new SqlConnection(ConnectionString) = new SqlConnection(ConnectionString);
         // [NonSerialized()]
+
         internal readonly DbProviderFactory BaseFactory = DbProviderFactories.GetFactory("System.Data.SqlClient");
 
         //// Connection String

@@ -56,18 +56,28 @@
 
     <div class="silver-background">
         <div class="row">
-            <div class="col-sm-3 col-sm-offset-3">
-                <a></a>
+            <div class="col-sm-2 col-sm-offset-1">
+                <asp:LinkButton Text="Listar Viajes" CssClass="linkMaster" runat="server" ID="lbListarViajes" OnClick="lbListarViajes_Click" />                
             </div>
-            <div class="col-sm-3 col-sm-offset-3">
-                <a Style="color:white" href="#">Listar Viajes</a> 
+            <div class="col-sm-2 col-sm-offset-1">
+                 <asp:LinkButton Text="Crear Viajes"  CssClass="linkMaster" runat="server" id="lbCrearViaje" OnClick="lbCrearViaje_Click"/>               
             </div>
-            <div class="col-sm-3 col-sm-offset-3">
-                <a Style="color:white" href="#">Crear Viajes</a>  
+            <div class="col-sm-2 col-sm-offset-1">
+                 <asp:LinkButton Text="Ver Perfil"  CssClass="linkMaster" runat="server" ID="lbVerPerfil" OnClick="lbVerPerfil_Click"/>                
+            </div>            
+            <div class="col-sm-2 col-sm-offset-1">
+                 <asp:LinkButton Text="Modificar Datos" id="lbModificarDatos" CssClass="linkMaster" runat="server" OnClick="lbModificarDatos_Click" />                
             </div>
-            <div class="col-sm-3 col-sm-offset-3">
-                <a Style="color:White" href="#">Ver Perfil</a> 
+
+            <div class="col-sm-2 col-sm-offset-1">
+                 <asp:LinkButton Text="Ver Perfil"  CssClass="linkMaster" runat="server" />                
             </div>
+
+            <div class="col-sm-2 col-sm-offset-1">
+                 <asp:LinkButton Text="Ver Perfil"  CssClass="linkMaster" runat="server" />                
+            </div>
+            <%--            //////IMPLEMENTAR//////--%>
+
         </div> <!-- ultimo div-->
     </div>
         <div>
