@@ -9,7 +9,6 @@
 			    <div>
 				    <div> 
 					    <h3>Alta de vehiculo</h3>
-					    <p>Información del vehiculo</p>
 					    <span class="required_notification">Datos requeridos</span> 
 				    </div>
                     <br />  
@@ -43,6 +42,10 @@
                         <%--<asp:CustomValidator ErrorMessage="Campo invalido" id="cvAsientos" runat="server" ValidationGroup="AgregarVehiculo" OnServerValidate="cvAsientos_ServerValidate" Cssclass="help-block"/>--%>
 				    </div>
 
+                    <div class="form-group">
+                        <asp:TextBox runat="server" ID="tbDescripcion" rows="4" TextMode="multiline" PlaceHolder="Descripcion:" CssClass="form-control" Width="400" />
+                        <%--<asp:CustomValidator ErrorMessage="Campo invalido" id="cvDescripcion" runat="server" ValidationGroup="AgregarVehiculo" OnServerValidate="cvDescripcion_ServerValidate" Cssclass="help-block"/>--%>
+                    </div>
 
                     <div class="form-group" >
                         
