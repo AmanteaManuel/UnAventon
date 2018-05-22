@@ -48,6 +48,7 @@
 <body>
 
     <form id="form1" runat="server">
+        <asp:ScriptManager runat="server" AsyncPostBackTimeout="999"/>
         <div class="row">		
 	    <img style="margin-left:5%" src="<%=Page.ResolveUrl("~/img/Logo.png") %>" height="5%" width="5%" alt="Logo Un Aventón">
 	    <hr />
@@ -76,7 +77,7 @@
             <div class="col-sm-2 col-sm-offset-1">
                  <asp:LinkButton Text="Publicar Viaje" id="lbPublicarViaje" CssClass="linkMaster" runat="server" OnClick="lbPublicarViaje_Click"/>                
             </div>
-            <%--            //////IMPLEMENTAR//////--%>
+            <%--//////IMPLEMENTAR//////--%>
 
         </div> <!-- ultimo div-->
     </div>
