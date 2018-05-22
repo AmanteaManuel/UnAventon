@@ -33,7 +33,12 @@ namespace UnAventon
         protected void lbModificarDatos_Click(object sender, EventArgs e)
         {
             //string idEncriptado = new Bol.Core.Service.Tools().Encripta(Convert.ToString(Persona.Id));
-            Response.Redirect("alta-Usuario.aspx?id=");
+            Response.Redirect("~/Usuario/alta-Usuario.aspx?id=");
+        }
+
+        protected void lbPublicarViaje_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Viajes/Publicar-Viaje?=");
         }
     }
 }

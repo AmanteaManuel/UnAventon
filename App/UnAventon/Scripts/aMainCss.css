@@ -44,7 +44,7 @@ ul li {
     background-color: #1883ba;
     border-radius: 6px;
     border: 2px solid #0016b0;
-    width: 5px;
+    width: auto;    
 }
 
     .boton_personalizado:hover {
@@ -60,4 +60,12 @@ ul li {
     text-align: center;
     text-decoration: none;
     display: inline-block;
+}
+
+/* Rounded Corner */
+.TexboxRounded {
+    border: 2px solid #456879;
+    border-radius: 7px;
+    height: 25px;
+    width: 230px;
 }

@@ -74,7 +74,7 @@
             </div>
 
             <div class="col-sm-2 col-sm-offset-1">
-                 <asp:LinkButton Text="Ver Perfil"  CssClass="linkMaster" runat="server" />                
+                 <asp:LinkButton Text="Publicar Viaje" id="lbPublicarViaje" CssClass="linkMaster" runat="server" OnClick="lbPublicarViaje_Click"/>                
             </div>
             <%--            //////IMPLEMENTAR//////--%>
 

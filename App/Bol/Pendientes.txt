@@ -2,3 +2,4 @@
 revisar fecha de nacimiento(validaciones)
 obtener usuario del contexto para modificacion
 verificar si el mail del usuario ya existe(rompe) creo que esta bien pero hay que capturar la exepcion para mostrar mensaje.
+Update panel en el publicar viaje(falta scriptManager)

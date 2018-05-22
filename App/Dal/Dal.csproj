@@ -41,9 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Chofer.cs" />
+    <Compile Include="Core\Ciudad.cs" />
     <Compile Include="Core\Log.cs" />
     <Compile Include="Core\Pasajero.cs" />
     <Compile Include="Core\Pregunta.cs" />
+    <Compile Include="Core\Provincia.cs" />
     <Compile Include="Core\Respuesta.cs" />
     <Compile Include="Core\Support\ConxionBd.cs" />
     <Compile Include="Core\Usuario.cs" />

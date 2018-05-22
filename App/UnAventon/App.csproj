@@ -207,6 +207,7 @@
     <Content Include="Usuario\alta-Usuario.aspx" />
     <Content Include="Vehiculos\AgregarVehiculo.aspx" />
     <Content Include="Viajes\Listado-de-Viajes.aspx" />
+    <Content Include="Viajes\Publicar-Viaje.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +242,13 @@
     </Compile>
     <Compile Include="Viajes\Listado-de-Viajes.aspx.designer.cs">
       <DependentUpon>Listado-de-Viajes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Viajes\Publicar-Viaje.aspx.cs">
+      <DependentUpon>Publicar-Viaje.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Viajes\Publicar-Viaje.aspx.designer.cs">
+      <DependentUpon>Publicar-Viaje.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -214,7 +214,7 @@ namespace UnAventon.Usuario
                     Bol.Usuario.Create(user);
 
                     //Redirijo
-                    Response.Redirect("Listado-de-Viajes.aspx");
+                    Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
                 }
                 else
                     throw new Exception("Error al insertar usuario. ");
