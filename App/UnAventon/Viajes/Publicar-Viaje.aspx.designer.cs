@@ -13,6 +13,15 @@ namespace UnAventon.Viajes {
     public partial class Publicar_Viaje {
         
         /// <summary>
+        /// upDestinos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upDestinos;
+        
+        /// <summary>
         /// ddlProvinciaSalida control.
         /// </summary>
         /// <remarks>
@@ -22,15 +31,6 @@ namespace UnAventon.Viajes {
         protected global::System.Web.UI.WebControls.DropDownList ddlProvinciaSalida;
         
         /// <summary>
-        /// ddlCiudadSalida control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCiudadSalida;
-        
-        /// <summary>
         /// ddlProvinciaDestino control.
         /// </summary>
         /// <remarks>
@@ -38,6 +38,15 @@ namespace UnAventon.Viajes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlProvinciaDestino;
+        
+        /// <summary>
+        /// ddlCiudadSalida control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCiudadSalida;
         
         /// <summary>
         /// ddlCiudadDestino control.

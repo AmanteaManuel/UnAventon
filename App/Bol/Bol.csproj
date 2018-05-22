@@ -47,6 +47,7 @@
     <Compile Include="Core\Pregunta.cs" />
     <Compile Include="Core\Provincia.cs" />
     <Compile Include="Core\Respuesta.cs" />
+    <Compile Include="Core\Service\Time.cs" />
     <Compile Include="Core\Service\Tools.cs" />
     <Compile Include="Core\Usuario.cs" />
     <Compile Include="Core\Vehiculo.cs" />

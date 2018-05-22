@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -50,5 +51,35 @@ namespace Bol.Core.Service
             return textoLimpio;
         }
 
+        /// <summary>
+        /// Metodo que recibe una cadena de caracteres e indica si se trata de un numero o no.
+        /// </summary>
+        /// <param name="pal">String a verificar.</param>
+        /// <returns>False si hay algun caracter que no sea numero. / True caso contrario.</returns>
+        public static bool IsNumber(string pal)
+        {
+            return pal.All(char.IsNumber);
+        }
+
+        /// <summary>
+        /// Metodo que recibe una cadena de caracteres e indica si se trata de un double o no.
+        /// </summary>
+        /// <param name="pal">String a verificar.</param>
+        /// <returns>true si es un double, false si no es double.</returns>
+        public static bool IsDouble(string pal)
+        {
+            double num;
+            return double.TryParse(pal, out num);
+        }
+
+        /// <summary>
+        /// Metodo que recibe una cadena de caracteres e indica si esta compuesta solo por letras .
+        /// </summary>
+        /// <param name="pal">String a verificar.</param>
+        /// <returns>False si algun caracter no es letra / True en caso contrario.</returns>
+        public static bool IsLetter(string pal)
+        {
+            return pal.Count(caracter => !char.IsLetter(caracter)) == 0;
+        }
     }
 }
