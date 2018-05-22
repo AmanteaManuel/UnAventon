@@ -27,7 +27,8 @@ namespace UnAventon.Vehiculos
                     u.Patente = tbPatente.Text;
                     u.Color = tbColor.Text;
                     u.Asientos = tbAsientos.Text;
-                    u.SiActivo = true;   //lo dejo porque no se que hace
+                    u.Descripcion = tbDescripcion.Text;
+                    //u.SiActivo = true;   lo dejo porque no se que hace
 
                     Bol.Vehiculo.Create(u);
 
