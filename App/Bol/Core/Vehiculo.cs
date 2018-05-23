@@ -17,7 +17,7 @@ namespace Bol
         private string _modelo;
         private string _patente;
         private int _asientosDisponibles;
-        private int _usuarioId;
+        private int _usuarioId;        
 
         #endregion
 
@@ -203,6 +203,9 @@ namespace Bol
                 if (dr.Table.Columns.Contains("UsuarioId") && !Convert.IsDBNull(dr["UsuarioId"]))
                     oBol.UsuarioId = Convert.ToInt32(dr["UsuarioId"]);
 
+                if (dr.Table.Columns.Contains("UsuarioId") && !Convert.IsDBNull(dr["UsuarioId"]))
+                    oBol.UsuarioId = Convert.ToInt32(dr["UsuarioId"]);
+
             }
             catch (Exception ex) { throw new Exception("Error en el metodo Fill" + ex.Message); }
 
@@ -239,6 +242,20 @@ namespace Bol
                 return vehiculo.Id;
             }
             catch (Exception e) { throw new Exception("Error en Insert" + e.Message); }
+        }
+        public void Update(Vehiculo vehiculo)
+        {
+            try
+            {
+                new Dal.Core.Vehiculo().Update(
+                    vehiculo.Color,
+                    vehiculo.Marca,
+                    vehiculo.Modelo,
+                    vehiculo.Patente,
+                    vehiculo.AsientosDisponibles,
+                    vehiculo.Id);
+            }
+            catch (Exception e) { throw new Exception("Error en el Update" + e.Message); }
         }
 
         #endregion

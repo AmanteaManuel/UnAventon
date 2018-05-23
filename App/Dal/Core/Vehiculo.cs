@@ -28,6 +28,14 @@ namespace Dal.Core
 			                                                   @parAsientosDisponibles,
 			                                                   @parUsuarioId)";
 
+        private const string UPDATE_VEHICULO = @"UPDATE Vehiculos SET 
+                                                            Marca = @parColor,
+                                                            Modelo = @parMarca,
+                                                            Color = @ParModelo,
+                                                            Patente = @ParPatente,
+                                                            Asientos = parAsientosDisponibles
+                                                        WHERE Id = @parVehiculoId";
+
         #endregion
 
         #region " Views "
@@ -46,7 +54,7 @@ namespace Dal.Core
                           string modelo,
                           string patente,
                           int asientosDisponibles,
-                          int usuarioId)
+                          int vehiculoId)
         {
             //query a ejecutar
             this.ExecuteCommandText = INSERT_VEHICULO;
@@ -66,11 +74,38 @@ namespace Dal.Core
 
             this.ExecuteParameters.Parameters.AddWithValue("@parAsientosDisponibles", asientosDisponibles);
 
-            this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
+            this.ExecuteParameters.Parameters.AddWithValue("@parVehiculoId", vehiculoId);
 
             //ejecución, retorna el valor del parámetro de retorno
             return this.ExecuteNonEscalar();
         }
+
+        public void Update(string color, string marca, string modelo, string patente, int asientosDisponibles, int usuarioId)
+        {
+            this.ExecuteCommandText = UPDATE_VEHICULO;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            //parámetros
+            //documento
+            this.ExecuteParameters.Parameters.AddWithValue("@parColor", color);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parMarca", marca);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@ParModelo", modelo);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@ParPatente", patente);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parAsientosDisponibles", asientosDisponibles);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
+
+            //ejecución
+            this.ExecuteNonQuery();
+        }
+
+
 
         #endregion
 
