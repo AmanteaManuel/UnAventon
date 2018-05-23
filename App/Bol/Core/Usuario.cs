@@ -24,6 +24,8 @@ namespace Bol
         private Pasajero _pasajero;
         private string _dni;
         private bool _siActivo;
+        private int _reputacionChofer;
+        private int _reputacioPasajero;
 
         #endregion
 
@@ -44,27 +46,51 @@ namespace Bol
             }
         }
 
-        public Chofer Chofer
+        //public Chofer Chofer
+        //{
+        //    get
+        //    {
+        //        return _chofer;
+        //    }
+        //    set
+        //    {
+        //        _chofer = value;
+        //    }
+        //}
+
+        //public Pasajero Pasajero
+        //{
+        //    get
+        //    {
+        //        return _pasajero;
+        //    }
+        //    set
+        //    {
+        //        _pasajero = value;
+        //    }
+        //}
+
+        public int ReputacionChofer
         {
             get
             {
-                return _chofer;
+                return _reputacionChofer;
             }
             set
             {
-                _chofer = value;
+                _reputacionChofer = value;
             }
         }
 
-        public Pasajero Pasajero
+        public int ReputacioPasajero
         {
             get
             {
-                return _pasajero;
+                return _reputacioPasajero;
             }
             set
             {
-                _pasajero = value;
+                _reputacioPasajero = value;
             }
         }
 
@@ -265,12 +291,9 @@ namespace Bol
         /// <returns></returns>
         private static List<Usuario> FillList(DataSet ds)
         {
-            if (ds.Tables[0].Rows.Count > 0)
+            //if (ds.Tables[0].Rows.Count > 0)
                 //return (from DataRow dr in ds.Tables[0].Rows select FillObject(dr)).ToList();
-                return null;
-            else
-                return null;
-            
+            return null;
         }
 
         #endregion
@@ -333,8 +356,8 @@ namespace Bol
 
                 usuario.Id = outId;
 
-                Bol.Pasajero.Create(usuario.Id);
-                Bol.Chofer.Create(usuario.Id);
+                //Bol.Pasajero.Create(usuario.Id);
+                //Bol.Chofer.Create(usuario.Id);
                 return usuario.Id;
             }
             catch (Exception e) { throw new Exception("Error en Insert" + e.Message); }

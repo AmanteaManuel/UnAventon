@@ -54,10 +54,7 @@
 
         <div class="col-xs-12 col-md-2 col-lg-2 form-group has-error">
             <label>Vehiculo</label>
-            <asp:DropDownList ID="ddlVehiculo" CssClass="TexboxRounded" runat="server">
-                <asp:ListItem Text="auto1" />
-                <asp:ListItem Text="auto2" />
-            </asp:DropDownList>
+            <asp:DropDownList ID="ddlVehiculo" CssClass="TexboxRounded" runat="server"></asp:DropDownList>
         </div>
 
         <div class="col-xs-12 col-md-2 col-lg-2 form-group has-error">

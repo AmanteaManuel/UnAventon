@@ -22,7 +22,9 @@ namespace Dal.Core
                                                     FechaNacimiento,
                                                     Email,
                                                     Contraseña,
-                                                    SiActivo
+                                                    SiActivo,
+                                                    ReputacionChofer,
+                                                    ReputacionPasajero
                                                     )
                                                 output INSERTED.Id
                                                 VALUES (
@@ -33,7 +35,9 @@ namespace Dal.Core
                                                     @parFechaNacimiento,
                                                     @parEmail,
                                                     @parContraseña,
-                                                    @parSiActivo)";
+                                                    @parSiActivo,
+                                                    0,
+                                                    0)";
 
         private const string UPDATE_USUARIO = @"UPDATE Usuario SET 
 				                                        NombreUsuario = @parNombreUsuario,

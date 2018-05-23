@@ -20,8 +20,13 @@ namespace UnAventon.Viajes
             //Cargo las provincias para cargar los ddl
             List<Provincia> provincias = new List<Provincia>();
             provincias = Provincia.GetAll();
+            List<Vehiculo> vehiculos = Vehiculo.GetAllByUsuarioId(1);
+
+
             CargarDDLProvincia(provincias, (DropDownList)ddlProvinciaDestino);
             CargarDDLProvincia(provincias, (DropDownList)ddlProvinciaSalida);
+            //TODO obtener usuario del contexto y pasarle id del usuario iniciado
+            CargarDDLVehiculos(vehiculos, (DropDownList)ddlVehiculo);
         }
 
         private void CargarDDLProvincia(List<Provincia> lista, DropDownList ddl)
@@ -36,6 +41,17 @@ namespace UnAventon.Viajes
         }
 
         private void CargarDDLCiudad(List<Ciudad> lista, DropDownList ddl)
+        {
+            string[] listaString = new string[lista.Count];
+            for (int i = 0; i < lista.Count; i++)
+            {
+                listaString[i] = lista[i].Descripcion;
+            }
+            ddl.DataSource = listaString;
+            ddl.DataBind();
+        }
+
+        private void CargarDDLVehiculos(List<Vehiculo> lista, DropDownList ddl)
         {
             string[] listaString = new string[lista.Count];
             for (int i = 0; i < lista.Count; i++)
