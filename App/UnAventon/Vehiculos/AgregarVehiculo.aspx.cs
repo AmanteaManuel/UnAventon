@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace UnAventon.Vehiculos
 {
-    public partial class AgregarVehiculo : System.Web.UI.Page
+    public partial class AgregarVehiculo : UnAventonPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
