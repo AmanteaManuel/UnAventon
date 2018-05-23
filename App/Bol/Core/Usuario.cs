@@ -322,7 +322,7 @@ namespace Bol
                 (new Dal.Core.Usuario().GetInstanceById(usuarioId)).Tables[0].Rows[0]);
         }
 
-        public Usuario GetUsuarioByEmail(string email)
+        public static Usuario GetUsuarioByEmail(string email)
         {
             return FillObject(new Dal.Core.Usuario().GetUsuarioByEmail(email).Tables[0].Rows[0]);
         }
@@ -393,7 +393,23 @@ namespace Bol
         //Meotod que autetica el usuario
         public Usuario IsAuthenticateUser(string username, string password)
         {
-            return null;
+            try
+            {
+                Usuario user = Bol.Usuario.GetUsuarioByEmail(username);
+                if (user != null)
+                {
+                    if (user.Contraseña == password && user.Email == username)
+                        return user;
+                    else
+                        throw new Exception("Contraseña o email incorrectos");
+                }
+                else
+                    throw new Exception("El usuario no existe");
+            }
+            catch (Exception)
+            {
+                throw new Exception("El usuario no existe");
+            }
         }
 
         #endregion

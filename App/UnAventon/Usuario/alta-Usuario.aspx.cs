@@ -202,7 +202,7 @@ namespace UnAventon.Usuario
                 if (Page.IsValid)
                 {
                     //si existe el usuario
-                    Bol.Usuario uexist = new Bol.Usuario().GetUsuarioByEmail(tbEmail.Text);
+                    Bol.Usuario uexist = Bol.Usuario.GetUsuarioByEmail(tbEmail.Text);
                     if (uexist != null)
                     {
                         Bol.Usuario user = new Bol.Usuario();
@@ -250,10 +250,10 @@ namespace UnAventon.Usuario
                     user.NombreUsuario = tbNombreUsuario.Text;
                     user.SiActivo = true;
 
-                    Bol.Usuario.Update(user);
+                    Bol.Usuario.Update(user);                    
 
                     //Redirijo
-                    Response.Redirect("Listado-de-Viajes.aspx");
+                    Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
                 }
                 else
                     throw new Exception("El usuario ya existe");

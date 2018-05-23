@@ -85,6 +85,7 @@
             <!-- mensaje de error-->
             <div class="row" id="divMsjAlerta" runat="server" visible="false">
                 <div class="alert alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <asp:Literal runat="server" ID="liMensajeAlerta" />
                 </div>
             </div>
@@ -92,6 +93,7 @@
             <!-- mensaje de Ok-->
             <div class="row" id="divMsjOk" runat="server" visible="false">
                 <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <asp:Literal runat="server" ID="liMsjOk" />
                 </div>
             </div>

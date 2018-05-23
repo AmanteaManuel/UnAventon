@@ -224,7 +224,7 @@ namespace Bol
 
         #region " CRUD "
 
-        public int Create(Vehiculo vehiculo)
+        public static int Create(Vehiculo vehiculo)
         {
             int outId = 0;
             try
@@ -243,7 +243,7 @@ namespace Bol
             }
             catch (Exception e) { throw new Exception("Error en Insert" + e.Message); }
         }
-        public void Update(Vehiculo vehiculo)
+        public static void Update(Vehiculo vehiculo)
         {
             try
             {

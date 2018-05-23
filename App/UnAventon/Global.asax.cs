@@ -36,7 +36,7 @@ namespace UnAventon
 
                 //Guardo el usuario en el Context.
                 Bol.Usuario u = new Bol.Usuario();
-                u = new Bol.Usuario().GetUsuarioByEmail(username);
+                u = Bol.Usuario.GetUsuarioByEmail(username);
                 Context.Items.Add("Usuario", u);
             }
         }
