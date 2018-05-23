@@ -5,3 +5,4 @@ verificar si el mail del usuario ya existe(rompe) creo que esta bien pero hay qu
 Update panel en el publicar viaje(falta scriptManager) //listo
 Cargar ddl del viaje
 Validacion public viaje.
+
