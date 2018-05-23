@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace Bol
@@ -13,13 +14,14 @@ namespace Bol
         private string _descripcion;
         private Vehiculo _vehiculo;
         private int _vehiculoId;
-        private string _destino;
-        private string _origen;
+        private int _destinoId;
+        private int _origenId;
         private string _duracion;
         private int _lugaresDisponibles;
         private DateTime _fechaSalida;
-        private double _precio;
-
+        private string _horaSalida;
+        private double _precio;  
+        
 
         #endregion
 
@@ -34,6 +36,7 @@ namespace Bol
             {
                 return _id;
             }
+            set { _id = value; }
         }
 
         /// <summary>
@@ -78,27 +81,27 @@ namespace Bol
             }
         }
 
-        public string Destino
+        public int Destino
         {
             get
             {
-                return _destino;
+                return _destinoId;
             }
             set
             {
-                _destino = value;
+                _destinoId = value;
             }
-        }
+        }        
 
-        public string Origen
+        public int Origen
         {
             get
             {
-                return _origen;
+                return _origenId;
             }
             set
             {
-                _origen = value;
+                _origenId = value;
             }
         }
        
@@ -163,6 +166,106 @@ namespace Bol
         {
             return null;
         }
+
+        #endregion
+
+        #region " Fill "
+
+        internal static Viaje FillObject(DataRow dr)
+        {
+            Viaje oBol = new Viaje();
+
+            try
+            {
+                if (dr.Table.Columns.Contains("Id") && !Convert.IsDBNull(dr["Id"]))
+                    oBol.Id = Convert.ToInt32(dr["Id"]);
+
+                if (dr.Table.Columns.Contains("Descripcion") && !Convert.IsDBNull(dr["Descripcion"]))
+                    oBol.Descripcion = Convert.ToString(dr["Descripcion"]);
+             
+                if (dr.Table.Columns.Contains("CiudadDestinoId") && !Convert.IsDBNull(dr["CiudadDestinoId"]))
+                    oBol.Destino = Convert.ToInt32(dr["CiudadDestinoId"]);
+
+                if (dr.Table.Columns.Contains("VehiculoId") && !Convert.IsDBNull(dr["VehiculoId"]))
+                    oBol._vehiculoId = Convert.ToInt32(dr["VehiculoId"]);
+
+                if (dr.Table.Columns.Contains("CiudadOrigenId") && !Convert.IsDBNull(dr["CiudadOrigenId"]))
+                    oBol.Origen = Convert.ToInt32(dr["CiudadOrigenId"]);
+
+                if (dr.Table.Columns.Contains("Duracion") && !Convert.IsDBNull(dr["Duracion"]))
+                    oBol.Duracion = Convert.ToString(dr["Duracion"]);
+
+                if (dr.Table.Columns.Contains("LugaresDisponibles") && !Convert.IsDBNull(dr["LugaresDisponibles"]))
+                    oBol.LugaresDisponibles = Convert.ToInt32(dr["LugaresDisponibles"]);
+
+                if (dr.Table.Columns.Contains("FechaSalida") && !Convert.IsDBNull(dr["FechaSalida"]))
+                    oBol.FechaSalida = Convert.ToDateTime(dr["FechaSalida"]);
+
+                if (dr.Table.Columns.Contains("Precio") && !Convert.IsDBNull(dr["Precio"]))
+                    oBol.Precio = Convert.ToDouble(dr["Precio"]);               
+
+            }
+            catch (Exception ex) { throw new Exception("Error en el metodo Fill" + ex.Message); }
+
+            return oBol;
+        }
+
+        #endregion
+
+        #region " CRUD "
+
+        public static int Create(Viaje viaje)
+        {
+            int outId = 0;
+            try
+            {
+                
+                outId = new Dal.Core.Viaje().Create(
+                viaje._origenId,
+                viaje._destinoId,
+                viaje.Duracion,
+                viaje.LugaresDisponibles,
+                viaje._vehiculoId,
+                viaje.FechaSalida,
+                viaje._horaSalida,
+                viaje.Precio,
+                viaje.Descripcion
+                );
+
+                viaje.Id = outId;
+                return viaje.Id;
+            }
+            catch (Exception e) { throw new Exception("Error en Insert" + e.Message); }
+        }
+
+        #endregion
+
+        #region " Constructor "
+
+        public Viaje(
+            int CiudadSalidaId,
+            int CiudadDestinoId,
+            string Duracion,
+            int LugaresDisponibles,
+            int vehiculoId,
+            DateTime fecha,
+            string horaSalida,
+            double precio,
+            string Descripcion)
+        {
+            this._origenId = CiudadSalidaId;
+            this._destinoId = CiudadDestinoId;
+            this._duracion = Duracion;
+            this._lugaresDisponibles = LugaresDisponibles;
+            this._vehiculoId = vehiculoId;
+            this._fechaSalida = fecha;
+            this._horaSalida = horaSalida;
+            this._precio = precio;
+            this._descripcion = Descripcion;
+        }
+
+        public Viaje() { }
+
 
         #endregion
     }

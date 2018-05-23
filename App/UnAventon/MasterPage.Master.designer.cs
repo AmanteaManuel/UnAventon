@@ -85,6 +85,33 @@ namespace UnAventon {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMsjAlerta;
         
         /// <summary>
+        /// liMensajeAlerta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal liMensajeAlerta;
+        
+        /// <summary>
+        /// divMsjOk control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMsjOk;
+        
+        /// <summary>
+        /// liMsjOk control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal liMsjOk;
+        
+        /// <summary>
         /// ContentPlaceHolder1 control.
         /// </summary>
         /// <remarks>

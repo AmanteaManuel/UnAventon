@@ -266,9 +266,11 @@ namespace Bol
         private static List<Usuario> FillList(DataSet ds)
         {
             if (ds.Tables[0].Rows.Count > 0)
+                //return (from DataRow dr in ds.Tables[0].Rows select FillObject(dr)).ToList();
                 return null;
-               // return (from DataRow dr in ds.Tables[0].Rows select FillObject(dr)).ToList();
-            return null;
+            else
+                return null;
+            
         }
 
         #endregion

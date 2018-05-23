@@ -82,16 +82,19 @@
         </div> <!-- ultimo div-->
     </div>
         <div>
-
-
             <!-- mensaje de error-->
-         <div class="row" id="divMsjAlerta" runat="server">
-            <div class="alert alert-danger" role="alert">
-              ERROR FATAL CRITICO 
-            </div>          
-        </div>
+            <div class="row" id="divMsjAlerta" runat="server" visible="false">
+                <div class="alert alert-danger" role="alert">
+                    <asp:Literal runat="server" ID="liMensajeAlerta" />
+                </div>
+            </div>
 
-
+            <!-- mensaje de Ok-->
+            <div class="row" id="divMsjOk" runat="server" visible="false">
+                <div class="alert alert-success" role="alert">
+                    <asp:Literal runat="server" ID="liMsjOk" />
+                </div>
+            </div>
 
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>

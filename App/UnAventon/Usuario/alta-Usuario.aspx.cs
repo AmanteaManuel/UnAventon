@@ -30,7 +30,7 @@ namespace UnAventon.Usuario
             if (string.IsNullOrEmpty(tbNombreUsuario.Text) || string.IsNullOrWhiteSpace(tbNombreUsuario.Text))
             {
                 args.IsValid = false;
-                tbNombreUsuario.Attributes.Add("class", "form-group has-error");   
+                tbNombreUsuario.Attributes.Add("class", "form-group has-error");
             }
         }
 
@@ -112,27 +112,27 @@ namespace UnAventon.Usuario
         {
             tbFechaNacimiento.Attributes.Add("class", "form-group");
             cvFechaNacimiento.ErrorMessage = string.Empty;
-            DateTime fecha;
             
+
             if (string.IsNullOrEmpty(tbFechaNacimiento.Text))
-                try
-                {
-                    string d = tbFechaNacimiento.Text;
-                    DateTime dt = Convert.ToDateTime(d);
+                if (Bol.Core.Service.Tools.IsNumber(tbFechaNacimiento.Text))
+                    try
+                    {
+                        Convert.ToDateTime(tbFechaNacimiento.Text);
+                    }
+                    catch (Exception)
+                    {
+                        Literal liMensaje = (Literal)this.Master.FindControl("liMensajeAlerta");
+                        liMensaje.Text = "Fecha Invalida ingrese una fecha con formato correcto dd/mm/aaa";                        
+                    }
 
-                    Console.WriteLine(dt);
-                }
-                catch (Exception ex)
-                {
-                    args.IsValid = false;
-                    tbFechaNacimiento.Attributes.Add("class", "form-group has-error");   
-                    ClientScript.RegisterClientScriptBlock(this.GetType(), "ERROR en la fecha", "<script> alert(); </script>");
-                    
-                }            
+
+            args.IsValid = false;
+            tbFechaNacimiento.Attributes.Add("class", "form-group has-error");
+
+
+        }          
                 
-                      
-        }
-
         #endregion
 
         #region " Events "
@@ -201,27 +201,35 @@ namespace UnAventon.Usuario
                 Validate("CrearUsuario");
                 if (Page.IsValid)
                 {
-                    Bol.Usuario user = new Bol.Usuario();
-                    user.Apellido = tbApellido.Text;
-                    user.Contraseña = tbContrasenia.Text;
-                    user.Dni = tbDni.Text;
-                    user.Email = tbEmail.Text;
-                    user.FechaNacimiento = Convert.ToDateTime(tbFechaNacimiento.Text);
-                    user.Nombre = tbNombre.Text;
-                    user.NombreUsuario = tbNombreUsuario.Text;
-                    user.SiActivo = true;
+                    //si existe el usuario
+                    Bol.Usuario uexist = new Bol.Usuario().GetUsuarioByEmail(tbEmail.Text);
+                    if (uexist != null)
+                    {
+                        Bol.Usuario user = new Bol.Usuario();
+                        user.Apellido = tbApellido.Text;
+                        user.Contraseña = tbContrasenia.Text;
+                        user.Dni = tbDni.Text;
+                        user.Email = tbEmail.Text;
+                        user.FechaNacimiento = Convert.ToDateTime(tbFechaNacimiento.Text);
+                        user.Nombre = tbNombre.Text;
+                        user.NombreUsuario = tbNombreUsuario.Text;
+                        user.SiActivo = true;
 
-                    Bol.Usuario.Create(user);
+                        Bol.Usuario.Create(user);
 
-                    //Redirijo
-                    Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
+                        //Redirijo
+                        Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
+                    }
+                    else
+                        throw new Exception("El usuario ya existe. ");
                 }
                 else
                     throw new Exception("Error al insertar usuario. ");
             }
             catch (Exception ex)
-            {
-                throw new Exception("Error al crear usuario", ex);
+            {                
+                Literal liMensaje = (Literal)this.Master.FindControl("liMensajeAlerta");
+                liMensaje.Text = "Error al crear usuario"+ ex;
             }
         }
 

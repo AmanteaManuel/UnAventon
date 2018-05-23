@@ -13,15 +13,6 @@ namespace UnAventon.Viajes {
     public partial class Publicar_Viaje {
         
         /// <summary>
-        /// upDestinos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upDestinos;
-        
-        /// <summary>
         /// ddlProvinciaSalida control.
         /// </summary>
         /// <remarks>
@@ -31,15 +22,6 @@ namespace UnAventon.Viajes {
         protected global::System.Web.UI.WebControls.DropDownList ddlProvinciaSalida;
         
         /// <summary>
-        /// ddlProvinciaDestino control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProvinciaDestino;
-        
-        /// <summary>
         /// ddlCiudadSalida control.
         /// </summary>
         /// <remarks>
@@ -47,6 +29,15 @@ namespace UnAventon.Viajes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCiudadSalida;
+        
+        /// <summary>
+        /// ddlProvinciaDestino control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlProvinciaDestino;
         
         /// <summary>
         /// ddlCiudadDestino control.
@@ -76,13 +67,22 @@ namespace UnAventon.Viajes {
         protected global::System.Web.UI.WebControls.TextBox tbLugaresDisponibles;
         
         /// <summary>
+        /// ddlVehiculo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlVehiculo;
+        
+        /// <summary>
         /// tbFecha control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbFecha;
+        protected global::System.Web.UI.WebControls.Calendar tbFecha;
         
         /// <summary>
         /// tbHoraSalida control.
@@ -94,13 +94,13 @@ namespace UnAventon.Viajes {
         protected global::System.Web.UI.WebControls.TextBox tbHoraSalida;
         
         /// <summary>
-        /// Precio control.
+        /// tbPrecio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Precio;
+        protected global::System.Web.UI.WebControls.TextBox tbPrecio;
         
         /// <summary>
         /// ddlTipoViaje control.

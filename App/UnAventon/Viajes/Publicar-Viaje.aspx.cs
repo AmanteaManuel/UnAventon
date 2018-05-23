@@ -12,37 +12,82 @@ namespace UnAventon.Viajes
 {
     public partial class Publicar_Viaje : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            //PreparePage();
-
-            this.Master.FindControl("divMsjAlerta").Visible = false;
-            
-        }
-
-        private void CargarDDL(List<Provincia>lista, DropDownList ddl)
-        {
-            string[] listaString = new string[lista.Count];
-            for (int i = 0; i < lista.Count; i++)
-            {
-                listaString[i] = lista[i].Descripcion;
-            }  
-            ddl.DataSource = listaString;
-            ddl.DataBind();
-        }
+        
+        #region " Methods "
 
         private void PreparePage()
         {
             //Cargo las provincias para cargar los ddl
             List<Provincia> provincias = new List<Provincia>();
-            provincias = Provincia.GetAll();            
-            CargarDDL(provincias, (DropDownList)ddlProvinciaDestino);
-            CargarDDL(provincias, (DropDownList)ddlProvinciaSalida);
+            provincias = Provincia.GetAll();
+            CargarDDLProvincia(provincias, (DropDownList)ddlProvinciaDestino);
+            CargarDDLProvincia(provincias, (DropDownList)ddlProvinciaSalida);
         }
+
+        private void CargarDDLProvincia(List<Provincia> lista, DropDownList ddl)
+        {
+            string[] listaString = new string[lista.Count];
+            for (int i = 0; i < lista.Count; i++)
+            {
+                listaString[i] = lista[i].Descripcion;
+            }
+            ddl.DataSource = listaString;
+            ddl.DataBind();
+        }
+
+        private void CargarDDLCiudad(List<Ciudad> lista, DropDownList ddl)
+        {
+            string[] listaString = new string[lista.Count];
+            for (int i = 0; i < lista.Count; i++)
+            {
+                listaString[i] = lista[i].Descripcion;
+            }
+            ddl.DataSource = listaString;
+            ddl.DataBind();
+        }
+
+        #endregion
+
+        #region " Events "
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            PreparePage();
+            this.Master.FindControl("divMsjAlerta").Visible = false;
+        }       
 
         protected void btnPublicarViaje_Click(object sender, EventArgs e)
         {
+            try
+            {
+                Validate("CrearUsuario");
+                if (Page.IsValid)
+                {
 
+                    Viaje viaje = new Viaje(
+                        1,//Convert.ToInt32(ddlCiudadSalida.SelectedIndex),
+                        2,//Convert.ToInt32(ddlCiudadDestino.SelectedIndex), 
+                        tbDuracion.Text,
+                        Convert.ToInt32(tbLugaresDisponibles.Text),
+                        1,//ddlVehiculo.SelectedIndex,
+                        tbFecha.SelectedDate,
+                        tbHoraSalida.Text,
+                        Convert.ToDouble(tbPrecio.Text),
+                        tbDescripcion.Text);
+
+                    Viaje.Create(viaje);
+
+                    this.Master.FindControl("divMsjOk").Visible = true;
+                    Literal liMensaje = (Literal)this.Master.FindControl("liMsjOK");
+                    liMensaje.Text = "Viaje publicado con éxito";
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Master.FindControl("divMsjAlerta").Visible = true;
+                Literal liMensaje = (Literal)this.Master.FindControl("liMensajeAlerta");
+                liMensaje.Text = "Error al publicar viaje " + ex.Message;
+            }
         }
 
         //cuando se produice un cambio en las provincias se refresca las ciudades cargadas
@@ -50,21 +95,32 @@ namespace UnAventon.Viajes
         {
             if (ddlProvinciaDestino.SelectedIndex > 0)
             {
-                List<Ciudad> provincias = new List<Ciudad>();
-                provincias = Ciudad.GetAllByProvinciaId(ddlProvinciaDestino.SelectedIndex);
-                //upDestinos.Update();
+                List<Ciudad> ciudades = new List<Ciudad>();
+                ciudades = Ciudad.GetAllByProvinciaId(ddlProvinciaDestino.SelectedIndex);
+                CargarDDLCiudad(ciudades, (DropDownList)ddlCiudadDestino);
+                // upDestinos.Update();
             }
         }
 
         //cuando se produice un cambio en las provincias se refresca las ciudades cargadas
-        protected void ddlCiudadSalida_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlProvinciaSalida_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlProvinciaSalida.SelectedIndex > 0)
             {
-                List<Ciudad> provincias = new List<Ciudad>();
-                provincias = Ciudad.GetAllByProvinciaId(ddlProvinciaSalida.SelectedIndex);
+                List<Ciudad> ciudades = new List<Ciudad>();
+                ciudades = Ciudad.GetAllByProvinciaId(ddlProvinciaSalida.SelectedIndex);
+                CargarDDLCiudad(ciudades, (DropDownList)ddlCiudadSalida);
                 //upDestinos.Update();
+
             }
         }
+
+        #endregion
+
+        #region " Validation "
+
+
+
+        #endregion
     }
 }
