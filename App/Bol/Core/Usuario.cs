@@ -364,5 +364,15 @@ namespace Bol
         }
 
         #endregion
+
+        #region " Method "
+
+        //Meotod que autetica el usuario
+        public Usuario IsAuthenticateUser(string username, string password)
+        {
+            return null;
+        }
+
+        #endregion
     }
 }

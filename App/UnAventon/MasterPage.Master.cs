@@ -10,7 +10,20 @@ namespace UnAventon
 	public partial class MasterPage : System.Web.UI.MasterPage
 	{
 
-		protected void Page_Load(object sender, EventArgs e)
+        /// <summary>
+        /// Usuario activo en el contexto de la aplicacion.
+        /// </summary>
+        protected Bol.Usuario @ActiveUsuario
+        {
+            get
+            {
+                if (Context.Items["Usuario"] != null)
+                    return (Bol.Usuario)Context.Items["Usuario"];
+                throw new Exception("No se pudo obtener el usuario del contexto.");
+            }
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
 		{
             //string userName = HttpContext.Current.User.Identity.Name;
         }

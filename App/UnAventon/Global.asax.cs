@@ -25,9 +25,20 @@ namespace UnAventon
 
         }
 
+        /// <summary>
+        /// Metodo que se ejecuta en cada request de la aplicacion.
+        /// </summary>
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
+            if ((Context.User != null) && (!String.IsNullOrEmpty(Context.User.Identity.Name)))
+            {
+                String username = Context.User.Identity.Name;
 
+                //Guardo el usuario en el Context.
+                Bol.Usuario u = new Bol.Usuario();
+                u = new Bol.Usuario().GetUsuarioByEmail(username);
+                Context.Items.Add("Usuario", u);
+            }
         }
 
         protected void Application_Error(object sender, EventArgs e)

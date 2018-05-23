@@ -160,5 +160,11 @@ namespace Dal.Core
 
 
         #endregion
+
+        #region " Method "
+
+
+
+        #endregion
     }
 }

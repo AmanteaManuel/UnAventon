@@ -4,7 +4,7 @@ using System.Web.UI.WebControls;
 
 namespace UnAventon.Usuario
 {
-    public partial class alta_Usuario : System.Web.UI.Page
+    public partial class alta_Usuario : UnAventonPage
     {
         #region " Properties "
 

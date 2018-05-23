@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace UnAventon.Viajes
 {
-    public partial class Listado_de_Viajes : System.Web.UI.Page
+    public partial class Listado_de_Viajes : UnAventonPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

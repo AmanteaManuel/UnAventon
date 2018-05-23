@@ -10,7 +10,7 @@ using Bol.Core;
 
 namespace UnAventon.Viajes
 {
-    public partial class Publicar_Viaje : System.Web.UI.Page
+    public partial class Publicar_Viaje : UnAventonPage
     {
         
         #region " Methods "
