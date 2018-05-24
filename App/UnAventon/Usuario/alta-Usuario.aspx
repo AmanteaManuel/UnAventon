@@ -13,12 +13,7 @@
 					    <%--<span class="required_notification">Datos requeridos</span> --%>
 				    </div>
                     <br />  
-
-                    <div  id="divNombreusuario" class="form-group has-error help-block" runat="server"> 
-                        <asp:Literal Text="Nombre de Usuario" runat="server" />
-					    <asp:TextBox runat="server" ID="tbNombreUsuario" PlaceHolder="Nombre de Usuario" Cssclass="form-control has-error " width="175"/>
-                        <asp:CustomValidator ErrorMessage="Campo invalido" id="cvNombreUsuario" runat="server" ValidationGroup="CrearUsuario" OnServerValidate="cvNombreUsuario_ServerValidate"/>
-				    </div>                   
+                                  
 
 				    <div  class="form-group" > 
                         <asp:Literal Text="Nombre" runat="server" />
@@ -45,13 +40,14 @@
 				    </div> 
 
                     <div  id="divFechaNacimiento" class="form-group has-error help-block" runat="server"> 
+                        <asp:Literal Text="Fecha Nacimiento" runat="server" />
 					    <asp:TextBox runat="server" ID="tbFechaNacimiento" PlaceHolder="dd/mm/aaaa" Cssclass="form-control has-error" width="175"/>
                         <asp:CustomValidator ErrorMessage="Campo invalido" id="cvFechaNacimiento" runat="server" ValidationGroup="CrearUsuario" OnServerValidate="cvFechaNacimiento_ServerValidate"/>
 				    </div> 
 
 				    <div class="form-group" > 
                         <asp:Literal Text="Contraseña" runat="server" />
-					    <asp:TextBox runat="server" ID="tbContrasenia" PlaceHolder="Contraseña"  Cssclass="form-control" width="175"/>
+					    <asp:TextBox runat="server" ID="tbContrasenia" TextMode="Password" PlaceHolder="Contraseña"  CssClass ="form-control" width="175"/>
                         <asp:CustomValidator ErrorMessage="Campo invalido" id="cvContrasenia" runat="server" ValidationGroup="CrearUsuario" OnServerValidate="cvContrasenia_ServerValidate" CssClass="help-block"/>
 				    </div>
 

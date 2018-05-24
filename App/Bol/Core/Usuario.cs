@@ -267,8 +267,8 @@ namespace Bol
             try
             {
                 //ID
-                if (dr.Table.Columns.Contains("PersonaId") && !Convert.IsDBNull(dr["PersonaId"]))
-                    oBol.Id = Convert.ToInt32(dr["PersonaId"]);
+                if (dr.Table.Columns.Contains("Id") && !Convert.IsDBNull(dr["Id"]))
+                    oBol.Id = Convert.ToInt32(dr["Id"]);
 
                 //Apellido
                 if (dr.Table.Columns.Contains("Apellido") && !Convert.IsDBNull(dr["Apellido"]))
@@ -277,6 +277,28 @@ namespace Bol
                 //Nombre
                 if (dr.Table.Columns.Contains("Nombre") && !Convert.IsDBNull(dr["Nombre"]))
                     oBol.Nombre = Convert.ToString(dr["Nombre"]);
+
+                if (dr.Table.Columns.Contains("Dni") && !Convert.IsDBNull(dr["Dni"]))
+                    oBol.Dni = Convert.ToString(dr["Dni"]);
+
+                if (dr.Table.Columns.Contains("FechaNacimiento") && !Convert.IsDBNull(dr["FechaNacimiento"]))
+                    oBol.FechaNacimiento = Convert.ToDateTime(dr["FechaNacimiento"]);
+
+                if (dr.Table.Columns.Contains("Email") && !Convert.IsDBNull(dr["Email"]))
+                    oBol.Email = Convert.ToString(dr["Email"]);
+
+                if (dr.Table.Columns.Contains("Contraseña") && !Convert.IsDBNull(dr["Contraseña"]))
+                    oBol.Contraseña = Convert.ToString(dr["Contraseña"]);
+
+                if (dr.Table.Columns.Contains("SiActivo") && !Convert.IsDBNull(dr["SiActivo"]))
+                    oBol.SiActivo = Convert.ToBoolean(dr["SiActivo"]);
+
+                if (dr.Table.Columns.Contains("ReputacionChofer") && !Convert.IsDBNull(dr["ReputacionChofer"]))
+                    oBol.ReputacionChofer = Convert.ToInt32(dr["ReputacionChofer"]);
+
+                if (dr.Table.Columns.Contains("ReputacionPasajero") && !Convert.IsDBNull(dr["ReputacionPasajero"]))
+                    oBol.ReputacioPasajero = Convert.ToInt32(dr["ReputacionPasajero"]);
+
 
             }
             catch (Exception ex) { throw new Exception("Error en el metodo Fill" + ex.Message); }

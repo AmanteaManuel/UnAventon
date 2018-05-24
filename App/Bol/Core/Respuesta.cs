@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Bol
 {
+    [Serializable]
     public class Respuesta
     {
         #region " Atributes "

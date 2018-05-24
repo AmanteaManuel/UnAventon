@@ -51,7 +51,7 @@ namespace Dal.Core
 
         private const string GET_USUARIO_BY_ID = "Select * from Usuario where Id = {0}";
 
-        private const string GET_USUARIO_BY_EMAIL = "Select * from Usuario where Email = {0}";
+        private const string GET_USUARIO_BY_EMAIL = "Select * from Usuario where Email = '{0}'";
 
 
         #endregion

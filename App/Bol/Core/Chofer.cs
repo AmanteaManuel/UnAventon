@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Bol
 {
+    [Serializable]
     public class Chofer
     {
         #region " Atributes "

@@ -22,6 +22,15 @@ namespace UnAventon {
         protected global::System.Web.UI.WebControls.TextBox tbEmail;
         
         /// <summary>
+        /// cvEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvEmail;
+        
+        /// <summary>
         /// tbPassword control.
         /// </summary>
         /// <remarks>
@@ -31,13 +40,22 @@ namespace UnAventon {
         protected global::System.Web.UI.WebControls.TextBox tbPassword;
         
         /// <summary>
+        /// cvPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvPassword;
+        
+        /// <summary>
         /// idInciarSesion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button idInciarSesion;
+        protected global::System.Web.UI.WebControls.LinkButton idInciarSesion;
         
         /// <summary>
         /// btnRegistrar control.
@@ -46,6 +64,6 @@ namespace UnAventon {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegistrar;
+        protected global::System.Web.UI.WebControls.LinkButton btnRegistrar;
     }
 }

@@ -51,6 +51,7 @@ namespace UnAventon
                         Context.Items.Add("Usuario", user);
 
                         String r = Request.QueryString["ReturnUrl"];
+                        //Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
                         Response.Redirect(r != null ? Request.QueryString["ReturnUrl"].ToString() : "~/Viajes/Listado-de-Viajes.aspx", false);
                     }
                     else throw new Exception("El usuario no existe");
@@ -58,6 +59,9 @@ namespace UnAventon
             }
             catch (Exception ex)
             {
+                Literal liMensaje = (Literal)this.Master.FindControl("liMensajeAlerta");
+                liMensaje.Text = "Error al crear usuario" + ex;
+
                 //divErrorLogin.Attributes.Add("class", "alert alert-danger");
                 //divErrorLogin.Visible = true;
                 //liErrorLogin.Text = ex.Message;
@@ -66,7 +70,17 @@ namespace UnAventon
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
+            Response.Redirect("~/Usuario/alta-Usuario.aspx");
+        }
+
+        protected void cvPassword_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+
+        }
+
+        protected void cvEmail_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+
         }
     }
 }

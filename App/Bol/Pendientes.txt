@@ -1,8 +1,9 @@
 ﻿Agregar mensaje de error en alta y modificacion de usuario.
 revisar fecha de nacimiento(validaciones)
-obtener usuario del contexto para modificacion
+obtener usuario del contexto para modificacion//ATR
 verificar si el mail del usuario ya existe(rompe) creo que esta bien pero hay que capturar la exepcion para mostrar mensaje.
 Update panel en el publicar viaje(falta scriptManager) //listo
 Cargar ddl del viaje
 Validacion public viaje.
+Falta probar cerrar sesion
 
