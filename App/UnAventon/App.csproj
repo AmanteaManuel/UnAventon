@@ -147,6 +147,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
+    <Content Include="img\car.png" />
     <Content Include="img\Fondo5.jpg" />
     <Content Include="Scripts\aMainCss.css" />
     <Content Include="MasterPage.Master" />

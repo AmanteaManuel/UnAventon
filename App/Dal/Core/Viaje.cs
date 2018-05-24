@@ -1,6 +1,7 @@
 ﻿using Dal.Core.Support;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace Dal.Core
@@ -28,6 +29,11 @@ namespace Dal.Core
                                                     @parHoraSalida,
 			                                        @parLugaresDisponibles,           
 			                                        @parDescripcion)";
+
+        private const string GET_INSTANCE_BY_ID = @"SELECT * FROM Viajes
+	                                                WHERE Id = {0}";
+
+        private const string GET_ALL = @"SELECT * FROM Viajes";
 
         public int Create(int origenId, int destinoId, string duracion, int lugaresDisponibles, int vehiculoId, DateTime fechaSalida, string horaSalida, double precio, string descripcion)
         {
@@ -59,6 +65,18 @@ namespace Dal.Core
 
             //ejecución, retorna el valor del parámetro de retorno
             return this.ExecuteNonEscalar();
+        }
+
+        public DataSet GetInstanceById(int id)
+        {
+            this.SelectCommandText = string.Format(GET_INSTANCE_BY_ID, id);
+            return this.Load();
+        }
+
+        public DataSet GetAll()
+        {
+            this.SelectCommandText = string.Format(GET_ALL);
+            return this.Load();
         }
     }
 }

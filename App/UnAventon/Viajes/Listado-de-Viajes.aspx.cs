@@ -11,7 +11,12 @@ namespace UnAventon.Viajes
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(!Page.IsPostBack)
+            {
+                //No hacer esto NUNCA
+                rptViajes.DataSource = new Dal.Core.Viaje().GetAll();
+                rptViajes.DataBind();
+            }            
         }
     }
 }
