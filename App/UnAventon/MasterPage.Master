@@ -52,7 +52,8 @@
         <div class="row">		
 	    <img style="margin-left:5%" src="<%=Page.ResolveUrl("~/img/Logo.png") %>" height="5%" width="5%" alt="Logo Un Aventón">
 	    <hr />
-            <asp:LinkButton style="color:white" runat="server" id="btnCerrarSesion" onclick="btnCerrarSesion_Click" Text="Cerrar Sesion" />            
+            <asp:HyperLink src="<%=Page.ResolveUrl("~/img/Logo.png") %>" NavigateUrl="navigateurl" runat="server" />
+            <asp:LinkButton srs style="color:white" runat="server" id="btnCerrarSesion" onclick="btnCerrarSesion_Click" Text="Cerrar Sesion" />            
     </div>
 
     <div class="silver-background">

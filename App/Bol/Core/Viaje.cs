@@ -226,8 +226,8 @@ namespace Bol
 
         private static List<Viaje> FillList(DataSet ds)
         {
-            if (ds.Tables[0].Rows.Count > 0)
-                return (from DataRow dr in ds.Tables[0].Rows select FillObject(dr)).ToList();
+            //if (ds.Tables[0].Rows.Count > 0)
+                //return (from DataRow dr in ds.Tables[0].Rows select FillObject(dr)).ToList();
             return null;
         }
 

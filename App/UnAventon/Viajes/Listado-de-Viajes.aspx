@@ -10,16 +10,16 @@
                 <div class="col-xs-12 col-md-12 col-lg-12">
                     <ul id="ulHeader" class="" runat="server">
                         <li class="">
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 header">
                                 <span>Origen</span>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-2 columna1">
                                 <span>Destino</span>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-2 columna2">
                                 <span>Precio</span>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-2 columna3">
                                 <span>Fecha</span>
                             </div>
                             <div class="col-sm-2">

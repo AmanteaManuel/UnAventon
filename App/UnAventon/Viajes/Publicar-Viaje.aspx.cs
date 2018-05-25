@@ -33,8 +33,7 @@ namespace UnAventon.Viajes
 
             CargarDDLProvincia(provincias, (DropDownList)ddlProvinciaDestino);
             CargarDDLProvincia(provincias, (DropDownList)ddlProvinciaSalida);            
-            CargarDDLVehiculos(vehiculos, (DropDownList)ddlVehiculo);
-            
+            CargarDDLVehiculos(vehiculos, (DropDownList)ddlVehiculo);           
             
         }
 
@@ -180,25 +179,27 @@ namespace UnAventon.Viajes
 
         protected void cvProvSalida_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            ddlProvinciaSalida.Attributes.Add("class", "form-group ");
+            ddlProvinciaSalida.Attributes.Add("class", "form-group");
             cvProvSalida.ErrorMessage = string.Empty;
 
             if (ddlProvinciaSalida.SelectedIndex <= 0)
             {
                 args.IsValid = false;
-                ddlProvinciaSalida.Attributes.Add("class", "form-group has-error");
+                ddlProvinciaSalida.Attributes.Add("class", "form-group error");
+                ddlProvinciaSalida.CssClass= "form-group error";
             }
         }
 
         protected void cvCiduadSalida_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            ddlCiudadSalida.Attributes.Add("class", "form-group ");
+            ddlCiudadSalida.Attributes.Add("class", "group ");
             cvCiudadDestino.ErrorMessage = string.Empty;
 
             if (ddlCiudadSalida.SelectedIndex <= 0)
             {
                 args.IsValid = false;
-                ddlCiudadSalida.Attributes.Add("class", "form-group has-error");
+                ddlCiudadSalida.Attributes.Add("class", "form-group error");
+                ddlCiudadSalida.CssClass = "form-group error";
             }
         }
 
@@ -210,7 +211,8 @@ namespace UnAventon.Viajes
             if (ddlProvinciaDestino.SelectedIndex <= 0)
             {
                 args.IsValid = false;
-                ddlProvinciaDestino.Attributes.Add("class", "form-group has-error");
+                ddlProvinciaDestino.Attributes.Add("class", "form-group error");
+                ddlProvinciaDestino.CssClass = "form-group error";
             }
         }
 
@@ -222,7 +224,7 @@ namespace UnAventon.Viajes
             if (ddlCiudadDestino.SelectedIndex <= 0)
             {
                 args.IsValid = false;
-                ddlCiudadDestino.Attributes.Add("class", "form-group has-error");
+                ddlCiudadDestino.Attributes.Add("class", "form-group error");
             }
         }
 
@@ -234,7 +236,8 @@ namespace UnAventon.Viajes
             if (string.IsNullOrEmpty(tbDuracion.Text))
             {
                 args.IsValid = false;
-                tbDuracion.Attributes.Add("class", "form-group has-error");
+                tbDuracion.Attributes.Add("class", "form-group error");
+                tbDuracion.CssClass = "form-group error";
             }
         }
 
@@ -246,7 +249,8 @@ namespace UnAventon.Viajes
             if (string.IsNullOrEmpty(tbLugaresDisponibles.Text))
             {
                 args.IsValid = false;
-                tbLugaresDisponibles.Attributes.Add("class", "form-group has-error");
+                tbLugaresDisponibles.Attributes.Add("class", "form-group error");
+                tbLugaresDisponibles.CssClass = "form-group error";
             }
         }
 
@@ -258,7 +262,8 @@ namespace UnAventon.Viajes
             if (ddlVehiculo.SelectedIndex <= 0)
             {
                 args.IsValid = false;
-                ddlVehiculo.Attributes.Add("class", "form-group has-error");
+                ddlVehiculo.Attributes.Add("class", "form-group error");
+                ddlVehiculo.CssClass = "form-group error";
             }
         }
 
@@ -270,7 +275,8 @@ namespace UnAventon.Viajes
             if (tbFecha.SelectedDate != null || tbFecha.SelectedDate < DateTime.Now)
             {
                 args.IsValid = false;
-                tbFecha.Attributes.Add("class", "form-group has-error");
+                tbFecha.Attributes.Add("class", "form-group error");
+                tbFecha.CssClass = "form-group error";
             }
         }
 
@@ -282,7 +288,8 @@ namespace UnAventon.Viajes
             if (string.IsNullOrEmpty(tbHoraSalida.Text))
             {
                 args.IsValid = false;
-                tbHoraSalida.Attributes.Add("class", "form-group has-error");
+                tbHoraSalida.Attributes.Add("class", "form-group error");
+                tbHoraSalida.CssClass = "form-group error";
             }
         }
 
@@ -294,7 +301,8 @@ namespace UnAventon.Viajes
             if (string.IsNullOrEmpty(tbPrecio.Text))
             {
                 args.IsValid = false;
-                tbPrecio.Attributes.Add("class", "form-group has-error");
+                tbPrecio.Attributes.Add("class", "form-group error");
+                tbPrecio.CssClass = "form-group error";
             }
         }
 
@@ -306,7 +314,8 @@ namespace UnAventon.Viajes
             if (ddlTipoViaje.SelectedIndex <= 0)
             {
                 args.IsValid = false;
-                ddlTipoViaje.Attributes.Add("class", "form-group has-error");
+                ddlTipoViaje.Attributes.Add("class", "form-group error");
+                ddlTipoViaje.CssClass = "form-group error";
             }
         }
 

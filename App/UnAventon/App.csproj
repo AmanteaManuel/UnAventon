@@ -68,6 +68,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="%24trash\BORRAR-LISTADO_VIAJES.aspx" />
     <Content Include="%24trash\Cerrar sesion.php" />
     <Content Include="%24trash\Fondo5.jpg" />
     <Content Include="%24trash\htmleve\html css js\editarcontra.js" />
@@ -214,6 +215,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="%24trash\BORRAR-LISTADO_VIAJES.aspx.cs">
+      <DependentUpon>BORRAR-LISTADO_VIAJES.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="%24trash\BORRAR-LISTADO_VIAJES.aspx.designer.cs">
+      <DependentUpon>BORRAR-LISTADO_VIAJES.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
