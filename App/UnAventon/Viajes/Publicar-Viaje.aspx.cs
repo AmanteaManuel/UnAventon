@@ -272,7 +272,7 @@ namespace UnAventon.Viajes
             tbFecha.Attributes.Add("class", "form-group");
             //cvFecha.ErrorMessage = string.Empty;
 
-            if (tbFecha.SelectedDate != null || tbFecha.SelectedDate < DateTime.Now)
+            if ((tbFecha.SelectedDate.Date == DateTime.MinValue.Date) || tbFecha.SelectedDate < DateTime.Now)
             {
                 args.IsValid = false;
                 tbFecha.Attributes.Add("class", "form-group error");

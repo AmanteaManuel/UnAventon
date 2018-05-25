@@ -150,6 +150,7 @@
     <Content Include="Home.aspx" />
     <Content Include="img\car.png" />
     <Content Include="img\Fondo5.jpg" />
+    <Content Include="img\LogOut.png" />
     <Content Include="Scripts\aMainCss.css" />
     <Content Include="MasterPage.Master" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -209,6 +210,7 @@
     <Content Include="img\Logo.png" />
     <Content Include="%24trash\Home.html" />
     <Content Include="Usuario\alta-Usuario.aspx" />
+    <Content Include="Usuario\Ver-Perfil.aspx" />
     <Content Include="Vehiculos\AgregarVehiculo.aspx" />
     <Content Include="Viajes\Listado-de-Viajes.aspx" />
     <Content Include="Viajes\Publicar-Viaje.aspx" />
@@ -249,6 +251,13 @@
     </Compile>
     <Compile Include="Usuario\alta-Usuario.aspx.designer.cs">
       <DependentUpon>alta-Usuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario\Ver-Perfil.aspx.cs">
+      <DependentUpon>Ver-Perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Usuario\Ver-Perfil.aspx.designer.cs">
+      <DependentUpon>Ver-Perfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vehiculos\AgregarVehiculo.aspx.cs">
       <DependentUpon>AgregarVehiculo.aspx</DependentUpon>

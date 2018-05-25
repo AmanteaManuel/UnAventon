@@ -31,15 +31,6 @@ namespace UnAventon {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// btnCerrarSesion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnCerrarSesion;
-        
-        /// <summary>
         /// lbListarViajes control.
         /// </summary>
         /// <remarks>
@@ -49,22 +40,22 @@ namespace UnAventon {
         protected global::System.Web.UI.WebControls.LinkButton lbListarViajes;
         
         /// <summary>
-        /// lbCrearViaje control.
+        /// lbPublicarViaje control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbCrearViaje;
+        protected global::System.Web.UI.WebControls.LinkButton lbPublicarViaje;
         
         /// <summary>
-        /// lbVerPerfil control.
+        /// lbRegistrarVehiculo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbVerPerfil;
+        protected global::System.Web.UI.WebControls.LinkButton lbRegistrarVehiculo;
         
         /// <summary>
         /// lbModificarDatos control.
@@ -76,13 +67,22 @@ namespace UnAventon {
         protected global::System.Web.UI.WebControls.LinkButton lbModificarDatos;
         
         /// <summary>
-        /// lbPublicarViaje control.
+        /// lbVerPerfil control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbPublicarViaje;
+        protected global::System.Web.UI.WebControls.LinkButton lbVerPerfil;
+        
+        /// <summary>
+        /// btnCerrarSesion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnCerrarSesion;
         
         /// <summary>
         /// divMsjAlerta control.

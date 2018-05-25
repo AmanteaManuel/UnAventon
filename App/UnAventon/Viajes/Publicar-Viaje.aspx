@@ -66,7 +66,7 @@
         <div class="col-xs-12 col-md-2 col-lg-2 form-group ">
             <label>Fecha</label>
             <asp:Calendar runat="server" CssClass="form-control TexboxRounded" ID="tbFecha"></asp:Calendar>
-<%--            <asp:CustomValidator ErrorMessage="*" ControlToValidate="tbFecha" ID="cvFecha" runat="server" OnServerValidate="cvFecha_ServerValidate" ValidationGroup="PublicarViaje"/>--%>
+            <asp:CustomValidator ErrorMessage="*" ControlToValidate="" ID="cvFecha" runat="server" OnServerValidate="cvFecha_ServerValidate" ValidationGroup="PublicarViaje"/>
         </div>
     </div>
 

@@ -6,102 +6,95 @@
 <head runat="server">
     <title>Inicio</title>
 
-    <link rel="stylesheet" href="<%=Page.ResolveUrl("~/Content/bootstrap.css") %>"> 
+    <link rel="stylesheet" href="<%=Page.ResolveUrl("~/Content/bootstrap.css") %>">
     <link rel="stylesheet" href="<%=Page.ResolveUrl("~/Scripts/aMainCss.css") %>">
-    <script src="<%=Page.ResolveUrl("~/Scripts/jquery-3.3.1.js") %>"></script> 
-    <script src="<%=Page.ResolveUrl("~/Scripts/bootstrap.js") %>"></script> 
+    <script src="<%=Page.ResolveUrl("~/Scripts/jquery-3.3.1.js") %>"></script>
+    <script src="<%=Page.ResolveUrl("~/Scripts/bootstrap.js") %>"></script>
 
     <style>
-		body
-		{
-		    background: linear-gradient(to bottom, MOCCASIN, white);
-			<!--background-image: url("fondo.jpg");
+        body {
+            background: linear-gradient(to bottom, MOCCASIN, white);
+            <!-- background-image: url("fondo.jpg");
             background-position: center center;
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
-            background-color: #464646;-->
-		}
-		.silver-background
-		{
-			background-color: CORAL;
+            background-color: #464646; -->
         }
-     
+
+        .silver-background {
+            background-color: CORAL;
+        }
+
         #loginForm .has-error .control-label,
         #loginForm .has-error .help-block,
         #loginForm .has-error .form-control-feedback {
-        color: #f39c12;
+            color: #f39c12;
         }
 
         #loginForm .has-success .control-label,
         #loginForm .has-success .help-block,
         #loginForm .has-success .form-control-feedback {
-        color: #18bc9c;
-
-        
+            color: #18bc9c;
         }
-
-	</style>
+    </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
 
     <form id="form1" runat="server">
-        <asp:ScriptManager runat="server" AsyncPostBackTimeout="999"/>
-        <div class="row">		
-	    <img style="margin-left:5%" src="<%=Page.ResolveUrl("~/img/Logo.png") %>" height="5%" width="5%" alt="Logo Un Aventón">
-	    <hr />
-            <asp:HyperLink src="<%=Page.ResolveUrl("~/img/Logo.png") %>" NavigateUrl="navigateurl" runat="server" />
-            <asp:LinkButton srs style="color:white" runat="server" id="btnCerrarSesion" onclick="btnCerrarSesion_Click" Text="Cerrar Sesion" />            
-    </div>
-
-    <div class="silver-background">
+        <asp:ScriptManager runat="server" AsyncPostBackTimeout="999" />
         <div class="row">
-            <div class="col-sm-2 col-sm-offset-1">
-                <asp:LinkButton Text="Listar Viajes" CssClass="linkMaster" runat="server" ID="lbListarViajes" OnClick="lbListarViajes_Click" />                
-            </div>
-            <div class="col-sm-2 col-sm-offset-1">
-                 <asp:LinkButton Text="Crear Viajes"  CssClass="linkMaster" runat="server" id="lbCrearViaje" OnClick="lbCrearViaje_Click"/>               
-            </div>
-            <div class="col-sm-2 col-sm-offset-1">
-                 <asp:LinkButton Text="Ver Perfil"  CssClass="linkMaster" runat="server" ID="lbVerPerfil" OnClick="lbVerPerfil_Click"/>                
-            </div>            
-            <div class="col-sm-2 col-sm-offset-1">
-                 <asp:LinkButton Text="Modificar Datos" id="lbModificarDatos" CssClass="linkMaster" runat="server" OnClick="lbModificarDatos_Click" />                
-            </div>
-
-            <div class="col-sm-2 col-sm-offset-1">
-                 <asp:LinkButton Text="Ver Perfil"  CssClass="linkMaster" runat="server" />                
-            </div>
-
-            <div class="col-sm-2 col-sm-offset-1">
-                 <asp:LinkButton Text="Publicar Viaje" id="lbPublicarViaje" CssClass="linkMaster" runat="server" OnClick="lbPublicarViaje_Click"/>                
-            </div>
-            <%--//////IMPLEMENTAR//////--%>
-
-        </div> <!-- ultimo div-->
-    </div>
-        <div>
-            <!-- mensaje de error-->
-            <div class="row" id="divMsjAlerta" runat="server" visible="false">
-                <div class="alert alert-danger" role="alert">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <asp:Literal runat="server" ID="liMensajeAlerta" />
-                </div>
-            </div>
-
-            <!-- mensaje de Ok-->
-            <div class="row" id="divMsjOk" runat="server" visible="false">
-                <div class="alert alert-success" role="alert">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <asp:Literal runat="server" ID="liMsjOk" />
-                </div>
-            </div>
-
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+            <img style="margin-left: 5%" src="<%=Page.ResolveUrl("~/img/Logo.png")%>" height="5%" width="5%" alt="Logo Un Aventón">
+            <hr />
         </div>
+
+        <div class="silver-background">
+            <div class="row">
+                <div class="col-sm-2 col-sm-offset-1">
+                    <asp:LinkButton Text="Listar Viajes" CssClass="linkMaster" runat="server" ID="lbListarViajes" OnClick="lbListarViajes_Click" />
+                </div>
+                <div class="col-sm-2 col-sm-offset-1">
+                    <asp:LinkButton Text="Publicar Viaje" ID="lbPublicarViaje" CssClass="linkMaster" runat="server" OnClick="lbPublicarViaje_Click" />
+                </div>
+                <div class="col-sm-2 col-sm-offset-1">
+                    <asp:LinkButton Text="Registrar Vehiculo" CssClass="linkMaster" runat="server" ID="lbRegistrarVehiculo" OnClick="lbRegistrarVehiculo_Click" />
+                </div>
+                <div class="col-sm-2 col-sm-offset-1">
+                    <asp:LinkButton Text="Modificar Datos" ID="lbModificarDatos" CssClass="linkMaster" runat="server" OnClick="lbModificarDatos_Click" />
+                </div>
+                <div class="col-sm-2 col-sm-offset-1">
+                    <asp:LinkButton Text="Ver Perfil" CssClass="linkMaster" runat="server" ID="lbVerPerfil" OnClick="lbVerPerfil_Click" />
+                </div>                
+                <div class="col-sm-2 col-sm-offset-1">
+                    <asp:LinkButton runat="server" ID="btnCerrarSesion" OnClick="btnCerrarSesion_Click">
+                    <img style="margin-right:0%" src="<%=Page.ResolveUrl("~/img/LogOut.png")%>" height="50px" width="50px"/>                
+                    </asp:LinkButton>
+                </div>
+            </div>
+            <!-- ultimo div-->
+        </div>
+            <div>
+                <!-- mensaje de error-->
+                <div class="row" id="divMsjAlerta" runat="server" visible="false">
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <asp:Literal runat="server" ID="liMensajeAlerta" />
+                    </div>
+                </div>
+
+                <!-- mensaje de Ok-->
+                <div class="row" id="divMsjOk" runat="server" visible="false">
+                    <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <asp:Literal runat="server" ID="liMsjOk" />
+                    </div>
+                </div>
+
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>        
     </form>
 </body>
 </html>

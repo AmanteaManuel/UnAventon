@@ -24,23 +24,32 @@ namespace UnAventon
         }
 
         protected void Page_Load(object sender, EventArgs e)
-		{
-            //string userName = HttpContext.Current.User.Identity.Name;
+		{            
+            string path = HttpContext.Current.Request.Url.AbsolutePath;            
+
+            if (path.Contains("alta-Usuario.aspx"))
+                lbModificarDatos.Enabled = false;
+
+            if (path.Contains("Publicar-Viaje.aspx"))
+                lbPublicarViaje.Enabled = false;
+
+            if (path.Contains("Listado-de-Viajes.aspx"))
+                lbListarViajes.Enabled = false;
+
+            if (path.Contains("Ver-Perfil.aspx"))
+                lbVerPerfil.Enabled = false;
+
         }
 
         protected void lbVerPerfil_Click(object sender, EventArgs e)
         {
-            
-        }
-
-        protected void lbCrearViaje_Click(object sender, EventArgs e)
-        {
-
+            string idEncriptado = new Bol.Core.Service.Tools().Encripta(Convert.ToString(@ActiveUsuario.Id));
+            Response.Redirect("~/Usuario/Ver-Perfil.aspx?id=" + idEncriptado);
         }
 
         protected void lbListarViajes_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("~Viajes/Listado-de-Viajes.aspx");
         }
 
         protected void lbModificarDatos_Click(object sender, EventArgs e)
@@ -54,6 +63,10 @@ namespace UnAventon
             string idEncriptado = new Bol.Core.Service.Tools().Encripta(Convert.ToString(@ActiveUsuario.Id));
             Response.Redirect("~/Viajes/Publicar-Viaje.aspx?id=" + idEncriptado);
         }
+        protected void lbRegistrarVehiculo_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Vehiculos/AgregarVehiculo.aspx");
+        }
 
         protected void btnCerrarSesion_Click(object sender, EventArgs e)
         {
@@ -63,5 +76,6 @@ namespace UnAventon
             Response.AppendHeader("Cache-Control", "no-store");
             Response.Redirect("~/Home.aspx");
         }
+
     }
 }
