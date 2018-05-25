@@ -31,33 +31,6 @@ namespace UnAventon.Usuario {
         protected global::System.Web.UI.WebControls.Literal liSubTitulo;
         
         /// <summary>
-        /// divNombreusuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divNombreusuario;
-        
-        /// <summary>
-        /// tbNombreUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbNombreUsuario;
-        
-        /// <summary>
-        /// cvNombreUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cvNombreUsuario;
-        
-        /// <summary>
         /// tbNombre control.
         /// </summary>
         /// <remarks>

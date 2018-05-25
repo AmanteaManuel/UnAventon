@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Bol
 {
+    [Serializable]
     public class Viaje
     {
         #region " Atributes "
@@ -157,14 +158,27 @@ namespace Bol
 
         #region " Views "
 
-        public Viaje GetById()
+        public Viaje GetInstanceById(int id)
         {
-            return null;
+            try
+            {
+                return FillObject((new Dal.Core.Viaje().GetInstanceById(id)).Tables[0].Rows[0]);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al Cargar Viaje. " + ex.Message);
+            }
         }
 
         public List<Viaje> GetAll()
         {
-            return null;
+            try
+            {
+                Dal.Core.Viaje dal = new Dal.Core.Viaje();
+                DataSet ds = dal.GetAll();
+                return FillList(ds);
+            }
+            catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
         }
 
         #endregion
@@ -208,6 +222,13 @@ namespace Bol
             catch (Exception ex) { throw new Exception("Error en el metodo Fill" + ex.Message); }
 
             return oBol;
+        }
+
+        private static List<Viaje> FillList(DataSet ds)
+        {
+            //if (ds.Tables[0].Rows.Count > 0)
+                //return (from DataRow dr in ds.Tables[0].Rows select FillObject(dr)).ToList();
+            return null;
         }
 
         #endregion

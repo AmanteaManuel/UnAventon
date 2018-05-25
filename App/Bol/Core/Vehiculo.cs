@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Bol
 {
+    [Serializable]
     public class Vehiculo
     {
         #region " Atributes "
@@ -212,10 +213,15 @@ namespace Bol
             return oBol;
         }
 
+        /// <summary>
+        /// Recupera una lista con todas los Usuario
+        /// </summary>
+        /// <param name="ds"></param>
+        /// <returns></returns>
         private static List<Vehiculo> FillList(DataSet ds)
         {
-           // if (ds.Tables[0].Rows.Count > 0)
-               // return (from DataRow dr in ds.Tables[0].Rows select FillObject(dr)).ToList();
+            //if (ds.Tables[0].Rows.Count > 0)
+            //    return (from DataRow dr in ds.Tables[0].Rows select FillObject(dr)).ToList();
             return null;
 
         }

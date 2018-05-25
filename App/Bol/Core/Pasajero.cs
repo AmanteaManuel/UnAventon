@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Bol
 {
+    [Serializable]
     public class Pasajero
     {
         #region " Atributes "

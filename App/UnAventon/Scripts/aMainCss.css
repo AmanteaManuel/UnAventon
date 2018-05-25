@@ -69,3 +69,47 @@ ul li {
     height: 25px;
     width: 230px;
 }
+
+.error {
+    border: 1px solid #ff0000;    
+    border-radius: 7px;
+    height: 25px;
+    width: 230px;
+}
+
+/*/grid*/
+.main{
+    display:grid;
+    grid-gap:10px;
+    grid-template-areas:
+        "header"
+        "columna1"
+        "columna2"
+        "columna3"
+}
+
+@media (min-widht: 500px)
+{
+    main {
+        grid-template-areas: 
+            "header header header"
+            "columna1 columna2 columna3"
+    }
+}
+
+header{
+    grid-area:header;
+}
+
+columna1 {
+    grid-area: columna1;
+}
+
+columna2 {
+    grid-area: columna2;
+}
+
+columna3 {
+    grid-area: columna3;
+}
+

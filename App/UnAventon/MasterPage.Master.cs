@@ -45,13 +45,23 @@ namespace UnAventon
 
         protected void lbModificarDatos_Click(object sender, EventArgs e)
         {
-            //string idEncriptado = new Bol.Core.Service.Tools().Encripta(Convert.ToString(Persona.Id));
-            Response.Redirect("~/Usuario/alta-Usuario.aspx?id=");
+            string idEncriptado = new Bol.Core.Service.Tools().Encripta(Convert.ToString(@ActiveUsuario.Id));
+            Response.Redirect("~/Usuario/alta-Usuario.aspx?id="+ idEncriptado);
         }
 
         protected void lbPublicarViaje_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Viajes/Publicar-Viaje?=");
+            string idEncriptado = new Bol.Core.Service.Tools().Encripta(Convert.ToString(@ActiveUsuario.Id));
+            Response.Redirect("~/Viajes/Publicar-Viaje.aspx?id=" + idEncriptado);
+        }
+
+        protected void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            Session.RemoveAll();
+            Session.Abandon();
+            Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
+            Response.AppendHeader("Cache-Control", "no-store");
+            Response.Redirect("~/Home.aspx");
         }
     }
 }

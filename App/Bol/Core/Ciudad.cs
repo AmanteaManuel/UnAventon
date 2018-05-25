@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bol.Core
 {
+    [Serializable]
     public class Ciudad
     {
         

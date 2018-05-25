@@ -22,21 +22,10 @@ namespace UnAventon.Usuario
 
         #region " Validate "
 
-        protected void cvNombreUsuario_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            tbNombreUsuario.Attributes.Add("class", "form-group");
-            cvNombreUsuario.ErrorMessage = string.Empty;
-
-            if (string.IsNullOrEmpty(tbNombreUsuario.Text) || string.IsNullOrWhiteSpace(tbNombreUsuario.Text))
-            {
-                args.IsValid = false;
-                tbNombreUsuario.Attributes.Add("class", "form-group has-error");
-            }
-        }
+        
 
         protected void cvNombre_ServerValidate(object source, ServerValidateEventArgs args)
         {
-
             tbNombre.Attributes.Add("class", "form-group");
             cvNombre.ErrorMessage = string.Empty;
 
@@ -142,11 +131,11 @@ namespace UnAventon.Usuario
             //Deja la pagina en blanco(sin datos)
             ClearPage();
 
-            // obtengo id de la url
-            string id;
+            // obtengo id de la url            
             if (Request.QueryString["id"] != null)
             {
-                id =new Bol.Core.Service.Tools().Desencripta(Request.QueryString["id"]);
+                string idEncriptado = Request.QueryString["id"];                
+                int id = Convert.ToInt32(new Bol.Core.Service.Tools().Desencripta(idEncriptado));
                 int IdDesencriptado = Convert.ToInt32(id);
                 Usuario = new Bol.Usuario().GetInstanceById(IdDesencriptado);
             }
@@ -172,7 +161,6 @@ namespace UnAventon.Usuario
                 //Cargo los datos del usuario en los texbox.
                 tbApellido.Text = Usuario.Apellido;
                 tbNombre.Text = Usuario.Nombre;
-                tbNombreUsuario.Text = Usuario.NombreUsuario;
                 tbContrasenia.Text = Usuario.Contraseña;
                 tbDni.Text = Usuario.Dni;
                 tbEmail.Text = Usuario.Email;
@@ -188,7 +176,6 @@ namespace UnAventon.Usuario
         {
             tbApellido.Text = string.Empty;
             tbNombre.Text = string.Empty;
-            tbNombreUsuario.Text = string.Empty;
             tbContrasenia.Text = string.Empty;
             tbDni.Text = string.Empty;
             tbEmail.Text = string.Empty;            
@@ -212,7 +199,7 @@ namespace UnAventon.Usuario
                         user.Email = tbEmail.Text;
                         user.FechaNacimiento = Convert.ToDateTime(tbFechaNacimiento.Text);
                         user.Nombre = tbNombre.Text;
-                        user.NombreUsuario = tbNombreUsuario.Text;
+                        
                         user.SiActivo = true;
 
                         Bol.Usuario.Create(user);
@@ -246,8 +233,7 @@ namespace UnAventon.Usuario
                     user.Dni = tbDni.Text;
                     user.Email = tbEmail.Text;
                     user.FechaNacimiento = Convert.ToDateTime(tbFechaNacimiento.Text);
-                    user.Nombre = tbNombre.Text;
-                    user.NombreUsuario = tbNombreUsuario.Text;
+                    user.Nombre = tbNombre.Text;                    
                     user.SiActivo = true;
 
                     Bol.Usuario.Update(user);                    
