@@ -8,48 +8,43 @@
 		    <div> 
 			    <div>
 				    <div> 
-					    <h3>Alta de vehiculo</h3>
-					    <span class="required_notification">Datos requeridos</span> 
+					    <h3><asp:Literal runat="server" id="liTitulo"/></h3> 
+                        <p><asp:Literal runat="server" ID="liSubTitulo" /></p>
+					    <%--<span class="required_notification">Datos requeridos</span>--%>
 				    </div>
                     <br />  
 
                     <div  id="divMarca" class="form-group has-error help-block" runat="server"> 
 
 					    <asp:TextBox runat="server" ID="tbMarca" PlaceHolder="Marca" Cssclass="form-control has-error" width="175"/>
-                        <%--<asp:CustomValidator ErrorMessage="Campo invalido" id="cvMarca" runat="server" ValidationGroup="AgregarVehiculo" OnServerValidate="cvMarca_ServerValidate" Cssclass="help-block"/>--%>
+                        <asp:CustomValidator ErrorMessage="Campo invalido" ControlToValidate="tbMarca" runat="server" ID="cvMarca" OnServerValidate="cvMarca_ServerValidate" ValidationGroup="AgregarVehiculo" />
 				    </div>                   
 
 				    <div  class="form-group" > 
                         <asp:TextBox runat="server" ID="tbModelo" PlaceHolder="Modelo" Cssclass="form-control" width="175"/>
-                        <%--<asp:CustomValidator ErrorMessage="Campo invalido" id="cvModelo" runat="server" ValidationGroup="AgregarVehiculo" OnServerValidate="cvModelo_ServerValidate" Cssclass="help-block"/>--%>
+                        <asp:CustomValidator ErrorMessage="Campo invalido" ControlToValidate="tbModelo" runat="server" ID="cvModelo" OnServerValidate="cvModelo_ServerValidate" ValidationGroup="AgregarVehiculo" />
 				    </div>
-
 
 				    <div class="form-group" > 
 					    <asp:TextBox runat="server" ID="tbPatente" PlaceHolder="Patente"  Cssclass="form-control" width="175"/>
-                        <%--<asp:CustomValidator ErrorMessage="Campo invalido" id="cvPatente" runat="server" ValidationGroup="AgregarVehiculo" OnServerValidate="cvPatente_ServerValidate" Cssclass="help-block"/>--%>
+                        <asp:CustomValidator ErrorMessage="Campo invalido" ControlToValidate="tbPatente" runat="server" ID="cvPatente" OnServerValidate="cvPatente_ServerValidate" ValidationGroup="AgregarVehiculo" />
 				    </div> 
-
 
 				    <div class="form-group" >
 					    <asp:TextBox runat="server" ID="tbColor" PlaceHolder="Color"  Cssclass="form-control" width="175"/>
-                        <%--<asp:CustomValidator ErrorMessage="Campo invalido" id="cvColor" runat="server" ValidationGroup="AgregarVehiculo" OnServerValidate="cvColor_ServerValidate" Cssclass="help-block"/>--%>
+                        <asp:CustomValidator ErrorMessage="Campo invalido" ControlToValidate="tbColor" runat="server" ID="cvColor" OnServerValidate="cvColor_ServerValidate" ValidationGroup="AgregarVehiculo" />
 				    </div>
-
 
 				    <div class="form-group" > 
 					    <asp:TextBox runat="server" ID="tbAsientos" PlaceHolder="Asientos Disponibles"  Cssclass="form-control" width="175"/>
-                        <%--<asp:CustomValidator ErrorMessage="Campo invalido" id="cvAsientos" runat="server" ValidationGroup="AgregarVehiculo" OnServerValidate="cvAsientos_ServerValidate" Cssclass="help-block"/>--%>
+                        <asp:CustomValidator ErrorMessage="Campo invalido" ControlToValidate="tbAsientos" runat="server" ID="cvAsientos" OnServerValidate="cvAsientos_ServerValidate" ValidationGroup="AgregarVehiculo" />
 				    </div>
 
-                    <div class="form-group">
-                        <asp:TextBox runat="server" ID="tbDescripcion" rows="4" TextMode="multiline" PlaceHolder="Descripcion:" CssClass="form-control" Width="400" />
-                        <%--<asp:CustomValidator ErrorMessage="Campo invalido" id="cvDescripcion" runat="server" ValidationGroup="AgregarVehiculo" OnServerValidate="cvDescripcion_ServerValidate" Cssclass="help-block"/>--%>
-                    </div>
 
                     <div class="form-group" >
-                        
-                        <asp:Button Text="Aceptar" runat="server" ID="btnAceptar" OnClick="btnAceptar_Click" />
+                    
+                        <asp:Button Text="Registrar" runat="server" ID="btnRegistrar" OnClick="btnRegistrar_Click" />
+                        <asp:Button Text="Modificar" runat="server" ID="btnModificar" OnClick="btnModificar_Click" />
 				    </div> 	
                             
 			    </div> 

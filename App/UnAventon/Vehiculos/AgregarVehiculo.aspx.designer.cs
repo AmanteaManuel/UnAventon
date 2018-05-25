@@ -13,6 +13,24 @@ namespace UnAventon.Vehiculos {
     public partial class AgregarVehiculo {
         
         /// <summary>
+        /// Control liTitulo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal liTitulo;
+        
+        /// <summary>
+        /// Control liSubTitulo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal liSubTitulo;
+        
+        /// <summary>
         /// Control divMarca.
         /// </summary>
         /// <remarks>
@@ -31,6 +49,15 @@ namespace UnAventon.Vehiculos {
         protected global::System.Web.UI.WebControls.TextBox tbMarca;
         
         /// <summary>
+        /// Control cvMarca.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvMarca;
+        
+        /// <summary>
         /// Control tbModelo.
         /// </summary>
         /// <remarks>
@@ -38,6 +65,15 @@ namespace UnAventon.Vehiculos {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbModelo;
+        
+        /// <summary>
+        /// Control cvModelo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvModelo;
         
         /// <summary>
         /// Control tbPatente.
@@ -49,6 +85,15 @@ namespace UnAventon.Vehiculos {
         protected global::System.Web.UI.WebControls.TextBox tbPatente;
         
         /// <summary>
+        /// Control cvPatente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvPatente;
+        
+        /// <summary>
         /// Control tbColor.
         /// </summary>
         /// <remarks>
@@ -56,6 +101,15 @@ namespace UnAventon.Vehiculos {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbColor;
+        
+        /// <summary>
+        /// Control cvColor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvColor;
         
         /// <summary>
         /// Control tbAsientos.
@@ -67,21 +121,30 @@ namespace UnAventon.Vehiculos {
         protected global::System.Web.UI.WebControls.TextBox tbAsientos;
         
         /// <summary>
-        /// Control tbDescripcion.
+        /// Control cvAsientos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbDescripcion;
+        protected global::System.Web.UI.WebControls.CustomValidator cvAsientos;
         
         /// <summary>
-        /// Control btnAceptar.
+        /// Control btnRegistrar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAceptar;
+        protected global::System.Web.UI.WebControls.Button btnRegistrar;
+        
+        /// <summary>
+        /// Control btnModificar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModificar;
     }
 }
