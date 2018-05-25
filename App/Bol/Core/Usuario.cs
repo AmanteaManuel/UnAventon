@@ -346,7 +346,12 @@ namespace Bol
 
         public static Usuario GetUsuarioByEmail(string email)
         {
-            return FillObject(new Dal.Core.Usuario().GetUsuarioByEmail(email).Tables[0].Rows[0]);
+            DataSet userdr;
+            userdr = new Dal.Core.Usuario().GetUsuarioByEmail(email);
+            if (userdr.Tables[0].Rows.Count > 0)
+                return FillObject(userdr.Tables[0].Rows[0]);
+            else
+                return null;            
         }
 
         #endregion
@@ -365,15 +370,16 @@ namespace Bol
             {
             //Bol.Usuario u = new Bol.Usuario().GetUsuarioByEmail(usuario.Email);
 
-                outId = new Dal.Core.Usuario().Create(
-                usuario.NombreUsuario,
+                outId = new Dal.Core.Usuario().Create(               
                 usuario.Nombre,
                 usuario.Apellido,
                 usuario.Dni,
                 usuario.FechaNacimiento,
                 usuario.Email,
                 usuario.Contraseña,
-                usuario.SiActivo
+                usuario.SiActivo,
+                0,
+                0
                 );
 
                 usuario.Id = outId;

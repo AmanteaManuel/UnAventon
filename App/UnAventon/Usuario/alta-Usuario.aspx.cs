@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace UnAventon.Usuario
@@ -26,100 +27,100 @@ namespace UnAventon.Usuario
 
         protected void cvNombre_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbNombre.Attributes.Add("class", "form-group");
+            tbNombre.CssClass = "form-group";
             cvNombre.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbNombre.Text))
             {
                 args.IsValid = false;
-                tbNombre.Attributes.Add("class", "form-group has-error");
+                tbNombre.CssClass = "form-group error";
             }
 
         }
 
         protected void cvApellido_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbApellido.Attributes.Add("class", "form-group");
+            tbApellido.CssClass = "form-group";
             cvApellido.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbApellido.Text))
             {
                 args.IsValid = false;
-                tbApellido.Attributes.Add("class", "form-group has-error");
+                tbApellido.Attributes.Add("class", "form-group error");
+                tbApellido.CssClass = "form-group error";
             }
         }
 
         protected void cvEmail_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbEmail.Attributes.Add("class", "form-group");
+            tbEmail.CssClass = "form-group";
             cvEmail.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbEmail.Text))
             {
                 args.IsValid = false;
-                tbEmail.Attributes.Add("class", "form-group has-error");
+                tbEmail.CssClass = "form-group error";
             }
         }
 
         protected void cvContrasenia_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbContrasenia.Attributes.Add("class", "form-group");
+            tbContrasenia.CssClass = "form-group";
             cvContrasenia.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbContrasenia.Text))
             {
                 args.IsValid = false;
-                tbContrasenia.Attributes.Add("class", "form-group has-error");
+                tbContrasenia.CssClass = "form-group error";
             }
         }
 
         protected void cvRepitaContraseña_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbRepitaContraseña.Attributes.Add("class", "form-group");
+            tbRepitaContraseña.CssClass = "form-group";
             cvNombre.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbRepitaContraseña.Text) || (tbContrasenia.Text != tbRepitaContraseña.Text))
             {
                 args.IsValid = false;
-                tbNombre.Attributes.Add("class", "form-group has-error");
+                tbRepitaContraseña.CssClass = "form-group error";
             }
         }
 
         protected void cvDni_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbDni.Attributes.Add("class", "form-group");
+            tbDni.CssClass = "form-group";
             cvDni.ErrorMessage = string.Empty;
 
-            if (string.IsNullOrEmpty(tbDni.Text))
+            if (string.IsNullOrEmpty(tbDni.Text) || (!Bol.Core.Service.Tools.IsNumber(tbDni.Text)))
             {
                 args.IsValid = false;
-                tbDni.Attributes.Add("class", "form-group has-error");
+                tbDni.CssClass = "form-group error";
             }
         }
 
         protected void cvFechaNacimiento_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbFechaNacimiento.Attributes.Add("class", "form-group");
+            tbFechaNacimiento.CssClass = "form-group";
             cvFechaNacimiento.ErrorMessage = string.Empty;
-            
+            if (!string.IsNullOrEmpty(tbFechaNacimiento.Text))
+                try
+                {
+                    Convert.ToDateTime(tbFechaNacimiento.Text);
+                }
+                catch (Exception)
+                {
+                    args.IsValid = false;
+                    tbFechaNacimiento.CssClass = "form-group error";
 
-            if (string.IsNullOrEmpty(tbFechaNacimiento.Text))
-                if (Bol.Core.Service.Tools.IsNumber(tbFechaNacimiento.Text))
-                    try
-                    {
-                        Convert.ToDateTime(tbFechaNacimiento.Text);
-                    }
-                    catch (Exception)
-                    {
-                        Literal liMensaje = (Literal)this.Master.FindControl("liMensajeAlerta");
-                        liMensaje.Text = "Fecha Invalida ingrese una fecha con formato correcto dd/mm/aaa";                        
-                    }
-
-
-            args.IsValid = false;
-            tbFechaNacimiento.Attributes.Add("class", "form-group has-error");
-
-
+                    Literal liMensaje = (Literal)this.Master.FindControl("liMensajeAlerta");
+                    liMensaje.Text = "Fecha Invalida ingrese una fecha con formato correcto dd/mm/aaa";
+                }
+            else
+            {
+                args.IsValid = false;
+                tbFechaNacimiento.CssClass = "form-group error";
+            }
         }          
                 
         #endregion
@@ -128,44 +129,47 @@ namespace UnAventon.Usuario
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Deja la pagina en blanco(sin datos)
-            ClearPage();
-
-            // obtengo id de la url            
-            if (Request.QueryString["id"] != null)
+            if (!Page.IsPostBack)
             {
-                string idEncriptado = Request.QueryString["id"];                
-                int id = Convert.ToInt32(new Bol.Core.Service.Tools().Desencripta(idEncriptado));
-                int IdDesencriptado = Convert.ToInt32(id);
-                Usuario = new Bol.Usuario().GetInstanceById(IdDesencriptado);
-            }
+                //Deja la pagina en blanco(sin datos)
+                ClearPage();
 
-            // si url vacia pagina es alta sino edicion           
-            
-            //si es alta
-            if (Usuario == null)
-            {
-                liTitulo.Text = "Registrar Usuario. ";
-                liSubTitulo.Text = "En esta pagina podra registrarse al sistema. ";
-                btnRegistrarse.Visible = true;
-                btnModificar.Visible = false;                
-            }
-            //si es modificacion
-            else
-            {
-                liTitulo.Text = "Modificar Usuario. ";
-                liSubTitulo.Text = "En esta pagina podra modificar sus datos Personales. ";
-                btnRegistrarse.Visible = false;
-                btnModificar.Visible = true;
+                // obtengo id de la url            
+                if (Request.QueryString["id"] != null)
+                {
+                    string idEncriptado = Request.QueryString["id"];
+                    int id = Convert.ToInt32(new Bol.Core.Service.Tools().Desencripta(idEncriptado));
+                    int IdDesencriptado = Convert.ToInt32(id);
+                    Usuario = new Bol.Usuario().GetInstanceById(IdDesencriptado);
+                }
 
-                //Cargo los datos del usuario en los texbox.
-                tbApellido.Text = Usuario.Apellido;
-                tbNombre.Text = Usuario.Nombre;
-                tbContrasenia.Text = Usuario.Contraseña;
-                tbDni.Text = Usuario.Dni;
-                tbEmail.Text = Usuario.Email;
-                tbEmail.Enabled = false;
+                // si url vacia pagina es alta sino edicion           
 
+                //si es alta
+                if (Usuario == null)
+                {
+                    liTitulo.Text = "Registrar Usuario. ";
+                    liSubTitulo.Text = "En esta pagina podra registrarse al sistema. ";
+                    btnRegistrarse.Visible = true;
+                    btnModificar.Visible = false;
+                }
+                //si es modificacion
+                else
+                {
+                    liTitulo.Text = "Modificar Usuario. ";
+                    liSubTitulo.Text = "En esta pagina podra modificar sus datos Personales. ";
+                    btnRegistrarse.Visible = false;
+                    btnModificar.Visible = true;
+
+                    //Cargo los datos del usuario en los texbox.
+                    tbApellido.Text = Usuario.Apellido;
+                    tbNombre.Text = Usuario.Nombre;
+                    tbContrasenia.Text = Usuario.Contraseña;
+                    tbDni.Text = Usuario.Dni;
+                    tbEmail.Text = Usuario.Email;
+                    tbEmail.Enabled = false;
+
+                }
             }
         }
 
@@ -177,6 +181,8 @@ namespace UnAventon.Usuario
             tbApellido.Text = string.Empty;
             tbNombre.Text = string.Empty;
             tbContrasenia.Text = string.Empty;
+            tbRepitaContraseña.Text = string.Empty;
+            tbFechaNacimiento.Text = string.Empty;
             tbDni.Text = string.Empty;
             tbEmail.Text = string.Empty;            
         }
@@ -190,7 +196,7 @@ namespace UnAventon.Usuario
                 {
                     //si existe el usuario
                     Bol.Usuario uexist = Bol.Usuario.GetUsuarioByEmail(tbEmail.Text);
-                    if (uexist != null)
+                    if (uexist == null)
                     {
                         Bol.Usuario user = new Bol.Usuario();
                         user.Apellido = tbApellido.Text;
@@ -211,12 +217,14 @@ namespace UnAventon.Usuario
                         throw new Exception("El usuario ya existe. ");
                 }
                 else
-                    throw new Exception("Error al insertar usuario. ");
+                    throw new Exception("Uno o mas campos son incorrectos. ");
             }
             catch (Exception ex)
-            {                
-                Literal liMensaje = (Literal)this.Master.FindControl("liMensajeAlerta");
-                liMensaje.Text = "Error al crear usuario"+ ex;
+            {
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = ex.Message;
             }
         }
 

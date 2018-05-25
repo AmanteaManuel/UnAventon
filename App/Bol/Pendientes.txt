@@ -1,9 +1,9 @@
-﻿Agregar mensaje de error en alta y modificacion de usuario.
-revisar fecha de nacimiento(validaciones)
-obtener usuario del contexto para modificacion//ATR
-verificar si el mail del usuario ya existe(rompe) creo que esta bien pero hay que capturar la exepcion para mostrar mensaje.
-Update panel en el publicar viaje(falta scriptManager) //listo
-Cargar ddl del viaje
-Validacion public viaje.
-Falta probar cerrar sesion
-
+﻿Agregar mensaje de error en alta y modificacion de usuario.	----//me sangran los globos oculares
+revisar fecha de nacimiento(validaciones)	----//al borde del acv pero siempre atr
+obtener usuario del contexto para modificacion	----//ATR
+verificar si el mail del usuario ya existe(rompe) creo que esta bien pero hay que capturar la exepcion para mostrar mensaje.	----//Listo calisto
+Update panel en el publicar viaje(falta scriptManager)	----//listo
+Cargar ddl del viaje (problemas con el update y el fillList)
+Validacion public viaje.(no se ejecutan todas?)
+Falta probar cerrar sesion	----//ATR
+revisar validaciones en el registrar vehiculo(aca no se ejecuta ninguna) y modificar(no se ejecutan todas? en el publicar viaje tampoco)

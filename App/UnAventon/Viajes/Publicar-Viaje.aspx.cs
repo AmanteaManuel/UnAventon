@@ -135,6 +135,8 @@ namespace UnAventon.Viajes
                     this.Master.FindControl("divMsjOk").Visible = true;
                     Literal liMensaje = (Literal)this.Master.FindControl("liMsjOK");
                     liMensaje.Text = "Viaje publicado con éxito";
+
+                    Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
                 }
                 else
                     throw new Exception("Error al publicar viaje ");

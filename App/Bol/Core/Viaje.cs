@@ -181,6 +181,17 @@ namespace Bol
             catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
         }
 
+        public List<Viaje> GetAllFromNowToOneMonth(DateTime fechaActual, DateTime fechaUnMes)
+        {
+            try
+            {
+                Dal.Core.Viaje dal = new Dal.Core.Viaje();
+                DataSet ds = dal.GetAllFromNowToOneMonth(fechaActual, fechaUnMes);
+                return FillList(ds);
+            }
+            catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
+        }
+
         #endregion
 
         #region " Fill "

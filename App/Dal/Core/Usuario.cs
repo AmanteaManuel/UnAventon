@@ -14,8 +14,7 @@ namespace Dal.Core
         /// <summary>
         /// query que inserta en la base una persona
         /// </summary>
-        private const string INSERT_USUARIO = @"INSERT INTO Usuario (
-                                                    NombreUsuario,
+        private const string INSERT_USUARIO = @"INSERT INTO Usuario (                                                    
                                                     Nombre,
                                                     Apellido,
                                                     Dni,
@@ -27,8 +26,7 @@ namespace Dal.Core
                                                     ReputacionPasajero
                                                     )
                                                 output INSERTED.Id
-                                                VALUES (
-                                                    @parNombreUsuario,
+                                                VALUES (                                                   
                                                     @parNombre,
                                                     @parApellido,
                                                     @parDni,
@@ -36,8 +34,9 @@ namespace Dal.Core
                                                     @parEmail,
                                                     @parContraseña,
                                                     @parSiActivo,
-                                                    0,
-                                                    0)";
+                                                    @parReputacionChofer,
+                                                    @parReputacionPasajero
+                                                    )";
 
         private const string UPDATE_USUARIO = @"UPDATE Usuario SET 
 				                                        NombreUsuario = @parNombreUsuario,
@@ -70,9 +69,9 @@ namespace Dal.Core
         }
 
         public DataSet GetUsuarioByEmail(string email)
-        {
+        {            
             this.SelectCommandText = string.Format(GET_USUARIO_BY_EMAIL, email);
-            return this.Load();
+            return this.Load();     
         }
 
         public DataSet GetAll()
@@ -84,15 +83,16 @@ namespace Dal.Core
 
         #region " CRUD "
 
-        public int Create(
-            string nombreUsuario,
+        public int Create(            
             string nombre,
             string apellido,
             string dni,
             DateTime fechaNacimiento,
             string email,            
             string contraseña,
-            bool siActivo               
+            bool siActivo ,
+            int ReputacionChofer,
+            int ReputacionPasajero
             )
         {
             //query a ejecutar
@@ -102,9 +102,6 @@ namespace Dal.Core
             this.ExecuteParameters.Parameters.Clear();
 
             //parámetros
-            //documento
-            this.ExecuteParameters.Parameters.AddWithValue("@parNombreUsuario", nombreUsuario);
-
             this.ExecuteParameters.Parameters.AddWithValue("@parNombre", nombre);
 
             this.ExecuteParameters.Parameters.AddWithValue("@parApellido", apellido);
@@ -117,8 +114,12 @@ namespace Dal.Core
 
             this.ExecuteParameters.Parameters.AddWithValue("@parContraseña", contraseña);
 
-            this.ExecuteParameters.Parameters.AddWithValue("@parSiActivo", siActivo);            
-            
+            this.ExecuteParameters.Parameters.AddWithValue("@parSiActivo", siActivo);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parReputacionChofer", ReputacionChofer);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parReputacionPasajero", ReputacionPasajero);
+
             //ejecución, retorna el valor del parámetro de retorno
             return this.ExecuteNonEscalar();
         }

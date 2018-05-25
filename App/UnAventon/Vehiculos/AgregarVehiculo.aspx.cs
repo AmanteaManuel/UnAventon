@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace UnAventon.Vehiculos
@@ -20,8 +21,9 @@ namespace UnAventon.Vehiculos
             set { ViewState["Vehiculo"] = value; }
         }
         #endregion
-        //estan comentadas las validaciones de asientos disponibles y descripcion para que no se rompa
+
         #region "Validate"     
+
         protected void cvMarca_ServerValidate(object source, ServerValidateEventArgs args)
         {
             tbMarca.Attributes.Add("class", "form-group");
@@ -30,7 +32,7 @@ namespace UnAventon.Vehiculos
             if (string.IsNullOrEmpty(tbMarca.Text) || string.IsNullOrWhiteSpace(tbMarca.Text))
             {
                 args.IsValid = false;
-                tbMarca.Attributes.Add("class", "form-group has-error");
+                tbMarca.Attributes.Add("class", "form-group error");
             }
         }   
 
@@ -42,7 +44,7 @@ namespace UnAventon.Vehiculos
             if (string.IsNullOrEmpty(tbModelo.Text))
             {
                 args.IsValid = false;
-                tbModelo.Attributes.Add("class", "form-group has-error");
+                tbModelo.Attributes.Add("class", "form-group error");
             }
         }
 
@@ -54,7 +56,7 @@ namespace UnAventon.Vehiculos
             if (string.IsNullOrEmpty(tbPatente.Text))
             {
                 args.IsValid = false;
-                tbPatente.Attributes.Add("class", "form-group has-error");
+                tbPatente.Attributes.Add("class", "form-group error");
             }
         }
 
@@ -66,7 +68,7 @@ namespace UnAventon.Vehiculos
             if (string.IsNullOrEmpty(tbColor.Text))
             {
                 args.IsValid = false;
-                tbColor.Attributes.Add("class", "form-group has-error");
+                tbColor.Attributes.Add("class", "form-group error");
             }
         }
 
@@ -78,7 +80,7 @@ namespace UnAventon.Vehiculos
             if (string.IsNullOrEmpty(tbAsientos.Text))
             {
                 args.IsValid = false;
-                tbAsientos.Attributes.Add("class", "form-group");
+                tbAsientos.Attributes.Add("class", "form-group error");
             }
         }
 
@@ -89,37 +91,41 @@ namespace UnAventon.Vehiculos
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ClearPage();
 
-            string id;
-            if (Request.QueryString["id"] != null)
+            if (!Page.IsPostBack)
             {
-                id = new Bol.Core.Service.Tools().Desencripta(Request.QueryString["id"]);
-                int IdDesencriptado = Convert.ToInt32(id);
-                Vehiculo = new Bol.Vehiculo().LoadById(IdDesencriptado);
-            }
-            if (Vehiculo == null)
-            {
-                liTitulo.Text = "Registrar Vehiculo. ";
-                liSubTitulo.Text = "En esta pagina podra registrarse al sistema. ";
-                btnRegistrar.Visible = true;
-                btnModificar.Visible = false;
-            }
-            else
-            {
-                liTitulo.Text = "Modificar Vehiculo. ";
-                liSubTitulo.Text = "En esta pagina podra modificar los datos de sus vehiculos. ";
-                btnRegistrar.Visible = false;
-                btnModificar.Visible = true;
+                ClearPage();
 
-                //Cargo los datos del vehiculo en los texbox.
-                tbMarca.Text = Vehiculo.Marca;
-                tbModelo.Text = Vehiculo.Modelo;
-                tbPatente.Text = Vehiculo.Patente;
-                tbColor.Text = Vehiculo.Color;
-                tbAsientos.Text =Convert.ToString(Vehiculo.AsientosDisponibles); 
-                
+                string id = new Bol.Core.Service.Tools().Encripta("1004");
+                if (Request.QueryString["id"] != null)
+                {
+                    id = new Bol.Core.Service.Tools().Desencripta(id);
+                    //id = new Bol.Core.Service.Tools().Desencripta(Request.QueryString["id"]);
+                    int IdDesencriptado = Convert.ToInt32(id);
+                    Vehiculo = new Bol.Vehiculo().LoadById(IdDesencriptado);
+                }
+                if (Vehiculo == null)
+                {
+                    liTitulo.Text = "Registrar Vehiculo. ";
+                    liSubTitulo.Text = "En esta pagina podra registrarse al sistema. ";
+                    btnRegistrar.Visible = true;
+                    btnModificar.Visible = false;
+                }
+                else
+                {
+                    liTitulo.Text = "Modificar Vehiculo. ";
+                    liSubTitulo.Text = "En esta pagina podra modificar los datos de sus vehiculos. ";
+                    btnRegistrar.Visible = false;
+                    btnModificar.Visible = true;
 
+                    //Cargo los datos del vehiculo en los texbox.
+                    tbMarca.Text = Vehiculo.Marca;
+                    tbModelo.Text = Vehiculo.Modelo;
+                    tbPatente.Text = Vehiculo.Patente;
+                    tbColor.Text = Vehiculo.Color;
+                    tbAsientos.Text = Convert.ToString(Vehiculo.AsientosDisponibles);
+
+                }
             }
         }
 
@@ -135,8 +141,8 @@ namespace UnAventon.Vehiculos
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
             try
-            {
-                Validate("CrearVehiculo");
+            {                
+                Validate("GroupRegistrarVehiculo");
                 if (Page.IsValid)
                 {
                     Bol.Vehiculo v = new Bol.Vehiculo();
@@ -144,47 +150,50 @@ namespace UnAventon.Vehiculos
                     v.Modelo = tbModelo.Text;
                     v.Patente = tbPatente.Text;
                     v.Color = tbColor.Text;
-                    v.AsientosDisponibles = Convert.ToInt32(tbAsientos.Text);  // Aca se rompe
-                    //v.SiActivo = true; //sirve para ver si esta dado de alta
+                    v.AsientosDisponibles = Convert.ToInt32(tbAsientos.Text);
 
-                    Bol.Vehiculo.Create(v);
-
+                    Bol.Vehiculo.Create(v, ActiveUsuario.Id);
+                    
+                    //tendriamos que mostrar un mensaje de ok para cuando la operacion es exitosa
+                    Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
                 }
 
             }
             catch (Exception ex)
             {
-
-                throw new Exception("Error al agregar el vehiculo", ex);
-            } 
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = ex.Message;                
+            }
+            
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
             try
             {
-                Validate("CrearVehiculo");             
+                Validate("GroupRegistrarVehiculo");
                 if (Page.IsValid)
                 {
-                    Bol.Vehiculo vehiculo = new Bol.Vehiculo();
-                    vehiculo.Marca = tbMarca.Text;
-                    vehiculo.Modelo = tbModelo.Text;
-                    vehiculo.Patente = tbPatente.Text;
-                    vehiculo.Color = tbColor.Text;
-                    vehiculo.AsientosDisponibles = Convert.ToInt32(tbAsientos.Text);
-                    //vehiculo.SiActivo = true;
+                    Vehiculo.Marca = tbMarca.Text;
+                    Vehiculo.Modelo = tbModelo.Text;
+                    Vehiculo.Patente = tbPatente.Text;
+                    Vehiculo.Color = tbColor.Text;
+                    Vehiculo.AsientosDisponibles = Convert.ToInt32(tbAsientos.Text);
 
-                    Bol.Vehiculo.Update(vehiculo);
+                    Bol.Vehiculo.Update(Vehiculo, ActiveUsuario.Id);
 
                     //Redirijo
-                    Response.Redirect("Listado-de-Viajes.aspx");
-                }
-                else
-                    throw new Exception("El vehiculo ya existe");
+                    Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
+                }               
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al agregar vehiculo", ex);
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = ex.Message;
             }
         }
 

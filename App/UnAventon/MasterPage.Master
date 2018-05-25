@@ -12,7 +12,7 @@
     <script src="<%=Page.ResolveUrl("~/Scripts/bootstrap.js") %>"></script>
 
     <style>
-        body {
+       body {
             background: linear-gradient(to bottom, MOCCASIN, white);
             <!-- background-image: url("fondo.jpg");
             background-position: center center;
@@ -23,7 +23,7 @@
         }
 
         .silver-background {
-            background-color: CORAL;
+            background-color: #F17376;
         }
 
         #loginForm .has-error .control-label,
@@ -35,7 +35,7 @@
         #loginForm .has-success .control-label,
         #loginForm .has-success .help-block,
         #loginForm .has-success .form-control-feedback {
-            color: #18bc9c;
+            color: #9D252D;
         }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">

@@ -49,7 +49,7 @@ namespace UnAventon
 
         protected void lbListarViajes_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~Viajes/Listado-de-Viajes.aspx");
+            Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
         }
 
         protected void lbModificarDatos_Click(object sender, EventArgs e)

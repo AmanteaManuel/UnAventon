@@ -10,8 +10,7 @@
     <thead class="silver-background">
         &nbsp
         <HR WIDTH=55%>
-        <tr>
-            
+        <tr>            
             <th>Origen</th>
             <th>Destino</th>
             <th>Precio</th>

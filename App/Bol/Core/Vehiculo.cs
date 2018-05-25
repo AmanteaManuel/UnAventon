@@ -153,10 +153,11 @@ namespace Bol
         #endregion
 
         #region " Views "
-
-        public Vehiculo LoadById(int vehiculoId)
+        
+        public Vehiculo LoadById(int usuarioId)
         {
-            throw new NotImplementedException();
+            return FillObject(
+                (new Dal.Core.Vehiculo().GetInstanceById(usuarioId)).Tables[0].Rows[0]);
         }
 
         public static List<Vehiculo> GetAllByUsuarioId(int usuarioId)
@@ -230,7 +231,7 @@ namespace Bol
 
         #region " CRUD "
 
-        public static int Create(Vehiculo vehiculo)
+        public static int Create(Vehiculo vehiculo, int usuarioId)
         {
             int outId = 0;
             try
@@ -242,14 +243,14 @@ namespace Bol
                                                        vehiculo.Modelo,
                                                        vehiculo.Patente,
                                                        vehiculo.AsientosDisponibles,
-                                                       vehiculo.UsuarioId);
+                                                       usuarioId);
 
                 vehiculo.Id = outId;                               
                 return vehiculo.Id;
             }
             catch (Exception e) { throw new Exception("Error en Insert" + e.Message); }
         }
-        public static void Update(Vehiculo vehiculo)
+        public static void Update(Vehiculo vehiculo, int usuarioId)
         {
             try
             {
@@ -259,9 +260,10 @@ namespace Bol
                     vehiculo.Modelo,
                     vehiculo.Patente,
                     vehiculo.AsientosDisponibles,
-                    vehiculo.Id);
+                    vehiculo.Id,
+                    usuarioId);
             }
-            catch (Exception e) { throw new Exception("Error en el Update" + e.Message); }
+            catch (Exception e) { throw new Exception("Error en el Update del vehiculo. " + e.Message); }
         }
 
         #endregion

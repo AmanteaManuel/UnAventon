@@ -13,24 +13,6 @@ namespace UnAventon.Viajes {
     public partial class Listado_de_Viajes {
         
         /// <summary>
-        /// ulHeader control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ulHeader;
-        
-        /// <summary>
-        /// liEmptyState control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liEmptyState;
-        
-        /// <summary>
         /// rptViajes control.
         /// </summary>
         /// <remarks>

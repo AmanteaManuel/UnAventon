@@ -2,77 +2,76 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="panel panel-default panel-container-dnst">
-        <div class="panel-body listadoUsuarios">
+    <div class="table-responsive">
+<table class="table table-hover" >
 
-            <!-- fila que dice los campos a listar-->
-            <div class="row">
-                <div class="col-xs-12 col-md-12 col-lg-12">
-                    <ul id="ulHeader" class="" runat="server">
-                        <li class="">
-                            <div class="col-sm-4 header">
-                                <span>Origen</span>
-                            </div>
-                            <div class="col-sm-2 columna1">
-                                <span>Destino</span>
-                            </div>
-                            <div class="col-sm-2 columna2">
-                                <span>Precio</span>
-                            </div>
-                            <div class="col-sm-2 columna3">
-                                <span>Fecha</span>
-                            </div>
-                            <div class="col-sm-2">
-                                <span>Usuario</span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <%--<--!EMPYTY STATE-->--%>
-            <div class="row">
-                <div class="col-xs-12 col-md-12 col-lg-12">
-                    <ul class="">
-                        <li id="liEmptyState" visible="false" runat="server">
-                            <div class="">
-                                <i class="zmdi zmdi-info-outline"></i>
-                                <span>No Se encontraron resultados</span>
-                            </div>
-                        </li>
+    <thead class="silver-background">
+        &nbsp
+        <br width=55%>
+        
+    </thead>
+    <tbody>
+        <asp:Repeater runat="server" ID="rptViajes" OnItemDataBound="rptViajes_ItemDataBound">
+            <HeaderTemplate >
+                <tr>            
+                    <th>Origen</th>
+                    <th>Destino</th>
+                    <th>Precio</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Usuario</th>            
+                </tr>
+            </HeaderTemplate>
+            <ItemTemplate>
+                <tr>
+                    <td>
+                        <asp:Literal Text="text" runat="server" />
+                    </td>                  
+                    <td>
+                        <asp:Literal Text="text" runat="server" />
+                    </td>
+                    <td>
+                        <asp:Literal Text="text" runat="server" />
+                    </td>
+                    <td>
+                        <asp:Literal Text="text" runat="server" />
+                    </td>
+                    <td>
+                        <asp:Literal Text="text" runat="server" />
+                    </td>
+                    <td>
+                        <asp:Literal Text="text" runat="server" />
+                    </td>
+                </tr> 
+                <tr>
+                    <td>Repeater</td>
+                    <td>Repeater</td>
+                    <td>Repeater</td>
+                    <td>Repeater</td>
+                    <td>Repeater</td>
+                    <td>Repeater</td>
+              </tr>
+            </ItemTemplate>
+        </asp:Repeater>
+        <tr>
+            <td>Origen5</td>
+            <td>Destino5</td>
+            <td>Precio5</td>
+            <td>Fecha5</td>
+            <td>Hora5</td>
+            <td>Usuario5</td>
 
-                        <%--<--!DATOS QUE SE VAN A REPETIR(VIAJES)-->--%>
-                        <asp:Repeater runat="server" ID="rptViajes">
-                            <ItemTemplate>
-                                <asp:HyperLink ID="hlDetallViaje" runat="server">
-                                    <li class="">
-                                        <div class="col-sm-1">
-                                            <asp:Image src="../img/car.png" CssClass="img-circle" runat="server" />
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <asp:Literal ID="liOrigen" Text="Texto de Prueba" runat="server" />
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <asp:Literal ID="liDestino" Text="Texto de Prueba" runat="server" />
-                                        </div>
-                                        <div class="col-sm-1">
-                                            <asp:Literal ID="liPrecio" Text="Texto de Prueba" runat="server" />
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <asp:Literal ID="liFecha" Text="Texto de Prueba" runat="server" />
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <span>
-                                                <asp:Literal ID="liNombreUsuario" Text="Texto de Prueba" runat="server" />
-                                                <asp:Literal ID="liReputacion" Text="Texto de Prueba" runat="server" />
-                                            </span>
-                                        </div>
-                                    </li>
-                                </asp:HyperLink>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+      </tr>
+        <tr>
+            <td>Origen5</td>
+            <td>Destino5</td>
+            <td>Precio5</td>
+            <td>Fecha5</td>
+            <td>Hora5</td>
+            <td>Usuario5</td>
+
+      </tr>
+    </tbody>
+</table>
+</div>
 </asp:Content>

@@ -35,6 +35,8 @@ namespace Dal.Core
 
         private const string GET_ALL = @"SELECT * FROM Viajes";
 
+        private const string GET_ALL_FROM_NOW_TO_ONE_MONTH = @"";
+
         public int Create(int origenId, int destinoId, string duracion, int lugaresDisponibles, int vehiculoId, DateTime fechaSalida, string horaSalida, double precio, string descripcion)
         {
             //query a ejecutar
@@ -70,6 +72,12 @@ namespace Dal.Core
         public DataSet GetInstanceById(int id)
         {
             this.SelectCommandText = string.Format(GET_INSTANCE_BY_ID, id);
+            return this.Load();
+        }
+
+        public DataSet GetAllFromNowToOneMonth(DateTime fechaActual, DateTime fechaUnMes)
+        {
+            this.SelectCommandText = string.Format(GET_ALL_FROM_NOW_TO_ONE_MONTH, fechaActual, fechaUnMes);
             return this.Load();
         }
 

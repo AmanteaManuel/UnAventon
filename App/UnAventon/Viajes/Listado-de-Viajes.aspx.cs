@@ -13,10 +13,17 @@ namespace UnAventon.Viajes
         {
             if(!Page.IsPostBack)
             {
-                //No hacer esto NUNCA
-                rptViajes.DataSource = new Dal.Core.Viaje().GetAll();
-                rptViajes.DataBind();
+              
             }            
+        }
+
+        protected void rptViajes_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            DateTime fechaActual = DateTime.Now;
+            DateTime fechaUnMes = fechaActual.AddMonths(1);
+            List<Bol.Viaje> viajes = new Bol.Viaje().GetAllFromNowToOneMonth(fechaActual, fechaUnMes);
+            rptViajes.DataSource = viajes;
+            rptViajes.DataBind();            
         }
     }
 }
