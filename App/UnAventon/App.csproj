@@ -150,6 +150,7 @@
     <Content Include="Home.aspx" />
     <Content Include="img\car.png" />
     <Content Include="img\Fondo5.jpg" />
+    <Content Include="img\Fondo6.jpg" />
     <Content Include="img\LogOut.png" />
     <Content Include="Scripts\aMainCss.css" />
     <Content Include="MasterPage.Master" />
