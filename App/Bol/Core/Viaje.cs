@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bol.Core;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
@@ -21,8 +22,10 @@ namespace Bol
         private int _lugaresDisponibles;
         private DateTime _fechaSalida;
         private string _horaSalida;
-        private double _precio;  
-        
+        private double _precio;
+        private Ciudad _destino;
+        private Ciudad _origen;
+
 
         #endregion
 
@@ -82,7 +85,7 @@ namespace Bol
             }
         }
 
-        public int Destino
+        public int DestinoId
         {
             get
             {
@@ -92,9 +95,9 @@ namespace Bol
             {
                 _destinoId = value;
             }
-        }        
+        }                
 
-        public int Origen
+        public int OrigenId
         {
             get
             {
@@ -105,7 +108,31 @@ namespace Bol
                 _origenId = value;
             }
         }
-       
+
+        public Ciudad Destino
+        {
+            get
+            {
+                return Bol.Core.Ciudad.GetById(_destinoId);
+            }
+            set
+            {
+                _destino = value;
+            }
+        }
+
+        public Ciudad Origen
+        {
+            get
+            {
+                return Bol.Core.Ciudad.GetById(_destinoId);
+            }
+            set
+            {
+                _origen = value;
+            }
+        }
+
         public string Duracion
         {
             get
@@ -154,6 +181,12 @@ namespace Bol
             }
         }
 
+        public string HoraSalida
+        {
+            get { return _horaSalida; }
+            set { _horaSalida = value; }
+        }
+
         #endregion
 
         #region " Views "
@@ -185,7 +218,7 @@ namespace Bol
         {
             try
             {
-                Dal.Core.Viaje dal = new Dal.Core.Viaje();
+                Dal.Core.Viaje dal = new Dal.Core.Viaje();           
                 DataSet ds = dal.GetAllFromNowToOneMonth(fechaActual, fechaUnMes);
                 return FillList(ds);
             }
@@ -209,13 +242,13 @@ namespace Bol
                     oBol.Descripcion = Convert.ToString(dr["Descripcion"]);
              
                 if (dr.Table.Columns.Contains("CiudadDestinoId") && !Convert.IsDBNull(dr["CiudadDestinoId"]))
-                    oBol.Destino = Convert.ToInt32(dr["CiudadDestinoId"]);
+                    oBol.DestinoId = Convert.ToInt32(dr["CiudadDestinoId"]);
 
                 if (dr.Table.Columns.Contains("VehiculoId") && !Convert.IsDBNull(dr["VehiculoId"]))
                     oBol._vehiculoId = Convert.ToInt32(dr["VehiculoId"]);
 
                 if (dr.Table.Columns.Contains("CiudadOrigenId") && !Convert.IsDBNull(dr["CiudadOrigenId"]))
-                    oBol.Origen = Convert.ToInt32(dr["CiudadOrigenId"]);
+                    oBol.OrigenId = Convert.ToInt32(dr["CiudadOrigenId"]);
 
                 if (dr.Table.Columns.Contains("Duracion") && !Convert.IsDBNull(dr["Duracion"]))
                     oBol.Duracion = Convert.ToString(dr["Duracion"]);
@@ -227,7 +260,11 @@ namespace Bol
                     oBol.FechaSalida = Convert.ToDateTime(dr["FechaSalida"]);
 
                 if (dr.Table.Columns.Contains("Precio") && !Convert.IsDBNull(dr["Precio"]))
-                    oBol.Precio = Convert.ToDouble(dr["Precio"]);               
+                    oBol.Precio = Convert.ToDouble(dr["Precio"]);
+
+                if (dr.Table.Columns.Contains("HoraSalida") && !Convert.IsDBNull(dr["HoraSalida"]))
+                    oBol.HoraSalida = Convert.ToString(dr["HoraSalida"]);
+
 
             }
             catch (Exception ex) { throw new Exception("Error en el metodo Fill" + ex.Message); }

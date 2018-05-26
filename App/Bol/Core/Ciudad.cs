@@ -81,6 +81,20 @@ namespace Bol.Core
             }
         }
 
+        public static Ciudad GetById (int id)
+        {
+            try
+            {
+                return FillObject(
+                    (new Dal.Core.Ciudad().GetInstanceById(id)).Tables[0].Rows[0]);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error al Cargar la ciudad. " + ex.Message);
+            }
+        }
+
         #endregion
 
         #region " Fill "

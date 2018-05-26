@@ -19,58 +19,32 @@
                     <th>Precio</th>
                     <th>Fecha</th>
                     <th>Hora</th>
-                    <th>Usuario</th>            
+                    <th>Lugares Disponibles</th>            
                 </tr>
             </HeaderTemplate>
             <ItemTemplate>
                 <tr>
                     <td>
-                        <asp:Literal Text="text" runat="server" />
+                        <asp:Literal Text='<%# Eval("Origen.Descripcion") %>' runat="server" ID="liOrigen" />
                     </td>                  
                     <td>
-                        <asp:Literal Text="text" runat="server" />
+                        <asp:Literal Text='<%# Eval("Destino.Descripcion") %>' runat="server" ID="liDestino"/>
                     </td>
                     <td>
-                        <asp:Literal Text="text" runat="server" />
-                    </td>
-                    <td>
-                        <asp:Literal Text="text" runat="server" />
-                    </td>
-                    <td>
-                        <asp:Literal Text="text" runat="server" />
-                    </td>
-                    <td>
-                        <asp:Literal Text="text" runat="server" />
+                        <asp:Literal Text='<%# Eval("Precio") %>' runat="server" ID="liPrecio"/>
+                    </td>                 
+                    <td>                  
+                        <asp:Literal Text='<%# Eval("FechaSalida") %>' runat="server" ID="liFecha"/>
+                    </td>                
+                    <td>                  
+                        <asp:Literal Text='<%# Eval("HoraSalida.ToShortTimeString()") %>' runat="server" ID="liHora"/>
+                    </td>                 
+                    <td>                  
+                        <asp:Literal Text='<%# Eval("LugaresDisponibles") %>' runat="server" ID="liUsuario"/>
                     </td>
                 </tr> 
-                <tr>
-                    <td>Repeater</td>
-                    <td>Repeater</td>
-                    <td>Repeater</td>
-                    <td>Repeater</td>
-                    <td>Repeater</td>
-                    <td>Repeater</td>
-              </tr>
             </ItemTemplate>
-        </asp:Repeater>
-        <tr>
-            <td>Origen5</td>
-            <td>Destino5</td>
-            <td>Precio5</td>
-            <td>Fecha5</td>
-            <td>Hora5</td>
-            <td>Usuario5</td>
-
-      </tr>
-        <tr>
-            <td>Origen5</td>
-            <td>Destino5</td>
-            <td>Precio5</td>
-            <td>Fecha5</td>
-            <td>Hora5</td>
-            <td>Usuario5</td>
-
-      </tr>
+        </asp:Repeater>        
     </tbody>
 </table>
 </div>

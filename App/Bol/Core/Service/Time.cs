@@ -133,6 +133,14 @@ namespace Bol.Core.Service
             return new Time().Compare(hora1, hora2);
         }
 
+        public static DateTime ConvertirFecha(DateTime f)
+        {
+            int año = f.Year;
+            int mes = f.Month;
+            int dia = f.Day;
+            string fecha = año + "/" + mes + "/" + dia + " 00:00:00.000";
+            return f = Convert.ToDateTime(fecha);           
+        }
 
         public static bool operator >(Time hora1, Time hora2)
         {
