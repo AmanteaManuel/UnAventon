@@ -118,7 +118,7 @@ namespace Dal.Core
             this.ExecuteNonQuery();
         }
 
-        public void Update(int vehiculoId)
+        public void Delete(int vehiculoId)
         {
             this.ExecuteCommandText = DELETE_VEHICULO;
 
