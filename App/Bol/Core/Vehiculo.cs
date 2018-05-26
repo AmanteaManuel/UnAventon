@@ -266,6 +266,15 @@ namespace Bol
             catch (Exception e) { throw new Exception("Error en el Update del vehiculo. " + e.Message); }
         }
 
+        public static void Delete(int vehiculoId)
+        {
+            try
+            {
+                new Dal.Core.Vehiculo().Delete(vehiculoId);
+            }
+            catch (Exception e) { throw new Exception("Error en el Update del vehiculo. " + e.Message); }
+        }
+
         #endregion
 
         #region " Contructor "
