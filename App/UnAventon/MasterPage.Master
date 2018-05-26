@@ -37,7 +37,7 @@
             color: #9D252D;
         }
     </style>
-    <asp:ContentPlaceHolder ID="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server"> 
     </asp:ContentPlaceHolder>
 </head>
 <body>
