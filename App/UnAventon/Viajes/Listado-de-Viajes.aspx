@@ -24,6 +24,7 @@
             </HeaderTemplate>
             <ItemTemplate>
                 <tr>
+                    <asp:LinkButton runat="server" id="lbDetalle" OnClick="lbDetalle_Click">
                     <td>
                         <asp:Literal Text='<%# Eval("Origen.Descripcion") %>' runat="server" ID="liOrigen" />
                     </td>                  
@@ -42,6 +43,7 @@
                     <td>                  
                         <asp:Literal Text='<%# Eval("LugaresDisponibles") %>' runat="server" ID="liUsuario"/>
                     </td>
+                    </asp:LinkButton>
                 </tr> 
             </ItemTemplate>
         </asp:Repeater>        
