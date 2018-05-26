@@ -69,7 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="%24trash\BORRAR-LISTADO_VIAJES.aspx" />
-    <Content Include="%24trash\Cerrar sesion.php" />
     <Content Include="%24trash\Fondo5.jpg" />
     <Content Include="%24trash\htmleve\html css js\editarcontra.js" />
     <Content Include="%24trash\htmleve\html css js\editarinformacion.html" />
@@ -138,7 +137,6 @@
     <Content Include="%24trash\htmleve\php\usuario.php" />
     <Content Include="%24trash\htmleve\php\vende.php" />
     <Content Include="%24trash\htmleve\php\vendealta.php" />
-    <Content Include="%24trash\Iniciar sesion.php" />
     <Content Include="%24trash\MasterPage.html" />
     <Content Include="%24trash\htmleve\img\img - Acceso directo.lnk" />
     <Content Include="Content\bootstrap-theme.css" />

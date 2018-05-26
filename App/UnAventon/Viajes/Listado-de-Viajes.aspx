@@ -37,7 +37,7 @@
                         <asp:Literal Text='<%# Eval("FechaSalida") %>' runat="server" ID="liFecha"/>
                     </td>                
                     <td>                  
-                        <asp:Literal Text='<%# Eval("HoraSalida.ToShortTimeString()") %>' runat="server" ID="liHora"/>
+                        <asp:Literal Text='<%# Eval("HoraSalida") %>' runat="server" ID="liHora"/>
                     </td>                 
                     <td>                  
                         <asp:Literal Text='<%# Eval("LugaresDisponibles") %>' runat="server" ID="liUsuario"/>
