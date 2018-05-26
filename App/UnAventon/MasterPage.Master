@@ -12,15 +12,14 @@
     <script src="<%=Page.ResolveUrl("~/Scripts/bootstrap.js") %>"></script>
 
     <style>
-       body {
-            background: linear-gradient(to bottom, MOCCASIN, white);
-            <!-- background-image: url("fondo.jpg");
+      body {
+           background-image: url('<%=Page.ResolveUrl("~/img/FondoMaster.jpg") %>');
             background-position: center center;
-            background-repeat: no-repeat;
+            backgroun-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
-            background-color: #464646; -->
-        }
+            background-color: #464646;
+        }        
 
         .silver-background {
             background-color: #F17376;

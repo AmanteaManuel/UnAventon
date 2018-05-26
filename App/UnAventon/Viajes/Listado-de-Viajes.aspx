@@ -24,6 +24,7 @@
             </HeaderTemplate>
             <ItemTemplate>
                 <tr>
+                    <asp:LinkButton runat="server" id="lbDetalle" OnClick="lbDetalle_Click">
                     <td>
                         <asp:Literal Text='<%# Eval("Origen.Descripcion") %>' runat="server" ID="liOrigen" />
                     </td>                  
@@ -37,11 +38,12 @@
                         <asp:Literal Text='<%# Eval("FechaSalida") %>' runat="server" ID="liFecha"/>
                     </td>                
                     <td>                  
-                        <asp:Literal Text='<%# Eval("HoraSalida.ToShortTimeString()") %>' runat="server" ID="liHora"/>
+                        <asp:Literal Text='<%# Eval("HoraSalida") %>' runat="server" ID="liHora"/>
                     </td>                 
                     <td>                  
                         <asp:Literal Text='<%# Eval("LugaresDisponibles") %>' runat="server" ID="liUsuario"/>
                     </td>
+                    </asp:LinkButton>
                 </tr> 
             </ItemTemplate>
         </asp:Repeater>        
