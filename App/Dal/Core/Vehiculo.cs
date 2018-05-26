@@ -38,6 +38,8 @@ namespace Dal.Core
 
         private const string GET_VEHICULO_BY_ID = @" SELECT * FROM Vehiculos WHERE Id = {0}";
 
+        private const string DELETE_VEHICULO = @"DELETE FROM vehiculos WHERE Id = @parVehiculoId";
+
         #endregion
 
         #region " Views "
@@ -111,6 +113,19 @@ namespace Dal.Core
 
             this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
 
+
+            //ejecución
+            this.ExecuteNonQuery();
+        }
+
+        public void Update(int vehiculoId)
+        {
+            this.ExecuteCommandText = DELETE_VEHICULO;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();                         
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parVehiculoId", vehiculoId);
 
             //ejecución
             this.ExecuteNonQuery();

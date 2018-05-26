@@ -19,22 +19,39 @@
             background-attachment: fixed;
             background-size: cover;
             background-color: #464646;
+            height: 100%;
+            width: 100%;
+
+            
         }        
 
-        .silver-background {
-            background-color: #F17376;
+        .Transparent-background {
+            background-color: rgba(0,0,0,0.0);
         }
-
-        #loginForm .has-error .control-label,
-        #loginForm .has-error .help-block,
-        #loginForm .has-error .form-control-feedback {
-            color: #f39c12;
+        
+        .links{
+            font-family: impact;
+            color: #D9D9D9 !important;
+            font-size: 15px;
+            box-shadow: 0px 0px 10px #9E4B4D;
+            padding: 7px 25px;
+            -moz-border-radius: 15px;
+            -webkit-border-radius: 15px;
+            border-radius: 15px;
+            border: 2px solid #000000;
+            background: #F17376;
+            background: linear-gradient(top,  #F17376,  #AD5355);
+            background: -ms-linear-gradient(top,  #F17376,  #AD5355);
+            background: -webkit-gradient(linear, left top, left bottom, from(#F17376), to(#AD5355));
+            background: -moz-linear-gradient(top,  #F17376,  #AD5355);
         }
-
-        #loginForm .has-success .control-label,
-        #loginForm .has-success .help-block,
-        #loginForm .has-success .form-control-feedback {
-            color: #9D252D;
+        .links:hover{
+            color: #FFFFFF !important;
+            background: #468CCF;
+            background: linear-gradient(top,  #99494B,  #CF6265);
+            background: -ms-linear-gradient(top,  #99494B,  #CF6265);
+            background: -webkit-gradient(linear, left top, left bottom, from(#99494B), to(#CF6265));
+            background: -moz-linear-gradient(top,  #99494B,  #CF6265);
         }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server"> 
@@ -48,27 +65,28 @@
             <img style="margin-left: 5%" src="<%=Page.ResolveUrl("~/img/Logo.png")%>" height="5%" width="5%" alt="Logo Un Aventón">
             <hr />
         </div>
+        <br />
 
-        <div class="silver-background">
+        <div class="Transparent-background">
             <div class="row">
-                <div class="col-sm-2 col-sm-offset-1">
-                    <asp:LinkButton Text="Listar Viajes" CssClass="linkMaster" runat="server" ID="lbListarViajes" OnClick="lbListarViajes_Click" />
+                <div class="col-xs-12 col-md-2 col-lg-2">
+                    <asp:LinkButton Text="Listar Viajes" CssClass="links"  runat="server" ID="lbListarViajes" OnClick="lbListarViajes_Click" />
                 </div>
-                <div class="col-sm-2 col-sm-offset-1">
-                    <asp:LinkButton Text="Publicar Viaje" ID="lbPublicarViaje" CssClass="linkMaster" runat="server" OnClick="lbPublicarViaje_Click" />
+                <div class="col-xs-12 col-md-2 col-lg-2">
+                    <asp:LinkButton Text="Publicar Viaje" ID="lbPublicarViaje" CssClass="links" runat="server" OnClick="lbPublicarViaje_Click" />
                 </div>
-                <div class="col-sm-2 col-sm-offset-1">
-                    <asp:LinkButton Text="Registrar Vehiculo" CssClass="linkMaster" runat="server" ID="lbRegistrarVehiculo" OnClick="lbRegistrarVehiculo_Click" />
+                <div class="col-xs-12 col-md-2 col-lg-2">
+                    <asp:LinkButton Text="Registrar Vehiculo" CssClass="links" runat="server" ID="lbRegistrarVehiculo" OnClick="lbRegistrarVehiculo_Click" />
                 </div>
-                <div class="col-sm-2 col-sm-offset-1">
-                    <asp:LinkButton Text="Modificar Datos" ID="lbModificarDatos" CssClass="linkMaster" runat="server" OnClick="lbModificarDatos_Click" />
+                <div class="col-xs-12 col-md-2 col-lg-2">
+                    <asp:LinkButton Text="Modificar Datos" ID="lbModificarDatos" CssClass="links" runat="server" OnClick="lbModificarDatos_Click" />
                 </div>
-                <div class="col-sm-2 col-sm-offset-1">
-                    <asp:LinkButton Text="Ver Perfil" CssClass="linkMaster" runat="server" ID="lbVerPerfil" OnClick="lbVerPerfil_Click" />
+                <div class="col-xs-12 col-md-2 col-lg-2">
+                    <asp:LinkButton Text="Ver Perfil" CssClass="links" runat="server" ID="lbVerPerfil" OnClick="lbVerPerfil_Click" />
                 </div>                
-                <div class="col-sm-2 col-sm-offset-1">
+                <div class="col-xs-12 col-md-2 col-lg-2">
                     <asp:LinkButton runat="server" ID="btnCerrarSesion" OnClick="btnCerrarSesion_Click">
-                    <img style="margin-right:0%" src="<%=Page.ResolveUrl("~/img/LogOut.png")%>" height="50px" width="50px"/>                
+                    <img style="margin-right:0%" src="<%=Page.ResolveUrl("~/img/LogOut.png")%>" height="30px" width="30"/>                
                     </asp:LinkButton>
                 </div>
             </div>
