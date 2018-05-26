@@ -33,7 +33,7 @@ namespace UnAventon.Viajes
 
             CargarDDLProvincia(provincias, (DropDownList)ddlProvinciaDestino);
             CargarDDLProvincia(provincias, (DropDownList)ddlProvinciaSalida);            
-            CargarDDLVehiculos(vehiculos, (DropDownList)ddlVehiculo);           
+            CargarDDLVehiculos(vehiculos, (DropDownList)ddlVehiculo);   
             
         }
 
