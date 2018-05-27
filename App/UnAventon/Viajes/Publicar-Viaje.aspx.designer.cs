@@ -139,6 +139,15 @@ namespace UnAventon.Viajes {
         protected global::System.Web.UI.WebControls.CustomValidator cvVehiulo;
         
         /// <summary>
+        /// divFecha control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divFecha;
+        
+        /// <summary>
         /// tbFecha control.
         /// </summary>
         /// <remarks>
@@ -209,6 +218,15 @@ namespace UnAventon.Viajes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator cvTipoViaje;
+        
+        /// <summary>
+        /// divDias control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDias;
         
         /// <summary>
         /// tbDescripcion control.

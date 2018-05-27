@@ -56,7 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\Base de Datos\BaseDeDatosUnAventon.sql" />
+    <Content Include="Core\Base de Datos\BDUnAventonNueva.sql" />
     <Content Include="Core\Base de Datos\ChoferYPasajero.sql" />
+    <Content Include="Core\Base de Datos\Datos nuevos Un Aventon.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

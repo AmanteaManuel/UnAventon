@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using Dal.Core;
+using System.Linq;
 
 namespace Bol
 {
@@ -313,8 +314,8 @@ namespace Bol
         /// <returns></returns>
         private static List<Usuario> FillList(DataSet ds)
         {
-            //if (ds.Tables[0].Rows.Count > 0)
-                //return (from DataRow dr in ds.Tables[0].Rows select FillObject(dr)).ToList();
+            if (ds.Tables[0].Rows.Count > 0)
+                return (from DataRow dr in ds.Tables[0].Rows select FillObject(dr)).ToList();
             return null;
         }
 

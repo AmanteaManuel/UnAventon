@@ -36,7 +36,7 @@ namespace Dal.Core
         private const string GET_ALL = @"SELECT * FROM Viajes";
 
         private const string GET_ALL_FROM_NOW_TO_ONE_MONTH = @"SELECT * FROM Viajes
-		                                                                WHERE FechaSalida BETWEEN @parFechaIni AND @parFechaFin
+		                                                                WHERE FechaSalida BETWEEN {0} AND {1}
 							                                            ORDER BY FechaSalida";
 
         public int Create(int origenId, int destinoId, string duracion, int lugaresDisponibles, int vehiculoId, DateTime fechaSalida, string horaSalida, double precio, string descripcion)

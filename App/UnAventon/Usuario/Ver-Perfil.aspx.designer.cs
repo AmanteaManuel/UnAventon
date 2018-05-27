@@ -13,15 +13,6 @@ namespace UnAventon.Usuario {
     public partial class Ver_Perfil {
         
         /// <summary>
-        /// liNombre control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal liNombre;
-        
-        /// <summary>
         /// liApellido control.
         /// </summary>
         /// <remarks>
@@ -29,6 +20,15 @@ namespace UnAventon.Usuario {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal liApellido;
+        
+        /// <summary>
+        /// liNombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal liNombre;
         
         /// <summary>
         /// liDni control.
@@ -65,5 +65,14 @@ namespace UnAventon.Usuario {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal liReputacionPasajero;
+        
+        /// <summary>
+        /// rptVehiculos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptVehiculos;
     }
 }

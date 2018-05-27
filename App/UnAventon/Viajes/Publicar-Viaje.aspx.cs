@@ -28,7 +28,8 @@ namespace UnAventon.Viajes
         {
             //Cargo las provincias para cargar los ddl
             List<Provincia> provincias = new List<Provincia>();
-            provincias = Provincia.GetAll();
+            provincias = Provincia.GetAll();            
+
             List<Vehiculo> vehiculos = Vehiculo.GetAllByUsuarioId(ActiveUsuario.Id);
 
             CargarDDLProvincia(provincias, (DropDownList)ddlProvinciaDestino);
@@ -39,8 +40,8 @@ namespace UnAventon.Viajes
 
         private void CargarDDLProvincia(List<Provincia> lista, DropDownList ddl)
         {
-            string[] listaString = new string[lista.Count];
-            for (int i = 0; i < lista.Count; i++)
+            string[] listaString = new string[lista.Count];    
+            for (int i = 0; i < 25; i++)
             {
                 listaString[i] = lista[i].Descripcion;
             }
@@ -50,7 +51,7 @@ namespace UnAventon.Viajes
 
         private void CargarDDLCiudad(List<Ciudad> lista, DropDownList ddl)
         {
-            string[] listaString = new string[lista.Count];
+            string[] listaString = new string[lista.Count];    
             for (int i = 0; i < lista.Count; i++)
             {
                 listaString[i] = lista[i].Descripcion;
@@ -63,10 +64,15 @@ namespace UnAventon.Viajes
         {
             try
             {
+                Vehiculo v = new Vehiculo();
+                v.Marca = "";
+                v.Modelo = "Seleccione...";
+                v.Patente = "";
+                lista.Insert(0,v);
                 string[] listaString = new string[lista.Count];
                 for (int i = 0; i < lista.Count; i++)
                 {
-                    listaString[i] = lista[i].Descripcion;
+                    listaString[i] = lista[i].Marca + " - " + lista[i].Modelo+" - " + lista[i].Patente;
                 }
                 ddl.DataSource = listaString;
                 ddl.DataBind();
@@ -118,13 +124,18 @@ namespace UnAventon.Viajes
                 Validate("PublicarViaje");
                 if (Page.IsValid)
                 {
+                    //Es un viaje Frecuente
+                    if(ddlTipoViaje.SelectedValue == "2")
+                    {
+                        //verifico que dias estan seleccionados,
 
+                    }                    
                     Viaje viaje = new Viaje(
                         1,//Convert.ToInt32(ddlCiudadSalida.SelectedIndex),
                         2,//Convert.ToInt32(ddlCiudadDestino.SelectedIndex), 
                         tbDuracion.Text,
                         Convert.ToInt32(tbLugaresDisponibles.Text),
-                        1007,//ddlVehiculo.SelectedIndex,
+                        ddlVehiculo.SelectedIndex,
                         tbFecha.SelectedDate,
                         tbHoraSalida.Text,
                         Convert.ToDouble(tbPrecio.Text),
@@ -155,10 +166,9 @@ namespace UnAventon.Viajes
         {
             if (ddlProvinciaDestino.SelectedIndex > 0)
             {
-                List<Ciudad> ciudades = new List<Ciudad>();
-                ciudades = Ciudad.GetAllByProvinciaId(ddlProvinciaDestino.SelectedIndex);
+                List<Ciudad> ciudades = new List<Ciudad>();                
+                ciudades = Ciudad.GetAllByProvinciaId(Convert.ToInt32(ddlProvinciaDestino.SelectedIndex));
                 CargarDDLCiudad(ciudades, (DropDownList)ddlCiudadDestino);
-                // upDestinos.Update();
             }
         }
 
@@ -167,12 +177,40 @@ namespace UnAventon.Viajes
         {
             if (ddlProvinciaSalida.SelectedIndex > 0)
             {
-                List<Ciudad> ciudades = new List<Ciudad>();
-                ciudades = Ciudad.GetAllByProvinciaId(ddlProvinciaSalida.SelectedIndex);
+                List<Ciudad> ciudades = new List<Ciudad>();                
+                ciudades = Ciudad.GetAllByProvinciaId(Convert.ToInt32(ddlProvinciaSalida.SelectedIndex));
                 CargarDDLCiudad(ciudades, (DropDownList)ddlCiudadSalida);
-                //upDestinos.Update();
-
+                //upCiudadSalida.Update();
             }
+        }
+
+        protected void ddlTipoViaje_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Convert.ToInt32(ddlTipoViaje.SelectedValue) > Convert.ToInt32("0"))
+                {
+                    //frecuente
+                    if (ddlTipoViaje.SelectedValue == "2")
+                    {
+                        //muestro los dias
+                        divDias.Visible = true;
+                        divFecha.Visible = false;
+                    }
+
+                    else
+                    {
+                        //oculto los dias
+                        divDias.Visible = false;
+                        divFecha.Visible = true;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error al obtener datos del tipo del viaje. ");
+            }
+
         }
 
         #endregion
@@ -181,146 +219,136 @@ namespace UnAventon.Viajes
 
         protected void cvProvSalida_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            ddlProvinciaSalida.Attributes.Add("class", "form-group");
+            ddlProvinciaSalida.CssClass = "form-control";
             cvProvSalida.ErrorMessage = string.Empty;
 
             if (ddlProvinciaSalida.SelectedIndex <= 0)
             {
                 args.IsValid = false;
-                ddlProvinciaSalida.Attributes.Add("class", "form-group error");
-                ddlProvinciaSalida.CssClass= "form-group error";
+                ddlProvinciaSalida.CssClass= "form-control error";
             }
         }
 
         protected void cvCiduadSalida_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            ddlCiudadSalida.Attributes.Add("class", "group ");
+            ddlCiudadSalida.CssClass = "form-control";
             cvCiudadDestino.ErrorMessage = string.Empty;
 
-            if (ddlCiudadSalida.SelectedIndex <= 0)
+            if (ddlCiudadSalida.SelectedIndex == ddlCiudadDestino.SelectedIndex)
             {
                 args.IsValid = false;
-                ddlCiudadSalida.Attributes.Add("class", "form-group error");
-                ddlCiudadSalida.CssClass = "form-group error";
+                ddlCiudadSalida.CssClass = "form-control error";
             }
         }
 
         protected void cvProvDestino_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            ddlProvinciaDestino.Attributes.Add("class", "form-group ");
+            ddlProvinciaDestino.CssClass = "form-control";
             cvProvDestino.ErrorMessage = string.Empty;
 
             if (ddlProvinciaDestino.SelectedIndex <= 0)
             {
                 args.IsValid = false;
-                ddlProvinciaDestino.Attributes.Add("class", "form-group error");
-                ddlProvinciaDestino.CssClass = "form-group error";
+                ddlProvinciaDestino.CssClass = "form-control error";
             }
         }
 
         protected void cvCiudadDestino_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            ddlCiudadDestino.Attributes.Add("class", "form-group ");
+            ddlCiudadDestino.CssClass = "form-control";
             cvCiudadDestino.ErrorMessage = string.Empty;
 
-            if (ddlCiudadDestino.SelectedIndex <= 0)
+            if (ddlCiudadSalida.SelectedIndex == ddlCiudadDestino.SelectedIndex)
             {
                 args.IsValid = false;
-                ddlCiudadDestino.Attributes.Add("class", "form-group error");
+                ddlCiudadDestino.CssClass = "form-control error";
             }
         }
 
         protected void cvDuracion_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbDuracion.Attributes.Add("class", "form-group");
+            tbDuracion.CssClass = "form-control";
             cvDuracion.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbDuracion.Text))
             {
                 args.IsValid = false;
-                tbDuracion.Attributes.Add("class", "form-group error");
-                tbDuracion.CssClass = "form-group error";
+                tbDuracion.CssClass = "form-control error";
             }
         }
 
         protected void cvLugaresDisponibles_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbLugaresDisponibles.Attributes.Add("class", "form-group");
+            tbLugaresDisponibles.CssClass = "form-control";
             cvLugaresDisponibles.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbLugaresDisponibles.Text))
             {
                 args.IsValid = false;
-                tbLugaresDisponibles.Attributes.Add("class", "form-group error");
-                tbLugaresDisponibles.CssClass = "form-group error";
+                tbLugaresDisponibles.CssClass = "form-control error";
             }
         }
 
         protected void cvVehiulo_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            ddlVehiculo.Attributes.Add("class", "form-group ");
+            ddlVehiculo.CssClass = "form-control";
             cvVehiulo.ErrorMessage = string.Empty;
 
             if (ddlVehiculo.SelectedIndex <= 0)
             {
                 args.IsValid = false;
-                ddlVehiculo.Attributes.Add("class", "form-group error");
-                ddlVehiculo.CssClass = "form-group error";
+                ddlVehiculo.CssClass = "form-control error";
             }
         }
 
         protected void cvFecha_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbFecha.Attributes.Add("class", "form-group");
+            tbFecha.CssClass = "form-control";
             //cvFecha.ErrorMessage = string.Empty;
 
             if ((tbFecha.SelectedDate.Date == DateTime.MinValue.Date) || tbFecha.SelectedDate < DateTime.Now)
             {
                 args.IsValid = false;
-                tbFecha.Attributes.Add("class", "form-group error");
-                tbFecha.CssClass = "form-group error";
+                tbFecha.CssClass = "form-control error";
             }
         }
 
         protected void cvHoraSalida_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbHoraSalida.Attributes.Add("class", "form-group");
+            tbHoraSalida.CssClass = "form-control";
             cvHoraSalida.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbHoraSalida.Text))
             {
                 args.IsValid = false;
-                tbHoraSalida.Attributes.Add("class", "form-group error");
-                tbHoraSalida.CssClass = "form-group error";
+                tbHoraSalida.CssClass = "form-control error";
             }
         }
 
         protected void cvPrecio_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbPrecio.Attributes.Add("class", "form-group");
+            tbPrecio.CssClass = "form-control";
             cvPrecio.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbPrecio.Text))
             {
                 args.IsValid = false;
-                tbPrecio.Attributes.Add("class", "form-group error");
-                tbPrecio.CssClass = "form-group error";
+                tbPrecio.CssClass = "form-control error";
             }
         }
 
         protected void cvTipoViaje_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            ddlTipoViaje.Attributes.Add("class", "form-group ");
+            ddlTipoViaje.CssClass = "form-control";
             cvTipoViaje.ErrorMessage = string.Empty;
 
             if (ddlTipoViaje.SelectedIndex <= 0)
             {
                 args.IsValid = false;
-                ddlTipoViaje.Attributes.Add("class", "form-group error");
-                ddlTipoViaje.CssClass = "form-group error";
+                ddlTipoViaje.CssClass = "form-control error";
             }
         }
 
-        #endregion
+        #endregion        
     }
 }

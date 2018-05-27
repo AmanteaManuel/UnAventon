@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace UnAventon
@@ -24,21 +25,30 @@ namespace UnAventon
         }
 
         protected void Page_Load(object sender, EventArgs e)
-		{            
-            string path = HttpContext.Current.Request.Url.AbsolutePath;            
+		{
+            try
+            {
+                string path = HttpContext.Current.Request.Url.AbsolutePath;
 
-            if (path.Contains("alta-Usuario.aspx"))
-                lbModificarDatos.Enabled = false;
+                if (path.Contains("alta-Usuario.aspx"))
+                    lbModificarDatos.Enabled = false;
 
-            if (path.Contains("Publicar-Viaje.aspx"))
-                lbPublicarViaje.Enabled = false;
+                if (path.Contains("Publicar-Viaje.aspx"))
+                    lbPublicarViaje.Enabled = false;
 
-            if (path.Contains("Listado-de-Viajes.aspx"))
-                lbListarViajes.Enabled = false;
+                if (path.Contains("Listado-de-Viajes.aspx"))
+                    lbListarViajes.Enabled = false;
 
-            if (path.Contains("Ver-Perfil.aspx"))
-                lbVerPerfil.Enabled = false;
-
+                if (path.Contains("Ver-Perfil.aspx"))
+                    lbVerPerfil.Enabled = false;
+            }
+            catch (Exception)
+            {
+                HtmlGenericControl divalert = (HtmlGenericControl)Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = "No se pudo obtener el usuario del contexto.";
+            }
         }
 
         protected void lbVerPerfil_Click(object sender, EventArgs e)

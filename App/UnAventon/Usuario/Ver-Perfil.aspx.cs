@@ -30,12 +30,24 @@ namespace UnAventon.Usuario
 
         private void PreparePage()
         {
+            #region " Datos Personales "
+
             liApellido.Text = ActiveUsuario.Apellido;
             liNombre.Text = ActiveUsuario.Nombre;
             liDni.Text = ActiveUsuario.Dni;
             liEmail.Text = ActiveUsuario.Email;
             liReputacionChofer.Text = ActiveUsuario.ReputacionChofer.ToString();
             liReputacionPasajero.Text = ActiveUsuario.ReputacioPasajero.ToString();
+
+            #endregion
+
+            #region " Autos "
+
+            List<Bol.Vehiculo> vehiculos = Bol.Vehiculo.GetAllByUsuarioId(ActiveUsuario.Id);
+            rptVehiculos.DataSource = vehiculos;
+            rptVehiculos.DataBind();
+
+            #endregion
         }
     }
 }

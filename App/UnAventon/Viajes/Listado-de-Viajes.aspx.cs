@@ -20,18 +20,7 @@ namespace UnAventon.Viajes
                     DateTime fechaActual = DateTime.Now;
                     DateTime fechaUnMes = fechaActual.AddMonths(1);
 
-                    //List<Bol.Viaje> viajes = new Bol.Viaje().GetAllFromNowToOneMonth(fechaActual, fechaUnMes);
-
-                    //borrar es para probar
-                    #region " prueba "lista" "
-
-                    List<Bol.Viaje> viajes = new List<Bol.Viaje>();
-                    Bol.Viaje v = new Bol.Viaje().GetInstanceById(1);
-
-                    for (int i = 0; i < 4; i++)
-                        viajes.Add(v);
-
-                    #endregion
+                    List<Bol.Viaje> viajes = new Bol.Viaje().GetAllFromNowToOneMonth(fechaActual, fechaUnMes);
 
                     //Bindeo el objeto
                     rptViajes.DataSource = viajes;

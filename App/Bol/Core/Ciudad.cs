@@ -17,6 +17,7 @@ namespace Bol.Core
         private int _codigo;
         private string _descripcion;
         private Respuesta _respuesta;
+        private int _provinciaId;
 
         #endregion
 
@@ -61,6 +62,18 @@ namespace Bol.Core
             set
             {
                 _descripcion = value;
+            }
+        }
+
+        public int ProvinciaId
+        {
+            get
+            {
+                return _provinciaId;
+            }
+            set
+            {
+                _provinciaId = value;
             }
         }
 
@@ -117,6 +130,11 @@ namespace Bol.Core
                 if (dr.Table.Columns.Contains("Descripcion") && !Convert.IsDBNull(dr["Descripcion"]))
                     oBol.Descripcion = Convert.ToString(dr["Descripcion"]);
 
+                if (dr.Table.Columns.Contains("ProvinciaId") && !Convert.IsDBNull(dr["ProvinciaId"]))
+                    oBol.ProvinciaId = Convert.ToInt32(dr["ProvinciaId"]);
+
+
+
             }
             catch (Exception ex) { throw new Exception("Error en el metodo Fill" + ex.Message); }
 
@@ -131,8 +149,8 @@ namespace Bol.Core
         private static List<Ciudad> FillList(DataSet ds)
         {
             if (ds.Tables[0].Rows.Count > 0)
-                return null;
-            return (from DataRow dr in ds.Tables[0].Rows select FillObject(dr)).ToList();
+                return (from DataRow dr in ds.Tables[0].Rows select FillObject(dr)).ToList();
+            return null;
         }
 
         #endregion

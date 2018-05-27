@@ -18,31 +18,31 @@
 									<tbody>
 										<tr>
 											<td><strong>Nombre:</strong></td>
-											<td>NombreUsuario</td>
+											<td><asp:Literal runat="server" ID="liApellido" /></td>
 										</tr>
 										<tr>
 											<td><strong>Apellido:</strong></td>
-											<td>ApellidoUsuario</td>
+											<td><asp:Literal runat="server" ID="liNombre" /></td>
 										</tr>
 										<tr>
-											<td><strong>DNI</strong></td>
-											<td>DNIUsuario</td>
+											<td><strong>DNI:</strong></td>
+											<td><asp:Literal runat="server" ID="liDni" /></td>
 										</tr>
 										<tr>
-											<td><strong>Email</strong></td>
-											<td>EmailUsuario</td>
+											<td><strong>Email:</strong></td>
+											<td><asp:Literal runat="server" ID="liEmail" /></td>
 										</tr>
 										<tr>
-											<td><strong>Reputacion como Chofer</strong></td>
-											<td>Porcentaje</td>
+											<td><strong>Reputacion como Chofer:</strong></td>
+											<td><asp:Literal runat="server" ID="liReputacionChofer" /></td>
 										</tr>
 										<tr>
-											<td><strong>Reputacion como Pasajero</strong></td>
-											<td>Porcentaje</td>
+											<td><strong>Reputacion como Pasajero:</strong></td>
+											<td><asp:Literal runat="server" ID="liReputacionPasajero" /></td>
 										</tr>                     
 									</tbody>
 								</table>
-								</hr>
+                                <hr/>
 							</div>
 						</div>
 					</div>            
@@ -60,47 +60,26 @@
 						<div class="col-md-3 col-lg-3 " align="center"></div>
 							<div class=" col-md-9 col-lg-9 "> 
 							<table class="table table-hover" >
-								<thead class="silver-background">
-									<tr>            
+                                <asp:Repeater runat="server" ID="rptVehiculos">
+                                    <HeaderTemplate>
+                                    <tr>            
 										<th>Marca</th>
 										<th>Modelo</th>
 										<th>Patente</th>
 										<th>Color</th>
 										<th>Asientos</th>
 									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Marca1</td>
-										<td>Modelo1</td>
-										<td>Patente1</td>
-										<td>Color1</td>
-										<td>Asientos1</td>
-			
-									</tr>
-									
-									<tr>
-										<td>Marca2</td>
-										<td>Modelo2</td>
-										<td>Patente2</td>
-										<td>Color2</td>
-										<td>Asientos2</td>
-									</tr>
-									<tr>
-										<td>Marca3</td>
-										<td>Modelo3</td>
-										<td>Patente3</td>
-										<td>Color3</td>
-										<td>Asientos3</td>
-									</tr>
-									<tr>
-										<td>Marca4</td>
-										<td>Modelo4</td>
-										<td>Patente4</td>
-										<td>Color4</td>
-										<td>Asientos4</td>
-									</tr>
-								</tbody>
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <tr>
+										    <td><asp:Literal Text='<%# Eval("Marca") %>' runat="server" /></td>
+										    <td><asp:Literal Text='<%# Eval("Modelo") %>' runat="server" /></td>
+										    <td><asp:Literal Text='<%# Eval("Patente") %>' runat="server" /></td>
+										    <td><asp:Literal Text='<%# Eval("Color") %>' runat="server" /></td>
+										    <td><asp:Literal Text='<%# Eval("AsientosDisponibles") %>' runat="server" /></td>
+									    </tr>
+                                    </ItemTemplate>
+                                </asp:Repeater>
 							</table>
 						</div>
 					</div>            
