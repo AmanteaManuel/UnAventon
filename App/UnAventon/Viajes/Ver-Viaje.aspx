@@ -54,9 +54,10 @@
 			</div>
 		</div>
 		<div class="col-md-6">
-			  			<div class="form-group">
-			  				<label><strong> Descripcion:</strong></label>
-			  			 	<input class="form-control" id="inputSeleccionado" type="text" value="Aca va la descripcion del viaje...">
+			  			
+			  			 <div class="form-group">
+			  				<label><strong>Descripcion:</strong></label>
+			  			 	<textarea  class="form-control" id="description" placeholder="aca va la descripcion"></textarea>
 			  			</div>
         </div>
 	</div>
