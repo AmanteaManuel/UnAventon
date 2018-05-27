@@ -26,61 +26,61 @@ namespace UnAventon.Vehiculos
 
         protected void cvMarca_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbMarca.Attributes.Add("class", "form-group");
+            tbMarca.CssClass = "form-group";
             cvMarca.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbMarca.Text) || string.IsNullOrWhiteSpace(tbMarca.Text))
             {
                 args.IsValid = false;
-                tbMarca.Attributes.Add("class", "form-group error");
+                tbMarca.CssClass = "form-group error";
             }
         }   
 
         protected void cvModelo_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbModelo.Attributes.Add("class", "form-group");
+            tbModelo.CssClass= "from-control";
             cvModelo.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbModelo.Text))
             {
                 args.IsValid = false;
-                tbModelo.Attributes.Add("class", "form-group error");
+                tbModelo.CssClass= "from-control error";
             }
         }
 
         protected void cvPatente_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbPatente.Attributes.Add("class", "form-group");
+            tbPatente.CssClass= "from-control";
             cvPatente.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbPatente.Text))
             {
                 args.IsValid = false;
-                tbPatente.Attributes.Add("class", "form-group error");
+                tbPatente.CssClass= "from-control error";
             }
         }
 
         protected void cvColor_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbColor.Attributes.Add("class", "form-group");
+            tbColor.CssClass= "from-control";
             cvColor.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbColor.Text))
             {
                 args.IsValid = false;
-                tbColor.Attributes.Add("class", "form-group error");
+                tbColor.CssClass= "from-control error";
             }
         }
 
         protected void cvAsientos_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbAsientos.Attributes.Add("class", "form-group");
+            tbAsientos.CssClass= "from-control";
             cvAsientos.ErrorMessage = string.Empty;
 
-            if (string.IsNullOrEmpty(tbAsientos.Text))
+            if (string.IsNullOrEmpty(tbAsientos.Text) || (Bol.Core.Service.Tools.IsNumber(tbAsientos.Text) == false))
             {
                 args.IsValid = false;
-                tbAsientos.Attributes.Add("class", "form-group error");
+                tbAsientos.CssClass= "from-control error";
             }
         }
 

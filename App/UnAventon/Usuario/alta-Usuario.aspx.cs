@@ -27,81 +27,81 @@ namespace UnAventon.Usuario
 
         protected void cvNombre_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbNombre.CssClass = "form-group";
+            tbNombre.CssClass = "form-control";
             cvNombre.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbNombre.Text))
             {
                 args.IsValid = false;
-                tbNombre.CssClass = "form-group error";
+                tbNombre.CssClass = "form-control error";
             }
 
         }
 
         protected void cvApellido_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbApellido.CssClass = "form-group";
+            tbApellido.CssClass = "form-control";
             cvApellido.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbApellido.Text))
             {
                 args.IsValid = false;
-                tbApellido.Attributes.Add("class", "form-group error");
-                tbApellido.CssClass = "form-group error";
+                tbApellido.Attributes.Add("class", "form-control error");
+                tbApellido.CssClass = "form-control error";
             }
         }
 
         protected void cvEmail_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbEmail.CssClass = "form-group";
+            tbEmail.CssClass = "form-control";
             cvEmail.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbEmail.Text))
             {
                 args.IsValid = false;
-                tbEmail.CssClass = "form-group error";
+                tbEmail.CssClass = "form-control error";
             }
         }
 
         protected void cvContrasenia_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbContrasenia.CssClass = "form-group";
+            tbContrasenia.CssClass = "form-control";
             cvContrasenia.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbContrasenia.Text))
             {
                 args.IsValid = false;
-                tbContrasenia.CssClass = "form-group error";
+                tbContrasenia.CssClass = "form-control error";
             }
         }
 
         protected void cvRepitaContraseña_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbRepitaContraseña.CssClass = "form-group";
+            tbRepitaContraseña.CssClass = "form-control";
             cvNombre.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbRepitaContraseña.Text) || (tbContrasenia.Text != tbRepitaContraseña.Text))
             {
                 args.IsValid = false;
-                tbRepitaContraseña.CssClass = "form-group error";
+                tbRepitaContraseña.CssClass = "form-control error";
             }
         }
 
         protected void cvDni_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbDni.CssClass = "form-group";
+            tbDni.CssClass = "form-control";
             cvDni.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbDni.Text) || (!Bol.Core.Service.Tools.IsNumber(tbDni.Text)))
             {
                 args.IsValid = false;
-                tbDni.CssClass = "form-group error";
+                tbDni.CssClass = "form-control error";
             }
         }
 
         protected void cvFechaNacimiento_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbFechaNacimiento.CssClass = "form-group";
+            tbFechaNacimiento.CssClass = "form-control";
             cvFechaNacimiento.ErrorMessage = string.Empty;
             if (!string.IsNullOrEmpty(tbFechaNacimiento.Text))
                 try
@@ -111,7 +111,7 @@ namespace UnAventon.Usuario
                 catch (Exception)
                 {
                     args.IsValid = false;
-                    tbFechaNacimiento.CssClass = "form-group error";
+                    tbFechaNacimiento.CssClass = "form-control error";
 
                     Literal liMensaje = (Literal)this.Master.FindControl("liMensajeAlerta");
                     liMensaje.Text = "Fecha Invalida ingrese una fecha con formato correcto dd/mm/aaa";
@@ -119,7 +119,7 @@ namespace UnAventon.Usuario
             else
             {
                 args.IsValid = false;
-                tbFechaNacimiento.CssClass = "form-group error";
+                tbFechaNacimiento.CssClass = "form-control error";
             }
         }          
                 
@@ -235,26 +235,26 @@ namespace UnAventon.Usuario
                 Validate("CrearUsuario");
                 if (Page.IsValid)
                 {
-                    Bol.Usuario user = new Bol.Usuario();
-                    user.Apellido = tbApellido.Text;
-                    user.Contraseña = tbContrasenia.Text;
-                    user.Dni = tbDni.Text;
-                    user.Email = tbEmail.Text;
-                    user.FechaNacimiento = Convert.ToDateTime(tbFechaNacimiento.Text);
-                    user.Nombre = tbNombre.Text;                    
-                    user.SiActivo = true;
-
-                    Bol.Usuario.Update(user);                    
+                    ActiveUsuario.Apellido = tbApellido.Text;
+                    ActiveUsuario.Contraseña = tbContrasenia.Text;
+                    ActiveUsuario.Dni = tbDni.Text;
+                    ActiveUsuario.Email = tbEmail.Text;
+                    ActiveUsuario.FechaNacimiento = Convert.ToDateTime(tbFechaNacimiento.Text);
+                    ActiveUsuario.Nombre = tbNombre.Text;
+                    Bol.Usuario.Update(ActiveUsuario);                    
 
                     //Redirijo
                     Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
                 }
                 else
-                    throw new Exception("El usuario ya existe");
+                    throw new Exception("Uno o mas campos son incorrectos");
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al crear usuario", ex);
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = ex.Message;                
             }
         }
 

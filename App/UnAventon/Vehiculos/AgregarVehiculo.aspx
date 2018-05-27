@@ -13,29 +13,29 @@
 				    </div>
                     <br />  
 
-                    <div  id="divMarca" class="form-group"> 
+                    <div  class="form-group help-block"> 
 					    <asp:TextBox runat="server" ID="tbMarca" PlaceHolder="Marca" Cssclass="form-control " width="175"/>
-                        <asp:CustomValidator ErrorMessage="errormessage" ControlToValidate="tbMarca" runat="server"  ID="cvMarca" OnServerValidate="cvMarca_ServerValidate" ValidationGroup="GroupRegistrarVehiculo" />
-				    </div>                   
+                        <asp:CustomValidator runat="server"  ID="cvMarca" OnServerValidate="cvMarca_ServerValidate" ValidationGroup="GroupRegistrarVehiculo" />
+				    </div>
 
-				    <div  class="form-group" > 
+				    <div  class="form-group help-block" > 
                         <asp:TextBox runat="server" ID="tbModelo" PlaceHolder="Modelo" Cssclass="form-control" width="175"/>
-                        <asp:CustomValidator ErrorMessage="Campo invalido" ControlToValidate="tbModelo" runat="server" ID="cvModelo" OnServerValidate="cvModelo_ServerValidate" ValidationGroup="GroupRegistrarVehiculo" EnableClientScript="false" />
+                        <asp:CustomValidator runat="server" ID="cvModelo" OnServerValidate="cvModelo_ServerValidate" ValidationGroup="GroupRegistrarVehiculo" EnableClientScript="false" />
 				    </div>
 
-				    <div class="form-group" > 
+				    <div class="form-group help-block" > 
 					    <asp:TextBox runat="server" ID="tbPatente" PlaceHolder="Patente"  Cssclass="form-control" width="175"/>
-                        <asp:CustomValidator ErrorMessage="Campo invalido" ControlToValidate="tbPatente" runat="server" ID="cvPatente" OnServerValidate="cvPatente_ServerValidate" ValidationGroup="GroupRegistrarVehiculo" EnableClientScript="false"/>
-				    </div> 
-
-				    <div class="form-group" >
-					    <asp:TextBox runat="server" ID="tbColor" PlaceHolder="Color"  Cssclass="form-control" width="175"/>
-                        <asp:CustomValidator ErrorMessage="Campo invalido" ControlToValidate="tbColor" runat="server" ID="cvColor" OnServerValidate="cvColor_ServerValidate" ValidationGroup="GroupRegistrarVehiculo" EnableClientScript="false"/>
+                        <asp:CustomValidator runat="server" ID="cvPatente" OnServerValidate="cvPatente_ServerValidate" ValidationGroup="GroupRegistrarVehiculo" EnableClientScript="false"/>
 				    </div>
 
-				    <div class="form-group" > 
+				    <div class="form-group help-block" >
+					    <asp:TextBox runat="server" ID="tbColor" PlaceHolder="Color"  Cssclass="form-control" width="175"/>
+                        <asp:CustomValidator runat="server" ID="cvColor" OnServerValidate="cvColor_ServerValidate" ValidationGroup="GroupRegistrarVehiculo" EnableClientScript="false"/>
+				    </div>
+
+				    <div class="form-group help-block" > 
 					    <asp:TextBox runat="server" ID="tbAsientos" PlaceHolder="Asientos Disponibles"  Cssclass="form-control" width="175"/>
-                        <asp:CustomValidator ErrorMessage="Campo invalido" ControlToValidate="tbAsientos" runat="server" ID="cvAsientos" OnServerValidate="cvAsientos_ServerValidate" ValidationGroup="GroupRegistrarVehiculo" EnableClientScript="false"/>
+                        <asp:CustomValidator runat="server" ID="cvAsientos" OnServerValidate="cvAsientos_ServerValidate" ValidationGroup="GroupRegistrarVehiculo" EnableClientScript="false"/>
 				    </div>
 
                     <div class="form-group" >               

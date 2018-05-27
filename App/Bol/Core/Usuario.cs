@@ -400,16 +400,14 @@ namespace Bol
             try
             {
                 //Objetos
-
                 new Dal.Core.Usuario().Update(
-                    usuario.NombreUsuario,
                     usuario.Nombre,
                     usuario.Apellido,
                     usuario.Dni,
                     usuario.FechaNacimiento,
                     usuario.Email,
                     usuario.Contraseña,
-                    usuario.SiActivo);
+                    usuario.Id);
             }
             catch (Exception e) { throw new Exception("Error en Update" + e.Message); }
         }

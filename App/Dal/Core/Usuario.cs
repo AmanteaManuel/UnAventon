@@ -39,14 +39,13 @@ namespace Dal.Core
                                                     )";
 
         private const string UPDATE_USUARIO = @"UPDATE Usuario SET 
-				                                        NombreUsuario = @parNombreUsuario,
 				                                        Nombre = @parNombre,
 				                                        Apellido = @parApellido,
 				                                        Dni = @parDni,
 				                                        FechaNacimiento = @parFechaNacimiento,
 				                                        Email = @parEmail,
 				                                        Contraseña = @parContraseña
-				                                    WHERE UsuarioId = @parUsuarioId";
+				                                    WHERE Id = @parUsuarioId";
 
         private const string GET_USUARIO_BY_ID = "Select * from Usuario where Id = {0}";
 
@@ -124,15 +123,14 @@ namespace Dal.Core
             return this.ExecuteNonEscalar();
         }
 
-        public void Update(
-            string nombreUsuario,
+        public void Update(            
             string nombre,
             string apellido,
             string dni,
             DateTime fechaNacimiento,
             string email,
             string contraseña,
-            bool siActivo)
+            int usuarioId)
         {
             //query a ejecutar
             this.ExecuteCommandText = UPDATE_USUARIO;
@@ -142,8 +140,6 @@ namespace Dal.Core
 
             //parámetros
             //documento
-            this.ExecuteParameters.Parameters.AddWithValue("@parNombreUsuario", nombreUsuario);
-
             this.ExecuteParameters.Parameters.AddWithValue("@parNombre", nombre);
 
             this.ExecuteParameters.Parameters.AddWithValue("@parApellido", apellido);
@@ -156,7 +152,8 @@ namespace Dal.Core
 
             this.ExecuteParameters.Parameters.AddWithValue("@parContraseña", contraseña);
 
-            this.ExecuteParameters.Parameters.AddWithValue("@parSiActivo", siActivo);
+            this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
+
 
             //ejecución, retorna el valor del parámetro de retorno
             this.ExecuteNonQuery();

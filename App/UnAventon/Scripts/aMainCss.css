@@ -81,10 +81,7 @@ ul li {
 }
 
 .error {
-    border: 1px solid #ff0000;    
-    border-radius: 7px;
-    height: 25px;
-    width: 230px;
+    border: 2px solid #ff0000;        
 }
 
 /*/grid*/

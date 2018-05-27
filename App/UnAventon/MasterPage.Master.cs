@@ -72,8 +72,11 @@ namespace UnAventon
         {
             Session.RemoveAll();
             Session.Abandon();
-            Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
-            Response.AppendHeader("Cache-Control", "no-store");
+            //Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
+            //Response.AppendHeader("Cache-Control", "no-store");
+            ActiveUsuario.Id = -1;
+            Response.Cookies["ASP.NET_SessionId"].Value = string.Empty;
+            Response.Cookies["ASP.NET_SessionId"].Expires = DateTime.Now.AddMonths(-10);
             Response.Redirect("~/Home.aspx");
         }
 

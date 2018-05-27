@@ -60,11 +60,11 @@
                                 <div id="login-form" role="form" style="display: block;">
                                     <div class="form-group" runat="server">
                                         <asp:TextBox runat="server" class="form-control" placeholder="Email" ID="tbEmail" />         
-                                        <asp:CustomValidator ErrorMessage="errormessage" ControlToValidate="tbEmail" ID="cvEmail" ValidationGroup="GroupLogin" runat="server" OnServerValidate="cvEmail_ServerValidate" />
+                                        <asp:CustomValidator Enabled="true" ErrorMessage="errormessage" ID="cvEmail" ValidationGroup="GroupLogin" runat="server" OnServerValidate="cvEmail_ServerValidate" />
                                     </div>
                                     <div class="form-group" runat="server">
                                         <asp:TextBox runat="server" type="password" id="tbPassword" class="form-control" placeholder="Contraseña"/>     
-                                        <asp:CustomValidator ErrorMessage="errormessage" ControlToValidate="tbPassword" ID="cvPassword" runat="server" ValidationGroup="GroupLogin" OnServerValidate="cvPassword_ServerValidate" />
+                                        <asp:CustomValidator Enabled="true" ErrorMessage="errormessage" ID="cvPassword" runat="server" ValidationGroup="GroupLogin" OnServerValidate="cvPassword_ServerValidate" />
                                     </div>                                   
                                     <div class="form-group">
                                         <div class="row">

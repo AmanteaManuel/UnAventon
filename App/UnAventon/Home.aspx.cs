@@ -20,7 +20,7 @@ namespace UnAventon
             try
             {
                 //divErrorLogin.Visible = false;
-                Validate("GroupLogin");
+                Page.Validate("GroupLogin");
                 if (Page.IsValid)
                 {
                     //Obtengo las credenciales del usuario.
@@ -59,8 +59,8 @@ namespace UnAventon
             }
             catch (Exception ex)
             {
-                Literal liMensaje = (Literal)this.Master.FindControl("liMensajeAlerta");
-                liMensaje.Text = "Error al crear usuario" + ex;
+                Literal liMensaje = (Literal)Page.Master.FindControl("liMensajeAlerta");
+                liMensaje.Text = "El Usuario no existe" + ex;
 
                 //divErrorLogin.Attributes.Add("class", "alert alert-danger");
                 //divErrorLogin.Visible = true;
@@ -75,12 +75,26 @@ namespace UnAventon
 
         protected void cvPassword_ServerValidate(object source, ServerValidateEventArgs args)
         {
+            tbEmail.CssClass = "form-control";
+            cvEmail.ErrorMessage = string.Empty;
 
+            if (string.IsNullOrEmpty(tbEmail.Text))
+            {
+                args.IsValid = false;                
+                tbEmail.CssClass = "form-control error";
+            }
         }
 
         protected void cvEmail_ServerValidate(object source, ServerValidateEventArgs args)
         {
+            tbPassword.CssClass = "form-control";
+            cvPassword.ErrorMessage = string.Empty;
 
+            if (string.IsNullOrEmpty(tbPassword.Text))
+            {
+                args.IsValid = false;
+                tbPassword.CssClass = "form-control error";
+            }
         }
     }
 }
