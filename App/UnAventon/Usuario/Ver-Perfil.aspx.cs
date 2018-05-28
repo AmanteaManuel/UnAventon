@@ -54,5 +54,33 @@ namespace UnAventon.Usuario
         {
 
         }
+
+        protected void rptVehiculos_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            try
+            {
+                int id;
+                int.TryParse(((LinkButton)e.CommandSource).CommandArgument, out id);
+
+                if (e.CommandName.ToUpper().Equals("DELETE"))
+                {
+                    Bol.Vehiculo.Delete(id);
+                    string idEncriptado = new Bol.Core.Service.Tools().Encripta(Convert.ToString(@ActiveUsuario.Id));
+                    Response.Redirect("~/Usuario/Ver-Perfil.aspx?id=" + idEncriptado);
+                }
+                if (e.CommandName.ToUpper().Equals("UPDATE"))
+                {
+                    string idEncriptado = new Bol.Core.Service.Tools().Encripta(Convert.ToString(id));
+                    Response.Redirect("~/Vehiculos/AgregarVehiculo.aspx?id=" + idEncriptado);
+                }
+            }
+            catch (Exception ex)
+            {
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = "Error al eliminar vehiculo " + ex.Message;
+            }
+        }
     }
 }

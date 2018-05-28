@@ -126,7 +126,7 @@ namespace Bol
         {
             get
             {
-                return Bol.Core.Ciudad.GetById(_destinoId);
+                return Bol.Core.Ciudad.GetById(_origenId);
             }
             set
             {

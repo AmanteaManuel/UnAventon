@@ -94,13 +94,10 @@ namespace UnAventon.Vehiculos
 
             if (!Page.IsPostBack)
             {
-                ClearPage();
-
-                string id = new Bol.Core.Service.Tools().Encripta("1004");
+                ClearPage();               
                 if (Request.QueryString["id"] != null)
                 {
-                    id = new Bol.Core.Service.Tools().Desencripta(id);
-                    //id = new Bol.Core.Service.Tools().Desencripta(Request.QueryString["id"]);
+                    string id = new Bol.Core.Service.Tools().Desencripta(Request.QueryString["id"]);                    
                     int IdDesencriptado = Convert.ToInt32(id);
                     Vehiculo = new Bol.Vehiculo().LoadById(IdDesencriptado);
                 }

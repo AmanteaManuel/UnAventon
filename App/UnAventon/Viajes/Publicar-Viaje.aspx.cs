@@ -42,7 +42,7 @@ namespace UnAventon.Viajes
             list.DataTextField = text;
             list.DataValueField = value;
             list.DataSource = dataSource;
-            list.DataBind();
+            list.DataBind();            
 
             list.Items.Insert(0, new ListItem(valoramostrarpordefecto, string.Empty));
         }
@@ -95,8 +95,8 @@ namespace UnAventon.Viajes
 
                     }                    
                     Viaje viaje = new Viaje(
-                        Convert.ToInt32(ddlCiudadSalida.SelectedIndex),
-                        Convert.ToInt32(ddlCiudadDestino.SelectedIndex), 
+                        Convert.ToInt32(ddlCiudadSalida.SelectedValue),
+                        Convert.ToInt32(ddlCiudadDestino.SelectedValue), 
                         tbDuracion.Text,
                         Convert.ToInt32(tbLugaresDisponibles.Text),
                         ddlVehiculo.SelectedIndex,
@@ -132,8 +132,7 @@ namespace UnAventon.Viajes
             {
                 List<Ciudad> ciudades = new List<Ciudad>();                
                 ciudades = Ciudad.GetAllByProvinciaId(Convert.ToInt32(ddlProvinciaDestino.SelectedValue));
-                LoadDropDownList(ddlCiudadDestino, ciudades, "Descripcion", "ID", "Seleccione...");
-                //upCiudadDestino.Update();
+                LoadDropDownList(ddlCiudadDestino, ciudades, "Descripcion", "ID", "Seleccione...");                
             }
         }
 
@@ -145,7 +144,7 @@ namespace UnAventon.Viajes
                 List<Ciudad> ciudades = new List<Ciudad>();                
                 ciudades = Ciudad.GetAllByProvinciaId(Convert.ToInt32(ddlProvinciaSalida.SelectedValue));
                 LoadDropDownList(ddlCiudadSalida, ciudades, "Descripcion", "ID", "Seleccione...");
-                //pCiudadSalida.Update();
+                
             }
         }
 
@@ -158,11 +157,11 @@ namespace UnAventon.Viajes
                     //frecuente
                     if (ddlTipoViaje.SelectedValue == "2")
                     {
-
+                        //divListaViajes.Visible = true;
                     }
-
                     else
                     {
+                        //divListaViajes.Visible = false;
                     }
                 }
             }

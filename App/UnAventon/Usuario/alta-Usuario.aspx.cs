@@ -165,9 +165,11 @@ namespace UnAventon.Usuario
                     tbApellido.Text = Usuario.Apellido;
                     tbNombre.Text = Usuario.Nombre;
                     tbContrasenia.Text = Usuario.Contraseña;
+                    tbRepitaContraseña.Text = Usuario.Contraseña;
                     tbDni.Text = Usuario.Dni;
                     tbEmail.Text = Usuario.Email;
                     tbEmail.Enabled = false;
+                    tbFechaNacimiento.Text = Usuario.FechaNacimiento.ToString("dd/MM/yyyy");
 
                 }
             }

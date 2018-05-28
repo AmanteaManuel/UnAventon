@@ -18,11 +18,11 @@
 									<tbody>
 										<tr>
 											<td><strong>Nombre:</strong></td>
-											<td><asp:Literal runat="server" ID="liApellido" /></td>
+											<td><asp:Literal runat="server" ID="liNombre" /></td>
 										</tr>
 										<tr>
 											<td><strong>Apellido:</strong></td>
-											<td><asp:Literal runat="server" ID="liNombre" /></td>
+											<td><asp:Literal runat="server" ID="liApellido" /></td>
 										</tr>
 										<tr>
 											<td><strong>DNI:</strong></td>
@@ -60,7 +60,7 @@
 						<div class="col-md-3 col-lg-3 " align="center"></div>
 							<div class=" col-md-9 col-lg-9 "> 
 							<table class="table table-hover" >
-                                <asp:Repeater runat="server" ID="rptVehiculos">
+                                <asp:Repeater runat="server" ID="rptVehiculos"  OnItemCommand="rptVehiculos_ItemCommand">
                                     <HeaderTemplate>
                                     <tr>            
 										<th>Marca</th>
@@ -69,6 +69,7 @@
 										<th>Color</th>
 										<th>Asientos</th>
                                         <th>Eliminar</th>
+                                        <th>Modificar</th>
 									</tr>
                                     </HeaderTemplate>
                                     <ItemTemplate>
@@ -78,7 +79,9 @@
 										    <td><asp:Literal Text='<%# Eval("Patente") %>' runat="server" /></td>
 										    <td><asp:Literal Text='<%# Eval("Color") %>' runat="server" /></td>
 										    <td><asp:Literal Text='<%# Eval("AsientosDisponibles") %>' runat="server" /></td>
-                                            <td><asp:Button CssClass="DeleteButton" runat="server" ID="btnBorraVehiculo" OnClick="btnBorraVehiculo_Click" Text="X"/></td>                                            
+                                            <td><asp:LinkButton CssClass="DeleteButton" ID="linkDetalle" CommandName="DELETE" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Eliminar"></asp:LinkButton></td>
+                                            <td><asp:LinkButton CssClass="UpdateButton" ID="LinkButton1" CommandName="UPDATE" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Modificar"></asp:LinkButton></td>
+                                            <%--<asp:Button  runat="server" ID="btnBorraVehiculo" OnClick="btnBorraVehiculo_Click" Text="X"/>   --%>                                         
 									    </tr>
                                     </ItemTemplate>
                                 </asp:Repeater>
