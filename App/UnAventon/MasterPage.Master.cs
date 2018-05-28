@@ -80,14 +80,18 @@ namespace UnAventon
 
         protected void btnCerrarSesion_Click(object sender, EventArgs e)
         {
-            Session.RemoveAll();
+            //Session.RemoveAll();
+            //Session.Abandon();
+            ////Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
+            ////Response.AppendHeader("Cache-Control", "no-store");
+            //ActiveUsuario.Id = -1;
+            //Response.Cookies["ASP.NET_SessionId"].Value = string.Empty;
+            //Response.Cookies["ASP.NET_SessionId"].Expires = DateTime.Now.AddMonths(-10);
+            //Response.Redirect("~/Home.aspx");
+
             Session.Abandon();
-            //Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
-            //Response.AppendHeader("Cache-Control", "no-store");
-            ActiveUsuario.Id = -1;
-            Response.Cookies["ASP.NET_SessionId"].Value = string.Empty;
-            Response.Cookies["ASP.NET_SessionId"].Expires = DateTime.Now.AddMonths(-10);
-            Response.Redirect("~/Home.aspx");
+            System.Web.Security.FormsAuthentication.SignOut();
+            Response.Redirect("~/Home.aspx", false);
         }
 
     }

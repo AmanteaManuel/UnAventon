@@ -29,6 +29,33 @@
                 6px 6px 5px #464646, 
                 9px 9px 5px #808080;
         }
+        .boton_personalizado {
+            font-family: 'arial black';
+            color: #FFFFFF !important;
+            font-size:12px;   
+            padding:10px,25px;
+            text-shadow: 0px 0px 10px #7A3A3C;
+            box-shadow: 1px 1px 1px #7A3A3C;
+            padding: 10px 25px;
+            -moz-border-radius: 12px;
+            -webkit-border-radius: 12px;
+            border-radius: 12px;
+            border: 2px groove #000000;
+            background: #F17376;
+            background: linear-gradient(top, #F17376, #A64F51);
+            background: -ms-linear-gradient(top, #F17376, #A64F51);
+            background: -webkit-gradient(linear, left top, left bottom, from(#F17376), to(#A64F51));
+            background: -moz-linear-gradient(top, #F17376, #A64F51);
+        }
+
+            .boton_personalizado:hover {
+                color: #FFFFFF !important;
+                background: #F17376;
+                background: linear-gradient(top, #C25C5F, #8F4446);
+                background: -ms-linear-gradient(top, #C25C5F, #8F4446);
+                background: -webkit-gradient(linear, left top, left bottom, from(#C25C5F), to(#8F4446));
+                background: -moz-linear-gradient(top, #C25C5F, #8F4446);
+    }
     </style>
 
 </head>
@@ -45,7 +72,7 @@
     <p class="text-center Text-Shadow" style="color:white" ><strong><big>En está página podrá buscar y compartir viajes con los demás usuarios<big></strong></p>
     <hr />
         <h4 class="text-center Text-Shadow"  style="color:white" > Por favor, ingresé los datos solicitados a continuación para poder usar la página o puede             
-                <asp:LinkButton style="color:orangered" href="/Viajes/Listado-de-Viajes.aspx" runat="server"><b>continuar como invitado</b></asp:LinkButton>   
+                <asp:LinkButton style="color:orangered" OnClick="Unnamed_Click" runat="server"><b>continuar como invitado</b></asp:LinkButton>   
         </h4>
     <div class="container">
         <div class="row">
@@ -69,10 +96,10 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-6 col-sm-offset-3">
-                                                <asp:LinkButton Text="Iniciar Sesion" class="form-control btn btn-login align-center" runat="server" tabindex="4" id="idInciarSesion" OnClick="idInciarSesion_Click" />
+                                                <asp:LinkButton Text="Iniciar Sesion" class="form-control boton_personalizado" runat="server" tabindex="4" id="idInciarSesion" OnClick="idInciarSesion_Click"/>
                                             </div>
                                             <div class="col-sm-6 col-sm-offset-3">
-                                                <asp:LinkButton Text="Registrar" runat="server" class="form-control btn btn-login" tabindex="4" ID="btnRegistrar" OnClick="btnRegistrar_Click" />
+                                                <asp:LinkButton Text="Registrar" runat="server" class="form-control boton_personalizado" tabindex="4" ID="btnRegistrar" OnClick="btnRegistrar_Click"/>
                                             </div>
                                         </div>
                                     </div>

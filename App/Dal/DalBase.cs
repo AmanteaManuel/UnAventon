@@ -10,9 +10,9 @@ namespace Dal
     {
         #region Variables, Fields, Enumerations
 
-        // Base provider
-        // [NonSerialized()]
-        protected static string ConnectionString = "Data Source=(localdb)\\Servidor;Initial Catalog=UnAventon; Integrated Security=True";
+        // Base provider    Data Source=(localdb)\\Servidor;Initial Catalog=UnAventon; Integrated Security=True
+        // [NonSerialized()]Data Source=(LocalDB)\Servidor;Initial Catalog=UnAventon;Integrated Security=True
+        protected static string ConnectionString = @"Data Source=(LocalDB)\Servidor;Initial Catalog=UnAventon;Integrated Security=True";
 
         // [NonSerialized()]
         // internal static SqlConnection new SqlConnection(ConnectionString) = new SqlConnection(ConnectionString);

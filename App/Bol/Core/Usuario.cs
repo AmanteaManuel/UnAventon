@@ -433,7 +433,7 @@ namespace Bol
                 else
                     throw new Exception("El usuario no existe");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw new Exception("El usuario no existe");
             }
