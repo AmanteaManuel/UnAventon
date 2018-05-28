@@ -93,10 +93,41 @@
     </div>
     <div class="col-xs-12 col-md-2 col-lg-2 form-group ">
         <label>Comentario</label>
-        
-    </div>
 
+   <%-- <div class="table-responsive">
+        <table class="table table-hover" >
+            <thead class="silver-background">
+            &nbsp
+            <HR WIDTH=55%>
+            <tr>            
+                <th>Origen</th>
+                <th>Destino</th>
+                <th>Precio</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Usuario</th>
+            
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Origen1</td>
+                <td>Destino1</td>
+                <td>Precio1</td>
+                <td>Fecha1</td>
+                <td>Hora1</td>
+                <td>Usuario1</td>
 
+            </tr>
+             <tr>
+                <td>Origen2</td>
+                <td>Destino2</td>
+                <td>Precio2</td>
+                <td>Fecha2</td>
+                <td>Hora2</td>
+                <td>Usuario1</td>
+            </tr>
+    </div>--%>
 
     <div class="Container">        
     </div>
