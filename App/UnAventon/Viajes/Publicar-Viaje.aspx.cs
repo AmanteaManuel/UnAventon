@@ -22,6 +22,9 @@ namespace UnAventon.Viajes
             set { ViewState["Usuario"] = value; }
         }
 
+        public List<Bol.Viaje> viajesAgregados;
+        
+
         #region " Methods "
 
         private void PreparePage()
@@ -47,11 +50,11 @@ namespace UnAventon.Viajes
             list.Items.Insert(0, new ListItem(valoramostrarpordefecto, string.Empty));
         }
 
-            #endregion
+        #endregion
 
-            #region " Events "
+        #region " Events "
 
-            protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
@@ -91,12 +94,18 @@ namespace UnAventon.Viajes
                     //Es un viaje Frecuente
                     if(ddlTipoViaje.SelectedValue == "2")
                     {
-                        //verifico que dias estan seleccionados,
+                        foreach (var v in viajesAgregados)
+                        {
+                            v.Precio = (v.Precio / v.LugaresDisponibles);
+                            Viaje.Create(v);
+                        }
 
-                    }                    
-                    Viaje viaje = new Viaje(
+                    }
+                    else
+                    {
+                        Viaje viaje = new Viaje(
                         Convert.ToInt32(ddlCiudadSalida.SelectedValue),
-                        Convert.ToInt32(ddlCiudadDestino.SelectedValue), 
+                        Convert.ToInt32(ddlCiudadDestino.SelectedValue),
                         tbDuracion.Text,
                         Convert.ToInt32(tbLugaresDisponibles.Text),
                         ddlVehiculo.SelectedIndex,
@@ -105,7 +114,9 @@ namespace UnAventon.Viajes
                         Convert.ToDouble(tbPrecio.Text),
                         tbDescripcion.Text);
 
-                    Viaje.Create(viaje);
+                        viaje.Precio = (viaje.Precio / viaje.LugaresDisponibles);
+                        Viaje.Create(viaje);
+                    }
 
                     this.Master.FindControl("divMsjOk").Visible = true;
                     Literal liMensaje = (Literal)this.Master.FindControl("liMsjOK");
@@ -157,11 +168,11 @@ namespace UnAventon.Viajes
                     //frecuente
                     if (ddlTipoViaje.SelectedValue == "2")
                     {
-                        //divListaViajes.Visible = true;
+                        divViajesAgregados.Visible = true;
                     }
                     else
                     {
-                        //divListaViajes.Visible = false;
+                        divViajesAgregados.Visible = true;
                     }
                 }
             }
@@ -170,6 +181,45 @@ namespace UnAventon.Viajes
                 throw new Exception("Error al obtener datos del tipo del viaje. ");
             }
 
+        }
+
+        protected void btnAgregarViaje_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Validate("PublicarViaje");
+                if (Page.IsValid)
+                {
+                    Viaje viaje = new Viaje(
+                        Convert.ToInt32(ddlCiudadSalida.SelectedValue),
+                        Convert.ToInt32(ddlCiudadDestino.SelectedValue),
+                        tbDuracion.Text,
+                        Convert.ToInt32(tbLugaresDisponibles.Text),
+                        ddlVehiculo.SelectedIndex,
+                        tbFecha.SelectedDate,
+                        tbHoraSalida.Text,
+                        Convert.ToDouble(tbPrecio.Text),
+                        tbDescripcion.Text);
+
+                    viajesAgregados.Add(viaje);
+
+                    rptViajesAgregados.DataSource = viajesAgregados;
+                    rptViajesAgregados.DataBind();
+
+                    this.Master.FindControl("divMsjOk").Visible = true;
+                    Literal liMensaje = (Literal)this.Master.FindControl("liMsjOK");
+                    liMensaje.Text = "Viaje Agregado con éxito";
+                }
+                else
+                    throw new Exception("Error al Agregar viaje. ");
+            }
+            catch (Exception ex)
+            {
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = ex.Message;
+            }
         }
 
         #endregion
@@ -308,6 +358,7 @@ namespace UnAventon.Viajes
             }
         }
 
-        #endregion        
+        #endregion
+    
     }
 }

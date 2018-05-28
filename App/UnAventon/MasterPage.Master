@@ -53,6 +53,11 @@
             background: -webkit-gradient(linear, left top, left bottom, from(#99494B), to(#CF6265));
             background: -moz-linear-gradient(top,  #99494B,  #CF6265);
         }
+        .alert-success{            
+            background-color: #dff0d8;
+            border-color: #d0e9c6;
+            color: #3c763d;
+        }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server"> 
     </asp:ContentPlaceHolder>

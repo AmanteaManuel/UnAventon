@@ -11,7 +11,7 @@
         
     </thead>
     <tbody>
-        <asp:Repeater runat="server" ID="rptViajes" OnItemDataBound="rptViajes_ItemDataBound">
+        <asp:Repeater runat="server" ID="rptViajes" >
             <HeaderTemplate >
                 <tr>            
                     <th>Origen</th>
@@ -24,7 +24,7 @@
             </HeaderTemplate>
             <ItemTemplate>
                 <tr>
-                    <asp:LinkButton runat="server" id="lbDetalle" OnClick="lbDetalle_Click">
+                    <asp:LinkButton runat="server" id="lbDetalle">
                     <td>
                         <asp:Literal Text='<%# Eval("Origen.Descripcion") %>' runat="server" ID="liOrigen" />
                     </td>                  

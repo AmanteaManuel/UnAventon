@@ -53,11 +53,8 @@ namespace UnAventon.Viajes
                 }
                
             }            
-        }
-        
-        protected void rptViajes_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {           
-        }
+        }        
+       
 
         protected void lbDetalle_Click(object sender, EventArgs e)
         {
