@@ -68,6 +68,7 @@
 										<th>Patente</th>
 										<th>Color</th>
 										<th>Asientos</th>
+                                        <th>Eliminar</th>
 									</tr>
                                     </HeaderTemplate>
                                     <ItemTemplate>
@@ -77,6 +78,7 @@
 										    <td><asp:Literal Text='<%# Eval("Patente") %>' runat="server" /></td>
 										    <td><asp:Literal Text='<%# Eval("Color") %>' runat="server" /></td>
 										    <td><asp:Literal Text='<%# Eval("AsientosDisponibles") %>' runat="server" /></td>
+                                            <td><asp:Button CssClass="DeleteButton" runat="server" ID="btnBorraVehiculo" OnClick="btnBorraVehiculo_Click" Text="X"/></td>                                            
 									    </tr>
                                     </ItemTemplate>
                                 </asp:Repeater>

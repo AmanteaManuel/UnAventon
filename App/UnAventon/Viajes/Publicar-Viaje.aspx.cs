@@ -112,7 +112,8 @@ namespace UnAventon.Viajes
                 HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
                 divalert.Visible = true;
                 Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
-                lialert.Text = ex.Message;                
+                lialert.Text = ex.Message;
+                Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
             }
 
         }

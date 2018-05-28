@@ -119,4 +119,21 @@ columna2 {
 columna3 {
     grid-area: columna3;
 }
+.DeleteButton {
+    font-family: 'arial black';
+    color: #EDEDED !important;
+    font-size: 14px;
+    box-shadow: 1px 1px 10px #A10D0D;
+    padding: 5px 5px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    border: 2px solid #000000;
+    background: #E60505;
+}
+
+.DeleteButton:hover {
+    color: #FFFFFF !important;
+    background: #9C0B0B;
+}
 

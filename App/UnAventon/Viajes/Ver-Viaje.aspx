@@ -3,64 +3,74 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <body>
-<div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
-				<div class="panel panel-info">
-					<div class="panel-heading">
-						<h3 class="panel-title">Detalles del viaje</h3>
-					</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-md-3 col-lg-3 " align="left"></div>
-								<div class=" col-md-9 col-lg-9 "> 
-									<table class="table table-user-information">
-										<tbody>
-											<tr>
-												<td><strong>Ciudad Origen:</strong></td>
-												<td>Ciudad-Origen</td>
-											</tr>
-											<tr>
-												<td><strong>Ciudad Destino:</strong></td>
-												<td>Ciuda-Destino</td>
-											</tr>
-											<tr>
-												<td><strong>Duracion:</strong></td>
-												<td>Duracion del viaje</td>
-											</tr>
-											<tr>
-												<td><strong>Fecha:</strong></td>
-												<td>SI, aca va la fecha</td>
-											</tr>
-											<tr>
-												<td><strong>Hora:</strong></td>
-												<td>La hora</td>
-											</tr>
-											<tr>
-												<td><strong>Lugares Disponibles:</strong></td>
-												<td>Aca los lugares</td>
-											</tr>   
-											<tr>
-												<td><strong>Reputacion Chofer:</strong></td>
-												<td>Aca va la reputacion</td>
-											</tr>  
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>            
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-6">
-			  			
-			  			 <div class="form-group">
-			  				<label><strong>Descripcion:</strong></label>
-			  			 	<textarea  class="form-control" id="description" placeholder="aca va la descripcion"></textarea>
-			  			</div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Detalles del viaje</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class=" col-md-9 col-lg-9 ">
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>Ciudad Origen:</strong></td>
+                                                <td>
+                                                    <asp:Literal Text="text" runat="server" ID="liCudadOrigen" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Ciudad Destino:</strong></td>
+                                                <td>
+                                                    <asp:Literal Text="text" runat="server" id="liCiudadDestino"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Duracion:</strong></td>
+                                                <td>
+                                                    <asp:Literal Text="text" runat="server" id="liDuracion"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Fecha:</strong></td>
+                                                <td>
+                                                    <asp:Literal Text="text" runat="server" id="liFecha"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Hora:</strong></td>
+                                                <td>
+                                                    <asp:Literal Text="text" runat="server" id="liHora"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Lugares Disponibles:</strong></td>
+                                                <td>
+                                                    <asp:Literal Text="text" runat="server" id="liLugares"/>
+                                                </td>
+                                            </tr>
+                                            <%--<tr>
+                                                <td><strong>Reputacion Chofer:</strong></td>
+                                                <td>
+                                                    <asp:Literal Text="text" runat="server" id="liReputacionChofer"/>
+                                                </td>
+                                            </tr>--%>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-3 col-lg-3" id="divDescripcion" runat="server" visible=" true">
+                                    <div class="form-group">
+                                        <label><strong>Comentario:</strong></label>
+                                        <asp:TextBox runat="server" ID="tbComentario" TextMode="MultiLine" Enabled="false" Height="150px" Width="500" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-	</div>
-</div>
-</body>
+    </body>
 </asp:Content>

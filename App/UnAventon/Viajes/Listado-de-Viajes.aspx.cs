@@ -20,7 +20,24 @@ namespace UnAventon.Viajes
                     DateTime fechaActual = DateTime.Now;
                     DateTime fechaUnMes = fechaActual.AddMonths(1);
 
-                    List<Bol.Viaje> viajes = new Bol.Viaje().GetAllFromNowToOneMonth(fechaActual, fechaUnMes);
+                    //List<Bol.Viaje> viajes = new Bol.Viaje().GetAllFromNowToOneMonth(fechaActual, fechaUnMes);
+
+
+                    #region " Pruebas "
+                    List<Bol.Viaje> viajes = new List<Bol.Viaje>();
+                    Bol.Viaje v1 = new Bol.Viaje().GetInstanceById(1);
+                    Bol.Viaje v2 = new Bol.Viaje().GetInstanceById(6);
+                    Bol.Viaje v3 = new Bol.Viaje().GetInstanceById(1014);
+                    Bol.Viaje v4 = new Bol.Viaje().GetInstanceById(1015);
+                    viajes.Add(v1);
+                    viajes.Add(v2);
+                    viajes.Add(v3);
+                    viajes.Add(v4);
+                    string idEncriptado = new Bol.Core.Service.Tools().Encripta(Convert.ToString(v1.Id));
+                    
+                    Response.Redirect("~/Viajes/Ver-Viaje.aspx?id=" + idEncriptado);
+
+                    #endregion                   
 
                     //Bindeo el objeto
                     rptViajes.DataSource = viajes;

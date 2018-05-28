@@ -49,5 +49,10 @@ namespace UnAventon.Usuario
 
             #endregion
         }
+
+        protected void btnBorraVehiculo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
