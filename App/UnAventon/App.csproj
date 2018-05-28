@@ -212,6 +212,7 @@
     <Content Include="Usuario\alta-Usuario.aspx" />
     <Content Include="Usuario\Ver-Perfil.aspx" />
     <Content Include="Vehiculos\AgregarVehiculo.aspx" />
+    <Content Include="Viajes\Listado-de-Viajes-Publico.aspx" />
     <Content Include="Viajes\Listado-de-Viajes.aspx" />
     <Content Include="Viajes\Publicar-Viaje.aspx" />
     <Content Include="Viajes\Ver-Viaje.aspx" />
@@ -266,6 +267,13 @@
     </Compile>
     <Compile Include="Vehiculos\AgregarVehiculo.aspx.designer.cs">
       <DependentUpon>AgregarVehiculo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Viajes\Listado-de-Viajes-Publico.aspx.cs">
+      <DependentUpon>Listado-de-Viajes-Publico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Viajes\Listado-de-Viajes-Publico.aspx.designer.cs">
+      <DependentUpon>Listado-de-Viajes-Publico.aspx</DependentUpon>
     </Compile>
     <Compile Include="Viajes\Listado-de-Viajes.aspx.cs">
       <DependentUpon>Listado-de-Viajes.aspx</DependentUpon>

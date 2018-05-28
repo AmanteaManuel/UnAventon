@@ -13,40 +13,27 @@
 
     <%--ORIGEN/DESTINO--%>
     <div class="row">
-        <%--<asp:UpdatePanel runat="server" UpdateMode="Always" ID="upDestinos">
-            <ContentTemplate>--%>
-                <div class="col-xs-12 col-md-2 col-lg-2 form-group">
-                    <label>Provincia Salida</label>
-                    <asp:DropDownList ID="ddlProvinciaSalida" OnSelectedIndexChanged="ddlProvinciaSalida_SelectedIndexChanged" CssClass="form-control " runat="server" AutoPostBack="true"></asp:DropDownList>
-                    <asp:CustomValidator ErrorMessage="*"  runat="server" ID="cvProvSalida" OnServerValidate="cvProvSalida_ServerValidate" ValidationGroup="PublicarViaje"/>
-                    <span class="has-warning"><%--aca va el mensaje de error--%></span>
-                </div>
-               <%-- <asp:UpdatePanel runat="server" ID="upCiudadSalida" UpdateMode="Always">
-                    <ContentTemplate>--%>
-                        <div class="col-xs-12 col-md-2 col-lg-2 form-group">
-                            <label>Ciudad Salida</label>
-                            <asp:DropDownList ID="ddlCiudadSalida" CssClass="form-control " runat="server" AutoPostBack="true"></asp:DropDownList>
-                            <asp:CustomValidator ErrorMessage="*" runat="server" ID="cvCiduadSalida" OnServerValidate="cvCiduadSalida_ServerValidate" ValidationGroup="PublicarViaje" />
-                        </div>
-                    <%--</ContentTemplate>
-                </asp:UpdatePanel>   --%>
-                <div class="col-xs-12 col-md-2 col-lg-2 form-group ">
-                    <label>Provincia Destino</label>
-                    <asp:DropDownList ID="ddlProvinciaDestino" OnSelectedIndexChanged="ddlProvinciaDestino_SelectedIndexChanged" CssClass="form-control" runat="server" AutoPostBack="true" ></asp:DropDownList>
-                    <asp:CustomValidator ErrorMessage="*"  runat="server" ID="cvProvDestino" OnServerValidate="cvProvDestino_ServerValidate" ValidationGroup="PublicarViaje" />
-                </div>
-                <%--<asp:UpdatePanel runat="server" ID="upCiudadDestino" UpdateMode="Always">
-                    <ContentTemplate>--%>
-                        <div class="col-xs-12 col-md-2 col-lg-2 form-group">
-                            <label>Ciudad Destino</label>
-                            <asp:DropDownList ID="ddlCiudadDestino" CssClass="form-control " runat="server" AutoPostBack="true"></asp:DropDownList>
-                            <asp:CustomValidator ErrorMessage="*"  runat="server" ID="cvCiudadDestino" OnServerValidate="cvCiudadDestino_ServerValidate" ValidationGroup="PublicarViaje" />
-                        </div>
-                    <%--</ContentTemplate>
-                </asp:UpdatePanel>--%>
-                
-           <%-- </ContentTemplate>
-        </asp:UpdatePanel>--%>
+        <div class="col-xs-12 col-md-2 col-lg-2 form-group">
+            <label>Provincia Salida</label>
+            <asp:DropDownList ID="ddlProvinciaSalida" OnSelectedIndexChanged="ddlProvinciaSalida_SelectedIndexChanged" CssClass="form-control " runat="server" AutoPostBack="true"></asp:DropDownList>
+            <asp:CustomValidator ErrorMessage="*" runat="server" ID="cvProvSalida" OnServerValidate="cvProvSalida_ServerValidate" ValidationGroup="PublicarViaje" />
+            <span class="has-warning"><%--aca va el mensaje de error--%></span>
+        </div>
+        <div class="col-xs-12 col-md-2 col-lg-2 form-group">
+            <label>Ciudad Salida</label>
+            <asp:DropDownList ID="ddlCiudadSalida" CssClass="form-control " runat="server" AutoPostBack="true"></asp:DropDownList>
+            <asp:CustomValidator ErrorMessage="*" runat="server" ID="cvCiduadSalida" OnServerValidate="cvCiduadSalida_ServerValidate" ValidationGroup="PublicarViaje" />
+        </div>
+        <div class="col-xs-12 col-md-2 col-lg-2 form-group ">
+            <label>Provincia Destino</label>
+            <asp:DropDownList ID="ddlProvinciaDestino" OnSelectedIndexChanged="ddlProvinciaDestino_SelectedIndexChanged" CssClass="form-control" runat="server" AutoPostBack="true"></asp:DropDownList>
+            <asp:CustomValidator ErrorMessage="*" runat="server" ID="cvProvDestino" OnServerValidate="cvProvDestino_ServerValidate" ValidationGroup="PublicarViaje" />
+        </div>
+        <div class="col-xs-12 col-md-2 col-lg-2 form-group">
+            <label>Ciudad Destino</label>
+            <asp:DropDownList ID="ddlCiudadDestino" CssClass="form-control " runat="server" AutoPostBack="true"></asp:DropDownList>
+            <asp:CustomValidator ErrorMessage="*" runat="server" ID="cvCiudadDestino" OnServerValidate="cvCiudadDestino_ServerValidate" ValidationGroup="PublicarViaje" />
+        </div>
     </div>
     <%--FIN ORIGEN/DESTINO--%>
 
@@ -98,43 +85,15 @@
             </asp:DropDownList>
             <asp:CustomValidator ErrorMessage="*" ID="cvTipoViaje" runat="server" OnServerValidate="cvTipoViaje_ServerValidate" ValidationGroup="PublicarViaje"/>           
         </div>
-         <%--DIAS si selecciona Frecuente--%>
-             <div class="col-xs-12 col-md-2 col-lg-3 form-group" runat="server" id="divDias" visible="false">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="chbLunes" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Lunes</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="chbMartes" value="option2">
-                    <label class="form-check-label" for="inlineCheckbox2">Martes</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="chbMiercoles" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Miercoles</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="chbJueves" value="option2">
-                    <label class="form-check-label" for="inlineCheckbox2">Jueves</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="chbViernes" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Viernes</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="chbSabado" value="option2">
-                    <label class="form-check-label" for="inlineCheckbox2">Sabado</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="chbDomingo" value="option2">
-                    <label class="form-check-label" for="inlineCheckbox2">Domingo</label>
-                </div>
-            </div>
-            <%--FIN DIAS si selecciona Frecuente--%>
     </div>
     <div class="col-xs-12 col-md-2 col-lg-2 form-group ">
         <label>Comentario</label>
         <asp:TextBox CssClass="form-control" runat="server" ID="tbDescripcion" Width="700" Height="150" TextMode="MultiLine" />
         <asp:Button Text="Publicar" runat="server" ID="btnPublicarViaje" CssClass="boton_personalizado" OnClick="btnPublicarViaje_Click" />
+    </div>
+    <div class="col-xs-12 col-md-2 col-lg-2 form-group ">
+        <label>Comentario</label>
+        
     </div>
 
 

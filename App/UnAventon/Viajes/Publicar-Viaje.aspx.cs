@@ -32,63 +32,26 @@ namespace UnAventon.Viajes
 
             List<Vehiculo> vehiculos = Vehiculo.GetAllByUsuarioId(ActiveUsuario.Id);
 
-            CargarDDLProvincia(provincias, (DropDownList)ddlProvinciaDestino);
-            CargarDDLProvincia(provincias, (DropDownList)ddlProvinciaSalida);            
-            CargarDDLVehiculos(vehiculos, (DropDownList)ddlVehiculo);   
-            
+            LoadDropDownList(ddlProvinciaDestino, provincias, "Descripcion", "ID", "Seleccione...");
+            LoadDropDownList(ddlProvinciaSalida, provincias, "Descripcion", "ID", "Seleccione...");
+            LoadDropDownList(ddlVehiculo, vehiculos, "Modelo", "ID", "Seleccione...");            
         }
 
-        private void CargarDDLProvincia(List<Provincia> lista, DropDownList ddl)
+        private void LoadDropDownList(DropDownList list, object dataSource, string text, string value, string valoramostrarpordefecto)
         {
-            string[] listaString = new string[lista.Count];    
-            for (int i = 0; i < 25; i++)
-            {
-                listaString[i] = lista[i].Descripcion;
-            }
-            ddl.DataSource = listaString;
-            ddl.DataBind();
+            list.DataTextField = text;
+            list.DataValueField = value;
+            list.DataSource = dataSource;
+            list.DataBind();
+
+            list.Items.Insert(0, new ListItem(valoramostrarpordefecto, string.Empty));
         }
 
-        private void CargarDDLCiudad(List<Ciudad> lista, DropDownList ddl)
-        {
-            string[] listaString = new string[lista.Count];    
-            for (int i = 0; i < lista.Count; i++)
-            {
-                listaString[i] = lista[i].Descripcion;
-            }
-            ddl.DataSource = listaString;
-            ddl.DataBind();
-        }
+            #endregion
 
-        private void CargarDDLVehiculos(List<Vehiculo> lista, DropDownList ddl)
-        {
-            try
-            {
-                Vehiculo v = new Vehiculo();
-                v.Marca = "";
-                v.Modelo = "Seleccione...";
-                v.Patente = "";
-                lista.Insert(0,v);
-                string[] listaString = new string[lista.Count];
-                for (int i = 0; i < lista.Count; i++)
-                {
-                    listaString[i] = lista[i].Marca + " - " + lista[i].Modelo+" - " + lista[i].Patente;
-                }
-                ddl.DataSource = listaString;
-                ddl.DataBind();
-            }
-            catch (Exception)
-            {
-                throw new Exception("Error al listar vehículos");
-            }
-            
-        }
+            #region " Events "
 
-        #endregion
-
-        #region " Events "
-
-        protected void Page_Load(object sender, EventArgs e)
+            protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
@@ -168,8 +131,9 @@ namespace UnAventon.Viajes
             if (ddlProvinciaDestino.SelectedIndex > 0)
             {
                 List<Ciudad> ciudades = new List<Ciudad>();                
-                ciudades = Ciudad.GetAllByProvinciaId(Convert.ToInt32(ddlProvinciaDestino.SelectedIndex));
-                CargarDDLCiudad(ciudades, (DropDownList)ddlCiudadDestino);
+                ciudades = Ciudad.GetAllByProvinciaId(Convert.ToInt32(ddlProvinciaDestino.SelectedValue));
+                LoadDropDownList(ddlCiudadDestino, ciudades, "Descripcion", "ID", "Seleccione...");
+                //upCiudadDestino.Update();
             }
         }
 
@@ -179,9 +143,9 @@ namespace UnAventon.Viajes
             if (ddlProvinciaSalida.SelectedIndex > 0)
             {
                 List<Ciudad> ciudades = new List<Ciudad>();                
-                ciudades = Ciudad.GetAllByProvinciaId(Convert.ToInt32(ddlProvinciaSalida.SelectedIndex));
-                CargarDDLCiudad(ciudades, (DropDownList)ddlCiudadSalida);
-                //upCiudadSalida.Update();
+                ciudades = Ciudad.GetAllByProvinciaId(Convert.ToInt32(ddlProvinciaSalida.SelectedValue));
+                LoadDropDownList(ddlCiudadSalida, ciudades, "Descripcion", "ID", "Seleccione...");
+                //pCiudadSalida.Update();
             }
         }
 

@@ -96,5 +96,10 @@ namespace UnAventon
                 tbPassword.CssClass = "form-control error";
             }
         }
+
+        protected void Unnamed_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Viajes/Listado-de-Viajes-Publico.aspx");
+        }
     }
 }
