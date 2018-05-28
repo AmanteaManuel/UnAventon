@@ -95,8 +95,8 @@ namespace UnAventon.Viajes
 
                     }                    
                     Viaje viaje = new Viaje(
-                        1,//Convert.ToInt32(ddlCiudadSalida.SelectedIndex),
-                        2,//Convert.ToInt32(ddlCiudadDestino.SelectedIndex), 
+                        Convert.ToInt32(ddlCiudadSalida.SelectedIndex),
+                        Convert.ToInt32(ddlCiudadDestino.SelectedIndex), 
                         tbDuracion.Text,
                         Convert.ToInt32(tbLugaresDisponibles.Text),
                         ddlVehiculo.SelectedIndex,
@@ -158,16 +158,11 @@ namespace UnAventon.Viajes
                     //frecuente
                     if (ddlTipoViaje.SelectedValue == "2")
                     {
-                        //muestro los dias
-                        divDias.Visible = true;
-                        divFecha.Visible = false;
+
                     }
 
                     else
                     {
-                        //oculto los dias
-                        divDias.Visible = false;
-                        divFecha.Visible = true;
                     }
                 }
             }
