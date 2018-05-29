@@ -50,8 +50,16 @@ namespace UnAventon.Viajes
         private void PreparePage()
         {            
             liCudadOrigen.Text = Viaje.Origen.Descripcion;
-            liCiudadDestino.Text = Viaje.Destino.Descripcion;            
-            tbComentario.Text = Viaje.Descripcion;
+            liCiudadDestino.Text = Viaje.Destino.Descripcion;
+
+            if (Viaje.Descripcion != "")
+            {
+                divDescripcion.Visible = true;
+                tbComentario.Text = Viaje.Descripcion;
+            }
+            else
+                divDescripcion.Visible = false;
+
             liDuracion.Text = Viaje.Duracion;
             liFecha.Text = Viaje.FechaSalida.Date.ToShortDateString();
             liHora.Text = Viaje.HoraSalida;

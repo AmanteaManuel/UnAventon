@@ -170,11 +170,19 @@ namespace Bol
             }
         }
 
+        public string ShortDate
+        {
+            get
+            {
+                return FechaSalida.ToString("dd/MM/yyy");
+            }
+        }
+
         public double Precio
         {
             get
             {
-                return _precio;
+                return Math.Round(_precio,2);
             }
             set
             {

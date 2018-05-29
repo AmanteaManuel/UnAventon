@@ -58,7 +58,7 @@
 
         <div class="col-xs-12 col-md-2 col-lg-3 form-group" runat="server" id="divFecha">
             <label>Fecha</label>
-            <asp:Calendar runat="server" CssClass="" ID="tbFecha"></asp:Calendar>
+            <asp:Calendar runat="server" CssClass="nomargin" ID="tbFecha"></asp:Calendar>
             <asp:CustomValidator ErrorMessage=""  ID="cvFecha" runat="server" OnServerValidate="cvFecha_ServerValidate" ValidationGroup="PublicarViaje"/>
         </div>
     </div>
@@ -86,7 +86,7 @@
             <asp:CustomValidator ErrorMessage="*" ID="cvTipoViaje" runat="server" OnServerValidate="cvTipoViaje_ServerValidate" ValidationGroup="PublicarViaje"/>           
         </div>
         <div class="col-xs-12 col-md-2 col-lg-2 form-group ">
-            <asp:Button Text="Agregar Viaje" runat="server" ID="btnAgregarViaje" CssClass="boton_personalizado" OnClick="btnAgregarViaje_Click" />
+            <asp:Button Text="Agregar Viaje" runat="server" ID="btnAgregarViaje" CssClass="boton_personalizado" visible="false" OnClick="btnAgregarViaje_Click" />
         </div>
     </div>
     <div class="row">    

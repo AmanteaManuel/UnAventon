@@ -22,13 +22,24 @@ namespace UnAventon.Viajes
             set { ViewState["Usuario"] = value; }
         }
 
-        public List<Bol.Viaje> viajesAgregados;
+        internal List<Bol.Viaje> viajesAgregados
+        {
+            get
+            {
+                object o = ViewState["viajesAgregados"] as object;
+                return (o != null) ? (List<Viaje>)o : new List<Viaje>();
+            }
+            set { ViewState["viajesAgregados"] = value; }
+        }
+
+        //public List<Bol.Viaje> viajesAgregados;
         
 
         #region " Methods "
 
         private void PreparePage()
         {
+            viajesAgregados = new List<Viaje>();
             //Cargo las provincias para cargar los ddl
             List<Provincia> provincias = new List<Provincia>();
             provincias = Provincia.GetAll();            
@@ -58,6 +69,11 @@ namespace UnAventon.Viajes
         {
             try
             {
+                HtmlGenericControl divMsjOk = (HtmlGenericControl)this.Master.FindControl("divMsjOk");
+                divMsjOk.Visible = false;
+                HtmlGenericControl divMsjAlerta = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divMsjAlerta.Visible = false;
+
                 if (!IsPostBack)
                 {
                     if (Request.QueryString["id"] != null)
@@ -94,7 +110,7 @@ namespace UnAventon.Viajes
                     //Es un viaje Frecuente
                     if(ddlTipoViaje.SelectedValue == "2")
                     {
-                        foreach (var v in viajesAgregados)
+                        foreach (var v in this.viajesAgregados)
                         {
                             v.Precio = (v.Precio / v.LugaresDisponibles);
                             Viaje.Create(v);
@@ -169,10 +185,13 @@ namespace UnAventon.Viajes
                     if (ddlTipoViaje.SelectedValue == "2")
                     {
                         divViajesAgregados.Visible = true;
+                        btnAgregarViaje.Visible = true;
                     }
                     else
                     {
-                        divViajesAgregados.Visible = true;
+                        divViajesAgregados.Visible = false;
+                        btnAgregarViaje.Visible = false;
+
                     }
                 }
             }
@@ -203,7 +222,7 @@ namespace UnAventon.Viajes
 
                     viajesAgregados.Add(viaje);
 
-                    rptViajesAgregados.DataSource = viajesAgregados;
+                    rptViajesAgregados.DataSource = this.viajesAgregados;
                     rptViajesAgregados.DataBind();
 
                     this.Master.FindControl("divMsjOk").Visible = true;
