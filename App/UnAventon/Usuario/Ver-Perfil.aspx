@@ -61,7 +61,7 @@
 					<div class="row">
 						<div class="col-md-3 col-lg-3 " align="center"></div>
 							<div class=" col-md-9 col-lg-9 "> 
-                                <div class="table-responsive">
+                                <div class="table-responsive-vehiculo">
                                     <table class="table table-hover">
                                         <asp:Repeater runat="server" ID="rptVehiculos" OnItemCommand="rptVehiculos_ItemCommand">
                                             <HeaderTemplate>

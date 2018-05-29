@@ -35,6 +35,8 @@ namespace Dal.Core
 
         private const string GET_ALL = @"SELECT * FROM Viajes";
 
+        private const string GET_ALL_BY_VEHICULO_ID = @"select * from Viajes where VehiculoId = {0}";
+
         private const string GET_ALL_FROM_NOW_TO_ONE_MONTH = @"SELECT * FROM Viajes
 		                                                                WHERE FechaSalida BETWEEN '{0}' AND '{1}'
 							                                            ORDER BY FechaSalida";
@@ -87,6 +89,12 @@ namespace Dal.Core
         public DataSet GetAll()
         {
             this.SelectCommandText = string.Format(GET_ALL);
+            return this.Load();
+        }
+
+        public DataSet GetAllViajesByVehiculoId(int id)
+        {
+            this.SelectCommandText = string.Format(GET_ALL_BY_VEHICULO_ID, id);
             return this.Load();
         }
     }

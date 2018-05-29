@@ -19,7 +19,8 @@ namespace Bol
         private string _modelo;
         private string _patente;
         private int _asientosDisponibles;
-        private int _usuarioId;        
+        private int _usuarioId;
+        private List<Viaje> viajes;
 
         #endregion
 
@@ -151,10 +152,18 @@ namespace Bol
             }
         }
 
+        public List<Viaje> Viajes
+        {
+            get
+            {
+                return Bol.Viaje.GetAllViajesByVehiculoId(Id);
+            }           
+        }
+
         #endregion
 
         #region " Views "
-        
+
         public Vehiculo LoadById(int usuarioId)
         {
             return FillObject(
@@ -271,7 +280,10 @@ namespace Bol
         {
             try
             {
-                new Dal.Core.Vehiculo().Delete(vehiculoId);
+                if (Viaje.GetAllViajesByVehiculoId(vehiculoId).Count == 0)
+                    new Dal.Core.Vehiculo().Delete(vehiculoId);
+                else
+                    throw new Exception("El vehiculo tiene viajes en curso. ");
             }
             catch (Exception e) { throw new Exception("Error en el Update del vehiculo. " + e.Message); }
         }

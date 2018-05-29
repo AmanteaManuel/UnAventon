@@ -13,6 +13,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class=" col-md-9 col-lg-9 ">
+                                    <div class="table-responsive">
                                     <table class="table table-user-information">
                                         <tbody>
                                             <tr>
@@ -31,6 +32,12 @@
                                                 <td><strong>Duracion:</strong></td>
                                                 <td>
                                                     <asp:Literal Text="text" runat="server" id="liDuracion"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Precio:</strong></td>
+                                                <td>
+                                                    <asp:Literal Text="text" runat="server" id="liPrecio"/>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -59,6 +66,7 @@
                                             </tr>--%>
                                         </tbody>
                                     </table>
+                                    </div>
                                 </div>
                                 <div class="col-md-3 col-lg-3" id="divDescripcion" runat="server" visible=" true">
                                     <div class="form-group">

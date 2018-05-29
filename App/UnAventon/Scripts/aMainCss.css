@@ -169,6 +169,12 @@ columna3 {
     margin: 20px;
     color: #fff !important;
 }
+.table-responsive-vehiculo{
+    background: rgba(0,0,0,0.2);
+    margin: auto;
+    color: #fff !important;
+}
+
 nomargin {
     margin: 0;
     background: rgba(0,0,0,0.2);

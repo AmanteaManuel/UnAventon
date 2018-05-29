@@ -40,13 +40,13 @@
     <div class="row">
         <div class="col-xs-12 col-md-2 col-lg-3 form-group ">
             <label>Duracion en horas</label>
-            <asp:TextBox CssClass="form-control " runat="server" ID="tbDuracion"  placeholder ="1"/>
+            <asp:TextBox CssClass="form-control " runat="server" ID="tbDuracion"  placeholder ="Ejemplo: 1"/>
             <asp:CustomValidator ErrorMessage=""  runat="server" id="cvDuracion" OnServerValidate="cvDuracion_ServerValidate" ValidationGroup="PublicarViaje"/>
         </div>
 
         <div class="col-xs-12 col-md-2 col-lg-3 form-group ">
             <label>Lugares Disponibles</label>
-            <asp:TextBox CssClass="form-control " runat="server" ID="tbLugaresDisponibles" placeholder ="5"/>
+            <asp:TextBox CssClass="form-control " runat="server" ID="tbLugaresDisponibles" placeholder ="Ejemplo: 4"/>
             <asp:CustomValidator ErrorMessage=""   runat="server" id="cvLugaresDisponibles" OnServerValidate="cvLugaresDisponibles_ServerValidate" ValidationGroup="PublicarViaje"/>
         </div>
 
@@ -66,13 +66,13 @@
     <div class="row">
         <div class="col-xs-12 col-md-2 col-lg-3 form-group ">
             <label>Hora Salida</label>
-            <asp:TextBox CssClass="form-control " runat="server" ID="tbHoraSalida" placeholder ="12:00"/>
+            <asp:TextBox CssClass="form-control " runat="server" ID="tbHoraSalida" placeholder ="Ejemplo: 12:00"/>
             <asp:CustomValidator ErrorMessage=""  ID="cvHoraSalida" runat="server" OnServerValidate="cvHoraSalida_ServerValidate" ValidationGroup="PublicarViaje"/>
         </div>
 
         <div class="col-xs-12 col-md-2 col-lg-3 form-group ">
             <label>Precio Total</label>
-            <asp:TextBox CssClass="form-control " runat="server" ID="tbPrecio" placeholder ="500"/>
+            <asp:TextBox CssClass="form-control " runat="server" ID="tbPrecio" placeholder ="Ejemplo: 500"/>
             <asp:CustomValidator ErrorMessage=""  ID="cvPrecio" runat="server" OnServerValidate="cvPrecio_ServerValidate" ValidationGroup="PublicarViaje"/>
         </div>
 
@@ -92,7 +92,7 @@
     <div class="row">    
         <div class="col-xs-12 col-md-2 col-lg-5 form-group ">
             <label>Comentario</label>
-            <asp:TextBox CssClass="form-control" runat="server" placeholder="Comentarios" ID="tbDescripcion" TextMode="MultiLine" />
+            <asp:TextBox CssClass="form-control" runat="server" placeholder="Ejemplo: Comentario..." ID="tbDescripcion" TextMode="MultiLine" />
             <br />
             <asp:Button Text="Publicar" runat="server" ID="btnPublicarViaje" CssClass="boton_personalizado" OnClick="btnPublicarViaje_Click" />
         </div>

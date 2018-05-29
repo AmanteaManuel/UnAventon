@@ -106,7 +106,13 @@ namespace UnAventon.Usuario
             if (!string.IsNullOrEmpty(tbFechaNacimiento.Text))
                 try
                 {
-                    Convert.ToDateTime(tbFechaNacimiento.Text);
+                    DateTime f = Convert.ToDateTime(tbFechaNacimiento.Text);
+                    if (f.Year > 2000)
+                    {
+                        args.IsValid = false;
+                        tbFechaNacimiento.CssClass = "form-control error";
+                        throw new Exception("El usuario debe ser mayor de edad. ");                       
+                    }
                 }
                 catch (Exception)
                 {
@@ -213,7 +219,7 @@ namespace UnAventon.Usuario
                         Bol.Usuario.Create(user);
 
                         //Redirijo
-                        Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
+                        Response.Redirect("~/Home.aspx");
                     }
                     else
                         throw new Exception("El usuario ya existe. ");

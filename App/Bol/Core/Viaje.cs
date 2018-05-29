@@ -158,6 +158,8 @@ namespace Bol
             }
         }
 
+       
+
         public DateTime FechaSalida
         {
             get
@@ -199,6 +201,17 @@ namespace Bol
         #endregion
 
         #region " Views "
+
+        internal static List<Viaje> GetAllViajesByVehiculoId(int id)
+        {
+            try
+            {
+                Dal.Core.Viaje dal = new Dal.Core.Viaje();
+                DataSet ds = dal.GetAllViajesByVehiculoId(id);
+                return FillList(ds);
+            }
+            catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
+        }
 
         public Viaje GetInstanceById(int id)
         {

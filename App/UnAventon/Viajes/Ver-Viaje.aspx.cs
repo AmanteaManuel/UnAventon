@@ -51,7 +51,7 @@ namespace UnAventon.Viajes
         {            
             liCudadOrigen.Text = Viaje.Origen.Descripcion;
             liCiudadDestino.Text = Viaje.Destino.Descripcion;
-
+            liPrecio.Text = Viaje.Precio.ToString();
             if (Viaje.Descripcion != "")
             {
                 divDescripcion.Visible = true;
