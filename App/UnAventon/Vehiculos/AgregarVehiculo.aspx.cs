@@ -26,61 +26,61 @@ namespace UnAventon.Vehiculos
 
         protected void cvMarca_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbMarca.CssClass = "form-group";
+            tbMarca.CssClass = "form-control";
             cvMarca.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbMarca.Text) || string.IsNullOrWhiteSpace(tbMarca.Text))
             {
-                args.IsValid = false;
-                tbMarca.CssClass = "form-group error";
+                args.IsValid = false;                
+                tbMarca.CssClass = "form-control error";
             }
         }   
 
         protected void cvModelo_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbModelo.CssClass= "from-control";
+            tbModelo.CssClass= "form-control";
             cvModelo.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbModelo.Text))
             {
                 args.IsValid = false;
-                tbModelo.CssClass= "from-control error";
+                tbModelo.CssClass= "form-control error";
             }
         }
 
         protected void cvPatente_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbPatente.CssClass= "from-control";
+            tbPatente.CssClass= "form-control";
             cvPatente.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbPatente.Text))
             {
                 args.IsValid = false;
-                tbPatente.CssClass= "from-control error";
+                tbPatente.CssClass= "form-control error";
             }
         }
 
         protected void cvColor_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbColor.CssClass= "from-control";
+            tbColor.CssClass= "form-control";
             cvColor.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbColor.Text))
             {
                 args.IsValid = false;
-                tbColor.CssClass= "from-control error";
+                tbColor.CssClass= "form-control error";
             }
         }
 
         protected void cvAsientos_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbAsientos.CssClass= "from-control";
+            tbAsientos.CssClass= "form-control";
             cvAsientos.ErrorMessage = string.Empty;
 
             if (string.IsNullOrEmpty(tbAsientos.Text) || (Bol.Core.Service.Tools.IsNumber(tbAsientos.Text) == false))
             {
                 args.IsValid = false;
-                tbAsientos.CssClass= "from-control error";
+                tbAsientos.CssClass= "form-control error";
             }
         }
 
@@ -150,10 +150,12 @@ namespace UnAventon.Vehiculos
                     v.AsientosDisponibles = Convert.ToInt32(tbAsientos.Text);
 
                     Bol.Vehiculo.Create(v, ActiveUsuario.Id);
-                    
+
                     //tendriamos que mostrar un mensaje de ok para cuando la operacion es exitosa
                     Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
                 }
+                else
+                    throw new Exception(" Error al registrar Vehículo ");
 
             }
             catch (Exception ex)
@@ -183,7 +185,9 @@ namespace UnAventon.Vehiculos
 
                     //Redirijo
                     Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
-                }               
+                }
+                else
+                    throw new Exception(" Error al modificar Vehículo ");
             }
             catch (Exception ex)
             {
