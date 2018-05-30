@@ -28,8 +28,7 @@ namespace UnAventon
 		{
             try
             {
-                if (ActiveUsuario == null)
-                {
+                
                     string path = HttpContext.Current.Request.Url.AbsolutePath;
 
                     if (path.Contains("alta-Usuario.aspx"))
@@ -46,14 +45,14 @@ namespace UnAventon
 
                     if (path.Contains("Agregar-Vehiculo.aspx"))
                         lbRegistrarVehiculo.Enabled = false;
-                }
+                
             }
             catch (Exception)
             {
-                HtmlGenericControl divalert = (HtmlGenericControl)Master.FindControl("divMsjAlerta");
-                divalert.Visible = true;
-                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
-                lialert.Text = "No se pudo obtener el usuario del contexto.";
+                //HtmlGenericControl divalert = (HtmlGenericControl)Page.FindControl("divMsjAlerta");
+                //divalert.Visible = true;
+                //Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                //lialert.Text = "No se pudo obtener el usuario del contexto.";
             }
         }
 

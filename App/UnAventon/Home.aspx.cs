@@ -59,8 +59,9 @@ namespace UnAventon
             }
             catch (Exception ex)
             {
-                Literal liMensaje = (Literal)Page.Master.FindControl("liMensajeAlerta");
-                liMensaje.Text = "El Usuario no existe" + ex;
+                tbEmail.CssClass = "form-control error";
+                //Literal liMensaje = (Literal)Page.Master.FindControl("liMensajeAlerta");
+                //liMensaje.Text = "El Usuario no existe" + ex;
 
                 //divErrorLogin.Attributes.Add("class", "alert alert-danger");
                 //divErrorLogin.Visible = true;
