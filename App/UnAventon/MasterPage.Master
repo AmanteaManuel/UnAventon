@@ -25,10 +25,12 @@
             
         }        
 
-        .Transparent-background {
-            background-color: rgba(0,0,0,0.0);
-        }
         
+        .header-app{
+            padding:20px;
+            float:left;
+            width:100%;
+        }
         .links{
             font-family: impact;
             color: #D9D9D9 !important;
@@ -58,6 +60,11 @@
             border-color: #d0e9c6;
             color: #3c763d;
         }
+
+        .logoHeader img{
+            width:100px;
+            margin:15px 20px;
+        }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server"> 
     </asp:ContentPlaceHolder>
@@ -67,12 +74,14 @@
     <form id="form1" runat="server">
         <asp:ScriptManager runat="server" AsyncPostBackTimeout="999" />
         <div class="row">
-            <img style="margin-left: 5%" src="<%=Page.ResolveUrl("~/img/Logo.png")%>" height="5%" width="5%" alt="Logo Un Aventón">
+              <div class="col-sm-12 col-lg-12 logoHeader">
+            <img  src="<%=Page.ResolveUrl("~/img/Logo.png")%>" alt="Logo Un Aventón">
+                  </div>
             <hr />
         </div>
         <br />
 
-        <div class="Transparent-background">
+        <div class="header-app">
             <div class="row">
                 <div class="col-xs-12 col-md-2 col-lg-2">
                     <asp:LinkButton Text="Listar Viajes" CssClass="links"  runat="server" ID="lbListarViajes" OnClick="lbListarViajes_Click" />
@@ -97,6 +106,7 @@
             </div>
             <!-- ultimo div-->
         </div>
+       <div class="clearfix"></div>
             <div>
                 <!-- mensaje de error-->
                 <div class="row" id="divMsjAlerta" runat="server" visible="false">

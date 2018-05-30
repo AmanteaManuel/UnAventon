@@ -72,11 +72,7 @@
             <p><label>En esta página podrá ver el listado de todos los viajes.</label></p>
         </div>
         <div class="table-responsive">
-            <table class="table table-hover">
-                <thead class="silver-background">
-                    &nbsp
-                <br width="55%" />
-                </thead>
+            <table class="table table-hover">                
                 <tbody>
                     <asp:Repeater runat="server" ID="rptViajes">
                         <HeaderTemplate>
