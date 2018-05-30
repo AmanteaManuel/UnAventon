@@ -63,51 +63,58 @@
         </div>
     <br/>        
 </form>
-<body runat="server">    
-    </div>
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead class="silver-background">
-                &nbsp
+<body runat="server">
+    <div id="global" class="margin-general">
+        <div>
+            <h3><strong>
+                <label>Listado de Viajes</label></strong></h3>
+            <p><label><strong>Para ver la funcionalidad completa de la pagina debe</strong></label><asp:HyperLink runat="server" ID="hlregsitrarse" CssClass="Font-Bold" ForeColor="Black" Font-Size="XX-Large"><strong> Registrarse</strong></></asp:HyperLink></p>
+            <p><label>En esta página podrá ver el listado de todos los viajes.</label></p>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="silver-background">
+                    &nbsp
                 <br width="55%" />
-            </thead>
-            <tbody>
-                <asp:Repeater runat="server" ID="rptViajes">
-                    <HeaderTemplate>
-                        <tr>
-                            <th>Origen</th>
-                            <th>Destino</th>
-                            <th>Precio</th>
-                            <th>Fecha</th>
-                            <th>Hora</th>
-                            <th>Lugares Disponibles</th>
-                        </tr>
-                    </HeaderTemplate>
-                    <ItemTemplate>
-                        <tr>
-                            <td>
-                                <asp:Literal Text='<%# Eval("Origen.Descripcion") %>' runat="server" ID="liOrigen" />
-                            </td>
-                            <td>
-                                <asp:Literal Text='<%# Eval("Destino.Descripcion") %>' runat="server" ID="liDestino" />
-                            </td>
-                            <td>
-                                <asp:Literal Text='<%# Eval("Precio") %>' runat="server" ID="liPrecio" />
-                            </td>
-                            <td>
-                                <asp:Literal Text='<%# Eval("FechaSalida") %>' runat="server" ID="liFecha" />
-                            </td>
-                            <td>
-                                <asp:Literal Text='<%# Eval("HoraSalida") %>' runat="server" ID="liHora" />
-                            </td>
-                            <td>
-                                <asp:Literal Text='<%# Eval("LugaresDisponibles") %>' runat="server" ID="liUsuario" />
-                            </td>
-                        </tr>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <asp:Repeater runat="server" ID="rptViajes">
+                        <HeaderTemplate>
+                            <tr>
+                                <th>Origen</th>
+                                <th>Destino</th>
+                                <th>Precio</th>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Lugares Disponibles</th>
+                            </tr>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <tr>
+                                <td>
+                                    <asp:Literal Text='<%# Eval("Origen.Descripcion") %>' runat="server" ID="liOrigen" />
+                                </td>
+                                <td>
+                                    <asp:Literal Text='<%# Eval("Destino.Descripcion") %>' runat="server" ID="liDestino" />
+                                </td>
+                                <td>
+                                    <asp:Literal Text='<%# Eval("Precio") %>' runat="server" ID="liPrecio" />
+                                </td>
+                                <td>
+                                    <asp:Literal Text='<%# Eval("FechaSalida") %>' runat="server" ID="liFecha" />
+                                </td>
+                                <td>
+                                    <asp:Literal Text='<%# Eval("HoraSalida") %>' runat="server" ID="liHora" />
+                                </td>
+                                <td>
+                                    <asp:Literal Text='<%# Eval("LugaresDisponibles") %>' runat="server" ID="liUsuario" />
+                                </td>
+                            </tr>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </tbody>
+            </table>
+        </div>
     </div>
-</body>   
+</body>
 </html>

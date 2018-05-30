@@ -11,7 +11,11 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 <br/>
-<div id="divGlobal">
+<div id="divGlobal" class="margin-general">
+    <div> 
+        <h3><strong><label>Publicar Viaje</label></strong></h3>
+        <p><label>En esta página podrá publicar nuevos viajes.</label></p>
+    </div>
     <%--ORIGEN/DESTINO--%>
     <div class="row">
         <div class="col-xs-12 col-md-2 col-lg-2 form-group">

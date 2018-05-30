@@ -3,11 +3,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <br />
-<div id="global">
+<div id="global" class="margin-general">
     <div>
         <div>
             <div>
-                <h3><asp:Literal runat="server" ID="liTitulo" /></h3>
+                <h3><strong><asp:Literal runat="server" ID="liTitulo" /></strong></h3>
                 <p><asp:Literal runat="server" ID="liSubTitulo" /></p>
             </div>
             <br />

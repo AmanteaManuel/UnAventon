@@ -4,11 +4,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <br />
-<div id="global">    
+<div id="global" class="margin-general">    
 		    <div> 
 			    <div>
 				    <div> 
-					    <h3><asp:Literal runat="server" id="liTitulo"/></h3>
+					    <h3><strong><asp:Literal runat="server" id="liTitulo"/></strong></h3>
 					    <p><asp:Literal runat="server" ID="liSubTitulo" /></p>
 					    <%--<span class="required_notification">Datos requeridos</span> --%>
 				    </div>

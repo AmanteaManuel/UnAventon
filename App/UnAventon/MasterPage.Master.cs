@@ -41,6 +41,9 @@ namespace UnAventon
 
                 if (path.Contains("Ver-Perfil.aspx"))
                     lbVerPerfil.Enabled = false;
+
+                if (path.Contains("Agregar-Vehiculo.aspx"))
+                    lbRegistrarVehiculo.Enabled = false;
             }
             catch (Exception)
             {

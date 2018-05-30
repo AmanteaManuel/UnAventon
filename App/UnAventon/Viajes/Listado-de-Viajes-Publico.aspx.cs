@@ -24,6 +24,8 @@ namespace UnAventon.Viajes
                     //Bindeo el objeto
                     rptViajes.DataSource = viajes;
                     rptViajes.DataBind();
+
+                    hlregsitrarse.NavigateUrl = "~/Usuario/alta-Usuario.aspx";
                 }
                 catch (Exception ex)
                 {

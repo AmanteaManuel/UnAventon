@@ -103,15 +103,15 @@ namespace UnAventon.Vehiculos
                 }
                 if (Vehiculo == null)
                 {
-                    liTitulo.Text = "Registrar Vehiculo. ";
-                    liSubTitulo.Text = "En esta pagina podra registrarse al sistema. ";
+                    liTitulo.Text = "Registrar vehículo. ";
+                    liSubTitulo.Text = "En esta página podra Registrar un vehículo. ";
                     btnRegistrar.Visible = true;
                     btnModificar.Visible = false;
                 }
                 else
                 {
-                    liTitulo.Text = "Modificar Vehiculo. ";
-                    liSubTitulo.Text = "En esta pagina podra modificar los datos de sus vehiculos. ";
+                    liTitulo.Text = "Modificar vehículo. ";
+                    liSubTitulo.Text = "En esta página podra modificar los datos de sus vehículos. ";
                     btnRegistrar.Visible = false;
                     btnModificar.Visible = true;
 
