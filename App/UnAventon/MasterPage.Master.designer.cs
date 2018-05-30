@@ -31,6 +31,15 @@ namespace UnAventon {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// divBody control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divBody;
+        
+        /// <summary>
         /// lbListarViajes control.
         /// </summary>
         /// <remarks>

@@ -158,6 +158,10 @@ namespace UnAventon.Usuario
                     liSubTitulo.Text = "En esta pagina podra registrarse al sistema. ";
                     btnRegistrarse.Visible = true;
                     btnModificar.Visible = false;
+
+                    HtmlGenericControl divBody = (HtmlGenericControl)this.Master.FindControl("divBody");
+                    divBody.Visible = false;                    
+
                 }
                 //si es modificacion
                 else
@@ -273,7 +277,5 @@ namespace UnAventon.Usuario
 
 
         #endregion
-
-
     }
 }

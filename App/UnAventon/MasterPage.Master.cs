@@ -28,22 +28,25 @@ namespace UnAventon
 		{
             try
             {
-                string path = HttpContext.Current.Request.Url.AbsolutePath;
+                if (ActiveUsuario == null)
+                {
+                    string path = HttpContext.Current.Request.Url.AbsolutePath;
 
-                if (path.Contains("alta-Usuario.aspx"))
-                    lbModificarDatos.Enabled = false;
+                    if (path.Contains("alta-Usuario.aspx"))
+                        lbModificarDatos.Enabled = false;
 
-                if (path.Contains("Publicar-Viaje.aspx"))
-                    lbPublicarViaje.Enabled = false;
+                    if (path.Contains("Publicar-Viaje.aspx"))
+                        lbPublicarViaje.Enabled = false;
 
-                if (path.Contains("Listado-de-Viajes.aspx"))
-                    lbListarViajes.Enabled = false;
+                    if (path.Contains("Listado-de-Viajes.aspx"))
+                        lbListarViajes.Enabled = false;
 
-                if (path.Contains("Ver-Perfil.aspx"))
-                    lbVerPerfil.Enabled = false;
+                    if (path.Contains("Ver-Perfil.aspx"))
+                        lbVerPerfil.Enabled = false;
 
-                if (path.Contains("Agregar-Vehiculo.aspx"))
-                    lbRegistrarVehiculo.Enabled = false;
+                    if (path.Contains("Agregar-Vehiculo.aspx"))
+                        lbRegistrarVehiculo.Enabled = false;
+                }
             }
             catch (Exception)
             {
