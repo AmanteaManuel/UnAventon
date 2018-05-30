@@ -280,12 +280,13 @@ namespace Bol
         {
             try
             {
-                if (Viaje.GetAllViajesByVehiculoId(vehiculoId).Count == 0)
+                List<Viaje> viajes = Viaje.GetAllViajesByVehiculoId(vehiculoId);
+                if (viajes == null)
                     new Dal.Core.Vehiculo().Delete(vehiculoId);
                 else
                     throw new Exception("El vehiculo tiene viajes en curso. ");
             }
-            catch (Exception e) { throw new Exception("Error en el Update del vehiculo. " + e.Message); }
+            catch (Exception e) { throw new Exception("Error en la eliminacion del vehiculo. " + e.Message); }
         }
 
         #endregion

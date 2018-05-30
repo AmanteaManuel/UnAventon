@@ -79,7 +79,7 @@ namespace UnAventon.Usuario
                 HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
                 divalert.Visible = true;
                 Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
-                lialert.Text = "Error al eliminar vehiculo " + ex.Message;
+                lialert.Text = ex.Message;
             }
         }
     }

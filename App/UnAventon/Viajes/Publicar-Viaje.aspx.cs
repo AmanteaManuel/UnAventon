@@ -124,7 +124,7 @@ namespace UnAventon.Viajes
                         Convert.ToInt32(ddlCiudadDestino.SelectedValue),
                         tbDuracion.Text,
                         Convert.ToInt32(tbLugaresDisponibles.Text),
-                        ddlVehiculo.SelectedIndex,
+                        Convert.ToInt32(ddlVehiculo.SelectedValue),
                         tbFecha.SelectedDate,
                         tbHoraSalida.Text,
                         Convert.ToDouble(tbPrecio.Text),

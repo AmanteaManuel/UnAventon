@@ -179,3 +179,8 @@ nomargin {
     margin: 0;
     background: rgba(0,0,0,0.2);
 }
+
+.label-default-subTitle {
+    color: white;
+    font-weight: normal;
+}
