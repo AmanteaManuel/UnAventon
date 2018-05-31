@@ -38,6 +38,7 @@ namespace UnAventon.Usuario
             liEmail.Text = ActiveUsuario.Email;
             liReputacionChofer.Text = ActiveUsuario.ReputacionChofer.ToString();
             liReputacionPasajero.Text = ActiveUsuario.ReputacioPasajero.ToString();
+            liFechaNacimiento.Text = ActiveUsuario.FechaNacimiento.ToString("dd/MM/yyyy");
 
             #endregion
 

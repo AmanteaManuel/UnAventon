@@ -84,7 +84,7 @@
         <div class="header-app" id="divBody" runat="server">
             <div class="row">
                 <div class="col-xs-12 col-md-2 col-lg-2">
-                    <asp:LinkButton Text="Listar Viajes" CssClass="links"  runat="server" ID="lbListarViajes" OnClick="lbListarViajes_Click" />
+                    <asp:LinkButton Text="Listado de Viajes" CssClass="links"  runat="server" ID="lbListarViajes" OnClick="lbListarViajes_Click" />
                 </div>
                 <div class="col-xs-12 col-md-2 col-lg-2">
                     <asp:LinkButton Text="Publicar Viaje" ID="lbPublicarViaje" CssClass="links" runat="server" OnClick="lbPublicarViaje_Click" />

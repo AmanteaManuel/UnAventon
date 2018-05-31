@@ -29,6 +29,10 @@
 											    <td><strong>DNI:</strong></td>
 											    <td><asp:Literal runat="server" ID="liDni" /></td>
 										    </tr>
+                                            <tr>
+											    <td><strong>Fecha Nacimiento:</strong></td>
+											    <td><asp:Literal runat="server" ID="liFechaNacimiento" /></td>
+										    </tr>
 										    <tr>
 											    <td><strong>Email:</strong></td>
 											    <td><asp:Literal runat="server" ID="liEmail" /></td>

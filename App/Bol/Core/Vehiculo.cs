@@ -264,7 +264,9 @@ namespace Bol
         {
             try
             {
-                new Dal.Core.Vehiculo().Update(
+                List<Viaje> viajes = Viaje.GetAllViajesByVehiculoId(vehiculo.Id);
+                if (viajes == null)
+                    new Dal.Core.Vehiculo().Update(
                     vehiculo.Color,
                     vehiculo.Marca,
                     vehiculo.Modelo,
@@ -272,6 +274,8 @@ namespace Bol
                     vehiculo.AsientosDisponibles,
                     vehiculo.Id,
                     usuarioId);
+                else
+                    throw new Exception("El vehiculo tiene viajes en curso. ");
             }
             catch (Exception e) { throw new Exception("Error en el Update del vehiculo. " + e.Message); }
         }
