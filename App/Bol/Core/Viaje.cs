@@ -26,6 +26,8 @@ namespace Bol
         private double _precio;
         private Ciudad _destino;
         private Ciudad _origen;
+        private Usuario _usuario;
+        private int _usuarioId;
 
 
         #endregion
@@ -42,6 +44,15 @@ namespace Bol
                 return _id;
             }
             set { _id = value; }
+        }
+
+        public int UsuarioId
+        {
+            get
+            {
+                return _usuarioId;
+            }
+            set { _usuarioId = value; }
         }
 
         /// <summary>
@@ -156,9 +167,7 @@ namespace Bol
             {
                 _lugaresDisponibles = value;
             }
-        }
-
-       
+        }       
 
         public DateTime FechaSalida
         {
@@ -198,11 +207,23 @@ namespace Bol
             set { _horaSalida = value; }
         }
 
+        public Usuario Usuario
+        {
+            get
+            {
+                return new Bol.Usuario().GetInstanceById(UsuarioId);
+            }
+            set
+            {
+                _usuario = value;
+            }
+        }
+
         #endregion
 
         #region " Views "
 
-        internal static List<Viaje> GetAllViajesByVehiculoId(int id)
+        public static List<Viaje> GetAllViajesByVehiculoId(int id)
         {
             try
             {
@@ -287,6 +308,9 @@ namespace Bol
                 if (dr.Table.Columns.Contains("HoraSalida") && !Convert.IsDBNull(dr["HoraSalida"]))
                     oBol.HoraSalida = Convert.ToString(dr["HoraSalida"]);
 
+                if (dr.Table.Columns.Contains("UsuarioId") && !Convert.IsDBNull(dr["UsuarioId"]))
+                    oBol.UsuarioId = Convert.ToInt32(dr["UsuarioId"]);
+
 
             }
             catch (Exception ex) { throw new Exception("Error en el metodo Fill" + ex.Message); }
@@ -305,11 +329,14 @@ namespace Bol
 
         #region " CRUD "
 
-        public static int Create(Viaje viaje)
+        public static int Create(Viaje viaje, int usuarioId)
         {
             int outId = 0;
             try
             {
+                //obtener viajes del usuario para la fecha del nuevo viaje
+
+                //preguntar si el viaje(nuevo) <> a la (hora del viaje salida + duracion) de todos los viajes del dia
                 
                 outId = new Dal.Core.Viaje().Create(
                 viaje._origenId,

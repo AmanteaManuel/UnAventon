@@ -92,6 +92,7 @@
 
 </head>
 <body >
+    <div>        
     <form runat="server">
     <div class="rows">
         <div class="col-md-8" >
@@ -106,6 +107,13 @@
         <h4 class="text-center Text-Shadow"  style="color:white" > Por favor, ingresé los datos solicitados a continuación para poder usar la página o puede             
                 <asp:LinkButton style="color:orangered" OnClick="Unnamed_Click" runat="server"><b>continuar como invitado</b></asp:LinkButton>   
         </h4>
+        <%--MENSAJE ALERTA--%>
+    <div class="row" id="divMsjAlerta" runat="server" visible="false">
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <asp:Literal runat="server" ID="liMensajeAlerta" />
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3" >
@@ -123,7 +131,7 @@
                                     </div>
                                     <div class="form-group" runat="server">
                                         <asp:TextBox runat="server" type="password" id="tbPassword" class="form-control" placeholder="Contraseña"/>     
-                                        <asp:CustomValidator Enabled="true" ErrorMessage="errormessage" ID="cvPassword" runat="server" ValidationGroup="GroupLogin" OnServerValidate="cvPassword_ServerValidate" />
+                                        <asp:CustomValidator Enabled="true" ErrorMessage="Usuario o Contraseña invalidos." ID="cvPassword" runat="server" ValidationGroup="GroupLogin" OnServerValidate="cvPassword_ServerValidate" />
                                     </div>                                   
                                     <div class="form-group">
                                         <div class="row">
@@ -150,5 +158,6 @@
         </div>
     </div>
 </form>
+</div>    
 </body>
 </html>

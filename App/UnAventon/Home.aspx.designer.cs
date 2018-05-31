@@ -13,6 +13,24 @@ namespace UnAventon {
     public partial class Home {
         
         /// <summary>
+        /// divMsjAlerta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMsjAlerta;
+        
+        /// <summary>
+        /// liMensajeAlerta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal liMensajeAlerta;
+        
+        /// <summary>
         /// tbEmail control.
         /// </summary>
         /// <remarks>

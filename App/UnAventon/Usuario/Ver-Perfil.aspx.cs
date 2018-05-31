@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bol;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -51,28 +52,36 @@ namespace UnAventon.Usuario
             #endregion
         }
 
-        protected void btnBorraVehiculo_Click(object sender, EventArgs e)
-        {
-
-        }
-
         protected void rptVehiculos_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             try
             {
                 int id;
                 int.TryParse(((LinkButton)e.CommandSource).CommandArgument, out id);
+                List<Viaje> viajes = Viaje.GetAllViajesByVehiculoId(id);              
 
                 if (e.CommandName.ToUpper().Equals("DELETE"))
                 {
-                    Bol.Vehiculo.Delete(id);
-                    string idEncriptado = new Bol.Core.Service.Tools().Encripta(Convert.ToString(@ActiveUsuario.Id));
-                    Response.Redirect("~/Usuario/Ver-Perfil.aspx?id=" + idEncriptado);
+
+                    if (viajes == null)
+                    {
+                        Bol.Vehiculo.Delete(id);
+                        string idEncriptado = new Bol.Core.Service.Tools().Encripta(Convert.ToString(@ActiveUsuario.Id));
+                        Response.Redirect("~/Usuario/Ver-Perfil.aspx?id=" + idEncriptado);
+                    }
+                    else
+                        throw new Exception("El vehiculo Tiene Viajes en curso. ");
                 }
                 if (e.CommandName.ToUpper().Equals("UPDATE"))
                 {
-                    string idEncriptado = new Bol.Core.Service.Tools().Encripta(Convert.ToString(id));
-                    Response.Redirect("~/Vehiculos/AgregarVehiculo.aspx?id=" + idEncriptado);
+                    if (viajes == null)
+                    {
+                        string idEncriptado = new Bol.Core.Service.Tools().Encripta(Convert.ToString(id));
+                        Response.Redirect("~/Vehiculos/AgregarVehiculo.aspx?id=" + idEncriptado);
+                    }
+                    else
+                        throw new Exception("El vehiculo Tiene Viajes en curso. ");                       
+                    
                 }
             }
             catch (Exception ex)

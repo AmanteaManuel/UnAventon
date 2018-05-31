@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace UnAventon
@@ -60,12 +61,12 @@ namespace UnAventon
             catch (Exception ex)
             {
                 tbEmail.CssClass = "form-control error";
-                //Literal liMensaje = (Literal)Page.Master.FindControl("liMensajeAlerta");
-                //liMensaje.Text = "El Usuario no existe" + ex;
+                tbPassword.CssClass = "form-control error";
 
-                //divErrorLogin.Attributes.Add("class", "alert alert-danger");
-                //divErrorLogin.Visible = true;
-                //liErrorLogin.Text = ex.Message;
+                HtmlGenericControl divMsjAlerta = (HtmlGenericControl)Page.FindControl("divMsjAlerta");
+                Literal liMensajeAlerta = (Literal)Page.FindControl("liMensajeAlerta");
+                liMensajeAlerta.Text = "El Usuario no existe";
+                divMsjAlerta.Visible = true;
             }
         }
 
@@ -83,6 +84,7 @@ namespace UnAventon
             {
                 args.IsValid = false;                
                 tbEmail.CssClass = "form-control error";
+                cvPassword.ErrorMessage = "Usuario o contraseña incorrectos. ";
             }
         }
 

@@ -113,7 +113,7 @@ namespace UnAventon.Viajes
                         foreach (var v in this.viajesAgregados)
                         {
                             v.Precio = (v.Precio / v.LugaresDisponibles);
-                            Viaje.Create(v);
+                            Viaje.Create(v, ActiveUsuario.Id);
                         }
 
                     }
@@ -131,7 +131,7 @@ namespace UnAventon.Viajes
                         tbDescripcion.Text);
 
                         viaje.Precio = (viaje.Precio / viaje.LugaresDisponibles);
-                        Viaje.Create(viaje);
+                        Viaje.Create(viaje, ActiveUsuario.Id);
                     }
 
                     this.Master.FindControl("divMsjOk").Visible = true;

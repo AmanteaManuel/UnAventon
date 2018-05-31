@@ -82,8 +82,13 @@ namespace UnAventon.Usuario
 
             if (string.IsNullOrEmpty(tbRepitaContraseña.Text) || (tbContrasenia.Text != tbRepitaContraseña.Text))
             {
+                if((tbContrasenia.Text != tbRepitaContraseña.Text))
+                {
+                    cvRepitaContraseña.ErrorMessage = "Las contraseñas deben coincidir";
+                    tbContrasenia.CssClass = "form-control error";
+                }
                 args.IsValid = false;
-                tbRepitaContraseña.CssClass = "form-control error";
+                tbRepitaContraseña.CssClass = "form-control error";                
             }
         }
 
@@ -111,6 +116,7 @@ namespace UnAventon.Usuario
                     {
                         args.IsValid = false;
                         tbFechaNacimiento.CssClass = "form-control error";
+                        cvFechaNacimiento.ErrorMessage = "El usuario debe ser mayor de edad.";
                         throw new Exception("El usuario debe ser mayor de edad. ");                       
                     }
                 }
@@ -226,7 +232,7 @@ namespace UnAventon.Usuario
                         Response.Redirect("~/Home.aspx");
                     }
                     else
-                        throw new Exception("El usuario ya existe. ");
+                        throw new Exception("El usuario ya existe, ingrese un nuevo email. ");
                 }
                 else
                     throw new Exception("Uno o mas campos son incorrectos. ");
