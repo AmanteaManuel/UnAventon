@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using System.Linq;
+using System.Transactions;
 
 namespace Bol
 {
@@ -268,6 +269,17 @@ namespace Bol
             catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
         }
 
+        private static List<Viaje> GetAllByUsuarioIdAndFecha(int id, DateTime fecha)
+        {
+            try
+            {
+                Dal.Core.Viaje dal = new Dal.Core.Viaje();
+                DataSet ds = dal.GetAllByUsuarioIdAndFecha(id, fecha);
+                return FillList(ds);
+            }
+            catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
+        }
+
         #endregion
 
         #region " Fill "
@@ -334,28 +346,59 @@ namespace Bol
             int outId = 0;
             try
             {
-                //obtener viajes del usuario para la fecha del nuevo viaje
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    ValidarViaje(viaje, usuarioId);
+                    //obtener viajes del usuario para la fecha del nuevo viaje
 
-                //preguntar si el viaje(nuevo) <> a la (hora del viaje salida + duracion) de todos los viajes del dia
-                
-                outId = new Dal.Core.Viaje().Create(
-                viaje._origenId,
-                viaje._destinoId,
-                viaje.Duracion,
-                viaje.LugaresDisponibles,
-                viaje._vehiculoId,
-                viaje.FechaSalida,
-                viaje._horaSalida,
-                viaje.Precio,
-                viaje.Descripcion
-                );
+                    //preguntar si el viaje(nuevo) <> a la (hora del viaje salida + duracion) de todos los viajes del dia
 
-                viaje.Id = outId;
-                return viaje.Id;
+                    outId = new Dal.Core.Viaje().Create(
+                    viaje._origenId,
+                    viaje._destinoId,
+                    viaje.Duracion,
+                    viaje.LugaresDisponibles,
+                    viaje._vehiculoId,
+                    viaje.FechaSalida,
+                    viaje._horaSalida,
+                    viaje.Precio,
+                    viaje.Descripcion,
+                    usuarioId
+                    );
+
+                    viaje.Id = outId;
+                    scope.Complete();
+                    return viaje.Id;
+                }
             }
-            catch (Exception e) { throw new Exception("Error en Insert" + e.Message); }
+            catch (Exception e) { throw new Exception("Error en Insert. " + e.Message); }
         }
 
+        private static void ValidarViaje(Viaje viaje, int usuarioId)
+        {
+            //obtengo todos los viajes en la fecha para ese usuario
+            List<Viaje> viajes = GetAllByUsuarioIdAndFecha(usuarioId, viaje.FechaSalida);
+
+            if (viajes != null)
+            {
+                //por cada viaje obtenido
+                foreach (var v in viajes)
+                {
+                    //obtengo la hora de salida y la casteo a datetime
+                    DateTime horaInicio = Convert.ToDateTime(v.HoraSalida);
+
+                    //obtengo la hora de Fin y la casteo a datetime
+                    DateTime horaFin = horaInicio.AddHours(Convert.ToDouble(v.Duracion));
+
+                    //si la hora de salida del viaje a validar esta en el lapso de tiempo de otro viaje
+                    //tiro error
+                    if (Convert.ToDateTime(viaje.HoraSalida) > horaInicio || Convert.ToDateTime(viaje.HoraSalida) < horaFin )
+                        throw new Exception("El viaje no pudo ser agregado porque el usuario ya tiene viajes agregados para esa hora. ");
+                }
+            }
+            
+        }
+        
         #endregion
 
         #region " Constructor "

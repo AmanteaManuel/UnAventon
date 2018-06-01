@@ -17,7 +17,8 @@ namespace Dal.Core
 			                                        FechaSalida,
                                                     HoraSalida,
 			                                        LugaresDisponibles,
-			                                        Descripcion)
+			                                        Descripcion,
+                                                    UsuarioId)
                                                 output INSERTED.Id
                                                 VALUES
 			                                        (@parOrigenId,
@@ -28,7 +29,8 @@ namespace Dal.Core
 			                                        @parFechaSalida,
                                                     @parHoraSalida,
 			                                        @parLugaresDisponibles,           
-			                                        @parDescripcion)";
+			                                        @parDescripcion,
+                                                    @parUsuarioId)";
 
         private const string GET_INSTANCE_BY_ID = @"SELECT * FROM Viajes
 	                                                WHERE Id = {0}";
@@ -41,7 +43,9 @@ namespace Dal.Core
 		                                                                WHERE FechaSalida BETWEEN '{0}' AND '{1}'
 							                                            ORDER BY FechaSalida";
 
-        public int Create(int origenId, int destinoId, string duracion, int lugaresDisponibles, int vehiculoId, DateTime fechaSalida, string horaSalida, double precio, string descripcion)
+        private const string GET_ALL_BY_USUARIOID_AND_FECHA = @"SELECT * FROM Viajes WHERE UsuarioId = {0} AND FechaSalida = '{1}'";
+
+        public int Create(int origenId, int destinoId, string duracion, int lugaresDisponibles, int vehiculoId, DateTime fechaSalida, string horaSalida, double precio, string descripcion, int UsuarioId)
         {
             //query a ejecutar
             this.ExecuteCommandText = INSERT_VIAJE;
@@ -69,6 +73,8 @@ namespace Dal.Core
 
             this.ExecuteParameters.Parameters.AddWithValue("@parDescripcion", descripcion);
 
+            this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", UsuarioId);
+
             //ejecución, retorna el valor del parámetro de retorno
             return this.ExecuteNonEscalar();
         }
@@ -79,16 +85,21 @@ namespace Dal.Core
             return this.Load();
         }
 
-        //TODO ESTA COMO EL OJETE
+        public DataSet GetAll()
+        {
+            this.SelectCommandText = string.Format(GET_ALL);
+            return this.Load();
+        }
+
         public DataSet GetAllFromNowToOneMonth(DateTime fechaActual, DateTime fechaUnMes)
         {
             this.SelectCommandText = string.Format(GET_ALL_FROM_NOW_TO_ONE_MONTH, fechaActual.ToString("yyyy-MM-dd"), fechaUnMes.ToString("yyyy-MM-dd"));
             return this.Load();
         }
 
-        public DataSet GetAll()
+        public DataSet GetAllByUsuarioIdAndFecha(int id,DateTime fecha)
         {
-            this.SelectCommandText = string.Format(GET_ALL);
+            this.SelectCommandText = string.Format(GET_ALL_BY_USUARIOID_AND_FECHA, id, fecha.ToString("yyyy-MM-dd"));
             return this.Load();
         }
 

@@ -5,6 +5,16 @@
             margin-bottom: 0px;
         }
         
+        .trasnparent-background{
+            background: rgba(192,192,192,0.2);
+            color: #fff !important;
+        }
+        .center {
+            margin: auto;
+            width: 50%;            
+            border: 3px solid black;
+            padding: 10px;
+        }
     </style>
 </asp:Content>
 
@@ -22,7 +32,7 @@
             <label class="label-default-subTitle">Provincia Salida</label>
             <asp:DropDownList ID="ddlProvinciaSalida" OnSelectedIndexChanged="ddlProvinciaSalida_SelectedIndexChanged" CssClass="form-control " runat="server" AutoPostBack="true"></asp:DropDownList>
             <asp:CustomValidator ErrorMessage="" runat="server" ID="cvProvSalida" OnServerValidate="cvProvSalida_ServerValidate" ValidationGroup="PublicarViaje" />
-            <span class="has-warning"><%--aca va el mensaje de error--%></span>
+            <%--<span class="has-warning"></span>--%>
         </div>
         <div class="col-xs-12 col-md-2 col-lg-2 form-group">
             <label class="label-default-subTitle">Ciudad Salida</label>
@@ -63,7 +73,7 @@
 
         <div class="col-xs-12 col-md-2 col-lg-3 form-group" runat="server" id="divFecha">
             <label class="label-default-subTitle">Fecha</label>
-            <asp:Calendar runat="server" CssClass="nomargin" ID="tbFecha"></asp:Calendar>
+            <asp:Calendar runat="server" CssClass="nomargin trasnparent-background" ID="tbFecha"></asp:Calendar>
             <asp:CustomValidator ErrorMessage=""  ID="cvFecha" runat="server" OnServerValidate="cvFecha_ServerValidate" ValidationGroup="PublicarViaje"/>
         </div>
     </div>
@@ -85,8 +95,9 @@
             <label class="label-default-subTitle">Tipo de Viaje</label>
             <asp:DropDownList ID="ddlTipoViaje" CssClass="form-control" runat="server" OnSelectedIndexChanged="ddlTipoViaje_SelectedIndexChanged" AutoPostBack="true">
                 <asp:ListItem Text="Seleccione..." Value="0"/>
-                <asp:ListItem Text="Ocacional" Value="1"/>
-                <asp:ListItem Text="Frecuente" Value="2"/>                
+                <asp:ListItem Text="Ocasional" Value="1"/>
+                <asp:ListItem Text="Frecuente" Value="2"/>
+                <asp:ListItem Text="Diario" Value="3"/>
             </asp:DropDownList>
             <asp:CustomValidator ErrorMessage="*" ID="cvTipoViaje" runat="server" OnServerValidate="cvTipoViaje_ServerValidate" ValidationGroup="PublicarViaje"/>           
         </div>
@@ -101,12 +112,13 @@
             <br />
             <asp:Button Text="Publicar" runat="server" ID="btnPublicarViaje" CssClass="boton_personalizado" OnClick="btnPublicarViaje_Click" />
         </div>
+        <%--VIAJES FRECUENTES--%>
         <div class="col-xs-12 col-md-2 col-lg-5 form-group" id="divViajesAgregados" visible="false" runat="server">
             <div class="table-responsive">
                 <table class="table table-hover">
                 <asp:Repeater runat="server" ID="rptViajesAgregados">
                     <HeaderTemplate >
-                        <thead class="silver-background">&nbsp<hr width="55%">
+                        <%--<thead class="silver-background">&nbsp<hr width="55%">--%>
                             <tr>
                                 <th>Origen</th>
                                 <th>Destino</th>
@@ -128,7 +140,21 @@
                         </tbody>
                     </ItemTemplate>
                 </asp:Repeater>
+                    </table>
             </div>
+        </div>
+        <%--VIAJES DIARIOS--%>
+        <div class="col-xs-12 col-md-2 col-lg-5 form-group center trasnparent-background" id="divViajesDiarios" visible="false" runat="server">
+            <asp:Panel runat="server" ID="panelDias">
+                <asp:CheckBox Text="Lunes" runat="server" id="cbklunes"/>   
+                <asp:CheckBox Text="Martes" runat="server" id="cbkmartes"/> 
+                <asp:CheckBox Text="Miércoles" runat="server" id="cbkmiercoles"/>
+                <asp:CheckBox Text="Jueves" runat="server" id="cbkjueves"/>
+                <asp:CheckBox Text="Viernes" runat="server" id="cbkviernes"/>
+                <asp:CheckBox Text="Sabado" runat="server" id="cbksabado"/>
+                <asp:CheckBox Text="Domingo" runat="server" id="cbkdomingo"/>
+            </asp:Panel>
+            <asp:CustomValidator ErrorMessage="Seleccione al menos un día. " OnServerValidate="ViajesDiarios_ServerValidate" ID="ViajesDiarios" runat="server" ValidationGroup="DiasCheck" />
         </div>
     </div>
     <div class="Container">        

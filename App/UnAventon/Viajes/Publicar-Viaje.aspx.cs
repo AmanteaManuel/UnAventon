@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using Bol;
 using Bol.Core;
 
+
 namespace UnAventon.Viajes
 {
     public partial class Publicar_Viaje : UnAventonPage
@@ -115,9 +116,8 @@ namespace UnAventon.Viajes
                             v.Precio = (v.Precio / v.LugaresDisponibles);
                             Viaje.Create(v, ActiveUsuario.Id);
                         }
-
                     }
-                    else
+                    if (ddlTipoViaje.SelectedValue == "1")
                     {
                         Viaje viaje = new Viaje(
                         Convert.ToInt32(ddlCiudadSalida.SelectedValue),
@@ -129,9 +129,73 @@ namespace UnAventon.Viajes
                         tbHoraSalida.Text,
                         Convert.ToDouble(tbPrecio.Text),
                         tbDescripcion.Text);
-
                         viaje.Precio = (viaje.Precio / viaje.LugaresDisponibles);
+
                         Viaje.Create(viaje, ActiveUsuario.Id);
+                    }
+                    if (ddlTipoViaje.SelectedValue == "3")
+                    {
+                        //todo validacion
+                        Validate("DiasCheck");
+                        if (Page.IsValid)
+                        {
+
+                            DateTime desde = DateTime.Now;
+                            DateTime hasta = tbFecha.SelectedDate;
+
+                            //agregar los dias de la semana segun los chbks
+                            DayOfWeek[] dias = new DayOfWeek[7];
+
+                            //TODO falta arreglar solo esto.
+                            #region " Carga de dias "
+
+                            //cargo los dias en el vector
+                            if (cbklunes.Checked == true)
+                                dias.SetValue(DayOfWeek.Monday,1);
+
+                            if (cbkmartes.Checked == true)
+                                dias[2] = DayOfWeek.Tuesday;
+
+                            if (cbkmiercoles.Checked == true)
+                                dias[3] = DayOfWeek.Wednesday;
+
+                            if (cbkjueves.Checked == true)
+                                dias[4] = DayOfWeek.Thursday;
+
+                            if (cbkviernes.Checked == true)
+                                dias[5] = DayOfWeek.Friday;
+
+                            if (cbksabado.Checked == true)
+                                dias[6] = DayOfWeek.Saturday;
+
+                            if (cbkdomingo.Checked == true)
+                                dias[7] = DayOfWeek.Sunday;
+
+                            #endregion
+
+                            //obtengo todos los dias para ese periodo de tiempo
+                            List<DateTime> fechas = GetDias(desde, hasta, dias);
+
+                            foreach (var f in fechas)
+                            {
+                                Viaje viaje = new Viaje(
+                                Convert.ToInt32(ddlCiudadSalida.SelectedValue),
+                                Convert.ToInt32(ddlCiudadDestino.SelectedValue),
+                                tbDuracion.Text,
+                                Convert.ToInt32(tbLugaresDisponibles.Text),
+                                Convert.ToInt32(ddlVehiculo.SelectedValue),
+                                f,
+                                tbHoraSalida.Text,
+                                Convert.ToDouble(tbPrecio.Text),
+                                tbDescripcion.Text);
+                                viaje.Precio = (viaje.Precio / viaje.LugaresDisponibles);
+
+                                Viaje.Create(viaje, ActiveUsuario.Id);
+                            }
+                        }
+                        else
+                            throw new Exception("Debe seleccionar al menos un día de la semana.");
+
                     }
 
                     this.Master.FindControl("divMsjOk").Visible = true;
@@ -150,6 +214,30 @@ namespace UnAventon.Viajes
                 Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
                 lialert.Text = ex.Message;                            
             }
+        }
+
+        private List<DateTime> GetDias(DateTime desde, DateTime hasta, DayOfWeek[] tipoDias)
+        {
+            List<DateTime> lsDias = new List<DateTime>();
+            for (int i = 0; i < tipoDias.Length; i++)
+            {
+                var fechaInicial = desde;
+                var fechaFinal = hasta;
+                var totalDias = (fechaFinal - fechaInicial).TotalDays;
+                
+                while(fechaInicial.Year <= fechaFinal.Year && fechaInicial.Month <= fechaFinal.Month && fechaInicial.Day <= fechaFinal.Day)
+                {
+
+                    if (fechaInicial.DayOfWeek == tipoDias[i])
+                    {
+                        lsDias.Add(fechaInicial);
+                    }
+
+                    fechaInicial = fechaInicial.AddDays(1);
+                }
+
+            }
+            return lsDias;
         }
 
         //cuando se produice un cambio en las provincias se refresca las ciudades cargadas
@@ -187,11 +275,19 @@ namespace UnAventon.Viajes
                         divViajesAgregados.Visible = true;
                         btnAgregarViaje.Visible = true;
                     }
-                    else
+                    //Ocasional
+                    if (ddlTipoViaje.SelectedValue == "1")
                     {
                         divViajesAgregados.Visible = false;
                         btnAgregarViaje.Visible = false;
 
+                    }
+                    //Diario
+                    if(ddlTipoViaje.SelectedValue == "3")
+                    {
+                        divViajesDiarios.Visible = true;
+                        divViajesAgregados.Visible = false;
+                        btnAgregarViaje.Visible = false;
                     }
                 }
             }
@@ -331,13 +427,16 @@ namespace UnAventon.Viajes
 
         protected void cvFecha_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            tbFecha.CssClass = "form-control";
-            //cvFecha.ErrorMessage = string.Empty;
+            tbFecha.CssClass = "nomargin trasnparent-background";            
 
             if ((tbFecha.SelectedDate.Date == DateTime.MinValue.Date) || tbFecha.SelectedDate < DateTime.Now)
             {
+                if(tbFecha.SelectedDate < DateTime.Now)
+                {
+                    cvFecha.ErrorMessage = "No puede seleccionar una fecha anterior al dia de hoy.";
+                }
                 args.IsValid = false;
-                tbFecha.CssClass = "form-control error";
+                tbFecha.CssClass = "nomargin trasnparent-background error";
             }
         }
 
@@ -377,7 +476,38 @@ namespace UnAventon.Viajes
             }
         }
 
+        protected void ViajesDiarios_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            int dias =0;
+            
+            if (cbklunes.Checked == true)
+                dias++;
+
+            if (cbkmartes.Checked == true)
+                dias++;
+
+            if (cbkmiercoles.Checked == true)
+                dias++;
+
+            if (cbkjueves.Checked == true)
+                dias++;
+
+            if (cbkviernes.Checked == true)
+                dias++;
+
+            if (cbksabado.Checked == true)
+                dias++;
+
+            if (cbkdomingo.Checked == true)
+                dias++;
+            
+            cvTipoViaje.ErrorMessage = string.Empty;
+            if (dias < 1)
+            {                
+                args.IsValid = false;
+                cvTipoViaje.ErrorMessage = "Al menos debe seleccionar un día";
+            }
+        }
         #endregion
-    
     }
 }
