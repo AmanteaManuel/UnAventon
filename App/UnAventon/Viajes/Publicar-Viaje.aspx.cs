@@ -144,33 +144,35 @@ namespace UnAventon.Viajes
                             DateTime hasta = tbFecha.SelectedDate;
 
                             //agregar los dias de la semana segun los chbks
-                            DayOfWeek[] dias = new DayOfWeek[7];
+                            List<DayOfWeek> dayOfWeeks =new List<DayOfWeek>();
+                            //DayOfWeek[] dias = new DayOfWeek[7];
 
                             //TODO falta arreglar solo esto.
                             #region " Carga de dias "
 
                             //cargo los dias en el vector
                             if (cbklunes.Checked == true)
-                                dias.SetValue(DayOfWeek.Monday,1);
+                                dayOfWeeks.Add(DayOfWeek.Monday);
 
                             if (cbkmartes.Checked == true)
-                                dias[2] = DayOfWeek.Tuesday;
+                                dayOfWeeks.Add(DayOfWeek.Tuesday);
 
                             if (cbkmiercoles.Checked == true)
-                                dias[3] = DayOfWeek.Wednesday;
+                                dayOfWeeks.Add(DayOfWeek.Wednesday);                           
 
                             if (cbkjueves.Checked == true)
-                                dias[4] = DayOfWeek.Thursday;
+                                dayOfWeeks.Add(DayOfWeek.Thursday);
 
                             if (cbkviernes.Checked == true)
-                                dias[5] = DayOfWeek.Friday;
+                                dayOfWeeks.Add(DayOfWeek.Friday);
 
                             if (cbksabado.Checked == true)
-                                dias[6] = DayOfWeek.Saturday;
+                                dayOfWeeks.Add(DayOfWeek.Saturday);
 
                             if (cbkdomingo.Checked == true)
-                                dias[7] = DayOfWeek.Sunday;
+                                dayOfWeeks.Add(DayOfWeek.Sunday);
 
+                            DayOfWeek[] dias = dayOfWeeks.ToArray();
                             #endregion
 
                             //obtengo todos los dias para ese periodo de tiempo
