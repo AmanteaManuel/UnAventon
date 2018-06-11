@@ -10,7 +10,7 @@ namespace Dal.Core
     {
         #region " Query SQL "
 
-        private const string GET_ALL_BY_USUARIO_ID = @"Select * from Vehiculos where UsuarioId = {0} ";
+        private const string GET_ALL_BY_USUARIO_ID = @"Select * from Vehiculos where UsuarioId = {0} AND SiActivo = 1 ";
 
         private const string INSERT_VEHICULO = @"INSERT INTO Vehiculos
                                                                (Marca,
@@ -18,7 +18,8 @@ namespace Dal.Core
                                                                Color,
                                                                Patente,
                                                                Asientos,
-                                                               UsuarioId)
+                                                               UsuarioId,
+                                                               SiActivo)
 	                                                        output INSERTED.Id
                                                         VALUES
 			                                                   (@parMarca,
@@ -26,7 +27,8 @@ namespace Dal.Core
                                                                @parColor,
 			                                                   @ParPatente,
 			                                                   @parAsientosDisponibles,
-			                                                   @parUsuarioId)";
+			                                                   @parUsuarioId,
+                                                                1)";
 
         private const string UPDATE_VEHICULO = @"UPDATE Vehiculos SET 
                                                             Marca = @parMarca,
@@ -38,7 +40,9 @@ namespace Dal.Core
 
         private const string GET_VEHICULO_BY_ID = @" SELECT * FROM Vehiculos WHERE Id = {0}";
 
-        private const string DELETE_VEHICULO = @"DELETE FROM vehiculos WHERE Id = @parVehiculoId";
+        private const string DELETE_VEHICULO = @"UPDATE Vehiculos
+                                                    SET SiActivo = 0
+                                                    WHERE Vehiculos.Id = @parVehiculoId";
 
         #endregion
 
@@ -118,6 +122,10 @@ namespace Dal.Core
             this.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Baja logica del vehiculo
+        /// </summary>
+        /// <param name="vehiculoId"></param>
         public void Delete(int vehiculoId)
         {
             this.ExecuteCommandText = DELETE_VEHICULO;
