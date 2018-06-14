@@ -79,7 +79,7 @@ namespace UnAventon
         protected void lbPublicarViaje_Click(object sender, EventArgs e)
         {
             string idEncriptado = new Bol.Core.Service.Tools().Encripta(Convert.ToString(@ActiveUsuario.Id));
-            Response.Redirect("~/Viajes/Publicar-Viaje.aspx?id=" + idEncriptado);
+            Response.Redirect("~/Viajes/Publicar-Viaje.aspx");
         }
         protected void lbRegistrarVehiculo_Click(object sender, EventArgs e)
         {
