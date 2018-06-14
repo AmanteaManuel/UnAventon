@@ -80,5 +80,49 @@
                 </div>
             </div>
         </div>
+<%--    <div class="row"> <!-- Aca empieza la lista de postulantes-->
+		    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+			    <div class="panel panel-info">
+				    <div class="panel-heading">
+					    <h3 class="panel-title"><strong>Postulantes</strong></h3>
+				    </div>
+                    <div class="panel-body">
+					    <div class="row">	
+                             <div class="              ">                         AGREGAR CLASE RESPONSIVE
+							    <div class=" col-md-9 col-lg-9 ">                                
+                                        <table class="table table-hover">
+                                            <asp:Repeater runat="server" ID="" OnItemCommand="">
+                                                <HeaderTemplate>
+                                                    <tr>
+                                                        <th>Postulante</th>
+                                                        <th>Reputacion</th>
+                                                        <th>Aceptar</th>
+                                                        <th>Rechazar</th>
+                                                    </tr>
+                                                </HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <tr>
+                                                         <td>
+                                                            <asp:Literal Text='<%# Eval("     ") %>' runat="server" />   AGREGAR ID DEL POSTULANTE
+                                                        </td>
+                                                        <td>
+                                                            <asp:Literal Text='<%# Eval("     ") %>' runat="server" />   AGREGAR REPUTACION DEL POSTULANTE
+                                                        </td>
+                                                        <td>
+                                                            <asp:LinkButton CssClass="(Boton aceptar)" ID="    " CommandName="(Aceptar)" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Aceptar"></asp:LinkButton>   MODIFICAR
+                                                        </td>
+                                                        <td>
+                                                            <asp:LinkButton CssClass="(Boton rechazar)" ID="   " CommandName="(Rechazar)" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Rechazar"></asp:LinkButton>   MODIFICAR
+                                                        </td>
+                                                    </tr>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </table>
+                                </div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>--%>
     </body>
 </asp:Content>
