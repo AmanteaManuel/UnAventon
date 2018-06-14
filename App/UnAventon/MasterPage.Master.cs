@@ -45,7 +45,10 @@ namespace UnAventon
 
                     if (path.Contains("Agregar-Vehiculo.aspx"))
                         lbRegistrarVehiculo.Enabled = false;
-                
+
+                    if (path.Contains("Mis-Viajes.aspx"))
+                        lbMisViajes.Enabled = false;
+
             }
             catch (Exception)
             {
@@ -99,5 +102,9 @@ namespace UnAventon
             Response.Redirect("~/Home.aspx", false);
         }
 
+        protected void lbMisViajes_Click(object sender, EventArgs e)
+        {            
+            Response.Redirect("~/Viajes/Mis-Viajes.aspx");
+        }
     }
 }

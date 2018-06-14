@@ -29,6 +29,7 @@ namespace Bol
         private Ciudad _origen;
         private Usuario _usuario;
         private int _usuarioId;
+        private List<Usuario> _postulantes;
 
 
         #endregion
@@ -220,6 +221,21 @@ namespace Bol
             }
         }
 
+        public List<Usuario> Postulantes
+        {
+            get
+            {
+                return Bol.Usuario.GetPostulantesByViajeId(Id);
+            }
+        }
+
+        public List<Usuario> Pasajeros
+        {
+            get
+            {
+                return Bol.Usuario.GetPasajerosByViajeId(Id);
+            }
+        }
         #endregion
 
         #region " Views "
@@ -264,6 +280,17 @@ namespace Bol
             {
                 Dal.Core.Viaje dal = new Dal.Core.Viaje();           
                 DataSet ds = dal.GetAllFromNowToOneMonth(fechaActual, fechaUnMes);
+                return FillList(ds);
+            }
+            catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
+        }
+
+        public List<Viaje> GetAllByUsuarioId(int id)
+        {
+            try
+            {
+                Dal.Core.Viaje dal = new Dal.Core.Viaje();
+                DataSet ds = dal.GetAllByUsuarioId(id);
                 return FillList(ds);
             }
             catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }

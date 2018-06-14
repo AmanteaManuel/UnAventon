@@ -47,10 +47,25 @@ namespace Dal.Core
 				                                        Contraseña = @parContraseña
 				                                    WHERE Id = @parUsuarioId";
 
-        private const string GET_USUARIO_BY_ID = "Select * from Usuario where Id = {0}";
+        private const string GET_USUARIO_BY_ID = @"Select * from Usuario where Id = {0}";
 
-        private const string GET_USUARIO_BY_EMAIL = "Select * from Usuario where Email = '{0}'";
+        private const string GET_USUARIO_BY_EMAIL = @"Select * from Usuario where Email = '{0}'";
 
+        private const string GET_PASAJEROS_BY_VIAJE_ID = @"SELECT * FROM Postulantes WHERE viajeId = {0} AND EstadoViajeCodigo = 2";
+
+        private const string GET_POSTULANTES_BY_VIAJE_ID = @"SELECT * FROM Postulantes WHERE viajeId = {0} AND EstadoViajeCodigo != 2";
+
+        private const string CREATE_POSTULACION = @"INSERT INTO Postulantes (UsuarioId, ViajeId, EstadoViaje) 
+				                                                     output INSERTED.Id
+				                                                     VALUES (@parUsuarioId,@parViajeId, 1)";
+
+        private const string ACEPTAR_POSTULACION = @"UPDATE Postulantes
+                                                            SET EstadoViaje = @parEstado
+                                                            WHERE UsuarioId = @parUsuarioId AND ViajeId = @parViajeId";
+
+        private const string RECHAZAR_POSTULACION = @"UPDATE Postulantes
+                                                            SET EstadoViaje = @parEstado
+                                                            WHERE UsuarioId = @parUsuarioId AND ViajeId = @parViajeId";
 
         #endregion
 
@@ -76,6 +91,18 @@ namespace Dal.Core
         public DataSet GetAll()
         {
             throw new NotImplementedException();
+        }
+
+        public DataSet GetPasajerosByViajeId(int id)
+        {
+            this.SelectCommandText = string.Format(GET_PASAJEROS_BY_VIAJE_ID, id);
+            return this.Load();
+        }
+
+        public DataSet GetPostulantesByViajeId(int id)
+        {
+            this.SelectCommandText = string.Format(GET_POSTULANTES_BY_VIAJE_ID, id);
+            return this.Load();
         }
 
         #endregion
@@ -159,8 +186,59 @@ namespace Dal.Core
             this.ExecuteNonQuery();
         }
 
+        public int CreatePostulacion(int usuarioId, int viajeId)
+        {
+            //query a ejecutar
+            this.ExecuteCommandText = CREATE_POSTULACION;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+           
+            this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parViajeId", viajeId);
 
 
+            //ejecución, retorna el valor del parámetro de retorno
+            return this.ExecuteNonEscalar();
+        }
+
+        public void AceptarPostulacion(int usuarioId, int viajeId)
+        {
+            //query a ejecutar
+            this.ExecuteCommandText = ACEPTAR_POSTULACION;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parViajeId", viajeId);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parEstado", 2);
+
+            //ejecución, retorna el valor del parámetro de retorno
+            this.ExecuteNonQuery();
+        }
+
+        public void RechazarPostulacion(int usuarioId, int viajeId)
+        {
+            //query a ejecutar
+            this.ExecuteCommandText = RECHAZAR_POSTULACION;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parViajeId", viajeId);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parEstado", 3);
+
+
+            //ejecución, retorna el valor del parámetro de retorno
+            this.ExecuteNonQuery();
+        }
         #endregion
 
         #region " Method "

@@ -355,6 +355,26 @@ namespace Bol
                 return null;            
         }
 
+        internal static List<Usuario> GetPostulantesByViajeId(int id)
+        {
+            DataSet userdr;
+            userdr = new Dal.Core.Usuario().GetPostulantesByViajeId(id);
+            if (userdr.Tables[0].Rows.Count > 0)
+                return FillList(userdr);
+            else
+                return null; ;
+        }
+
+        internal static List<Usuario> GetPasajerosByViajeId(int id)
+        {
+            DataSet userdr;
+            userdr = new Dal.Core.Usuario().GetPasajerosByViajeId(id);
+            if (userdr.Tables[0].Rows.Count > 0)
+                return FillList(userdr);
+            else
+                return null;
+        }
+
         #endregion
 
         #region " CRUD "
@@ -411,6 +431,35 @@ namespace Bol
                     usuario.Id);
             }
             catch (Exception e) { throw new Exception("Error en Update" + e.Message); }
+        }
+
+        public static int CreatePostulacion(int usuarioId, int viajeId)
+        {
+            int outId = 0;
+            try
+            {
+                outId = new Dal.Core.Usuario().CreatePostulacion(usuarioId, viajeId);                
+                return outId;
+            }
+            catch (Exception e) { throw new Exception("Error en Insert" + e.Message); }
+        }
+
+        public static void AceptarPostulacion(int usuarioId, int viajeId)
+        {            
+            try
+            {
+               new Dal.Core.Usuario().AceptarPostulacion(usuarioId, viajeId);                
+            }
+            catch (Exception e) { throw new Exception("Error en Insert" + e.Message); }
+        }
+
+        public static void RechazarPostulacion(int usuarioId, int viajeId)
+        {            
+            try
+            {
+               new Dal.Core.Usuario().RechazarPostulacion(usuarioId, viajeId);               
+            }
+            catch (Exception e) { throw new Exception("Error en Insert" + e.Message); }
         }
 
         #endregion
