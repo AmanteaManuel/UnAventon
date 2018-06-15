@@ -116,7 +116,7 @@
                                                         </td>
                                                     </tr>
                                                 </ItemTemplate>
-                                            </asp:Repeater>
+                                            </a  sp:Repeater>
                                         </table>
                                 </div>
 						</div>
