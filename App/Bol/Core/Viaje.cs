@@ -29,6 +29,7 @@ namespace Bol
         private Ciudad _origen;
         private Usuario _usuario;
         private int _usuarioId;
+        private List<Usuario> _postulantes;
 
 
         #endregion
@@ -220,6 +221,21 @@ namespace Bol
             }
         }
 
+        public List<Usuario> Postulantes
+        {
+            get
+            {
+                return Bol.Usuario.GetPostulantesByViajeId(Id);
+            }
+        }
+
+        public List<Usuario> Pasajeros
+        {
+            get
+            {
+                return Bol.Usuario.GetPasajerosByViajeId(Id);
+            }
+        }
         #endregion
 
         #region " Views "
@@ -264,6 +280,17 @@ namespace Bol
             {
                 Dal.Core.Viaje dal = new Dal.Core.Viaje();           
                 DataSet ds = dal.GetAllFromNowToOneMonth(fechaActual, fechaUnMes);
+                return FillList(ds);
+            }
+            catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
+        }
+
+        public List<Viaje> GetAllByUsuarioId(int id)
+        {
+            try
+            {
+                Dal.Core.Viaje dal = new Dal.Core.Viaje();
+                DataSet ds = dal.GetAllByUsuarioId(id);
                 return FillList(ds);
             }
             catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
@@ -398,7 +425,35 @@ namespace Bol
             }
             
         }
-        
+
+        public static void Update(Viaje viaje, int usuarioId)
+        {
+            
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    ValidarViaje(viaje, usuarioId);
+
+                    new Dal.Core.Viaje().Update(
+                    viaje._origenId,
+                    viaje._destinoId,
+                    viaje.Duracion,
+                    viaje.LugaresDisponibles,
+                    viaje._vehiculoId,
+                    viaje.FechaSalida,
+                    viaje._horaSalida,
+                    viaje.Precio,
+                    viaje.Descripcion,
+                    viajeId
+                    );
+
+                    scope.Complete();
+                }
+            }
+            catch (Exception e) { throw new Exception("Error en Update. " + e.Message); }
+        }
+
         #endregion
 
         #region " Constructor "

@@ -45,7 +45,10 @@ namespace UnAventon
 
                     if (path.Contains("Agregar-Vehiculo.aspx"))
                         lbRegistrarVehiculo.Enabled = false;
-                
+
+                    if (path.Contains("Mis-Viajes.aspx"))
+                        lbMisViajes.Enabled = false;
+
             }
             catch (Exception)
             {
@@ -76,7 +79,7 @@ namespace UnAventon
         protected void lbPublicarViaje_Click(object sender, EventArgs e)
         {
             string idEncriptado = new Bol.Core.Service.Tools().Encripta(Convert.ToString(@ActiveUsuario.Id));
-            Response.Redirect("~/Viajes/Publicar-Viaje.aspx?id=" + idEncriptado);
+            Response.Redirect("~/Viajes/Publicar-Viaje.aspx");
         }
         protected void lbRegistrarVehiculo_Click(object sender, EventArgs e)
         {
@@ -99,5 +102,9 @@ namespace UnAventon
             Response.Redirect("~/Home.aspx", false);
         }
 
+        protected void lbMisViajes_Click(object sender, EventArgs e)
+        {            
+            Response.Redirect("~/Viajes/Mis-Viajes.aspx");
+        }
     }
 }

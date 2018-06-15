@@ -37,6 +37,8 @@ namespace Dal.Core
 
         private const string GET_ALL = @"SELECT * FROM Viajes";
 
+        private const string GET_ALL_BY_USUARIO_ID = @"SELECT * FROM Viajes WHERE usuarioId = {0}";
+
         private const string GET_ALL_BY_VEHICULO_ID = @"select * from Viajes where VehiculoId = {0}";
 
         private const string GET_ALL_FROM_NOW_TO_ONE_MONTH = @"SELECT * FROM Viajes
@@ -44,6 +46,18 @@ namespace Dal.Core
 							                                            ORDER BY FechaSalida";
 
         private const string GET_ALL_BY_USUARIOID_AND_FECHA = @"SELECT * FROM Viajes WHERE UsuarioId = {0} AND FechaSalida = '{1}'";
+
+        private const string UPDATE = @"UPDATE Viajes SET
+	                                                    CiudadOrigenId = @parOrigenId, 
+	                                                    CiudadDestinoId = @parDestinoId, 
+	                                                    Duracion = @parDuracion,
+	                                                    VehiculoId = @parVehiculoId, 
+	                                                    Precio = @parPrecio, 
+	                                                    FechaSalida = @parFechaSalida, 
+	                                                    LugaresDisponibles = @parLugaresDisponibles,
+	                                                    HoraSalida = @parHoraSalida,
+	                                                    Descripcion = @parDescripcion
+                                                    WHERE Id = @parViajeId;";
 
         public int Create(int origenId, int destinoId, string duracion, int lugaresDisponibles, int vehiculoId, DateTime fechaSalida, string horaSalida, double precio, string descripcion, int UsuarioId)
         {
@@ -107,6 +121,46 @@ namespace Dal.Core
         {
             this.SelectCommandText = string.Format(GET_ALL_BY_VEHICULO_ID, id);
             return this.Load();
+        }
+
+        public DataSet GetAllByUsuarioId(int id)
+        {
+            this.SelectCommandText = string.Format(GET_ALL_BY_USUARIO_ID, id);
+            return this.Load();
+        }
+
+        public void Update(int origenId, int destinoId, string duracion, int lugaresDisponibles, int vehiculoId, DateTime fechaSalida, string horaSalida, double precio, string descripcion, int viajeId)
+        {
+            //query a ejecutar
+            this.ExecuteCommandText = UPDATE;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            //parámetros
+            //documento
+            this.ExecuteParameters.Parameters.AddWithValue("@parOrigenId", origenId);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parDestinoId", destinoId);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parDuracion", duracion);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parLugaresDisponibles", lugaresDisponibles);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parVehiculoId", vehiculoId);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parFechaSalida", fechaSalida);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parHoraSalida", horaSalida);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parPrecio", precio);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parDescripcion", descripcion);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parViajeId", viajeId);
+
+            //ejecución, retorna el valor del parámetro de retorno
+            this.ExecuteNonQuery();
         }
     }
 }

@@ -110,7 +110,7 @@ namespace Bol
                     oBol._preguntaId = Convert.ToInt32(dr["PreguntaId"]);
 
                 if (dr.Table.Columns.Contains("Fecha") && !Convert.IsDBNull(dr["Fecha"]))
-                    oBol.Fecha = Convert.ToInt32(dr["Fecha"]);
+                    oBol.Fecha = Convert.ToDateTime(dr["Fecha"]);
 
             }
             catch (Exception ex) { throw new Exception("Error en el metodo Fill" + ex.Message); }

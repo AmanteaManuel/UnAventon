@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dal.Core
 {
-    class Pregunta : DalBase
+    public class Pregunta : DalBase
     {
         private const string INSERT_PREGUNTA = @"INSERT INTO [dbo].[Respuesta]
                                                                    ([Descripcion]
@@ -18,7 +18,7 @@ namespace Dal.Core
 		                                                           @parPreguntaId,
 		                                                           @parUsuarioId)";
 
-        public int Create(int fecha, string descripcion, int usuarioId, int viajeId)
+        public int Create(DateTime fecha, string descripcion, int usuarioId, int viajeId)
         {
             //query a ejecutar
             this.ExecuteCommandText = INSERT_PREGUNTA;

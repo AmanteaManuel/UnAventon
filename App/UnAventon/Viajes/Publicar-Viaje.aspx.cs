@@ -13,14 +13,14 @@ namespace UnAventon.Viajes
 {
     public partial class Publicar_Viaje : UnAventonPage
     {
-        public Bol.Usuario Usuario
+        public Bol.Viaje Viaje
         {
             get
             {
-                object o = ViewState["Usuario"] as object;
-                return (o != null) ? (Bol.Usuario)o : null;
+                object o = ViewState["Viaje"] as object;
+                return (o != null) ? (Bol.Viaje)o : null;
             }
-            set { ViewState["Usuario"] = value; }
+            set { ViewState["Viaje"] = value; }
         }
 
         internal List<Bol.Viaje> viajesAgregados
@@ -40,6 +40,7 @@ namespace UnAventon.Viajes
 
         private void PreparePage()
         {
+
             viajesAgregados = new List<Viaje>();
             //Cargo las provincias para cargar los ddl
             List<Provincia> provincias = new List<Provincia>();
@@ -62,6 +63,18 @@ namespace UnAventon.Viajes
             list.Items.Insert(0, new ListItem(valoramostrarpordefecto, string.Empty));
         }
 
+        private void LoadDatos(Viaje V)
+        {
+            //Usar set ddl de Marce para todos ciudad y provincia
+            tbDuracion.Text = V.Duracion;
+            tbLugaresDisponibles.Text = tbLugaresDisponibles.ToString();
+            //SetDll vehiculo
+            tbFecha.SelectedDate = V.FechaSalida;
+            tbHoraSalida.Text = V.HoraSalida;
+            tbPrecio.Text = (V.Precio * V.LugaresDisponibles).ToString();
+            tbDescripcion.Text = V.Descripcion;
+        }
+
         #endregion
 
         #region " Events "
@@ -77,16 +90,33 @@ namespace UnAventon.Viajes
 
                 if (!IsPostBack)
                 {
+                    // Si es modificacion
                     if (Request.QueryString["id"] != null)
                     {
+                        liTitulo.Text = "Modificar Viaje";
+                        liSubtitulo.Text = "En esta página podrá modificarun viaje.";
+
                         string idEncriptado = Request.QueryString["id"];
                         int id = Convert.ToInt32(new Bol.Core.Service.Tools().Desencripta(idEncriptado));
                         int IdDesencriptado = Convert.ToInt32(id);
-                        Usuario = new Bol.Usuario().GetInstanceById(IdDesencriptado);
+                        Viaje = new Bol.Viaje().GetInstanceById(IdDesencriptado);
                         PreparePage();
+                        ddlTipoViaje.Enabled = false;
+                        LoadDatos(Viaje);
+                        btnModificar.Visible = true;
+                        btnPublicarViaje.Visible = false;
+
                     }
+                    //si es nueva publicacion
                     else
-                        throw new Exception("No hay usuario en el contexto. ");
+                    {
+                        liTitulo.Text = "Publicar Viaje";
+                        liSubtitulo.Text = "En esta página podrá publicar nuevos viajes.";
+
+                        PreparePage();
+                        btnPublicarViaje.Visible = true;
+                        btnModificar.Visible = false;
+                    }
                 }
             }
             catch (Exception ex)
@@ -511,5 +541,45 @@ namespace UnAventon.Viajes
             }
         }
         #endregion
+
+        protected void btnModificar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Validate("PublicarViaje");
+                if (Page.IsValid)
+                {
+                    Viaje viaje = new Viaje(
+                    Convert.ToInt32(ddlCiudadSalida.SelectedValue),
+                    Convert.ToInt32(ddlCiudadDestino.SelectedValue),
+                    tbDuracion.Text,
+                    Convert.ToInt32(tbLugaresDisponibles.Text),
+                    Convert.ToInt32(ddlVehiculo.SelectedValue),
+                    tbFecha.SelectedDate,
+                    tbHoraSalida.Text,
+                    Convert.ToDouble(tbPrecio.Text),
+                    tbDescripcion.Text);
+                    viaje.Precio = (viaje.Precio / viaje.LugaresDisponibles);
+
+                    Bol.Viaje.Update(viaje, viaje.Id);
+
+
+                    this.Master.FindControl("divMsjOk").Visible = true;
+                    Literal liMensaje = (Literal)this.Master.FindControl("liMsjOK");
+                    liMensaje.Text = "Viaje publicado con éxito";
+
+                    Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
+                }
+                else
+                    throw new Exception("Error al publicar viaje ");
+            }
+            catch (Exception ex)
+            {
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = ex.Message;
+            }
+        }
     }
 }

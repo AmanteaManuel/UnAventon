@@ -87,6 +87,9 @@
                     <asp:LinkButton Text="Listado de Viajes" CssClass="links"  runat="server" ID="lbListarViajes" OnClick="lbListarViajes_Click" />
                 </div>
                 <div class="col-xs-12 col-md-2 col-lg-2">
+                    <asp:LinkButton Text="Mis Viajes" CssClass="links"  runat="server" ID="lbMisViajes" OnClick="lbMisViajes_Click" />
+                </div>
+                <div class="col-xs-12 col-md-2 col-lg-2">
                     <asp:LinkButton Text="Publicar Viaje" ID="lbPublicarViaje" CssClass="links" runat="server" OnClick="lbPublicarViaje_Click" />
                 </div>
                 <div class="col-xs-12 col-md-2 col-lg-2">
@@ -95,10 +98,10 @@
                 <div class="col-xs-12 col-md-2 col-lg-2">
                     <asp:LinkButton Text="Modificar Datos" ID="lbModificarDatos" CssClass="links" runat="server" OnClick="lbModificarDatos_Click" />
                 </div>
-                <div class="col-xs-12 col-md-2 col-lg-2">
-                    <asp:LinkButton Text="Ver Perfil" CssClass="links" runat="server" ID="lbVerPerfil" OnClick="lbVerPerfil_Click" />
+                <div class="col-xs-12 col-md-2 col-lg-1">
+                    <asp:LinkButton Text="Perfil" CssClass="links" runat="server" ID="lbVerPerfil" OnClick="lbVerPerfil_Click" />
                 </div>                
-                <div class="col-xs-12 col-md-2 col-lg-2">
+                <div class="col-xs-12 col-md-1 col-lg-1">
                     <asp:LinkButton runat="server" ID="btnCerrarSesion" OnClick="btnCerrarSesion_Click">
                     <img style="margin-right:0%" src="<%=Page.ResolveUrl("~/img/LogOut.png")%>" height="30px" width="30"/>                
                     </asp:LinkButton>

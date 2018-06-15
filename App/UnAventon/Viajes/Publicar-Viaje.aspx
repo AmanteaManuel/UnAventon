@@ -23,8 +23,8 @@
 <br/>
 <div id="divGlobal" class="margin-general">
     <div> 
-        <h3><strong><label>Publicar Viaje</label></strong></h3>
-        <p><label>En esta página podrá publicar nuevos viajes.</label></p>
+        <h3><strong><asp:Literal runat="server" ID="liTitulo" /></strong></h3>
+        <p><asp:Literal runat="server" ID="liSubtitulo" /></p>
     </div>
     <%--ORIGEN/DESTINO--%>
     <div class="row">
@@ -110,7 +110,8 @@
             <label class="label-default-subTitle">Comentario</label>
             <asp:TextBox CssClass="form-control" runat="server" placeholder="Ejemplo: Comentario..." ID="tbDescripcion" TextMode="MultiLine" />
             <br />
-            <asp:Button Text="Publicar" runat="server" ID="btnPublicarViaje" CssClass="boton_personalizado" OnClick="btnPublicarViaje_Click" />
+            <asp:Button Text="Publicar" runat="server" ID="btnPublicarViaje" CssClass="boton_personalizado" OnClick="btnPublicarViaje_Click" Visible="false"/>
+            <asp:Button Text="Modificar" runat="server" ID="btnModificar" CssClass="boton_personalizado" OnClick="btnModificar_Click" Visible="false"/>
         </div>
         <%--VIAJES FRECUENTES--%>
         <div class="col-xs-12 col-md-2 col-lg-5 form-group" id="divViajesAgregados" visible="false" runat="server">

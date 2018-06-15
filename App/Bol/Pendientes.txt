@@ -7,3 +7,9 @@ Cargar ddl del viaje (problemas con el update y el fillList)
 Validacion public viaje.(no se ejecutan todas?)----//listo
 Falta probar cerrar sesion	----//ATR
 revisar validaciones en el registrar vehiculo(aca no se ejecuta ninguna) y modificar(no se ejecutan todas? en el publicar viaje tampoco)----//listo
+
+
+SPRINT 2
+
+Agregar setDll en el modificar viaje.
+probar modificar viaje.

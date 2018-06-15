@@ -53,7 +53,7 @@ namespace Bol
             }
         }
 
-        public int Fecha
+        public DateTime Fecha
         {
             get
             {
@@ -114,7 +114,7 @@ namespace Bol
                     oBol._usuarioId = Convert.ToInt32(dr["UsuarioId"]);
 
                 if (dr.Table.Columns.Contains("Fecha") && !Convert.IsDBNull(dr["Fecha"]))
-                    oBol.Fecha = Convert.ToInt32(dr["Fecha"]);
+                    oBol.Fecha = Convert.ToDateTime(dr["Fecha"]);
 
             }
             catch (Exception ex) { throw new Exception("Error en el metodo Fill" + ex.Message); }
