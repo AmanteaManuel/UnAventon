@@ -50,7 +50,15 @@ namespace UnAventon.Viajes
         }
 
         private void PreparePage()
-        {            
+        {
+
+            if (Viaje.UsuarioId == ActiveUsuario.Id)
+                btnEliminarViaje.Visible = true;
+            else
+                btnEliminarViaje.Visible = false;
+
+            divDatosUsuario.Visible = false;
+
             liCudadOrigen.Text = Viaje.Origen.Descripcion;
             liCiudadDestino.Text = Viaje.Destino.Descripcion;
             liPrecio.Text = Viaje.Precio.ToString();
@@ -78,6 +86,7 @@ namespace UnAventon.Viajes
             rptListaPostulantes.DataSource = postulantesCargados;
             rptListaPostulantes.DataBind();
 
+
         }
 
         protected void rptListaPostulantes_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -100,6 +109,16 @@ namespace UnAventon.Viajes
                 if (e.CommandName.ToUpper().Equals("ELIMINAR"))
                 {
                     Bol.Usuario.EliminarPostulacion(id, Viaje.Id);
+                }
+                if (e.CommandName.ToUpper().Equals("DATOS"))
+                {
+                    divDatosUsuario.Visible = true;
+                    Bol.Usuario usuario = new Bol.Usuario().GetInstanceById(id);
+                    liEmail.Text = usuario.Email;
+                    liNombre.Text = usuario.Nombre;
+                    liApellido.Text = usuario.Apellido;
+                    liReputacion.Text = Convert.ToString(usuario.ReputacioPasajero);
+
                 }
             }
             catch (Exception ex)
@@ -132,6 +151,7 @@ namespace UnAventon.Viajes
                 HtmlGenericControl divAccionesPostulacionbtn = (HtmlGenericControl)e.Item.FindControl("divAccionesPostulacionbtn");
                 LinkButton lbAceptar = (LinkButton)e.Item.FindControl("lbAceptar");
                 LinkButton lbRechazar = (LinkButton)e.Item.FindControl("lbRechazar");
+                LinkButton lbDatos = (LinkButton)e.Item.FindControl("lbDatos");
 
                 //si el usuario legueado es igual al usuario que
                 if (Viaje.UsuarioId == ActiveUsuario.Id)
@@ -143,12 +163,24 @@ namespace UnAventon.Viajes
                         lbAceptar.Enabled = false;
                         lbRechazar.Enabled = false;
                     }
+                    if (u.EstadoViaje != 1)
+                    {
+                        lbDatos.Enabled = false;
+                    }
                 }
                 else
                 {
                     divAccionesPostulacionbtn.Visible = false;
                 }
             }
+        }
+
+        protected void btnEliminarViaje_Click(object sender, EventArgs e)
+        {
+              //obtener los id de usuarios
+              //borrar los usuarios
+              //borrar viaje
+              //descontar puntos 
         }
     }
 }

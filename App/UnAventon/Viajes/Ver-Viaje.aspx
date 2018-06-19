@@ -79,6 +79,8 @@
                 </div>
             </div>
         </div>
+   <asp:Button Text="Eliminar" runat="server" ID="btnEliminarViaje" CssClass="boton_personalizado" OnClick="btnEliminarViaje_Click" />
+
     <!-- Lista de postulantes-->
     <div class="row">    
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
@@ -101,6 +103,7 @@
                                                     <th>Aceptar</th>
                                                     <th>Rechazar</th>
                                                     <th>Eliminar</th>
+                                                    <th>Datos</th>
                                                 </div>
                                             </tr>
                                         </HeaderTemplate>
@@ -128,6 +131,9 @@
                                                     <td>
                                                         <asp:LinkButton CssClass="DeleteButton" CommandName="ELIMINAR" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Eliminar" ID="lbEliminar"></asp:LinkButton>
                                                     </td>
+                                                    <td>
+                                                        <asp:LinkButton CssClass="UpdateButton" CommandName="DATOS" CommandArgument='<%#Eval("Id") %>' runat="server" Text="Datos" ID="lbDatos"></asp:LinkButton>
+                                                    </td>
                                                 </div>
                                             </tr>
                                         </ItemTemplate>
@@ -141,4 +147,13 @@
         </div>    
     </div>
     <!-- FIN Lista de postulantes-->
+     <div class="row" id="divDatosUsuario" runat="server">
+                    <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                       <label><strong>Email: </strong></label> <asp:Literal runat="server" ID="liEmail" /><br>
+                        <label><strong>Nombre: </strong></label><asp:Literal runat="server" ID="liNombre" /><br>
+                        <label><strong>Apellido: </strong></label><asp:Literal runat="server" ID="liApellido" /><br>
+                        <label><strong>Reputacion: </strong></label><asp:Literal runat="server" ID="liReputacion"/>
+                    </div>
+     </div>
 </asp:Content>
