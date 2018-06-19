@@ -68,8 +68,14 @@ namespace UnAventon.Viajes
             liLugares.Text = Viaje.LugaresDisponibles.ToString();
 
 
-            List<Bol.Usuario> vehiculos = Bol.Usuario.GetPostulantesByViajeId(Viaje.Id);
-            rptListaPostulantes.DataSource = vehiculos;
+            List<Bol.Usuario> Postulantes = Bol.Usuario.GetPostulantesByViajeId(Viaje.Id);
+            List<Bol.Usuario> postulantesCargados = new List<Bol.Usuario>();
+            if (Postulantes == null || Postulantes.Count <= 0) return;
+            foreach (var p in Postulantes)
+            {
+                postulantesCargados.Add(new Bol.Usuario().GetInstanceById(p.Id));
+            }
+            rptListaPostulantes.DataSource = postulantesCargados;
             rptListaPostulantes.DataBind();
 
         }
@@ -84,13 +90,16 @@ namespace UnAventon.Viajes
                 if (e.CommandName.ToUpper().Equals("ACEPTAR"))
                 {
                     Bol.Usuario u = Bol.Usuario.GetPostulanteByViajeId(id, Viaje.Id);
-
-
                     Bol.Usuario.AceptarPostulacion(id, Viaje.Id);
                 }
                 if (e.CommandName.ToUpper().Equals("RECHAZAR"))
                 {
                     Bol.Usuario.RechazarPostulacion(id, Viaje.Id);
+                }
+
+                if (e.CommandName.ToUpper().Equals("ELIMINAR"))
+                {
+                    Bol.Usuario.EliminarPostulacion(id, Viaje.Id);
                 }
             }
             catch (Exception ex)
@@ -104,21 +113,42 @@ namespace UnAventon.Viajes
 
         protected void rptListaPostulantes_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (e.Item.ItemType != ListItemType.AlternatingItem && e.Item.ItemType != ListItemType.Item) return;
+            Bol.Usuario u = (Bol.Usuario)e.Item.DataItem;
+            if (u == null)
+                return;
 
-            //HtmlGenericControl divAccionesPostulacioncol = (HtmlGenericControl)Item.FindControl("divAccionesPostulacioncol");
-            //HtmlGenericControl divAccionesPostulacionbtn = (HtmlGenericControl)Page.FindControl("divAccionesPostulacionbtn");
+            if (e.Item.ItemType == ListItemType.Header)
+            {
+                HtmlGenericControl divAccionesPostulacioncol = (HtmlGenericControl)e.Item.FindControl("divAccionesPostulacioncol");
 
-            //if (Viaje.UsuarioId == ActiveUsuario.Id)
-            //{
-            //    divAccionesPostulacioncol.Visible = true;
-            //    divAccionesPostulacionbtn.Visible = true;
-            //}
-            //else
-            //{
-            //    divAccionesPostulacioncol.Visible = false;
-            //    divAccionesPostulacionbtn.Visible = false;
-            //}
+                if (Viaje.UsuarioId == ActiveUsuario.Id)
+                    divAccionesPostulacioncol.Visible = true;
+                else
+                    divAccionesPostulacioncol.Visible = false;
+            }
+
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {               
+                HtmlGenericControl divAccionesPostulacionbtn = (HtmlGenericControl)e.Item.FindControl("divAccionesPostulacionbtn");
+                LinkButton lbAceptar = (LinkButton)e.Item.FindControl("lbAceptar");
+                LinkButton lbRechazar = (LinkButton)e.Item.FindControl("lbRechazar");
+
+                //si el usuario legueado es igual al usuario que
+                if (Viaje.UsuarioId == ActiveUsuario.Id)
+                {
+                    divAccionesPostulacionbtn.Visible = true;
+                    //si el usuario fue aceptado o rechazado bloqueo los botones
+                    if(u.EstadoViaje != 2)
+                    {
+                        lbAceptar.Enabled = false;
+                        lbRechazar.Enabled = false;
+                    }
+                }
+                else
+                {
+                    divAccionesPostulacionbtn.Visible = false;
+                }
+            }
         }
     }
 }

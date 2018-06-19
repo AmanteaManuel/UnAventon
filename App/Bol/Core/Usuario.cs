@@ -27,6 +27,7 @@ namespace Bol
         private bool _siActivo;
         private int _reputacionChofer;
         private int _reputacioPasajero;
+        int _estadoViaje;
 
         #endregion
 
@@ -92,6 +93,18 @@ namespace Bol
             set
             {
                 _reputacioPasajero = value;
+            }
+        }
+
+        public int EstadoViaje
+        {
+            get
+            {
+                return _estadoViaje;
+            }
+            set
+            {
+                _estadoViaje = value;
             }
         }
 
@@ -271,6 +284,9 @@ namespace Bol
                 if (dr.Table.Columns.Contains("Id") && !Convert.IsDBNull(dr["Id"]))
                     oBol.Id = Convert.ToInt32(dr["Id"]);
 
+                if (dr.Table.Columns.Contains("UsuarioId") && !Convert.IsDBNull(dr["UsuarioId"]))
+                    oBol.Id = Convert.ToInt32(dr["UsuarioId"]);
+
                 //Apellido
                 if (dr.Table.Columns.Contains("Apellido") && !Convert.IsDBNull(dr["Apellido"]))
                     oBol.Apellido = Convert.ToString(dr["Apellido"]);
@@ -296,6 +312,9 @@ namespace Bol
 
                 if (dr.Table.Columns.Contains("ReputacionChofer") && !Convert.IsDBNull(dr["ReputacionChofer"]))
                     oBol.ReputacionChofer = Convert.ToInt32(dr["ReputacionChofer"]);
+
+                if (dr.Table.Columns.Contains("EstadoViaje") && !Convert.IsDBNull(dr["EstadoViaje"]))
+                    oBol.EstadoViaje = Convert.ToInt32(dr["EstadoViaje"]);
 
                 if (dr.Table.Columns.Contains("ReputacionPasajero") && !Convert.IsDBNull(dr["ReputacionPasajero"]))
                     oBol.ReputacioPasajero = Convert.ToInt32(dr["ReputacionPasajero"]);
@@ -495,6 +514,15 @@ namespace Bol
                new Dal.Core.Usuario().RechazarPostulacion(usuarioId, viajeId);               
             }
             catch (Exception e) { throw new Exception("Error en Insert" + e.Message); }
+        }
+
+        public static void EliminarPostulacion(int usuarioId, int viajeId)
+        {
+            try
+            {
+                new Dal.Core.Usuario().EliminarPostulacion(usuarioId, viajeId);
+            }
+            catch (Exception e) { throw new Exception("Error en Eliminarion" + e.Message); }
         }
 
         #endregion

@@ -66,8 +66,11 @@ namespace Dal.Core
         private const string RECHAZAR_POSTULACION = @"UPDATE Postulantes
                                                             SET EstadoViaje = @parEstado
                                                             WHERE UsuarioId = @parUsuarioId AND ViajeId = @parViajeId";
+
         private const string GET_POSTULANTE_BY_VIAJE_ID = @"SELECT * FROM Postulantes 
                                               Where UsuarioId = {0} AND ViajeId = {1}";
+
+        private const string DELETE_POSTULACION = @"DELETE FROM postulantes where UsuarioId = {0} AND ViajeId = {1}";
 
 
         #endregion
@@ -243,6 +246,21 @@ namespace Dal.Core
 
             this.ExecuteParameters.Parameters.AddWithValue("@parEstado", 3);
 
+
+            //ejecución, retorna el valor del parámetro de retorno
+            this.ExecuteNonQuery();
+        }
+
+        public void EliminarPostulacion(int usuarioId, int viajeId)
+        {
+            this.ExecuteCommandText = DELETE_POSTULACION;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parViajeId", viajeId);            
 
             //ejecución, retorna el valor del parámetro de retorno
             this.ExecuteNonQuery();

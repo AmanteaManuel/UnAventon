@@ -20,6 +20,8 @@ namespace UnAventon.Viajes
                     DateTime fechaUnMes = fechaActual.AddMonths(1);
 
                     List<Bol.Viaje> viajes = new Bol.Viaje().GetAllByUsuarioId(ActiveUsuario.Id);
+                    if (viajes == null || viajes.Count <= 0)
+                        throw new Exception("El usuario no tiene viajes publicados.");
 
 
                     #region " Pruebas "

@@ -97,9 +97,10 @@
                                                 <th>Nombre</th>
                                                 <th>Apellido</th>
                                                 <th>Reputacion</th>
-                                                <div id="divAccionesPostulacioncol" visible="false" runat="server">
+                                                <div id="divAccionesPostulacioncol" runat="server">
                                                     <th>Aceptar</th>
                                                     <th>Rechazar</th>
+                                                    <th>Eliminar</th>
                                                 </div>
                                             </tr>
                                         </HeaderTemplate>
@@ -116,13 +117,16 @@
                                                 <td>
                                                     <asp:Literal Text='<%# Eval("ReputacioPasajero") %>' runat="server" />                                               
                                                 </td>
-                                                <div id="divAccionesPostulacionbtn" visible="false" runat="server">
+                                                <div id="divAccionesPostulacionbtn" runat="server">
                                                     <td>
-                                                        <asp:LinkButton CssClass="UpdateButton" CommandName="ACEPTAR" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Aceptar"></asp:LinkButton>                                                
+                                                        <asp:LinkButton CssClass="UpdateButton" CommandName="ACEPTAR" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Aceptar" ID="lbAceptar"></asp:LinkButton>                                                
                                                     </td>
 
                                                     <td>
-                                                        <asp:LinkButton CssClass="DeleteButton" CommandName="RECHAZAR" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Rechazar"></asp:LinkButton>
+                                                        <asp:LinkButton CssClass="DeleteButton" CommandName="RECHAZAR" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Rechazar" ID="lbRechazar"></asp:LinkButton>
+                                                    </td>
+                                                    <td>
+                                                        <asp:LinkButton CssClass="DeleteButton" CommandName="ELIMINAR" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Eliminar" ID="lbEliminar"></asp:LinkButton>
                                                     </td>
                                                 </div>
                                             </tr>
