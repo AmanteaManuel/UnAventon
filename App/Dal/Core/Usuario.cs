@@ -51,9 +51,9 @@ namespace Dal.Core
 
         private const string GET_USUARIO_BY_EMAIL = @"Select * from Usuario where Email = '{0}'";
 
-        private const string GET_PASAJEROS_BY_VIAJE_ID = @"SELECT * FROM Postulantes WHERE viajeId = {0} AND EstadoViajeCodigo = 2";
+        private const string GET_PASAJEROS_BY_VIAJE_ID = @"SELECT * FROM Postulantes WHERE viajeId = {0} AND EstadoViaje = 2";
 
-        private const string GET_POSTULANTES_BY_VIAJE_ID = @"SELECT * FROM Postulantes WHERE viajeId = {0} AND EstadoViajeCodigo != 2";
+        private const string GET_POSTULANTES_BY_VIAJE_ID = @"SELECT * FROM Postulantes WHERE viajeId = {0} AND EstadoViaje != 2";
 
         private const string CREATE_POSTULACION = @"INSERT INTO Postulantes (UsuarioId, ViajeId, EstadoViaje) 
 				                                                     output INSERTED.Id
@@ -66,6 +66,9 @@ namespace Dal.Core
         private const string RECHAZAR_POSTULACION = @"UPDATE Postulantes
                                                             SET EstadoViaje = @parEstado
                                                             WHERE UsuarioId = @parUsuarioId AND ViajeId = @parViajeId";
+        private const string GET_POSTULANTE_BY_VIAJE_ID = @"SELECT * FROM Postulantes 
+                                              Where UsuarioId = {0} AND ViajeId = {1}";
+
 
         #endregion
 
@@ -102,6 +105,11 @@ namespace Dal.Core
         public DataSet GetPostulantesByViajeId(int id)
         {
             this.SelectCommandText = string.Format(GET_POSTULANTES_BY_VIAJE_ID, id);
+            return this.Load();
+        }
+        public DataSet GetUsuarioByViajeId(int userid, int viajeId)
+        {
+            this.SelectCommandText = string.Format(GET_POSTULANTE_BY_VIAJE_ID, userid, viajeId);
             return this.Load();
         }
 
@@ -239,6 +247,7 @@ namespace Dal.Core
             //ejecución, retorna el valor del parámetro de retorno
             this.ExecuteNonQuery();
         }
+
         #endregion
 
         #region " Method "

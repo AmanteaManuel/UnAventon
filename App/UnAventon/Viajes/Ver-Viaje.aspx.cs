@@ -33,6 +33,8 @@ namespace UnAventon.Viajes
                         int IdDesencriptado = Convert.ToInt32(id);
                         Viaje = new Bol.Viaje().GetInstanceById(IdDesencriptado);
                         PreparePage();
+                        
+                       
                     }
                     else
                         throw new Exception("Error en la Url. ");
@@ -64,7 +66,59 @@ namespace UnAventon.Viajes
             liFecha.Text = Viaje.FechaSalida.Date.ToShortDateString();
             liHora.Text = Viaje.HoraSalida;
             liLugares.Text = Viaje.LugaresDisponibles.ToString();
-            
+
+
+            List<Bol.Usuario> vehiculos = Bol.Usuario.GetPostulantesByViajeId(Viaje.Id);
+            rptListaPostulantes.DataSource = vehiculos;
+            rptListaPostulantes.DataBind();
+
+        }
+
+        protected void rptListaPostulantes_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            try
+            {
+                int id;
+                int.TryParse(((LinkButton)e.CommandSource).CommandArgument, out id);                
+
+                if (e.CommandName.ToUpper().Equals("ACEPTAR"))
+                {
+                    Bol.Usuario u = Bol.Usuario.GetPostulanteByViajeId(id, Viaje.Id);
+
+
+                    Bol.Usuario.AceptarPostulacion(id, Viaje.Id);
+                }
+                if (e.CommandName.ToUpper().Equals("RECHAZAR"))
+                {
+                    Bol.Usuario.RechazarPostulacion(id, Viaje.Id);
+                }
+            }
+            catch (Exception ex)
+            {
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = ex.Message;
+            }
+        }
+
+        protected void rptListaPostulantes_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType != ListItemType.AlternatingItem && e.Item.ItemType != ListItemType.Item) return;
+
+            //HtmlGenericControl divAccionesPostulacioncol = (HtmlGenericControl)Item.FindControl("divAccionesPostulacioncol");
+            //HtmlGenericControl divAccionesPostulacionbtn = (HtmlGenericControl)Page.FindControl("divAccionesPostulacionbtn");
+
+            //if (Viaje.UsuarioId == ActiveUsuario.Id)
+            //{
+            //    divAccionesPostulacioncol.Visible = true;
+            //    divAccionesPostulacionbtn.Visible = true;
+            //}
+            //else
+            //{
+            //    divAccionesPostulacioncol.Visible = false;
+            //    divAccionesPostulacionbtn.Visible = false;
+            //}
         }
     }
 }

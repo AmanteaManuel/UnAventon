@@ -305,7 +305,7 @@ namespace Bol
                 return FillList(ds);
             }
             catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
-        }
+        }        
 
         #endregion
 
@@ -445,7 +445,7 @@ namespace Bol
                     viaje._horaSalida,
                     viaje.Precio,
                     viaje.Descripcion,
-                    viajeId
+                    viaje.Id
                     );
 
                     scope.Complete();

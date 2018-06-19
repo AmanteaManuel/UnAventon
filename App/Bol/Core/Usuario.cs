@@ -355,7 +355,7 @@ namespace Bol
                 return null;            
         }
 
-        internal static List<Usuario> GetPostulantesByViajeId(int id)
+        public static List<Usuario> GetPostulantesByViajeId(int id)
         {
             DataSet userdr;
             userdr = new Dal.Core.Usuario().GetPostulantesByViajeId(id);
@@ -365,7 +365,22 @@ namespace Bol
                 return null; ;
         }
 
-        internal static List<Usuario> GetPasajerosByViajeId(int id)
+        public static Usuario GetPostulanteByViajeId(int Userid, int viajeId)
+        {
+            DataSet userdr;
+            userdr = new Dal.Core.Usuario().GetUsuarioByViajeId(Userid, viajeId);
+            if (userdr.Tables[0].Rows.Count > 0)
+                return FillObject(userdr.Tables[0].Rows[0]);
+            else
+                return null;
+        }
+
+        /// <summary>
+        /// Metodo que obtiene todos los postulantes de un viaje
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static List<Usuario> GetPasajerosByViajeId(int id)
         {
             DataSet userdr;
             userdr = new Dal.Core.Usuario().GetPasajerosByViajeId(id);
@@ -433,6 +448,12 @@ namespace Bol
             catch (Exception e) { throw new Exception("Error en Update" + e.Message); }
         }
 
+        /// <summary>
+        /// metodo que crea un postulacion cuando el
+        /// </summary>
+        /// <param name="usuarioId"></param>
+        /// <param name="viajeId"></param>
+        /// <returns></returns>
         public static int CreatePostulacion(int usuarioId, int viajeId)
         {
             int outId = 0;
@@ -444,15 +465,29 @@ namespace Bol
             catch (Exception e) { throw new Exception("Error en Insert" + e.Message); }
         }
 
+        /// <summary>
+        /// Metodo que acepta un postulante al viaje
+        /// </summary>
+        /// <param name="usuarioId"></param>
+        /// <param name="viajeId"></param>
         public static void AceptarPostulacion(int usuarioId, int viajeId)
         {            
             try
             {
-               new Dal.Core.Usuario().AceptarPostulacion(usuarioId, viajeId);                
+                Usuario u = GetPostulanteByViajeId(usuarioId, viajeId);
+                if (u != null)
+                    new Dal.Core.Usuario().AceptarPostulacion(usuarioId, viajeId);
+                else
+                    throw new Exception("El usuario ya fue aceptado. ");
             }
             catch (Exception e) { throw new Exception("Error en Insert" + e.Message); }
         }
 
+        /// <summary>
+        /// Metodo que rechaza un postulante al viaje
+        /// </summary>
+        /// <param name="usuarioId"></param>
+        /// <param name="viajeId"></param>
         public static void RechazarPostulacion(int usuarioId, int viajeId)
         {            
             try
