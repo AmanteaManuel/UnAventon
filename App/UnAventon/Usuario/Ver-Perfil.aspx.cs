@@ -127,5 +127,23 @@ namespace UnAventon.Usuario
                 
             }
         }
+
+        protected void rptPostulaciones_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            try
+            {
+                int id;
+                int.TryParse(((LinkButton)e.CommandSource).CommandArgument, out id);
+
+                if (e.CommandName.ToUpper().Equals("DETALLE"))
+                {
+                    string idenc = new Bol.Core.Service.Tools().Encripta(id.ToString());
+                    Response.Redirect(Page.ResolveUrl("~/Viajes/Ver-Viaje.aspx?Id=" + idenc), true);
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
     }
 }
