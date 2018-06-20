@@ -32,12 +32,16 @@ namespace Bol
         private int _usuarioId;
         private List<Usuario> _postulantes;
         private bool _siActivo;
+        private int _estadoViaje;
+        private int _usuarioPasajeroId;
 
         #endregion
 
         #region " Properties "
 
-        public enum EstadoViaje: int { Pendiente = 1, Aceptado = 2, Rechazado = 3}
+
+        //public enum EstadoViaje: int { Pendiente = 1, Aceptado = 2, Rechazado = 3}
+
         /// <summary>
         /// Identificador univoco de la bd
         /// </summary>
@@ -48,6 +52,26 @@ namespace Bol
                 return _id;
             }
             set { _id = value; }
+        }
+
+        //solo usarla para el ver perfil
+        public int EstadoViaje
+        {
+            get
+            {
+                return _estadoViaje;
+            }
+            set { _estadoViaje = value; }
+        }
+
+        //solo usarla para el ver perfil
+        public int UsuarioPasajeroId
+        {
+            get
+            {
+                return _usuarioPasajeroId;
+            }
+            set { _usuarioPasajeroId = value; }
         }
 
         public int UsuarioId
@@ -331,7 +355,17 @@ namespace Bol
                 return FillList(ds);
             }
             catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
-        }        
+        }
+
+        public static List<Viaje> GetPostulacionesByUsuarioId(int id)
+        {
+            DataSet userdr;
+            userdr = new Dal.Core.Viaje().GetPostulacionesByUsuarioId(id);
+            if (userdr.Tables[0].Rows.Count > 0)
+                return FillList(userdr);
+            else
+                return null;
+        }
 
         #endregion
 
@@ -348,7 +382,7 @@ namespace Bol
 
                 if (dr.Table.Columns.Contains("Descripcion") && !Convert.IsDBNull(dr["Descripcion"]))
                     oBol.Descripcion = Convert.ToString(dr["Descripcion"]);
-             
+
                 if (dr.Table.Columns.Contains("CiudadDestinoId") && !Convert.IsDBNull(dr["CiudadDestinoId"]))
                     oBol.DestinoId = Convert.ToInt32(dr["CiudadDestinoId"]);
 
@@ -382,6 +416,14 @@ namespace Bol
                 if (dr.Table.Columns.Contains("SiActivo") && !Convert.IsDBNull(dr["SiActivo"]))
                     oBol.SiActivo = Convert.ToBoolean(dr["SiActivo"]);
 
+                if (dr.Table.Columns.Contains("SiActivo") && !Convert.IsDBNull(dr["SiActivo"]))
+                    oBol.SiActivo = Convert.ToBoolean(dr["SiActivo"]);
+
+                if (dr.Table.Columns.Contains("EstadoViaje") && !Convert.IsDBNull(dr["EstadoViaje"]))
+                    oBol.EstadoViaje = Convert.ToInt32(dr["EstadoViaje"]);
+
+                if (dr.Table.Columns.Contains("UsuarioId") && !Convert.IsDBNull(dr["UsuarioId"]))
+                    oBol.UsuarioPasajeroId = Convert.ToInt32(dr["UsuarioId"]);
 
             }
             catch (Exception ex) { throw new Exception("Error en el metodo Fill" + ex.Message); }

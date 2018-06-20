@@ -50,6 +50,12 @@ namespace UnAventon.Usuario
             rptVehiculos.DataBind();
 
             #endregion
+
+            List<Bol.Viaje> postulaciones = Bol.Viaje.GetPostulacionesByUsuarioId(ActiveUsuario.Id);
+            rptPostulaciones.DataSource = postulaciones;
+            rptPostulaciones.DataBind();
+                
+
         }
 
         protected void rptVehiculos_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -90,6 +96,35 @@ namespace UnAventon.Usuario
                 divalert.Visible = true;
                 Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
                 lialert.Text = ex.Message;
+            }
+        }
+
+        protected void rptPostulaciones_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Bol.Viaje v = (Bol.Viaje)e.Item.DataItem;
+                if (v == null)
+                    return;
+
+                Label liEstado = (Label)e.Item.FindControl("liEstado");
+
+                if (v.EstadoViaje == 1)
+                {
+                    liEstado.Text = "Pendiente";
+                    liEstado.CssClass = "font-Yellow";
+                }
+                if (v.EstadoViaje == 2)
+                {
+                    liEstado.Text = "Aceptado";
+                    liEstado.CssClass = "font-Green";
+                }
+                if (v.EstadoViaje == 3)
+                {
+                    liEstado.Text = "Rechazado";
+                    liEstado.CssClass = "font-Red";
+                }
+                
             }
         }
     }

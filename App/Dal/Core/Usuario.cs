@@ -76,6 +76,10 @@ namespace Dal.Core
                                                             SET ReputacionChofer = ReputacionChofer-1
                                                             WHERE Id = @parUsuarioId";
 
+        private const string GET_PASAJEROS_BY_USUARIO_ID = @"select * from Viajes v 
+                                                                INNER JOIN Postulantes p on p.ViajeId = v.Id
+                                                                where p.UsuarioId = {0}";
+
 
         #endregion
 
@@ -103,9 +107,9 @@ namespace Dal.Core
             throw new NotImplementedException();
         }
 
-        public DataSet GetPasajerosByViajeId(int id)
+        public DataSet GetPostulacionesByUsuarioId(int id)
         {
-            this.SelectCommandText = string.Format(GET_PASAJEROS_BY_VIAJE_ID, id);
+            this.SelectCommandText = string.Format(GET_PASAJEROS_BY_USUARIO_ID, id);
             return this.Load();
         }
 
