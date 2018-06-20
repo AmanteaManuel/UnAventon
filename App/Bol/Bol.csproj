@@ -64,5 +64,8 @@
   <ItemGroup>
     <Content Include="Pendientes.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\Enum\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

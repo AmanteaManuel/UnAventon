@@ -79,11 +79,12 @@
                 </div>
             </div>
         </div>
-        <asp:Button Text="Eliminar" runat="server" ID="btnEliminarViaje" CssClass="boton_personalizado" OnClick="btnEliminarViaje_Click" />
+        <asp:Button Text="Eliminar" runat="server" ID="btnEliminarViaje" CssClass="boton_personalizado" OnClick="btnEliminarViaje_Click" OnClientClick="return confirm('¿Desea eliminar el viaje?');" />
         <asp:Button Text="Modificar" runat="server" ID="btnModificar" CssClass="boton_personalizado" OnClick="btnModificar_Click" />
+        <asp:Button Text="Postularse" runat="server" ID="btnPostularse" CssClass="boton_personalizado" OnClick="btnPostularse_Click" OnClientClick="return confirm('¿Desea postularse al viaje?');" />
 
     <!-- Lista de postulantes-->
-    <div class="row">    
+    <div class="row" id="divPostulacion" runat="server">    
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
             <div class="panel panel-info">
                 <div class="panel-heading">
@@ -100,12 +101,13 @@
                                                 <th>Nombre</th>
                                                 <th>Apellido</th>
                                                 <th>Reputacion</th>
-                                                <div id="divAccionesPostulacioncol" runat="server">
+                                                <%--<div id="divAccionesPostulacioncol" runat="server">--%>
                                                     <th>Aceptar</th>
                                                     <th>Rechazar</th>
                                                     <th>Eliminar</th>
                                                     <th>Datos</th>
-                                                </div>
+                                                    <th>Estado</th>
+                                               <%-- </div>--%>
                                             </tr>
                                         </HeaderTemplate>
                                         <ItemTemplate>
@@ -121,7 +123,7 @@
                                                 <td>
                                                     <asp:Literal Text='<%# Eval("ReputacioPasajero") %>' runat="server" />                                               
                                                 </td>
-                                                <div id="divAccionesPostulacionbtn" runat="server">
+                                                <div>
                                                     <td>
                                                         <asp:LinkButton CssClass="UpdateButton" CommandName="ACEPTAR" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Aceptar" ID="lbAceptar"></asp:LinkButton>                                                
                                                     </td>
@@ -130,11 +132,15 @@
                                                         <asp:LinkButton CssClass="DeleteButton" CommandName="RECHAZAR" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Rechazar" ID="lbRechazar"></asp:LinkButton>
                                                     </td>
                                                     <td>
-                                                        <asp:LinkButton CssClass="DeleteButton" CommandName="ELIMINAR" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Eliminar" ID="lbEliminar"></asp:LinkButton>
+                                                        <asp:LinkButton CssClass="DeleteButton" CommandName="ELIMINAR" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Eliminar" ID="lbEliminar" OnClientClick="return confirm('¿Desea eliminar el pasajero?');"></asp:LinkButton>
                                                     </td>
                                                     <td>
                                                         <asp:LinkButton CssClass="UpdateButton" CommandName="DATOS" CommandArgument='<%#Eval("Id") %>' runat="server" Text="Datos" ID="lbDatos"></asp:LinkButton>
                                                     </td>
+                                                    <td>
+                                                        <strong ><asp:Label runat="server" id="liEstado" /></strong>                                                
+                                                    </td>
+                                                        
                                                 </div>
                                             </tr>
                                         </ItemTemplate>
@@ -151,7 +157,8 @@
      <div class="row" id="divDatosUsuario" runat="server">
                     <div class="alert alert-success" role="alert">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
-                       <label><strong>Email: </strong></label> <asp:Literal runat="server" ID="liEmail" /><br>
+                        <div class="center"><label><strong>Datos del Usuario</strong></label></div> <br>                       
+                        <label><strong>Email: </strong></label> <asp:Literal runat="server" ID="liEmail" /><br>
                         <label><strong>Nombre: </strong></label><asp:Literal runat="server" ID="liNombre" /><br>
                         <label><strong>Apellido: </strong></label><asp:Literal runat="server" ID="liApellido" /><br>
                         <label><strong>Reputacion: </strong></label><asp:Literal runat="server" ID="liReputacion"/>

@@ -24,6 +24,12 @@ namespace UnAventon.Viajes
         {
             try
             {
+                //oculto los mensajes
+                HtmlGenericControl divMsjOk = (HtmlGenericControl)this.Master.FindControl("divMsjOk");
+                divMsjOk.Visible = false;
+                HtmlGenericControl divMsjAlerta = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divMsjAlerta.Visible = false;
+
                 if (!IsPostBack)
                 {
                     if (Request.QueryString["id"] != null)
@@ -50,21 +56,25 @@ namespace UnAventon.Viajes
         }
 
         private void PreparePage()
-        {
-
+        {             
+            //si el usuario activo es el dueño del viaje
             if (Viaje.UsuarioId == ActiveUsuario.Id)
             {
+                divPostulacion.Visible = true;
                 btnEliminarViaje.Visible = true;
                 btnModificar.Visible = true;
-            }               
+                btnPostularse.Visible = false;
+            }
+            //si el usuario activo no es el dueño del viaje
             else
             {
+                divPostulacion.Visible = false;
                 btnEliminarViaje.Visible = false;
                 btnModificar.Visible = false;
-            }              
-
+                btnPostularse.Visible = true;
+            }          
+            
             divDatosUsuario.Visible = false;
-
             liCudadOrigen.Text = Viaje.Origen.Descripcion;
             liCiudadDestino.Text = Viaje.Destino.Descripcion;
             liPrecio.Text = Viaje.Precio.ToString();
@@ -85,9 +95,14 @@ namespace UnAventon.Viajes
             List<Bol.Usuario> Postulantes = Bol.Usuario.GetPostulantesByViajeId(Viaje.Id);
             List<Bol.Usuario> postulantesCargados = new List<Bol.Usuario>();
             if (Postulantes == null || Postulantes.Count <= 0) return;
+            int estado;
             foreach (var p in Postulantes)
             {
-                postulantesCargados.Add(new Bol.Usuario().GetInstanceById(p.Id));
+                estado = p.EstadoViaje;
+                Bol.Usuario pos = new Bol.Usuario().GetInstanceById(p.Id);
+                pos.EstadoViaje = estado;
+                postulantesCargados.Add(pos);
+
             }
             rptListaPostulantes.DataSource = postulantesCargados;
             rptListaPostulantes.DataBind();
@@ -106,24 +121,43 @@ namespace UnAventon.Viajes
                 {
                     Bol.Usuario u = Bol.Usuario.GetPostulanteByViajeId(id, Viaje.Id);
                     Bol.Usuario.AceptarPostulacion(id, Viaje.Id);
+                    Bol.Viaje.RestarUnLUgar(Viaje.Id);
+                    Response.Redirect(Request.RawUrl);
                 }
                 if (e.CommandName.ToUpper().Equals("RECHAZAR"))
                 {
                     Bol.Usuario.RechazarPostulacion(id, Viaje.Id);
+                    Response.Redirect(Request.RawUrl);
                 }
 
                 if (e.CommandName.ToUpper().Equals("ELIMINAR"))
                 {
-                    Bol.Usuario.EliminarPostulacion(id, Viaje.Id);
+                    Bol.Usuario u = Bol.Usuario.GetPostulanteByViajeId(id, Viaje.Id);
+                    //Aceptado
+                    if (u.EstadoViaje == 2)
+                    {
+
+                        Bol.Usuario.EliminarPostulacion(id, Viaje.Id);
+                        Bol.Viaje.SumarUnLUgar(Viaje.Id);
+                        Bol.Usuario.RestarReputacionChofer(ActiveUsuario.Id);
+                        Response.Redirect(Request.RawUrl);
+
+                    }
+                    else
+                    {
+                        Bol.Usuario.EliminarPostulacion(id, Viaje.Id);
+                        Response.Redirect(Request.RawUrl);
+                    }
+                                     
                 }
                 if (e.CommandName.ToUpper().Equals("DATOS"))
                 {
                     divDatosUsuario.Visible = true;
                     Bol.Usuario usuario = new Bol.Usuario().GetInstanceById(id);
-                    liEmail.Text = usuario.Email;
-                    liNombre.Text = usuario.Nombre;
-                    liApellido.Text = usuario.Apellido;
-                    liReputacion.Text = Convert.ToString(usuario.ReputacioPasajero);
+                    liEmail.Text = " " + usuario.Email;
+                    liNombre.Text = " "+usuario.Nombre;
+                    liApellido.Text = " " + usuario.Apellido;
+                    liReputacion.Text = " " + Convert.ToString(usuario.ReputacioPasajero);
 
                 }
             }
@@ -138,46 +172,70 @@ namespace UnAventon.Viajes
 
         protected void rptListaPostulantes_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
+
             Bol.Usuario u = (Bol.Usuario)e.Item.DataItem;
             if (u == null)
-                return;
+                return;            
+            //if (e.Item.ItemType == ListItemType.Header)
+            //{
+            //    HtmlGenericControl divAccionesPostulacioncol = (HtmlGenericControl)e.Item.FindControl("divAccionesPostulacioncol");
 
-            if (e.Item.ItemType == ListItemType.Header)
-            {
-                HtmlGenericControl divAccionesPostulacioncol = (HtmlGenericControl)e.Item.FindControl("divAccionesPostulacioncol");
-
-                if (Viaje.UsuarioId == ActiveUsuario.Id)
-                    divAccionesPostulacioncol.Visible = true;
-                else
-                    divAccionesPostulacioncol.Visible = false;
-            }
+            //    if (Viaje.UsuarioId == ActiveUsuario.Id)
+            //        divAccionesPostulacioncol.Visible = true;
+            //    else
+            //        divAccionesPostulacioncol.Visible = false;
+            //}
 
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {               
-                HtmlGenericControl divAccionesPostulacionbtn = (HtmlGenericControl)e.Item.FindControl("divAccionesPostulacionbtn");
+            {   
                 LinkButton lbAceptar = (LinkButton)e.Item.FindControl("lbAceptar");
                 LinkButton lbRechazar = (LinkButton)e.Item.FindControl("lbRechazar");
                 LinkButton lbDatos = (LinkButton)e.Item.FindControl("lbDatos");
+                Label liEstado = (Label)e.Item.FindControl("liEstado");
 
-                //si el usuario legueado es igual al usuario que
+                //si el usuario logueado es igual al usuario que creo el viaje
                 if (Viaje.UsuarioId == ActiveUsuario.Id)
-                {
-                    divAccionesPostulacionbtn.Visible = true;
-                    //si el usuario fue aceptado o rechazado bloqueo los botones
-                    if(u.EstadoViaje != 2)
+                {      
+                    liEstado.Visible = true;
+                    liEstado.CssClass = "";
+
+                    //Usuario Pendiente
+                    if (u.EstadoViaje == 1)
                     {
+                        lbDatos.CssClass = "UpdateButton not-allowed";
+
+                        lbDatos.Enabled = false;
+                        liEstado.Text = "Pendiente";
+                        liEstado.CssClass = "font-Yellow";
+                        
+                    }
+
+                    //Usuario aceptado
+                    if (u.EstadoViaje == 2)
+                    {
+                        lbAceptar.CssClass = "UpdateButton not-allowed";
+                        lbRechazar.CssClass = "DeleteButton not-allowed";
+
                         lbAceptar.Enabled = false;
                         lbRechazar.Enabled = false;
+                        liEstado.Text = "Aceptado";
+                        liEstado.CssClass = "font-Green";
                     }
-                    if (u.EstadoViaje != 1)
+
+                    //Usuario Rechazado
+                    if (u.EstadoViaje == 3)
                     {
+                        lbAceptar.CssClass = "UpdateButton not-allowed";
+                        lbRechazar.CssClass = "DeleteButton not-allowed";
+                        lbDatos.CssClass = "DeleteButton not-allowed";
+
+                        lbAceptar.Enabled = false;
+                        lbRechazar.Enabled = false;
                         lbDatos.Enabled = false;
+                        liEstado.Text = "Rechazado";
+                        liEstado.CssClass = "font-Red";
                     }
-                }
-                else
-                {
-                    divAccionesPostulacionbtn.Visible = false;
-                }
+                }                
             }
         }
 
@@ -205,6 +263,40 @@ namespace UnAventon.Viajes
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        protected void btnPostularse_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                Bol.Usuario Postulante = Bol.Usuario.GetPostulanteByViajeId(ActiveUsuario.Id, Viaje.Id);
+                //pregunto si el postulante ya esta postulado
+                if (Postulante == null)
+                {
+                    if(Viaje.LugaresDisponiblesActual > 0)
+                    {
+                        Bol.Usuario.CreatePostulacion(ActiveUsuario.Id, Viaje.Id);
+                        HtmlGenericControl divMsjOk = (HtmlGenericControl)this.Master.FindControl("divMsjOk");
+                        divMsjOk.Visible = true;
+                        Literal liMsjOk = (Literal)this.Master.FindControl("liMsjOk");
+                        liMsjOk.Text = "Postulacion Exitosa";
+                    }
+
+                    else
+                        throw new Exception("El viaje no dispone lugares.");
+                }
+                else
+                    throw new Exception("Ya esta postulado a este viaje.");                
+                
+            }
+            catch (Exception ex)
+            {
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = ex.Message;
             }
         }
     }

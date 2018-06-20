@@ -53,10 +53,10 @@ namespace Dal.Core
 
         private const string GET_PASAJEROS_BY_VIAJE_ID = @"SELECT * FROM Postulantes WHERE viajeId = {0} AND EstadoViaje = 2";
 
-        private const string GET_POSTULANTES_BY_VIAJE_ID = @"SELECT * FROM Postulantes WHERE viajeId = {0} AND EstadoViaje != 2";
+        private const string GET_POSTULANTES_BY_VIAJE_ID = @"SELECT * FROM Postulantes WHERE viajeId = {0}";
 
         private const string CREATE_POSTULACION = @"INSERT INTO Postulantes (UsuarioId, ViajeId, EstadoViaje) 
-				                                                     output INSERTED.Id
+				                                                     output INSERTED.UsuarioId
 				                                                     VALUES (@parUsuarioId,@parViajeId, 1)";
 
         private const string ACEPTAR_POSTULACION = @"UPDATE Postulantes
@@ -70,7 +70,11 @@ namespace Dal.Core
         private const string GET_POSTULANTE_BY_VIAJE_ID = @"SELECT * FROM Postulantes 
                                               Where UsuarioId = {0} AND ViajeId = {1}";
 
-        private const string DELETE_POSTULACION = @"DELETE FROM postulantes where UsuarioId = {0} AND ViajeId = {1}";
+        private const string DELETE_POSTULACION = @"DELETE FROM postulantes where UsuarioId = @parUsuarioId AND ViajeId = @parViajeId";
+
+        private const string RESTAR_REPUTACION_CHOFER = @"UPDATE Usuario
+                                                            SET ReputacionChofer = ReputacionChofer-1
+                                                            WHERE Id = @parUsuarioId";
 
 
         #endregion
@@ -110,6 +114,12 @@ namespace Dal.Core
             this.SelectCommandText = string.Format(GET_POSTULANTES_BY_VIAJE_ID, id);
             return this.Load();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="viajeId"></param>
+        /// <returns></returns>
         public DataSet GetUsuarioByViajeId(int userid, int viajeId)
         {
             this.SelectCommandText = string.Format(GET_POSTULANTE_BY_VIAJE_ID, userid, viajeId);
@@ -197,6 +207,12 @@ namespace Dal.Core
             this.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Metodo que crea una postulacion  y retorna el id del usuario postulado
+        /// </summary>
+        /// <param name="usuarioId"></param>
+        /// <param name="viajeId"></param>
+        /// <returns></returns>
         public int CreatePostulacion(int usuarioId, int viajeId)
         {
             //query a ejecutar
@@ -261,6 +277,19 @@ namespace Dal.Core
             this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
 
             this.ExecuteParameters.Parameters.AddWithValue("@parViajeId", viajeId);            
+
+            //ejecución, retorna el valor del parámetro de retorno
+            this.ExecuteNonQuery();
+        }
+
+        public void RestarReputacionChofer(int usuarioId)
+        {
+            this.ExecuteCommandText = RESTAR_REPUTACION_CHOFER;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);            
 
             //ejecución, retorna el valor del parámetro de retorno
             this.ExecuteNonQuery();

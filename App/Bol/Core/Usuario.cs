@@ -28,6 +28,8 @@ namespace Bol
         private int _reputacionChofer;
         private int _reputacioPasajero;
         int _estadoViaje;
+        private string _estadoViajeDescripcion;
+
 
         #endregion
 
@@ -45,6 +47,18 @@ namespace Bol
             set
             {
                 _nombreUsuario = value;
+            }
+        }
+
+        public string EstadoViajeDescripcion
+        {
+            get
+            {
+                return _estadoViajeDescripcion;
+            }
+            set
+            {
+                _estadoViajeDescripcion = value;
             }
         }
 
@@ -523,6 +537,40 @@ namespace Bol
                 new Dal.Core.Usuario().EliminarPostulacion(usuarioId, viajeId);
             }
             catch (Exception e) { throw new Exception("Error en Eliminarion" + e.Message); }
+        }
+
+        public static void SumarReputacionChofer()
+        {
+
+        }
+
+        public static void RestarReputacionChofer(int usuarioId)
+        {
+            try
+            {
+                new Dal.Core.Usuario().RestarReputacionChofer(usuarioId);
+            }
+            catch (Exception e) { throw new Exception("Error en Eliminarion" + e.Message); }
+        }
+
+        public static void ObtenerReputacionChofer(int usuarioId)
+        {
+
+        }
+
+        public static void SumarReputacionPasajero(int usuarioId)
+        {
+
+        }
+
+        public static void RestarReputacionPasajero(int usuarioId)
+        {
+
+        }
+
+        public static void ObtenerReputacionPasajero(int usuarioId)
+        {
+
         }
 
         #endregion

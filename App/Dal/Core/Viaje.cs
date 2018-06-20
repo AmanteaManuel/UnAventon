@@ -17,7 +17,9 @@ namespace Dal.Core
 			                                        FechaSalida,
                                                     HoraSalida,
 			                                        LugaresDisponibles,
+                                                    LugaresDisponiblesActual,
 			                                        Descripcion,
+                                                    SiActivo,
                                                     UsuarioId)
                                                 output INSERTED.Id
                                                 VALUES
@@ -28,8 +30,10 @@ namespace Dal.Core
 			                                        @parPrecio,			
 			                                        @parFechaSalida,
                                                     @parHoraSalida,
-			                                        @parLugaresDisponibles,           
+			                                        @parLugaresDisponibles, 
+                                                    @parLugaresDisponiblesActual, 
 			                                        @parDescripcion,
+                                                    1,
                                                     @parUsuarioId)";
 
         private const string GET_INSTANCE_BY_ID = @"SELECT * FROM Viajes
@@ -59,6 +63,14 @@ namespace Dal.Core
 	                                                    Descripcion = @parDescripcion
                                                     WHERE Id = @parViajeId;";
 
+        private const string RESTAR_LUGAR = @"UPDATE Viajes
+                                                SET LugaresDisponiblesActual = LugaresDisponiblesActual-1
+                                                WHERE Id = @parviajeId";
+
+        private const string SUMAR_LUGAR = @"UPDATE Viajes
+                                                SET LugaresDisponiblesActual = LugaresDisponiblesActual+1
+                                                WHERE Id = @parviajeId";
+
         public int Create(int origenId, int destinoId, string duracion, int lugaresDisponibles, int vehiculoId, DateTime fechaSalida, string horaSalida, double precio, string descripcion, int UsuarioId)
         {
             //query a ejecutar
@@ -76,6 +88,7 @@ namespace Dal.Core
             this.ExecuteParameters.Parameters.AddWithValue("@parDuracion", duracion);
 
             this.ExecuteParameters.Parameters.AddWithValue("@parLugaresDisponibles", lugaresDisponibles);
+            this.ExecuteParameters.Parameters.AddWithValue("@parLugaresDisponiblesActual", lugaresDisponibles);
 
             this.ExecuteParameters.Parameters.AddWithValue("@parVehiculoId", vehiculoId);
 
@@ -160,6 +173,30 @@ namespace Dal.Core
             this.ExecuteParameters.Parameters.AddWithValue("@parViajeId", viajeId);
 
             //ejecución, retorna el valor del parámetro de retorno
+            this.ExecuteNonQuery();
+        }
+
+        public void RestarUnLUgar(int viajeId)
+        {
+            this.ExecuteCommandText = RESTAR_LUGAR;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parviajeId", viajeId);
+
+            this.ExecuteNonQuery();
+        }
+
+        public void SumarUnLUgar(int viajeId)
+        {
+            this.ExecuteCommandText = SUMAR_LUGAR;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parviajeId", viajeId);
+
             this.ExecuteNonQuery();
         }
     }

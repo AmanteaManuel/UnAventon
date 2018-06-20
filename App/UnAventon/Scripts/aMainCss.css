@@ -222,3 +222,23 @@ nomargin {
 .font-black {
     text-decoration-color: black;
 }
+
+.font-Green {
+    color: #008000;
+}
+
+.font-Red {
+    color: red;
+}
+
+.font-Yellow {
+    color: #ffd900;
+}
+
+.not-allowed{
+    cursor: not-allowed;
+}
+
+.center {
+    text-align: center; 
+}

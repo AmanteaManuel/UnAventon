@@ -57,6 +57,7 @@
   <ItemGroup>
     <Content Include="Core\Base de Datos\13-06-2018 data.sql" />
     <Content Include="Core\Base de Datos\13-06-2018 esquema.sql" />
+    <Content Include="Core\Base de Datos\EstadoViaje.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

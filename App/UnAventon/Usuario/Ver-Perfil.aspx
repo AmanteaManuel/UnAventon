@@ -92,7 +92,7 @@
                                                     <td>
                                                         <asp:Literal Text='<%# Eval("AsientosDisponibles") %>' runat="server" /></td>
                                                     <td>
-                                                        <asp:LinkButton CssClass="DeleteButton" ID="linkDetalle" CommandName="DELETE" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Eliminar"></asp:LinkButton></td>
+                                                        <asp:LinkButton CssClass="DeleteButton" ID="linkDetalle" CommandName="DELETE" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Eliminar" OnClientClick="return confirm('¿Desea eliminar el vehículo?');"></asp:LinkButton></td>
                                                     <td>
                                                         <asp:LinkButton CssClass="UpdateButton" ID="LinkButton1" CommandName="UPDATE" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Modificar"></asp:LinkButton></td>
                                                     <%--<asp:Button  runat="server" ID="btnBorraVehiculo" OnClick="btnBorraVehiculo_Click" Text="X"/>   --%>

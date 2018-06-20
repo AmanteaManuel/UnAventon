@@ -28,28 +28,52 @@ namespace UnAventon
 		{
             try
             {
-                
-                    string path = HttpContext.Current.Request.Url.AbsolutePath;
 
-                    if (path.Contains("alta-Usuario.aspx"))
-                        lbModificarDatos.Enabled = false;
+                string path = HttpContext.Current.Request.Url.AbsolutePath;
 
-                    if (path.Contains("Publicar-Viaje.aspx"))
-                        lbPublicarViaje.Enabled = false;
+                if (path.Contains("alta-Usuario.aspx"))
+                {
+                    lbModificarDatos.CssClass = "links not-allowed";
+                    lbModificarDatos.Enabled = false;
+                }
 
-                    if (path.Contains("Listado-de-Viajes.aspx"))
-                        lbListarViajes.Enabled = false;
+                if (path.Contains("Publicar-Viaje.aspx"))
+                {
+                    lbPublicarViaje.Enabled = false;
+                    lbPublicarViaje.CssClass = "links not-allowed";
+                }
 
-                    if (path.Contains("Ver-Perfil.aspx"))
-                        lbVerPerfil.Enabled = false;
+                if (path.Contains("Listado-de-Viajes.aspx"))
+                {
+                    lbListarViajes.Enabled = false;
+                    lbListarViajes.CssClass = "links not-allowed";
+                }
 
-                    if (path.Contains("Agregar-Vehiculo.aspx"))
-                        lbRegistrarVehiculo.Enabled = false;
+                if (path.Contains("Ver-Perfil.aspx"))
+                {
+                    lbVerPerfil.Enabled = false;
+                    lbVerPerfil.CssClass = "links not-allowed";
+                }
 
-                    if (path.Contains("Mis-Viajes.aspx"))
-                        lbMisViajes.Enabled = false;
+                if (path.Contains("Agregar-Vehiculo.aspx"))
+                {
+                    lbRegistrarVehiculo.Enabled = false;
+                    lbRegistrarVehiculo.CssClass = "links not-allowed";
+                }
 
+                if (path.Contains("Mis-Viajes.aspx"))
+                {
+                    lbMisViajes.Enabled = false;
+                    lbMisViajes.CssClass = "links not-allowed";
+                }
+
+                if (path.Contains("AgregarVehiculo.aspx"))
+                {
+                    lbRegistrarVehiculo.Enabled = false;
+                    lbRegistrarVehiculo.CssClass = "links not-allowed";
+                }
             }
+
             catch (Exception)
             {
                 //HtmlGenericControl divalert = (HtmlGenericControl)Page.FindControl("divMsjAlerta");

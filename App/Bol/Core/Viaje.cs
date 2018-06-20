@@ -22,6 +22,7 @@ namespace Bol
         private int _origenId;
         private string _duracion;
         private int _lugaresDisponibles;
+        private int _lugaresDisponiblesActual;
         private DateTime _fechaSalida;
         private string _horaSalida;
         private double _precio;
@@ -30,12 +31,13 @@ namespace Bol
         private Usuario _usuario;
         private int _usuarioId;
         private List<Usuario> _postulantes;
-
+        private bool _siActivo;
 
         #endregion
 
         #region " Properties "
 
+        public enum EstadoViaje: int { Pendiente = 1, Aceptado = 2, Rechazado = 3}
         /// <summary>
         /// Identificador univoco de la bd
         /// </summary>
@@ -69,6 +71,18 @@ namespace Bol
             set
             {
                 _codigo = value;
+            }
+        }
+
+        public bool SiActivo
+        {
+            get
+            {
+                return _siActivo;
+            }
+            set
+            {
+                _siActivo = value;
             }
         }
 
@@ -169,7 +183,19 @@ namespace Bol
             {
                 _lugaresDisponibles = value;
             }
-        }       
+        }
+
+        public int LugaresDisponiblesActual
+        {
+            get
+            {
+                return _lugaresDisponiblesActual;
+            }
+            set
+            {
+                _lugaresDisponiblesActual = value;
+            }
+        }
 
         public DateTime FechaSalida
         {
@@ -338,6 +364,9 @@ namespace Bol
                 if (dr.Table.Columns.Contains("LugaresDisponibles") && !Convert.IsDBNull(dr["LugaresDisponibles"]))
                     oBol.LugaresDisponibles = Convert.ToInt32(dr["LugaresDisponibles"]);
 
+                if (dr.Table.Columns.Contains("LugaresDisponiblesActual") && !Convert.IsDBNull(dr["LugaresDisponiblesActual"]))
+                    oBol.LugaresDisponiblesActual = Convert.ToInt32(dr["LugaresDisponiblesActual"]);
+
                 if (dr.Table.Columns.Contains("FechaSalida") && !Convert.IsDBNull(dr["FechaSalida"]))
                     oBol.FechaSalida = Convert.ToDateTime(dr["FechaSalida"]);
 
@@ -349,6 +378,9 @@ namespace Bol
 
                 if (dr.Table.Columns.Contains("UsuarioId") && !Convert.IsDBNull(dr["UsuarioId"]))
                     oBol.UsuarioId = Convert.ToInt32(dr["UsuarioId"]);
+
+                if (dr.Table.Columns.Contains("SiActivo") && !Convert.IsDBNull(dr["SiActivo"]))
+                    oBol.SiActivo = Convert.ToBoolean(dr["SiActivo"]);
 
 
             }
@@ -454,6 +486,24 @@ namespace Bol
             catch (Exception e) { throw new Exception("Error en Update. " + e.Message); }
         }
 
+        public static void RestarUnLUgar(int viajeId)
+        {
+            try
+            {
+                new Dal.Core.Viaje().RestarUnLUgar(viajeId);
+            }
+            catch (Exception e) { throw new Exception("Error al restaar asiento. " + e.Message); }
+        }
+
+        public static void SumarUnLUgar(int viajeId)
+        {
+            try
+            {
+                new Dal.Core.Viaje().SumarUnLUgar(viajeId);
+            }
+            catch (Exception e) { throw new Exception("Error al restaar asiento. " + e.Message); }
+        }
+         
         #endregion
 
         #region " Constructor "

@@ -84,6 +84,7 @@ namespace UnAventon.Viajes
             tbHoraSalida.Text = V.HoraSalida;
             tbPrecio.Text = (V.Precio * V.LugaresDisponibles).ToString();
             tbDescripcion.Text = V.Descripcion;
+            ddlTipoViaje.SelectedValue = "1";
         }
 
         #endregion

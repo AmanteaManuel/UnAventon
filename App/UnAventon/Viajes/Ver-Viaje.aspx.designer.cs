@@ -112,6 +112,24 @@ namespace UnAventon.Viajes {
         protected global::System.Web.UI.WebControls.Button btnModificar;
         
         /// <summary>
+        /// btnPostularse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPostularse;
+        
+        /// <summary>
+        /// divPostulacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPostulacion;
+        
+        /// <summary>
         /// rptListaPostulantes control.
         /// </summary>
         /// <remarks>
