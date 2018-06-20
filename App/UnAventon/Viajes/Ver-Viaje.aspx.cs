@@ -53,9 +53,15 @@ namespace UnAventon.Viajes
         {
 
             if (Viaje.UsuarioId == ActiveUsuario.Id)
+            {
                 btnEliminarViaje.Visible = true;
+                btnModificar.Visible = true;
+            }               
             else
+            {
                 btnEliminarViaje.Visible = false;
+                btnModificar.Visible = false;
+            }              
 
             divDatosUsuario.Visible = false;
 
@@ -181,6 +187,25 @@ namespace UnAventon.Viajes
               //borrar los usuarios
               //borrar viaje
               //descontar puntos 
+        }
+
+        protected void btnModificar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<Bol.Usuario> Postulantes = Bol.Usuario.GetPostulantesByViajeId(Viaje.Id);
+                if (Postulantes == null)
+                {
+                    string idEncriptado = new Bol.Core.Service.Tools().Encripta(Convert.ToString(Viaje.Id));
+                    Response.Redirect("~/Viajes/Publicar-Viaje.aspx?id=" + idEncriptado);
+                }
+                else
+                    throw new Exception("El viaje ya tiene postulantes. ");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

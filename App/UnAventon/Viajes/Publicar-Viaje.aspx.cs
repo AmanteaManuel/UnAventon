@@ -65,10 +65,21 @@ namespace UnAventon.Viajes
 
         private void LoadDatos(Viaje V)
         {
-            //Usar set ddl de Marce para todos ciudad y provincia
+            //Cargo DDL
+            object o = null;
+            EventArgs ea = null;
+            int ProvDestino = Ciudad.GetById(V.DestinoId).ProvinciaId;
+            int ProvSalida = Ciudad.GetById(V.OrigenId).ProvinciaId;
+            ddlProvinciaDestino.SelectedValue = ProvDestino.ToString();
+            ddlProvinciaSalida.SelectedValue = ProvSalida.ToString();
+            ddlProvinciaDestino_SelectedIndexChanged(o,ea);
+            ddlProvinciaSalida_SelectedIndexChanged(o, ea);
+            ddlCiudadDestino.SelectedValue = V.DestinoId.ToString();
+            ddlCiudadSalida.SelectedValue = V.OrigenId.ToString();
+            ddlVehiculo.SelectedValue = V.Vehiculo.Id.ToString();
+
             tbDuracion.Text = V.Duracion;
-            tbLugaresDisponibles.Text = tbLugaresDisponibles.ToString();
-            //SetDll vehiculo
+            tbLugaresDisponibles.Text = V.LugaresDisponibles.ToString();                    
             tbFecha.SelectedDate = V.FechaSalida;
             tbHoraSalida.Text = V.HoraSalida;
             tbPrecio.Text = (V.Precio * V.LugaresDisponibles).ToString();
@@ -102,6 +113,7 @@ namespace UnAventon.Viajes
                         Viaje = new Bol.Viaje().GetInstanceById(IdDesencriptado);
                         PreparePage();
                         ddlTipoViaje.Enabled = false;
+                        ddlTipoViaje.Visible = false;
                         LoadDatos(Viaje);
                         btnModificar.Visible = true;
                         btnPublicarViaje.Visible = false;
@@ -274,7 +286,7 @@ namespace UnAventon.Viajes
 
         //cuando se produice un cambio en las provincias se refresca las ciudades cargadas
         protected void ddlProvinciaDestino_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {            
             if (ddlProvinciaDestino.SelectedIndex > 0)
             {
                 List<Ciudad> ciudades = new List<Ciudad>();                
@@ -285,7 +297,7 @@ namespace UnAventon.Viajes
 
         //cuando se produice un cambio en las provincias se refresca las ciudades cargadas
         protected void ddlProvinciaSalida_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {            
             if (ddlProvinciaSalida.SelectedIndex > 0)
             {
                 List<Ciudad> ciudades = new List<Ciudad>();                

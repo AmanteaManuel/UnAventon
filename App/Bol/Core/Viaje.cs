@@ -91,7 +91,7 @@ namespace Bol
         {
             get
             {
-                return Vehiculo.LoadById(_vehiculoId);
+                return new Bol.Vehiculo().LoadById(_vehiculoId);
             }
             set
             {
