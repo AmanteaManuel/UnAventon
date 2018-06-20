@@ -60,8 +60,14 @@ namespace UnAventon.Viajes
             //si el usuario activo es el dueño del viaje
             if (Viaje.UsuarioId == ActiveUsuario.Id)
             {
-                divPostulacion.Visible = true;
-                btnEliminarViaje.Visible = true;
+                if(DateTime.Now.Date < Viaje.FechaSalida)
+                {
+                    btnEliminarViaje.Visible = true;
+                }
+                else
+                    btnEliminarViaje.Visible = false;
+
+                divPostulacion.Visible = true;                
                 btnModificar.Visible = true;
                 btnPostularse.Visible = false;
             }
@@ -241,10 +247,27 @@ namespace UnAventon.Viajes
 
         protected void btnEliminarViaje_Click(object sender, EventArgs e)
         {
-              //obtener los id de usuarios
-              //borrar los usuarios
-              //borrar viaje
-              //descontar puntos 
+            List<Bol.Usuario> postulantes = Bol.Usuario.GetPostulantesByViajeId(Viaje.Id);
+            //si no hay postulantes en el viaje
+            if(postulantes != null)
+            {
+                //elimino los postulantes del viaje
+                foreach (var p in postulantes)
+                {
+                    Bol.Usuario.EliminarPostulacion(p.Id,Viaje.Id);
+                }
+                //bajo la reputacion del usuario
+                Bol.Usuario.RestarReputacionChofer(ActiveUsuario.Id);
+                //borro viaje
+                Bol.Viaje.Delete(Viaje.Id);
+                Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
+            }
+            //si hay postulantes en el viaje
+            else
+            {
+                Bol.Viaje.Delete(Viaje.Id);
+                Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
+            }              
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)

@@ -433,6 +433,15 @@ namespace Bol
             catch (Exception e) { throw new Exception("Error en Insert. " + e.Message); }
         }
 
+        public static void Delete (int viajeId)
+        {
+            try
+            {
+                new Dal.Core.Viaje().Delete(viajeId);
+            }
+            catch (Exception e) { throw new Exception("Error al borrar viaje. " + e.Message); }
+        }
+
         private static void ValidarViaje(Viaje viaje, int usuarioId)
         {
             //obtengo todos los viajes en la fecha para ese usuario
@@ -492,7 +501,7 @@ namespace Bol
             {
                 new Dal.Core.Viaje().RestarUnLUgar(viajeId);
             }
-            catch (Exception e) { throw new Exception("Error al restaar asiento. " + e.Message); }
+            catch (Exception e) { throw new Exception("Error al restaa asiento. " + e.Message); }
         }
 
         public static void SumarUnLUgar(int viajeId)
@@ -501,7 +510,7 @@ namespace Bol
             {
                 new Dal.Core.Viaje().SumarUnLUgar(viajeId);
             }
-            catch (Exception e) { throw new Exception("Error al restaar asiento. " + e.Message); }
+            catch (Exception e) { throw new Exception("Error al sumnar asiento. " + e.Message); }
         }
          
         #endregion
