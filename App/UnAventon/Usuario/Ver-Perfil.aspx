@@ -14,7 +14,7 @@
 				</div>
 				<div class="panel-body">
 					<div class="row">						
-							<div class="col-md-8 col-lg-8 ">
+							<div class="col-md-9 col-lg-9 ">
                                 <div class="table-responsive">
 								    <table class="table table-user-information">
 									    <tbody>
@@ -57,7 +57,7 @@
 				</div>
 			</div>
 		
-		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
 			<div class="panel panel-info">
 				<div class="panel-heading">
 					<h3 class="panel-title"><strong>Mis vehiculos</strong></h3>
@@ -65,7 +65,7 @@
 				<div class="panel-body">
 					<div class="row">	
                          <div class="table-responsive-vehiculo">
-							<div class=" col-md-4 col-lg-4 ">                                
+							<div class=" col-md-12 col-lg-12">                                
                                     <table class="table table-hover">
                                         <asp:Repeater runat="server" ID="rptVehiculos" OnItemCommand="rptVehiculos_ItemCommand">
                                             <HeaderTemplate>
