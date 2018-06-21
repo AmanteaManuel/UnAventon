@@ -71,6 +71,14 @@ namespace Dal.Core
                                                 SET LugaresDisponiblesActual = LugaresDisponiblesActual+1
                                                 WHERE Id = @parviajeId";
 
+        private const string DELETE = @"UPDATE Viajes
+                                                SET SiActivo = 0
+                                                WHERE Id = @parviajeId";
+
+        private const string GET_PASAJEROS_BY_USUARIO_ID = @"select * from Viajes v 
+                                                                INNER JOIN Postulantes p on p.ViajeId = v.Id
+                                                                where p.UsuarioId = {0}";
+
         public int Create(int origenId, int destinoId, string duracion, int lugaresDisponibles, int vehiculoId, DateTime fechaSalida, string horaSalida, double precio, string descripcion, int UsuarioId)
         {
             //query a ejecutar
@@ -188,9 +196,27 @@ namespace Dal.Core
             this.ExecuteNonQuery();
         }
 
+        public DataSet GetPostulacionesByUsuarioId(int id)
+        {
+            this.SelectCommandText = string.Format(GET_PASAJEROS_BY_USUARIO_ID, id);
+            return this.Load();
+        }
+
         public void SumarUnLUgar(int viajeId)
         {
             this.ExecuteCommandText = SUMAR_LUGAR;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parviajeId", viajeId);
+
+            this.ExecuteNonQuery();
+        }
+
+        public void Delete(int viajeId)
+        {
+            this.ExecuteCommandText = DELETE;
 
             //Limpio los parámetros
             this.ExecuteParameters.Parameters.Clear();

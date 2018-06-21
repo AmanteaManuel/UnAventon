@@ -36,7 +36,7 @@
                                             <tr>
                                                 <td><strong>Precio:</strong></td>
                                                 <td>
-                                                    <asp:Literal Text="text" runat="server" id="liPrecio"/>
+                                                    $<asp:Literal Text="text" runat="server" id="liPrecio"/>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -52,9 +52,15 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><strong>Lugares Disponibles:</strong></td>
+                                                <td><strong>Lugares Totales:</strong></td>
                                                 <td>
                                                     <asp:Literal Text="text" runat="server" id="liLugares"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Lugares Disponibles:</strong></td>
+                                                <td>
+                                                    <asp:Literal runat="server" id="liLugaresDisponibles"/>
                                                 </td>
                                             </tr>
                                             <%--<tr>

@@ -574,17 +574,17 @@ namespace UnAventon.Viajes
                     tbDescripcion.Text);
                     viaje.Precio = (viaje.Precio / viaje.LugaresDisponibles);
 
-                    Bol.Viaje.Update(viaje, viaje.Id);
+                    Bol.Viaje.Update(viaje, Viaje.Id);
 
 
                     this.Master.FindControl("divMsjOk").Visible = true;
                     Literal liMensaje = (Literal)this.Master.FindControl("liMsjOK");
-                    liMensaje.Text = "Viaje publicado con éxito";
+                    liMensaje.Text = "Viaje Modificar con éxito";
 
                     Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
                 }
                 else
-                    throw new Exception("Error al publicar viaje ");
+                    throw new Exception("Error al Modificar viaje ");
             }
             catch (Exception ex)
             {

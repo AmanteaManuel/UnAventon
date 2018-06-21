@@ -416,7 +416,7 @@ namespace Bol
         public static List<Usuario> GetPasajerosByViajeId(int id)
         {
             DataSet userdr;
-            userdr = new Dal.Core.Usuario().GetPasajerosByViajeId(id);
+            userdr = new Dal.Core.Usuario().GetPostulacionesByUsuarioId(id);
             if (userdr.Tables[0].Rows.Count > 0)
                 return FillList(userdr);
             else
