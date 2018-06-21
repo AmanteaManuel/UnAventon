@@ -68,7 +68,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="%24trash\blank-profile-picture-973460_640-300x300.png" />
+    <Content Include="img\profile.png" />
     <Content Include="%24trash\BORRAR-LISTADO_VIAJES.aspx" />
     <Content Include="%24trash\Fondo5.jpg" />
     <Content Include="%24trash\htmleve\html css js\editarcontra.js" />
