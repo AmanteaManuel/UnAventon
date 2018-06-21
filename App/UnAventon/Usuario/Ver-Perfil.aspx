@@ -7,7 +7,7 @@
     <h3 class="panel-title"><strong>Mi Perfil</strong></h3>
     <p><label>En esta página podrá ver el detalles de su perfil, administrar sus vehículos y ver sus postulaciones a viajes.</label></p>
 	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-6 col-lg- col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg- " >
 			<div class="panel panel-info">
 				<div class="panel-heading">			
                     <h3 class="panel-title"><strong>Perfil</strong></h3>

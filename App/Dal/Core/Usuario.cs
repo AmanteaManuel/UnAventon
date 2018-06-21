@@ -80,6 +80,8 @@ namespace Dal.Core
                                                                 INNER JOIN Postulantes p on p.ViajeId = v.Id
                                                                 where p.UsuarioId = {0}";
 
+        private const string AGREGAR_IMAGEN = @"";
+
 
         #endregion
 

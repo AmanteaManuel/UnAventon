@@ -509,14 +509,14 @@ namespace Bol
             
         }
 
-        public static void Update(Viaje viaje, int usuarioId)
+        public static void Update(Viaje viaje, int viajeId)
         {
             
             try
             {
                 using (TransactionScope scope = new TransactionScope())
                 {
-                    ValidarViaje(viaje, usuarioId);
+                    ValidarViaje(viaje, viajeId);
 
                     new Dal.Core.Viaje().Update(
                     viaje._origenId,
@@ -528,7 +528,7 @@ namespace Bol
                     viaje._horaSalida,
                     viaje.Precio,
                     viaje.Descripcion,
-                    viaje.Id
+                    viajeId
                     );
 
                     scope.Complete();

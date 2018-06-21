@@ -62,10 +62,17 @@ namespace UnAventon.Viajes
             {
                 if(DateTime.Now.Date < Viaje.FechaSalida)
                 {
-                    btnEliminarViaje.Visible = true;
+                    btnEliminarViaje.Enabled = true;
+                    btnEliminarViaje.CssClass = "boton_personalizado";
+                    btnEliminarViaje.ToolTip = "";
                 }
                 else
-                    btnEliminarViaje.Visible = false;
+                {
+                    btnEliminarViaje.Enabled = false;
+                    btnEliminarViaje.CssClass = "boton_personalizado not-allowed";
+                    btnEliminarViaje.ToolTip = "No se puede eliminar un viaje ya ocurrido";
+                }
+                   
 
                 divPostulacion.Visible = true;                
                 btnModificar.Visible = true;
@@ -96,6 +103,7 @@ namespace UnAventon.Viajes
             liFecha.Text = Viaje.FechaSalida.Date.ToShortDateString();
             liHora.Text = Viaje.HoraSalida;
             liLugares.Text = Viaje.LugaresDisponibles.ToString();
+            liLugaresDisponibles.Text = Viaje.LugaresDisponiblesActual.ToString();
 
 
             List<Bol.Usuario> Postulantes = Bol.Usuario.GetPostulantesByViajeId(Viaje.Id);
@@ -210,6 +218,7 @@ namespace UnAventon.Viajes
                     {
                         lbDatos.CssClass = "UpdateButton not-allowed";
 
+                        lbRechazar.ToolTip = "El postulante aun no fue evaluado. ";
                         lbDatos.Enabled = false;
                         liEstado.Text = "Pendiente";
                         liEstado.CssClass = "font-Yellow";
@@ -222,6 +231,8 @@ namespace UnAventon.Viajes
                         lbAceptar.CssClass = "UpdateButton not-allowed";
                         lbRechazar.CssClass = "DeleteButton not-allowed";
 
+                        lbRechazar.ToolTip = "El postulante ya fue evaluado. ";
+                        lbAceptar.ToolTip = "El postulante ya fue evaluado. ";
                         lbAceptar.Enabled = false;
                         lbRechazar.Enabled = false;
                         liEstado.Text = "Aceptado";
@@ -234,6 +245,8 @@ namespace UnAventon.Viajes
                         lbAceptar.CssClass = "UpdateButton not-allowed";
                         lbRechazar.CssClass = "DeleteButton not-allowed";
                         lbDatos.CssClass = "DeleteButton not-allowed";
+                        lbRechazar.ToolTip = "El postulante ya fue evaluado. ";
+                        lbAceptar.ToolTip = "El postulante ya fue evaluado. ";
 
                         lbAceptar.Enabled = false;
                         lbRechazar.Enabled = false;
@@ -283,9 +296,12 @@ namespace UnAventon.Viajes
                 else
                     throw new Exception("El viaje ya tiene postulantes. ");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = ex.Message;
             }
         }
 
