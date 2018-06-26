@@ -131,6 +131,8 @@
                                                 <th>Hora</th>
                                                 <th>Estado</th>
                                                 <th>Detalle</th>
+                                                <th>Datos de Contacto</th>
+                                                <th>Baja del viaje</th>
                                             </tr>
                                         </HeaderTemplate>
                                         <ItemTemplate>
@@ -144,6 +146,12 @@
                                                 </td> 
                                                 <td>
                                                     <asp:LinkButton ID="lbDetalle" CssClass="links" CommandName="DETALLE" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Ver Detalle"></asp:LinkButton>
+                                                </td>
+                                                <td>
+                                                    <asp:LinkButton ID="lbDatos" CssClass="UpdateButton" CommandName="DATOS" CommandArgument='<%# Eval("id") %>' runat="server" Text="Contacto Chofer"></asp:LinkButton>
+                                                </td>
+                                                <td>
+                                                    <asp:LinkButton ID="lbBaja" CssClass="DeleteButton" CommandName="BAJA" CommandArgument='<%# Eval("id") %>' runat="server" Text="Darme de Baja"></asp:LinkButton>
                                                 </td>
                                             </tr>
                                         </ItemTemplate>
