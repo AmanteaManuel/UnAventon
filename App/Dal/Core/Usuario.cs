@@ -80,7 +80,9 @@ namespace Dal.Core
                                                                 INNER JOIN Postulantes p on p.ViajeId = v.Id
                                                                 where p.UsuarioId = {0}";
 
-        private const string AGREGAR_IMAGEN = @"";
+        private const string CAMBIAR_FOTO_PERFIL = @"UPDATE Usuario
+                                                        SET FotoPerfil = @parPath
+                                                        WHERE Id = @parUsuarioId;";
 
 
         #endregion
@@ -296,6 +298,20 @@ namespace Dal.Core
             this.ExecuteParameters.Parameters.Clear();
 
             this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);            
+
+            //ejecución, retorna el valor del parámetro de retorno
+            this.ExecuteNonQuery();
+        }
+
+        public void CambiarFotoPerfil(string path, int usuarioId)
+        {
+            this.ExecuteCommandText = CAMBIAR_FOTO_PERFIL;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parPath", path);
+            this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
 
             //ejecución, retorna el valor del parámetro de retorno
             this.ExecuteNonQuery();

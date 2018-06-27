@@ -141,6 +141,11 @@ namespace UnAventon.Usuario
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            HtmlGenericControl divMsjOk = (HtmlGenericControl)this.Master.FindControl("divMsjOk");
+            divMsjOk.Visible = false;
+            HtmlGenericControl divMsjAlerta = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+            divMsjAlerta.Visible = false;
             if (!Page.IsPostBack)
             {
                 //Deja la pagina en blanco(sin datos)
@@ -292,5 +297,30 @@ namespace UnAventon.Usuario
 
 
         #endregion
+
+        protected void lbFotoPerfil_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (fuFotoPerfil.HasFile)
+                {
+                   string path = "~//img//Fotos-Perfil//" + fuFotoPerfil.FileName;
+                   Bol.Usuario.CambiarFotoPerfil(path, ActiveUsuario.Id);
+                    Response.Redirect(Request.RawUrl);
+                }
+                else
+                {
+                    throw new Exception("Seleccione un archivo");
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = ex.Message;
+            }
+        }
     }
 }

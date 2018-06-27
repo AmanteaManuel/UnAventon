@@ -21,8 +21,6 @@
             background-color: #464646;
             height: 100%;
             width: 100%;
-
-            
         }        
 
         
@@ -66,9 +64,19 @@
             margin:15px 20px;
         }
         .img-circle{
-            border-radius: 8px;
+            border-radius: 10px;
+            width:100px;  
+            height:100px;            
         }
-
+        .nomargin
+        {
+            margin:0;
+            margin-top:30px;
+            padding:0;
+            border:0;
+            top:0;
+            right:0;
+        }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server"> 
     </asp:ContentPlaceHolder>
@@ -77,12 +85,16 @@
 
     <form id="form1" runat="server">
         <asp:ScriptManager runat="server" AsyncPostBackTimeout="999" />
-        <div class="row">
+        <div class="row">            
             <div class="col-sm-12 col-lg-10 logoHeader">
                 <img  src="<%=Page.ResolveUrl("~/img/Logo.png")%>" alt="Logo Un Aventón">
             </div>
-            <div class="col-sm-12 col-lg-2 logoHeader">
-                <asp:Image ImageUrl="imageurl" runat="server" id="imgPerfil" alt="User Pic" class="img-circle img-responsive" />                
+            <div class="col-sm-12 col-lg-2"  align="center">
+                <div class="nomargin">
+                    <asp:Image ImageUrl="imageurl" runat="server" id="imgPerfil" alt="User Pic" class="img-circle" /><br />           
+                    <strong><asp:Literal id="liNombreUsuario" runat="server" /></strong>
+                    <strong><asp:Literal id="liApellido" runat="server" /></strong>
+                </div>
             </div>
             <hr />
         </div>

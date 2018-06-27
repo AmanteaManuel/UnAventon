@@ -242,3 +242,7 @@ nomargin {
 .center {
     text-align: center; 
 }
+
+.noMargin{
+    margin:0;
+}

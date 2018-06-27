@@ -422,7 +422,7 @@ namespace Bol
                 return FillObject(userdr.Tables[0].Rows[0]);
             else
                 return null;
-        }
+        }       
 
         /// <summary>
         /// Metodo que obtiene todos los postulantes de un viaje
@@ -587,6 +587,15 @@ namespace Bol
         public static void ObtenerReputacionPasajero(int usuarioId)
         {
 
+        }
+
+        public static void CambiarFotoPerfil(string path, int usuarioId)
+        {
+            try
+            {
+                new Dal.Core.Usuario().CambiarFotoPerfil(path, usuarioId);
+            }
+            catch (Exception e) { throw new Exception("Error al cambiar la foto de perfil"); }
         }
 
         #endregion

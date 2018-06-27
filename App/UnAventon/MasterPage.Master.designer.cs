@@ -40,6 +40,24 @@ namespace UnAventon {
         protected global::System.Web.UI.WebControls.Image imgPerfil;
         
         /// <summary>
+        /// liNombreUsuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal liNombreUsuario;
+        
+        /// <summary>
+        /// liApellido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal liApellido;
+        
+        /// <summary>
         /// divBody control.
         /// </summary>
         /// <remarks>

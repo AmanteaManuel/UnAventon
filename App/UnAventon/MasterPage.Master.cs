@@ -77,6 +77,8 @@ namespace UnAventon
                     ActiveUsuario.FotoPerfil = "~/img/Fotos-Perfil/profile.png";
                            
                 imgPerfil.ImageUrl = ActiveUsuario.FotoPerfil;
+                liNombreUsuario.Text = ActiveUsuario.Nombre;
+                liApellido.Text =ActiveUsuario.Apellido;
 
             }
 
