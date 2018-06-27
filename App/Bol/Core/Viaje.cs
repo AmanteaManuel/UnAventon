@@ -534,7 +534,7 @@ namespace Bol
                     scope.Complete();
                 }
             }
-            catch (Exception e) { throw new Exception("Error en Update. " + e.Message); }
+            catch (Exception e) { throw new Exception("No se pudo Modificar el viaje."); }
         }
 
         public static void RestarUnLUgar(int viajeId)

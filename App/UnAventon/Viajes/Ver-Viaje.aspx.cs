@@ -84,13 +84,51 @@ namespace UnAventon.Viajes
                 divPostulacion.Visible = false;
                 btnEliminarViaje.Visible = false;
                 btnModificar.Visible = false;
-                btnPostularse.Visible = true;
+
+                //obtengo postulantes del viaje
+                List<Bol.Usuario> postulantes = Bol.Usuario.GetPostulantesByViajeId(Viaje.Id);
+
+                if(postulantes != null)
+                {
+                    //si el usuario esta postulado
+                    if (postulantes.Exists(x => x.Id == ActiveUsuario.Id))
+                    {
+                        Bol.Usuario u = Bol.Usuario.GetPostulanteByViajeId(ActiveUsuario.Id, Viaje.Id);
+
+                        btnPostularse.Visible = false;
+                        divEstadoPostulacion.Visible = true;
+
+                        if (u.EstadoViaje == 1)
+                        {
+                            liEstado.Text = "Pendiente";
+                            liEstado.CssClass = "font-Yellow";
+                        }
+                        if (u.EstadoViaje == 2)
+                        {
+                            liEstado.Text = "Aceptado";
+                            liEstado.CssClass = "font-Green";
+                        }
+                        if (u.EstadoViaje == 3)
+                        {
+                            liEstado.Text = "Rechazado";
+                            liEstado.CssClass = "font-Red";
+                        }
+                    }
+
+                }
+                //si el usuario no esta postulado
+                else
+                {
+                    btnPostularse.Visible = true;
+                    divEstadoPostulacion.Visible = false;
+                }
             }          
             
             divDatosUsuario.Visible = false;
             liCudadOrigen.Text = Viaje.Origen.Descripcion;
             liCiudadDestino.Text = Viaje.Destino.Descripcion;
             liPrecio.Text = Viaje.Precio.ToString();
+            liPrecioTotal.Text = (Viaje.Precio * Convert.ToDouble(Viaje.LugaresDisponibles)).ToString();
             if (Viaje.Descripcion != "")
             {
                 divDescripcion.Visible = true;
@@ -320,6 +358,8 @@ namespace UnAventon.Viajes
                         HtmlGenericControl divMsjOk = (HtmlGenericControl)this.Master.FindControl("divMsjOk");
                         divMsjOk.Visible = true;
                         Literal liMsjOk = (Literal)this.Master.FindControl("liMsjOk");
+                        liMsjOk.Text = "Postulacion Exitosa";
+                        Response.Redirect(Request.RawUrl);                        
                         liMsjOk.Text = "Postulacion Exitosa";
                     }
 

@@ -161,22 +161,22 @@ namespace Bol
             }           
         }
 
-        public int SiActivo
+        public bool SiActivo
         {
             get
             {
-                return _asientosDisponibles;
+                return _siActivo;
             }
             set
             {
-                _asientosDisponibles = value;
+                _siActivo = value;
             }
         }
 
 
         #endregion
 
-            #region " Views "
+        #region " Views "
 
         public Vehiculo LoadById(int usuarioId)
         {
@@ -233,7 +233,7 @@ namespace Bol
                     oBol.UsuarioId = Convert.ToInt32(dr["UsuarioId"]);
 
                 if (dr.Table.Columns.Contains("SiActivo") && !Convert.IsDBNull(dr["SiActivo"]))
-                    oBol.SiActivo = Convert.ToInt32(dr["SiActivo"]);
+                    oBol.SiActivo = Convert.ToBoolean(dr["SiActivo"]);
 
             }
             catch (Exception ex) { throw new Exception("Error en el metodo Fill" + ex.Message); }

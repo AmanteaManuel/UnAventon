@@ -118,7 +118,7 @@ namespace UnAventon.Viajes
                         LoadDatos(Viaje);
                         btnModificar.Visible = true;
                         btnPublicarViaje.Visible = false;
-
+                        lbFecha.Text = "Fecha";
                     }
                     //si es nueva publicacion
                     else
@@ -270,7 +270,8 @@ namespace UnAventon.Viajes
                 var fechaFinal = hasta;
                 var totalDias = (fechaFinal - fechaInicial).TotalDays;
                 
-                while(fechaInicial.Year <= fechaFinal.Year && fechaInicial.Month <= fechaFinal.Month && fechaInicial.Day <= fechaFinal.Day)
+                //while(fechaInicial.Year <= fechaFinal.Year && fechaInicial.Month <= fechaFinal.Month && fechaInicial.Day <= fechaFinal.Day)
+                while(fechaInicial.Date <= fechaFinal.Date)
                 {
 
                     if (fechaInicial.DayOfWeek == tipoDias[i])
@@ -319,20 +320,23 @@ namespace UnAventon.Viajes
                     {
                         divViajesAgregados.Visible = true;
                         btnAgregarViaje.Visible = true;
+                        lbFecha.Text = "Fecha";
                     }
                     //Ocasional
                     if (ddlTipoViaje.SelectedValue == "1")
                     {
                         divViajesAgregados.Visible = false;
                         btnAgregarViaje.Visible = false;
+                        lbFecha.Text = "Fecha";
 
                     }
-                    //Diario
+                    //Periodico
                     if(ddlTipoViaje.SelectedValue == "3")
                     {
                         divViajesDiarios.Visible = true;
                         divViajesAgregados.Visible = false;
                         btnAgregarViaje.Visible = false;
+                        lbFecha.Text = "Fecha Hasta";
                     }
                 }
             }

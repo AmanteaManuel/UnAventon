@@ -55,7 +55,7 @@ namespace UnAventon
                         //Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
                         Response.Redirect(r != null ? Request.QueryString["ReturnUrl"].ToString() : "~/Viajes/Listado-de-Viajes.aspx", false);
                     }
-                    else throw new Exception("El usuario no existe");
+                    else throw new Exception("El usuario o contraseña incorrectos. ");
                 }
             }
             catch (Exception ex)

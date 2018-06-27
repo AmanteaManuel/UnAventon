@@ -180,8 +180,10 @@ namespace UnAventon.Usuario
                     //Cargo los datos del usuario en los texbox.
                     tbApellido.Text = Usuario.Apellido;
                     tbNombre.Text = Usuario.Nombre;
-                    tbContrasenia.Text = Usuario.Contraseña;
-                    tbRepitaContraseña.Text = Usuario.Contraseña;
+                    //tbContrasenia.Text = Usuario.Contraseña;
+                    //tbRepitaContraseña.Text = Usuario.Contraseña;
+                    tbContrasenia.Text = "";
+                    tbRepitaContraseña.Text = "";
                     tbDni.Text = Usuario.Dni;
                     tbEmail.Text = Usuario.Email;
                     tbEmail.Enabled = false;
@@ -250,11 +252,18 @@ namespace UnAventon.Usuario
         {
             try
             {
+                if((tbContrasenia.Text == "") && (tbRepitaContraseña.Text == ""))
+                {
+                    tbContrasenia.Text = ActiveUsuario.Contraseña;
+                    tbRepitaContraseña.Text = ActiveUsuario.Contraseña;
+                }
+                
+
                 Validate("CrearUsuario");
                 if (Page.IsValid)
                 {
-                    ActiveUsuario.Apellido = tbApellido.Text;
-                    ActiveUsuario.Contraseña = tbContrasenia.Text;
+                    ActiveUsuario.Apellido = tbApellido.Text;                   
+                    ActiveUsuario.Contraseña = ActiveUsuario.Contraseña;
                     ActiveUsuario.Dni = tbDni.Text;
                     ActiveUsuario.Email = tbEmail.Text;
                     ActiveUsuario.FechaNacimiento = Convert.ToDateTime(tbFechaNacimiento.Text);

@@ -72,7 +72,7 @@
         </div>
 
         <div class="col-xs-12 col-md-2 col-lg-3 form-group" runat="server" id="divFecha">
-            <label class="label-default-subTitle">Fecha</label>
+            <asp:Label CssClass="label-default-subTitle" id="lbFecha" runat="server"/>            
             <asp:Calendar runat="server" CssClass="nomargin trasnparent-background" ID="tbFecha"></asp:Calendar>
             <asp:CustomValidator ErrorMessage=""  ID="cvFecha" runat="server" OnServerValidate="cvFecha_ServerValidate" ValidationGroup="PublicarViaje"/>
         </div>
@@ -97,7 +97,7 @@
                 <asp:ListItem Text="Seleccione..." Value="0"/>
                 <asp:ListItem Text="Ocasional" Value="1"/>
                 <asp:ListItem Text="Frecuente" Value="2"/>
-                <asp:ListItem Text="Diario" Value="3"/>
+                <asp:ListItem Text="Periodico" Value="3"/>
             </asp:DropDownList>
             <asp:CustomValidator ErrorMessage="*" ID="cvTipoViaje" runat="server" OnServerValidate="cvTipoViaje_ServerValidate" ValidationGroup="PublicarViaje"/>           
         </div>

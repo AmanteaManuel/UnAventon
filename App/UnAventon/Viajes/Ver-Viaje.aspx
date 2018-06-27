@@ -30,13 +30,19 @@
                                             <tr>
                                                 <td><strong>Duracion:</strong></td>
                                                 <td>
-                                                    <asp:Literal Text="text" runat="server" id="liDuracion"/>
+                                                    <asp:Literal Text="text" runat="server" id="liDuracion"/>Horas
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td><strong>Precio:</strong></td>
                                                 <td>
                                                     $<asp:Literal Text="text" runat="server" id="liPrecio"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Precio Total:</strong></td>
+                                                <td>
+                                                    $<asp:Literal runat="server" id="liPrecioTotal"/>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -85,9 +91,12 @@
                 </div>
             </div>
         </div>
-        <asp:Button Text="Eliminar" runat="server" ID="btnEliminarViaje" CssClass="boton_personalizado" OnClick="btnEliminarViaje_Click" OnClientClick="return confirm('¿Desea eliminar el viaje?');" />
+        <asp:Button Text="Eliminar" runat="server" ID="btnEliminarViaje" CssClass="boton_personalizado" OnClick="btnEliminarViaje_Click" OnClientClick="return confirm('¿Desea eliminar el viaje, si el posee pasajeros será penalizado.?');" />
         <asp:Button Text="Modificar" runat="server" ID="btnModificar" CssClass="boton_personalizado" OnClick="btnModificar_Click" />
         <asp:Button Text="Postularse" runat="server" ID="btnPostularse" CssClass="boton_personalizado" OnClick="btnPostularse_Click" OnClientClick="return confirm('¿Desea postularse al viaje?');" />
+        <div id="divEstadoPostulacion" runat="server">
+            <strong ><asp:Label runat="server" id="liEstado" /></strong>      
+        </div>
 
     <!-- Lista de postulantes-->
     <div class="row" id="divPostulacion" runat="server">    
@@ -138,7 +147,7 @@
                                                         <asp:LinkButton CssClass="DeleteButton" CommandName="RECHAZAR" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Rechazar" ID="lbRechazar"></asp:LinkButton>
                                                     </td>
                                                     <td>
-                                                        <asp:LinkButton CssClass="DeleteButton" CommandName="ELIMINAR" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Eliminar" ID="lbEliminar" OnClientClick="return confirm('¿Desea eliminar el pasajero?');"></asp:LinkButton>
+                                                        <asp:LinkButton CssClass="DeleteButton" CommandName="ELIMINAR" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Eliminar" ID="lbEliminar" OnClientClick="return confirm('¿Desea eliminar el pasajero, usted será penalisado.?');"></asp:LinkButton>
                                                     </td>
                                                     <td>
                                                         <asp:LinkButton CssClass="UpdateButton" CommandName="DATOS" CommandArgument='<%#Eval("Id") %>' runat="server" Text="Datos" ID="lbDatos"></asp:LinkButton>

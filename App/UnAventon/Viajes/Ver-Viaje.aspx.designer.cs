@@ -49,6 +49,15 @@ namespace UnAventon.Viajes {
         protected global::System.Web.UI.WebControls.Literal liPrecio;
         
         /// <summary>
+        /// liPrecioTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal liPrecioTotal;
+        
+        /// <summary>
         /// liFecha control.
         /// </summary>
         /// <remarks>
@@ -128,6 +137,24 @@ namespace UnAventon.Viajes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPostularse;
+        
+        /// <summary>
+        /// divEstadoPostulacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divEstadoPostulacion;
+        
+        /// <summary>
+        /// liEstado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label liEstado;
         
         /// <summary>
         /// divPostulacion control.
