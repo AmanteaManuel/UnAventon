@@ -78,12 +78,12 @@
     <form id="form1" runat="server">
         <asp:ScriptManager runat="server" AsyncPostBackTimeout="999" />
         <div class="row">
-              <div class="col-sm-12 col-lg-10 logoHeader">
-            <img  src="<%=Page.ResolveUrl("~/img/Logo.png")%>" alt="Logo Un Aventón">
-                  </div>
+            <div class="col-sm-12 col-lg-10 logoHeader">
+                <img  src="<%=Page.ResolveUrl("~/img/Logo.png")%>" alt="Logo Un Aventón">
+            </div>
             <div class="col-sm-12 col-lg-2 logoHeader">
-                  <img src="<%=Page.ResolveUrl("~/img/profile.png")%>" alt="User Pic" class="img-circle img-responsive">
-                  </div>
+                <asp:Image ImageUrl="imageurl" runat="server" id="imgPerfil" alt="User Pic" class="img-circle img-responsive" />                
+            </div>
             <hr />
         </div>
         <br />

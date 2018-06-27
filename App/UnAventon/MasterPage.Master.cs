@@ -72,6 +72,12 @@ namespace UnAventon
                     lbRegistrarVehiculo.Enabled = false;
                     lbRegistrarVehiculo.CssClass = "links not-allowed";
                 }
+
+                if(string.IsNullOrEmpty(ActiveUsuario.FotoPerfil))                
+                    ActiveUsuario.FotoPerfil = "~/img/Fotos-Perfil/profile.png";
+                           
+                imgPerfil.ImageUrl = ActiveUsuario.FotoPerfil;
+
             }
 
             catch (Exception)

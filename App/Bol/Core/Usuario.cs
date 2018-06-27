@@ -29,6 +29,7 @@ namespace Bol
         private int _reputacioPasajero;
         int _estadoViaje;
         private string _estadoViajeDescripcion;
+        private string _fotoPerfil;
 
 
         #endregion
@@ -269,6 +270,18 @@ namespace Bol
             }
         }
 
+        public string FotoPerfil
+        {
+            get
+            {
+                return _fotoPerfil;
+            }
+            set
+            {
+                _fotoPerfil = value;
+            }
+        }
+
         #endregion
 
         #region " Constructor "
@@ -332,6 +345,9 @@ namespace Bol
 
                 if (dr.Table.Columns.Contains("ReputacionPasajero") && !Convert.IsDBNull(dr["ReputacionPasajero"]))
                     oBol.ReputacioPasajero = Convert.ToInt32(dr["ReputacionPasajero"]);
+
+                if (dr.Table.Columns.Contains("FotoPerfil") && !Convert.IsDBNull(dr["FotoPerfil"]))
+                    oBol.FotoPerfil = Convert.ToString(dr["FotoPerfil"]);
 
 
             }
