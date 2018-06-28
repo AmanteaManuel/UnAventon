@@ -190,8 +190,9 @@ namespace UnAventon.Viajes
                         if (Page.IsValid)
                         {
 
-                            DateTime desde = clFechaHasta.SelectedDate;
-                            DateTime hasta = tbFecha.SelectedDate;
+                            
+                            DateTime desde= tbFecha.SelectedDate;
+                            DateTime hasta = clFechaHasta.SelectedDate;
 
                             //agregar los dias de la semana segun los chbks
                             List<DayOfWeek> dayOfWeeks =new List<DayOfWeek>();
@@ -246,7 +247,7 @@ namespace UnAventon.Viajes
                             }
                         }
                         else
-                            throw new Exception("Error al public viaje.");
+                            throw new Exception("Error al publicar viaje.");
 
                     }
 

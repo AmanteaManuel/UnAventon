@@ -58,9 +58,15 @@
                                                 </td>
                                             </tr>
                                             <tr>
+                                                <td><strong>Auto:</strong></td>
+                                                <td>
+                                                    <asp:Literal runat="server" id="liAuto"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td><strong>Lugares Totales:</strong></td>
                                                 <td>
-                                                    <asp:Literal Text="text" runat="server" id="liLugares"/>
+                                                    <asp:Literal runat="server" id="liLugares"/>
                                                 </td>
                                             </tr>
                                             <tr>

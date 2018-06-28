@@ -472,7 +472,7 @@ namespace Bol
                     return viaje.Id;
                 }
             }
-            catch (Exception e) { throw new Exception("Error al public viaje"); }
+            catch (Exception e) { throw new Exception("Error al publicar viaje."); }
         }
 
         public static void Delete (int viajeId)

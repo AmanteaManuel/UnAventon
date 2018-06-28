@@ -143,6 +143,9 @@ namespace UnAventon.Viajes
             liLugares.Text = Viaje.LugaresDisponibles.ToString();
             liLugaresDisponibles.Text = Viaje.LugaresDisponiblesActual.ToString();
 
+            Bol.Vehiculo v = Viaje.Vehiculo;
+            liAuto.Text = v.Marca + " " + v.Modelo + " " + v.Patente;
+
 
             List<Bol.Usuario> Postulantes = Bol.Usuario.GetPostulantesByViajeId(Viaje.Id);
             List<Bol.Usuario> postulantesCargados = new List<Bol.Usuario>();
