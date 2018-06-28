@@ -55,7 +55,9 @@ namespace UnAventon.Usuario
             rptPostulaciones.DataSource = postulaciones;
             rptPostulaciones.DataBind();
 
-            divDatosChofer.Visible = false;
+            //divDatosChofer.Visible = false;
+            
+         
         }
 
         protected void rptVehiculos_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -140,16 +142,16 @@ namespace UnAventon.Usuario
                     string idenc = new Bol.Core.Service.Tools().Encripta(id.ToString());
                     Response.Redirect(Page.ResolveUrl("~/Viajes/Ver-Viaje.aspx?Id=" + idenc), true);
                 }
-                if (e.CommandName.ToUpper().Equals("DATOS"))
-                {
-                    divDatosChofer.Visible = true;
-                    Bol.Usuario usuario= new Bol.Usuario().GetInstanceById(id);
-                    liEmail.Text = " " + usuario.Email;
-                    liNombre.Text = " " + usuario.Nombre;
-                    liApellido.Text = " " + usuario.Apellido;
-                    liReputacion.Text = " " + Convert.ToString(usuario.ReputacioPasajero);
+                //if (e.CommandName.ToUpper().Equals("DATOS"))
+                //{
+                //    divDatosChofer.Visible = true;
+                //    Bol.Usuario usuario= new Bol.Usuario().GetInstanceById(id);
+                //    liEmail.Text = " " + usuario.Email;
+                //    liNombre.Text = " " + usuario.Nombre;
+                //    liApellido.Text = " " + usuario.Apellido;
+                //    liReputacion.Text = " " + Convert.ToString(usuario.ReputacioPasajero);
 
-                }
+                //}
             }
             catch (Exception ex)
             {

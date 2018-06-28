@@ -99,6 +99,7 @@ namespace UnAventon.Viajes
                 divMsjOk.Visible = false;
                 HtmlGenericControl divMsjAlerta = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
                 divMsjAlerta.Visible = false;
+                lbFecha.Text = "Fecha";
 
                 if (!IsPostBack)
                 {

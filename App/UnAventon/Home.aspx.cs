@@ -55,7 +55,7 @@ namespace UnAventon
                         //Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
                         Response.Redirect(r != null ? Request.QueryString["ReturnUrl"].ToString() : "~/Viajes/Listado-de-Viajes.aspx", false);
                     }
-                    else throw new Exception("El usuario o contraseña incorrectos. ");
+                    else throw new Exception("Usuario o contraseña incorrectos. ");
                 }
             }
             catch (Exception ex)
@@ -65,7 +65,7 @@ namespace UnAventon
 
                 HtmlGenericControl divMsjAlerta = (HtmlGenericControl)Page.FindControl("divMsjAlerta");
                 Literal liMensajeAlerta = (Literal)Page.FindControl("liMensajeAlerta");
-                liMensajeAlerta.Text = "El Usuario no existe";
+                liMensajeAlerta.Text = ex.Message;
                 divMsjAlerta.Visible = true;
             }
         }
