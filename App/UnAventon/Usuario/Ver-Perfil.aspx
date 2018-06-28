@@ -131,7 +131,7 @@
                                                 <th>Hora</th>
                                                 <th>Estado</th>
                                                 <th>Detalle</th>
-                                                <th>Datos de Contacto</th>
+                                                <%--<th>Datos de Contacto</th>--%>
                                                 <th>Baja del viaje</th>
                                             </tr>
                                         </HeaderTemplate>
@@ -147,9 +147,9 @@
                                                 <td>
                                                     <asp:LinkButton ID="lbDetalle" CssClass="links" CommandName="DETALLE" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Ver Detalle"></asp:LinkButton>
                                                 </td>
-                                                <td>
+                                               <%-- <td>
                                                     <asp:LinkButton ID="lbDatos" CssClass="UpdateButton" CommandName="DATOS" CommandArgument='<%# Eval("id") %>' runat="server" Text="Contacto Chofer"></asp:LinkButton>
-                                                </td>
+                                                </td>--%>
                                                 <td>
                                                     <asp:LinkButton ID="lbBaja" CssClass="DeleteButton" CommandName="BAJA" CommandArgument='<%# Eval("id") %>' runat="server" Text="Darme de Baja"></asp:LinkButton>
                                                 </td>
@@ -165,7 +165,7 @@
         </div>
     </div>
     <!-- Aca termina la lista de Postulaciones-->
-     <div class="row" id="divDatosChofer" runat="server">
+    <%-- <div class="row" id="divDatosChofer" runat="server">
                     <div class="alert alert-success" role="alert">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                         <div class="center"><label><strong>Datos del Chofer</strong></label></div> <br>                       
@@ -174,6 +174,6 @@
                         <label><strong>Apellido: </strong></label><asp:Literal runat="server" ID="Literal3" /><br>  <!-- liApellido ya esta en uso-->
                         <label><strong>Reputacion: </strong></label><asp:Literal runat="server" ID="liReputacion"/>
                     </div>
-     </div>
+     </div>--%>
 </div>
 </asp:Content>

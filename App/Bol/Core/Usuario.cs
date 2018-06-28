@@ -616,11 +616,11 @@ namespace Bol
                         throw new Exception("Contraseña o email incorrectos");
                 }
                 else
-                    throw new Exception("El usuario no existe");
+                    throw new Exception("Usuario o contraseña incorrecto");
             }
             catch (Exception ex)
             {
-                throw new Exception("El usuario no existe");
+                throw new Exception("Usuario o contraseña incorrecto");
             }
         }
 
