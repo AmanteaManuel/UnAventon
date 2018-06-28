@@ -472,7 +472,7 @@ namespace Bol
                     return viaje.Id;
                 }
             }
-            catch (Exception e) { throw new Exception("Error en Insert. " + e.Message); }
+            catch (Exception e) { throw new Exception("Error al public viaje"); }
         }
 
         public static void Delete (int viajeId)
@@ -543,7 +543,7 @@ namespace Bol
             {
                 new Dal.Core.Viaje().RestarUnLUgar(viajeId);
             }
-            catch (Exception e) { throw new Exception("Error al restaa asiento. " + e.Message); }
+            catch (Exception e) { throw new Exception("Error al restar asiento. " + e.Message); }
         }
 
         public static void SumarUnLUgar(int viajeId)

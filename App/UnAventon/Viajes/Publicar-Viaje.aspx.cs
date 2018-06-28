@@ -101,13 +101,13 @@ namespace UnAventon.Viajes
                 divMsjAlerta.Visible = false;
 
                 if (!IsPostBack)
-                {
+                {                   
+
                     // Si es modificacion
                     if (Request.QueryString["id"] != null)
                     {
                         liTitulo.Text = "Modificar Viaje";
                         liSubtitulo.Text = "En esta página podrá modificarun viaje.";
-
                         string idEncriptado = Request.QueryString["id"];
                         int id = Convert.ToInt32(new Bol.Core.Service.Tools().Desencripta(idEncriptado));
                         int IdDesencriptado = Convert.ToInt32(id);
@@ -119,6 +119,8 @@ namespace UnAventon.Viajes
                         btnModificar.Visible = true;
                         btnPublicarViaje.Visible = false;
                         lbFecha.Text = "Fecha";
+                        divFechaHasta.Visible = false;
+
                     }
                     //si es nueva publicacion
                     else
@@ -129,6 +131,8 @@ namespace UnAventon.Viajes
                         PreparePage();
                         btnPublicarViaje.Visible = true;
                         btnModificar.Visible = false;
+                        lbFecha.Text = "Fecha";
+                        divFechaHasta.Visible = false;
                     }
                 }
             }
@@ -176,14 +180,16 @@ namespace UnAventon.Viajes
 
                         Viaje.Create(viaje, ActiveUsuario.Id);
                     }
+                    //Diario - Periodico
                     if (ddlTipoViaje.SelectedValue == "3")
                     {
                         //todo validacion
                         Validate("DiasCheck");
+                        Validate("ViajePeriodico");
                         if (Page.IsValid)
                         {
 
-                            DateTime desde = DateTime.Now;
+                            DateTime desde = clFechaHasta.SelectedDate;
                             DateTime hasta = tbFecha.SelectedDate;
 
                             //agregar los dias de la semana segun los chbks
@@ -239,7 +245,7 @@ namespace UnAventon.Viajes
                             }
                         }
                         else
-                            throw new Exception("Debe seleccionar al menos un día de la semana.");
+                            throw new Exception("Error al public viaje.");
 
                     }
 
@@ -321,6 +327,9 @@ namespace UnAventon.Viajes
                         divViajesAgregados.Visible = true;
                         btnAgregarViaje.Visible = true;
                         lbFecha.Text = "Fecha";
+                        divFechaHasta.Visible = false;
+                        divViajesDiarios.Visible = false;
+
                     }
                     //Ocasional
                     if (ddlTipoViaje.SelectedValue == "1")
@@ -328,6 +337,9 @@ namespace UnAventon.Viajes
                         divViajesAgregados.Visible = false;
                         btnAgregarViaje.Visible = false;
                         lbFecha.Text = "Fecha";
+                        divFechaHasta.Visible = false;
+                        divViajesAgregados.Visible = false;
+                        divViajesDiarios.Visible = false;
 
                     }
                     //Periodico
@@ -336,7 +348,9 @@ namespace UnAventon.Viajes
                         divViajesDiarios.Visible = true;
                         divViajesAgregados.Visible = false;
                         btnAgregarViaje.Visible = false;
-                        lbFecha.Text = "Fecha Hasta";
+                        lbFecha.Text = "Fecha Desde";
+                        divFechaHasta.Visible = true;
+                        divViajesAgregados.Visible = false;
                     }
                 }
             }
@@ -376,6 +390,46 @@ namespace UnAventon.Viajes
                 }
                 else
                     throw new Exception("Error al Agregar viaje. ");
+            }
+            catch (Exception ex)
+            {
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = ex.Message;
+            }
+        }
+
+        protected void btnModificar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Validate("PublicarViaje");
+                if (Page.IsValid)
+                {
+                    Viaje viaje = new Viaje(
+                    Convert.ToInt32(ddlCiudadSalida.SelectedValue),
+                    Convert.ToInt32(ddlCiudadDestino.SelectedValue),
+                    tbDuracion.Text,
+                    Convert.ToInt32(tbLugaresDisponibles.Text),
+                    Convert.ToInt32(ddlVehiculo.SelectedValue),
+                    tbFecha.SelectedDate,
+                    tbHoraSalida.Text,
+                    Convert.ToDouble(tbPrecio.Text),
+                    tbDescripcion.Text);
+                    viaje.Precio = (viaje.Precio / viaje.LugaresDisponibles);
+
+                    Bol.Viaje.Update(viaje, Viaje.Id);
+
+
+                    this.Master.FindControl("divMsjOk").Visible = true;
+                    Literal liMensaje = (Literal)this.Master.FindControl("liMsjOK");
+                    liMensaje.Text = "Viaje Modificar con éxito";
+
+                    Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
+                }
+                else
+                    throw new Exception("Error al Modificar viaje ");
             }
             catch (Exception ex)
             {
@@ -557,46 +611,33 @@ namespace UnAventon.Viajes
                 cvTipoViaje.ErrorMessage = "Al menos debe seleccionar un día";
             }
         }
-        #endregion
 
-        protected void btnModificar_Click(object sender, EventArgs e)
+        protected void cvFechaHasta_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            try
+            tbFecha.CssClass = "nomargin trasnparent-background";
+
+            if ((clFechaHasta.SelectedDate.Date == DateTime.MinValue.Date) || (clFechaHasta.SelectedDate < DateTime.Now) || (clFechaHasta.SelectedDate < tbFecha.SelectedDate.Date))
             {
-                Validate("PublicarViaje");
-                if (Page.IsValid)
+                if (clFechaHasta.SelectedDate < tbFecha.SelectedDate.Date)
                 {
-                    Viaje viaje = new Viaje(
-                    Convert.ToInt32(ddlCiudadSalida.SelectedValue),
-                    Convert.ToInt32(ddlCiudadDestino.SelectedValue),
-                    tbDuracion.Text,
-                    Convert.ToInt32(tbLugaresDisponibles.Text),
-                    Convert.ToInt32(ddlVehiculo.SelectedValue),
-                    tbFecha.SelectedDate,
-                    tbHoraSalida.Text,
-                    Convert.ToDouble(tbPrecio.Text),
-                    tbDescripcion.Text);
-                    viaje.Precio = (viaje.Precio / viaje.LugaresDisponibles);
-
-                    Bol.Viaje.Update(viaje, Viaje.Id);
-
-
-                    this.Master.FindControl("divMsjOk").Visible = true;
-                    Literal liMensaje = (Literal)this.Master.FindControl("liMsjOK");
-                    liMensaje.Text = "Viaje Modificar con éxito";
-
-                    Response.Redirect("~/Viajes/Listado-de-Viajes.aspx");
+                    cvFechaHasta.ErrorMessage = "No puede seleccionar una fecha anterior a la fecha desde.";
                 }
-                else
-                    throw new Exception("Error al Modificar viaje ");
-            }
-            catch (Exception ex)
-            {
-                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
-                divalert.Visible = true;
-                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
-                lialert.Text = ex.Message;
+                if(clFechaHasta.SelectedDate < DateTime.Now)
+                {
+                    cvFechaHasta.ErrorMessage = "No puede seleccionar una fecha anterior al dia de hoy.";
+                }
+                if (clFechaHasta.SelectedDate == DateTime.MinValue.Date)
+                {
+                    cvFechaHasta.ErrorMessage = "Debe seleccionar la fecha hasta.";
+                }
+                args.IsValid = false;
+                tbFecha.CssClass = "nomargin trasnparent-background error";
             }
         }
+        #endregion
+
+
+
+
     }
 }

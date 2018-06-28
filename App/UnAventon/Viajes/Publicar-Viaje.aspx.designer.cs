@@ -121,22 +121,22 @@ namespace UnAventon.Viajes {
         protected global::System.Web.UI.WebControls.CustomValidator cvDuracion;
         
         /// <summary>
-        /// tbLugaresDisponibles control.
+        /// ddlTipoViaje control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbLugaresDisponibles;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoViaje;
         
         /// <summary>
-        /// cvLugaresDisponibles control.
+        /// cvTipoViaje control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cvLugaresDisponibles;
+        protected global::System.Web.UI.WebControls.CustomValidator cvTipoViaje;
         
         /// <summary>
         /// ddlVehiculo control.
@@ -155,42 +155,6 @@ namespace UnAventon.Viajes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator cvVehiulo;
-        
-        /// <summary>
-        /// divFecha control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divFecha;
-        
-        /// <summary>
-        /// lbFecha control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbFecha;
-        
-        /// <summary>
-        /// tbFecha control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar tbFecha;
-        
-        /// <summary>
-        /// cvFecha control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cvFecha;
         
         /// <summary>
         /// tbHoraSalida control.
@@ -229,22 +193,22 @@ namespace UnAventon.Viajes {
         protected global::System.Web.UI.WebControls.CustomValidator cvPrecio;
         
         /// <summary>
-        /// ddlTipoViaje control.
+        /// tbLugaresDisponibles control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoViaje;
+        protected global::System.Web.UI.WebControls.TextBox tbLugaresDisponibles;
         
         /// <summary>
-        /// cvTipoViaje control.
+        /// cvLugaresDisponibles control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cvTipoViaje;
+        protected global::System.Web.UI.WebControls.CustomValidator cvLugaresDisponibles;
         
         /// <summary>
         /// btnAgregarViaje control.
@@ -256,6 +220,42 @@ namespace UnAventon.Viajes {
         protected global::System.Web.UI.WebControls.Button btnAgregarViaje;
         
         /// <summary>
+        /// divFecha control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divFecha;
+        
+        /// <summary>
+        /// lbFecha control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbFecha;
+        
+        /// <summary>
+        /// tbFecha control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar tbFecha;
+        
+        /// <summary>
+        /// cvFecha control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvFecha;
+        
+        /// <summary>
         /// tbDescripcion control.
         /// </summary>
         /// <remarks>
@@ -263,24 +263,6 @@ namespace UnAventon.Viajes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbDescripcion;
-        
-        /// <summary>
-        /// btnPublicarViaje control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPublicarViaje;
-        
-        /// <summary>
-        /// btnModificar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModificar;
         
         /// <summary>
         /// divViajesAgregados control.
@@ -389,5 +371,50 @@ namespace UnAventon.Viajes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator ViajesDiarios;
+        
+        /// <summary>
+        /// btnPublicarViaje control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPublicarViaje;
+        
+        /// <summary>
+        /// btnModificar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModificar;
+        
+        /// <summary>
+        /// divFechaHasta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divFechaHasta;
+        
+        /// <summary>
+        /// clFechaHasta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar clFechaHasta;
+        
+        /// <summary>
+        /// cvFechaHasta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvFechaHasta;
     }
 }
