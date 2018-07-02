@@ -97,7 +97,7 @@
                 </div>
             </div>
         </div>
-        <asp:Button Text="Eliminar" runat="server" ID="btnEliminarViaje" CssClass="boton_personalizado" OnClick="btnEliminarViaje_Click" OnClientClick="return confirm('¿Desea eliminar el viaje, si el posee pasajeros será penalizado.?');" />
+        <asp:Button Text="Eliminar" runat="server" ID="btnEliminarViaje" CssClass="boton_personalizado" OnClick="btnEliminarViaje_Click" OnClientClick="return confirm('¿Desea eliminar el viaje?, si el viaje posee pasajeros será penalizado.');" />
         <asp:Button Text="Modificar" runat="server" ID="btnModificar" CssClass="boton_personalizado" OnClick="btnModificar_Click" />
         <asp:Button Text="Postularse" runat="server" ID="btnPostularse" CssClass="boton_personalizado" OnClick="btnPostularse_Click" OnClientClick="return confirm('¿Desea postularse al viaje?');" />
         <div id="divEstadoPostulacion" class="Estado" runat="server">
@@ -153,7 +153,7 @@
                                                         <asp:LinkButton CssClass="DeleteButton" CommandName="RECHAZAR" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Rechazar" ID="lbRechazar"></asp:LinkButton>
                                                     </td>
                                                     <td>
-                                                        <asp:LinkButton CssClass="DeleteButton" CommandName="ELIMINAR" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Eliminar" ID="lbEliminar" OnClientClick="return confirm('¿Desea eliminar el pasajero, usted será penalisado.?');"></asp:LinkButton>
+                                                        <asp:LinkButton CssClass="DeleteButton" CommandName="ELIMINAR" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Eliminar" ID="lbEliminar" OnClientClick="return confirm('¿Desea eliminar el pasajero?,si el mismo está aceptado usted será penalizado.');"></asp:LinkButton>
                                                     </td>
                                                     <td>
                                                         <asp:LinkButton CssClass="UpdateButton" CommandName="DATOS" CommandArgument='<%#Eval("Id") %>' runat="server" Text="Datos" ID="lbDatos"></asp:LinkButton>

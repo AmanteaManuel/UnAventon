@@ -175,9 +175,15 @@ namespace UnAventon.Viajes
                 if (e.CommandName.ToUpper().Equals("ACEPTAR"))
                 {
                     Bol.Usuario u = Bol.Usuario.GetPostulanteByViajeId(id, Viaje.Id);
-                    Bol.Usuario.AceptarPostulacion(id, Viaje.Id);
-                    Bol.Viaje.RestarUnLUgar(Viaje.Id);
-                    Response.Redirect(Request.RawUrl);
+
+                    if (Viaje.LugaresDisponiblesActual > 0)
+                    {
+                        Bol.Usuario.AceptarPostulacion(id, Viaje.Id);
+                        Bol.Viaje.RestarUnLUgar(Viaje.Id);
+                        Response.Redirect(Request.RawUrl);
+                    }
+                    else
+                        throw new Exception("El Viaje no tiene asientos libres.");
                 }
                 if (e.CommandName.ToUpper().Equals("RECHAZAR"))
                 {
