@@ -45,7 +45,13 @@
 										    <tr>
 											    <td><strong>Reputacion como Pasajero:</strong></td>
 											    <td><asp:Literal runat="server" ID="liReputacionPasajero" /></td>
-										    </tr>                     
+										    </tr>  
+                                            <tr>
+                                                <td><strong>Eliminar mi cuenta </strong></td>
+                                                <td> 
+                                                    <asp:Linkbutton ID="lbeliminarCuenta" CssClass="DeleteButton" CommandName="ELIMINARCUENTA" CommandArgument='<%# Eval("id") %>' runat="server" Text="Eliminar" OnClientClick="return confirm('¿Esta seguro que desea eliminar la cuenta?');" ></asp:Linkbutton>
+                                                </td>
+                                            </tr>
 									    </tbody>
 								        </table>
                                     </div>
@@ -131,7 +137,7 @@
                                                 <th>Hora</th>
                                                 <th>Estado</th>
                                                 <th>Detalle</th>
-                                                <%--<th>Datos de Contacto</th>--%>
+                                                <th>Datos de Contacto</th>
                                                 <th>Baja del viaje</th>
                                             </tr>
                                         </HeaderTemplate>
@@ -147,11 +153,11 @@
                                                 <td>
                                                     <asp:LinkButton ID="lbDetalle" CssClass="links" CommandName="DETALLE" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Ver Detalle"></asp:LinkButton>
                                                 </td>
-                                               <%-- <td>
-                                                    <asp:LinkButton ID="lbDatos" CssClass="UpdateButton" CommandName="DATOS" CommandArgument='<%# Eval("id") %>' runat="server" Text="Contacto Chofer"></asp:LinkButton>
-                                                </td>--%>
                                                 <td>
-                                                    <asp:LinkButton ID="lbBaja" CssClass="DeleteButton" CommandName="BAJA" CommandArgument='<%# Eval("id") %>' runat="server" Text="Darme de Baja"></asp:LinkButton>
+                                                    <asp:LinkButton ID="lbDatos" CssClass="UpdateButton" CommandName="DATOS" CommandArgument='<%# Eval("id") %>' runat="server" Text="Contacto Chofer"></asp:LinkButton>
+                                                </td>
+                                                <td>
+                                                    <asp:LinkButton ID="lbBaja" CssClass="DeleteButton" CommandName="BAJA" CommandArgument='<%# Eval("id") %>' runat="server" Text="Darme de Baja" OnClientClick="return confirm('¿Desea darse de baja? Usted podria llegar a ser penalizado');"></asp:LinkButton>
                                                 </td>
                                             </tr>
                                         </ItemTemplate>
@@ -165,15 +171,15 @@
         </div>
     </div>
     <!-- Aca termina la lista de Postulaciones-->
-    <%-- <div class="row" id="divDatosChofer" runat="server">
+     <div class="row" id="divDatosChofer" runat="server">
                     <div class="alert alert-success" role="alert">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                         <div class="center"><label><strong>Datos del Chofer</strong></label></div> <br>                       
-                        <label><strong>Email: </strong></label> <asp:Literal runat="server" ID="Literal1" /><br>   <!-- liEmail ya esta en uso-->
-                        <label><strong>Nombre: </strong></label><asp:Literal runat="server" ID="Literal2" /><br>   <!-- liNombre ya esta en uso-->
-                        <label><strong>Apellido: </strong></label><asp:Literal runat="server" ID="Literal3" /><br>  <!-- liApellido ya esta en uso-->
+                        <label><strong>Email: </strong></label> <asp:Literal runat="server" ID="Literal1" /><br>   
+                        <label><strong>Nombre: </strong></label><asp:Literal runat="server" ID="Literal2" /><br>   
+                        <label><strong>Apellido: </strong></label><asp:Literal runat="server" ID="Literal3" /><br>  
                         <label><strong>Reputacion: </strong></label><asp:Literal runat="server" ID="liReputacion"/>
                     </div>
-     </div>--%>
+     </div>
 </div>
 </asp:Content>
