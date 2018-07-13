@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">    
-        <div class="container margin-general">
+<div class="container margin-general">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
                     <div class="panel panel-info">
@@ -95,8 +95,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>       
         <asp:Button Text="Eliminar" runat="server" ID="btnEliminarViaje" CssClass="boton_personalizado" OnClick="btnEliminarViaje_Click" OnClientClick="return confirm('¿Desea eliminar el viaje?, si el viaje posee pasajeros será penalizado.');" />
         <asp:Button Text="Modificar" runat="server" ID="btnModificar" CssClass="boton_personalizado" OnClick="btnModificar_Click" />
         <asp:Button Text="Postularse" runat="server" ID="btnPostularse" CssClass="boton_personalizado" OnClick="btnPostularse_Click" OnClientClick="return confirm('¿Desea postularse al viaje?');" />
@@ -176,13 +175,34 @@
     </div>
     <!-- FIN Lista de postulantes-->
      <div class="row" id="divDatosUsuario" runat="server">
-                    <div class="alert alert-success" role="alert">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <div class="center"><label><strong>Datos del Usuario</strong></label></div> <br>                       
-                        <label><strong>Email: </strong></label> <asp:Literal runat="server" ID="liEmail" /><br>
-                        <label><strong>Nombre: </strong></label><asp:Literal runat="server" ID="liNombre" /><br>
-                        <label><strong>Apellido: </strong></label><asp:Literal runat="server" ID="liApellido" /><br>
-                        <label><strong>Reputacion: </strong></label><asp:Literal runat="server" ID="liReputacion"/>
-                    </div>
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <div class="center"><label><strong>Datos del Usuario</strong></label></div> <br>                       
+            <label><strong>Email: </strong></label> <asp:Literal runat="server" ID="liEmail" /><br>
+            <label><strong>Nombre: </strong></label><asp:Literal runat="server" ID="liNombre" /><br>
+            <label><strong>Apellido: </strong></label><asp:Literal runat="server" ID="liApellido" /><br>
+            <label><strong>Reputacion: </strong></label><asp:Literal runat="server" ID="liReputacion"/>
+        </div>
      </div>
+
+    <%--SECCION DE PREGUNTAS--%>
+    <br /><h3 class="panel-title">Preguntas</h3><br />    
+    <div class="row">       
+            <div class=" col-md-2 col-lg-2 "><asp:Panel runat="server" BackColor="Transparent"></asp:Panel></div>
+                <div class=" col-md-8 col-lg-8">
+                    <asp:Repeater runat="server">
+                        <ItemTemplate>
+                            <div class="divPreguntas">
+                                <strong><asp:Label ID="lbPregunta" CssClass="pregunta"  Text="Hola que tal tenes aire acondicionado?" runat="server" /></strong><br /><br />
+                                <asp:Label ID="lbRespuesta" CssClass="respuesta" Text="Que te importa" runat="server" />
+                            </div>
+                            <asp:Button Text="Responder" runat="server" ID="btnResponder" CssClass="boton_personalizado" OnClick="btnResponder_Click1"/><br /><br />                    
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </div>
+            <div class=" col-md-2 col-lg-2 "></div>
+    </div>
+    <%--FIN SECCION DE PREGUNTAS--%>
+
+</div>
 </asp:Content>

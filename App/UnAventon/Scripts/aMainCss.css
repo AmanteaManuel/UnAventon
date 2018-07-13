@@ -256,3 +256,18 @@ nomargin {
 .roundedCorner{
     border-radius:7px 14px;
 }
+
+.divPreguntas {
+    background: rgba(0,0,0,0.2);
+    border:solid 1px;
+}
+
+.pregunta {
+    color: #000000;
+    font-size:larger;
+}
+
+.respuesta {
+    color: white;   
+    font-size: larger;
+}

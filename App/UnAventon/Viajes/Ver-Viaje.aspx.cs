@@ -387,5 +387,15 @@ namespace UnAventon.Viajes
                 lialert.Text = ex.Message;
             }
         }
+
+        protected void btnResponder_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnResponder_Click1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
