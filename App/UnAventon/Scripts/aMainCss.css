@@ -252,3 +252,7 @@ nomargin {
 .noMargin{
     margin:0;
 }
+
+.roundedCorner{
+    border-radius:7px 14px;
+}

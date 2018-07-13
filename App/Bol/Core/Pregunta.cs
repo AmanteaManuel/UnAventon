@@ -80,6 +80,7 @@ namespace Bol
             }
         }
 
+        public int UsuarioId { get; set; }
 
 
         #endregion
@@ -111,7 +112,7 @@ namespace Bol
                     oBol._viajeId = Convert.ToInt32(dr["ViajeId"]);
 
                 if (dr.Table.Columns.Contains("UsuarioId") && !Convert.IsDBNull(dr["UsuarioId"]))
-                    oBol._usuarioId = Convert.ToInt32(dr["UsuarioId"]);
+                    oBol.UsuarioId = Convert.ToInt32(dr["UsuarioId"]);
 
                 if (dr.Table.Columns.Contains("Fecha") && !Convert.IsDBNull(dr["Fecha"]))
                     oBol.Fecha = Convert.ToDateTime(dr["Fecha"]);
@@ -139,21 +140,20 @@ namespace Bol
 
         #region " CRUD "
 
-        public static int Create(Pregunta respuesta)
+        public static int Create(Pregunta pregunta)
         {
             int outId = 0;
             try
             {
-
                 outId = new Dal.Core.Pregunta().Create(
-                respuesta.Fecha,
-                respuesta.Descripcion,
-                respuesta._usuarioId,
-                respuesta._viajeId
+                pregunta.Fecha,
+                pregunta.Descripcion,
+                pregunta._usuarioId,
+                pregunta._viajeId
                 );
 
-                respuesta.Id = outId;
-                return respuesta.Id;
+                pregunta.Id = outId;
+                return pregunta.Id;
             }
             catch (Exception e) { throw new Exception("Error en Insert" + e.Message); }
         }

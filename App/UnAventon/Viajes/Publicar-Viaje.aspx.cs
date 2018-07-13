@@ -153,7 +153,12 @@ namespace UnAventon.Viajes
         {
             try
             {
-                Validate("PublicarViaje");
+                //Pregunto si el usuario esta apto de publicar un viaje.
+                bool apto = Bol.Viaje.ValidarCreacionDeViaje(ActiveUsuario.Id);
+                if (apto == false)
+                    throw new Exception("El usuario adeuda pagos o calificaciones.");
+
+                Validate("PublicarViaje"); 
                 if (Page.IsValid)
                 {
                     //Es un viaje Frecuente

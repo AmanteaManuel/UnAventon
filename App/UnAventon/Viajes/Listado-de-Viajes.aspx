@@ -3,11 +3,41 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <br />
-<div id="global" class="margin-general">    
-    <div>
-        <h3><strong><label>Listado de Viajes</label></strong></h3>
-        <p><label>En esta página podrá ver el listado de todos los viajes.</label></p>
+<div id="global" class="margin-general">   
+    <div class="row">
+        <div class="col-sm-6 col-lg-6">
+            <h3><strong>
+                <label>Listado de Viajes</label></strong></h3>
+            <p>
+                <label>En esta página podrá ver el listado de todos los viajes.</label></p>
+        </div>
+        <div class="col-sm-6 col-lg-6">
+            <asp:UpdatePanel runat="server" ID="upBusqueda" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <strong>Provincia Salida</strong>
+                    <asp:DropDownList ID="ddlProvSalida" OnSelectedIndexChanged="ddlProvSalida_SelectedIndexChanged" runat="server" CssClass="roundedCorner" AutoPostBack="true">
+                    </asp:DropDownList>
+
+                    <strong>Ciudad Salida</strong>
+                    <asp:DropDownList runat="server" ID="ddlCiudadSalida" CssClass="roundedCorner">
+                    </asp:DropDownList><br />
+
+                    <br />
+
+                    <strong>Provincia Destino</strong>
+                    <asp:DropDownList runat="server" ID="ddlProvDestino" OnSelectedIndexChanged="ddlProvDestino_SelectedIndexChanged" CssClass="roundedCorner" AutoPostBack="true">
+                    </asp:DropDownList>
+
+                    <strong>Ciudad Destino</strong>
+                    <asp:DropDownList runat="server" ID="ddlCiudadDestino" CssClass="roundedCorner">
+                    </asp:DropDownList>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            <asp:Button Text="Buscar" CssClass="links" ID="btnBuscar" OnClick="btnBuscar_Click1" runat="server" />
+        </div>
     </div>
+    </div>
+        
     <div class="row">
         <div class="col-sm-12 col-lg-12">
            <div class="panel panel-default">        

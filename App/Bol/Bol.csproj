@@ -43,8 +43,10 @@
   <ItemGroup>
     <Compile Include="Core\Chofer.cs" />
     <Compile Include="Core\Ciudad.cs" />
+    <Compile Include="Core\ItemViajeAsistido.cs" />
     <Compile Include="Core\Log.cs" />
     <Compile Include="Core\Pasajero.cs" />
+    <Compile Include="Core\Postulacion.cs" />
     <Compile Include="Core\Pregunta.cs" />
     <Compile Include="Core\Provincia.cs" />
     <Compile Include="Core\Respuesta.cs" />

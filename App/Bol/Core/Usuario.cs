@@ -555,9 +555,13 @@ namespace Bol
             catch (Exception e) { throw new Exception("Error en Eliminarion" + e.Message); }
         }
 
-        public static void SumarReputacionChofer()
+        public static void SumarReputacionChofer(int usuarioId)
         {
-
+            try
+            {
+                new Dal.Core.Usuario().SumarReputacionChofer(usuarioId);
+            }
+            catch (Exception e) { throw new Exception("Error en Eliminarion" + e.Message); }
         }
 
         public static void RestarReputacionChofer(int usuarioId)
@@ -569,25 +573,25 @@ namespace Bol
             catch (Exception e) { throw new Exception("Error en Eliminarion" + e.Message); }
         }
 
-        public static void ObtenerReputacionChofer(int usuarioId)
-        {
-
-        }
-
         public static void SumarReputacionPasajero(int usuarioId)
         {
-
+            try
+            {
+                new Dal.Core.Usuario().SumarReputacionPasajero(usuarioId);
+            }
+            catch (Exception e) { throw new Exception("Error en Eliminarion" + e.Message); }
         }
 
         public static void RestarReputacionPasajero(int usuarioId)
         {
-
+            try
+            {
+                new Dal.Core.Usuario().RestarReputacionPasajero(usuarioId);
+            }
+            catch (Exception e) { throw new Exception("Error en Eliminarion" + e.Message); }
         }
 
-        public static void ObtenerReputacionPasajero(int usuarioId)
-        {
 
-        }
 
         public static void CambiarFotoPerfil(string path, int usuarioId)
         {

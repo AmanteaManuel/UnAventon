@@ -55,9 +55,9 @@ namespace Dal.Core
 
         private const string GET_POSTULANTES_BY_VIAJE_ID = @"SELECT * FROM Postulantes WHERE viajeId = {0}";
 
-        private const string CREATE_POSTULACION = @"INSERT INTO Postulantes (UsuarioId, ViajeId, EstadoViaje) 
+        private const string CREATE_POSTULACION = @"INSERT INTO Postulantes (UsuarioId, ViajeId, EstadoViaje, SiCalificado) 
 				                                                     output INSERTED.UsuarioId
-				                                                     VALUES (@parUsuarioId,@parViajeId, 1)";
+				                                                     VALUES (@parUsuarioId,@parViajeId, 1, 0)";
 
         private const string ACEPTAR_POSTULACION = @"UPDATE Postulantes
                                                             SET EstadoViaje = @parEstado
@@ -83,6 +83,18 @@ namespace Dal.Core
         private const string CAMBIAR_FOTO_PERFIL = @"UPDATE Usuario
                                                         SET FotoPerfil = @parPath
                                                         WHERE Id = @parUsuarioId;";
+
+        private const string SUMAR_REPUTACION_CHOFER = @"UPDATE Usuario
+                                                            SET ReputacionChofer = ReputacionChofer + 1
+                                                            WHERE Id = @parUsuarioId";
+
+        private const string SUMAR_REPUTACION_PASAJERO = @"UPDATE Usuario
+	                                                        SET ReputacionPasajero = ReputacionPasajero + 1
+	                                                        WHERE Id = @parUsuarioId";
+
+        private const string RESTAR_REPUTACION_PASAJERO = @"UPDATE Usuario
+	                                                            SET ReputacionPasajero = ReputacionPasajero - 1
+	                                                            WHERE Id = @parUsuarioId";
 
 
         #endregion
@@ -311,6 +323,47 @@ namespace Dal.Core
             this.ExecuteParameters.Parameters.Clear();
 
             this.ExecuteParameters.Parameters.AddWithValue("@parPath", path);
+            this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
+
+            //ejecución, retorna el valor del parámetro de retorno
+            this.ExecuteNonQuery();
+        }
+
+
+
+        public void SumarReputacionChofer(int usuarioId)
+        {
+            this.ExecuteCommandText = SUMAR_REPUTACION_CHOFER;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
+
+            //ejecución, retorna el valor del parámetro de retorno
+            this.ExecuteNonQuery();
+        }     
+
+        public void SumarReputacionPasajero(int usuarioId)
+        {
+            this.ExecuteCommandText = SUMAR_REPUTACION_PASAJERO;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
+
+            //ejecución, retorna el valor del parámetro de retorno
+            this.ExecuteNonQuery();
+        }
+
+        public void RestarReputacionPasajero(int usuarioId)
+        {
+            this.ExecuteCommandText = RESTAR_REPUTACION_PASAJERO;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
             this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
 
             //ejecución, retorna el valor del parámetro de retorno

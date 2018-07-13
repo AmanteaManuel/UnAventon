@@ -54,6 +54,9 @@ namespace Bol
             set { _id = value; }
         }
 
+        public bool SiPagado
+        { get; set; }
+
         //solo usarla para el ver perfil
         public int EstadoViaje
         {
@@ -367,6 +370,16 @@ namespace Bol
                 return null;
         }
 
+        public static List<Viaje> GetAllByFiltrosAndNowToOneMonth(int CiudadDestinoId, int ciudadSalidaId, DateTime fechaActual, DateTime fechaUnMes)
+        {
+            DataSet Viajedr;
+            Viajedr = new Dal.Core.Viaje().GetAllByFiltrosAndNowToOneMonth(CiudadDestinoId, ciudadSalidaId, fechaActual, fechaUnMes);
+            if (Viajedr.Tables[0].Rows.Count > 0)
+                return FillList(Viajedr);
+            else
+                return null;
+        }
+
         #endregion
 
         #region " Fill "
@@ -424,6 +437,9 @@ namespace Bol
 
                 if (dr.Table.Columns.Contains("UsuarioId") && !Convert.IsDBNull(dr["UsuarioId"]))
                     oBol.UsuarioPasajeroId = Convert.ToInt32(dr["UsuarioId"]);
+
+                if (dr.Table.Columns.Contains("SiPagado") && !Convert.IsDBNull(dr["SiPagado"]))
+                    oBol.SiPagado = Convert.ToBoolean(dr["SiPagado"]);
 
             }
             catch (Exception ex) { throw new Exception("Error en el metodo Fill" + ex.Message); }
@@ -552,7 +568,17 @@ namespace Bol
             {
                 new Dal.Core.Viaje().SumarUnLUgar(viajeId);
             }
-            catch (Exception e) { throw new Exception("Error al sumnar asiento. " + e.Message); }
+            catch (Exception e) { throw new Exception("Error al sumnar asiento. "); }
+        }
+
+        public static void Pagar(int viajeId)
+        {
+            try
+            {
+                new Dal.Core.Viaje().Pagar(viajeId);
+            }
+            catch (Exception e) { throw new Exception("Error al pagar el viaje. ");
+            }
         }
          
         #endregion
@@ -583,6 +609,38 @@ namespace Bol
 
         public Viaje() { }
 
+
+        #endregion
+
+        #region " Validaciones "
+
+        public static bool ValidarCreacionDeViaje(int usuarioId)
+        {
+            List<Viaje> viajes = new Bol.Viaje().GetAllByUsuarioId(usuarioId);
+            List<Postulacion> postulaciones = Bol.Core.Postulacion.GetAllPostulacionesAceptados(usuarioId);
+
+            if (postulaciones != null)
+            {
+                //si adeuda alguna calificacion
+                foreach (Postulacion p in postulaciones)
+                {
+                    if (p.SiCalificado == false)
+                        return false;
+                }
+            }
+
+            if (viajes != null)
+            {
+                foreach (Viaje v in viajes)
+                {
+                    //si hay algun viaje que no esta pagado retorno false
+                    if (v.SiPagado != true)
+                        return false;
+                }
+            }
+
+            return true;
+        }
 
         #endregion
     }

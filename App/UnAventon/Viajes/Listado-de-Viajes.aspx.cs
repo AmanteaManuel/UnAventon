@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bol.Core;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -22,10 +23,13 @@ namespace UnAventon.Viajes
 
                     List<Bol.Viaje> viajes = new Bol.Viaje().GetAllFromNowToOneMonth(fechaActual, fechaUnMes);
 
+                    List<Provincia> provincias = new List<Provincia>();
+                    provincias = Provincia.GetAll();
 
-                    #region " Pruebas "
+                    LoadDropDownList(ddlProvDestino, provincias, "Descripcion", "ID", "Seleccione...");
+                    LoadDropDownList(ddlProvSalida, provincias, "Descripcion", "ID", "Seleccione...");
 
-                    #endregion                   
+
 
                     //Bindeo el objeto
                     rptViajes.DataSource = viajes;
@@ -40,8 +44,7 @@ namespace UnAventon.Viajes
                 }
                
             }            
-        }        
-       
+        }               
 
         protected void lbDetalle_Click(object sender, EventArgs e)
         {
@@ -64,7 +67,52 @@ namespace UnAventon.Viajes
             catch (Exception ex)
             {                
             }
-        }     
-      
+        }
+
+        protected void btnBuscar_Click1(object sender, EventArgs e)
+        {
+            if ((ddlCiudadDestino.SelectedIndex != 0) && (ddlCiudadSalida.SelectedIndex != 0))
+            {
+                DateTime fechaActual = DateTime.Now;
+                DateTime fechaUnMes = fechaActual.AddMonths(1);
+
+                List<Bol.Viaje> viajes = Bol.Viaje.GetAllByFiltrosAndNowToOneMonth(Convert.ToInt32(ddlCiudadDestino.SelectedValue), Convert.ToInt32(ddlCiudadSalida.SelectedValue), fechaActual, fechaUnMes);
+
+                rptViajes.DataSource = viajes;
+                rptViajes.DataBind();
+            }
+        }
+
+        protected void ddlProvSalida_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlProvSalida.SelectedIndex > 0)
+            {
+                List<Ciudad> ciudades = new List<Ciudad>();
+                ciudades = Ciudad.GetAllByProvinciaId(Convert.ToInt32(ddlProvSalida.SelectedValue));
+                LoadDropDownList(ddlCiudadSalida, ciudades, "Descripcion", "ID", "Seleccione...");
+                upBusqueda.Update();
+            }
+        }
+
+        protected void ddlProvDestino_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlProvDestino.SelectedIndex > 0)
+            {
+                List<Ciudad> ciudades = new List<Ciudad>();
+                ciudades = Ciudad.GetAllByProvinciaId(Convert.ToInt32(ddlProvDestino.SelectedValue));
+                LoadDropDownList(ddlCiudadDestino, ciudades, "Descripcion", "ID", "Seleccione...");
+                upBusqueda.Update();
+            }
+        }
+
+        private void LoadDropDownList(DropDownList list, object dataSource, string text, string value, string valoramostrarpordefecto)
+        {
+            list.DataTextField = text;
+            list.DataValueField = value;
+            list.DataSource = dataSource;
+            list.DataBind();
+
+            list.Items.Insert(0, new ListItem(valoramostrarpordefecto, string.Empty));
+        }
     }
 }

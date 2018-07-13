@@ -20,6 +20,7 @@ namespace Dal.Core
                                                     LugaresDisponiblesActual,
 			                                        Descripcion,
                                                     SiActivo,
+                                                    SiPagado,
                                                     UsuarioId)
                                                 output INSERTED.Id
                                                 VALUES
@@ -33,8 +34,10 @@ namespace Dal.Core
 			                                        @parLugaresDisponibles, 
                                                     @parLugaresDisponiblesActual, 
 			                                        @parDescripcion,
+                                                    0,
                                                     1,
                                                     @parUsuarioId)";
+       
 
         private const string GET_INSTANCE_BY_ID = @"SELECT * FROM Viajes
 	                                                WHERE Id = {0}";
@@ -78,6 +81,14 @@ namespace Dal.Core
         private const string GET_PASAJEROS_BY_USUARIO_ID = @"select * from Viajes v 
                                                                 INNER JOIN Postulantes p on p.ViajeId = v.Id
                                                                 where p.UsuarioId = {0}";
+
+        private const string PAGAR = @"Update Viajes Set SiPagado = 1 where Id = @parviajeId";
+
+        private const string GET_ALL_POSTULACIONES_ACEPTADAS = @"select * from Postulantes where UsuarioId = {0}";
+
+        private const string GET_ALL_BY_FILTROS_AND_FROM_NOW_TO_ONE_MONTH = @"SELECT * FROM Viajes
+	                                                                            WHERE (FechaSalida BETWEEN '{2}' AND '{3}') AND CiudadOrigenId = {1} AND CiudadDestinoId = {0}
+	                                                                            ORDER BY FechaSalida";
 
         public int Create(int origenId, int destinoId, string duracion, int lugaresDisponibles, int vehiculoId, DateTime fechaSalida, string horaSalida, double precio, string descripcion, int UsuarioId)
         {
@@ -144,6 +155,12 @@ namespace Dal.Core
             return this.Load();
         }
 
+        public DataSet GetAllPostulacionesAceptados(int usuarioId)
+        {
+            this.SelectCommandText = string.Format(GET_ALL_POSTULACIONES_ACEPTADAS, usuarioId);
+            return this.Load();
+        }
+
         public DataSet GetAllByUsuarioId(int id)
         {
             this.SelectCommandText = string.Format(GET_ALL_BY_USUARIO_ID, id);
@@ -184,6 +201,12 @@ namespace Dal.Core
             this.ExecuteNonQuery();
         }
 
+        public DataSet GetAllByFiltrosAndNowToOneMonth(int ciudadDestinoId, int ciudadSalidaId, DateTime fechaActual, DateTime fechaUnMes)
+        {
+            this.SelectCommandText = string.Format(GET_ALL_BY_FILTROS_AND_FROM_NOW_TO_ONE_MONTH, ciudadDestinoId, ciudadSalidaId, fechaActual.ToString("yyyy-MM-dd"), fechaUnMes.ToString("yyyy-MM-dd"));
+            return this.Load();
+        }
+
         public void RestarUnLUgar(int viajeId)
         {
             this.ExecuteCommandText = RESTAR_LUGAR;
@@ -217,6 +240,18 @@ namespace Dal.Core
         public void Delete(int viajeId)
         {
             this.ExecuteCommandText = DELETE;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parviajeId", viajeId);
+
+            this.ExecuteNonQuery();
+        }
+
+        public void Pagar(int viajeId)
+        {
+            this.ExecuteCommandText = PAGAR;
 
             //Limpio los parámetros
             this.ExecuteParameters.Parameters.Clear();
