@@ -93,6 +93,17 @@ namespace Bol
             }
         }
 
+        public string ActivoStr
+        {
+            get
+            {
+                if (this.SiActivo == true)
+                    return "Activo";
+                else
+                    return "Eliminado";
+            }
+        }
+
         /// <summary>
         /// Marca del auto
         /// </summary>

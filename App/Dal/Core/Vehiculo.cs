@@ -10,7 +10,7 @@ namespace Dal.Core
     {
         #region " Query SQL "
 
-        private const string GET_ALL_BY_USUARIO_ID = @"Select * from Vehiculos where UsuarioId = {0} AND SiActivo = 1 ";
+        private const string GET_ALL_BY_USUARIO_ID = @"Select * from Vehiculos where UsuarioId = {0}";
 
         private const string INSERT_VEHICULO = @"INSERT INTO Vehiculos
                                                                (Marca,

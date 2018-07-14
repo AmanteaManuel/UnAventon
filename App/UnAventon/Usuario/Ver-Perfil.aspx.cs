@@ -15,7 +15,7 @@ namespace UnAventon.Usuario
         {
             try
             {
-                if(!Page.IsPostBack)
+                if (!Page.IsPostBack)
                 {
                     PreparePage();
                 }
@@ -66,7 +66,7 @@ namespace UnAventon.Usuario
             {
                 int id;
                 int.TryParse(((LinkButton)e.CommandSource).CommandArgument, out id);
-                List<Viaje> viajes = Viaje.GetAllViajesByVehiculoId(id);              
+                List<Viaje> viajes = Viaje.GetAllViajesByVehiculoId(id);
 
                 if (e.CommandName.ToUpper().Equals("DELETE"))
                 {
@@ -88,8 +88,8 @@ namespace UnAventon.Usuario
                         Response.Redirect("~/Vehiculos/AgregarVehiculo.aspx?id=" + idEncriptado);
                     }
                     else
-                        throw new Exception("El vehiculo Tiene Viajes en curso. ");                       
-                    
+                        throw new Exception("El vehiculo Tiene Viajes en curso. ");
+
                 }
             }
             catch (Exception ex)
@@ -126,7 +126,7 @@ namespace UnAventon.Usuario
                     liEstado.Text = "Rechazado";
                     liEstado.CssClass = "font-Red";
                 }
-                
+
             }
         }
 
@@ -162,6 +162,29 @@ namespace UnAventon.Usuario
         {
             Bol.Usuario.EliminarUsuario(ActiveUsuario.Id);
             Response.Redirect("~/Home.aspx");
+        }
+
+        protected void rptVehiculos_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {                
+                Bol.Vehiculo v = (Bol.Vehiculo)e.Item.DataItem;
+                if (v == null)
+                    return;
+
+                Label liEstadoVehiculo = (Label)e.Item.FindControl("liEstadoVehiculo");
+
+                if (v.SiActivo == true)
+                {
+                    liEstadoVehiculo.Text = "Activo";
+                    liEstadoVehiculo.CssClass = "font-Green";
+                }
+                else
+                {
+                    liEstadoVehiculo.Text = "Eliminado";
+                    liEstadoVehiculo.CssClass = "font-Red";
+                }
+            }
         }
     }
 }

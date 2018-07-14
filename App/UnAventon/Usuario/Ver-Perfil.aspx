@@ -77,7 +77,7 @@
                          <div class="table-responsive-vehiculo">
 							<div class=" col-md-12 col-lg-12">                                
                                     <table class="table table-hover">
-                                        <asp:Repeater runat="server" ID="rptVehiculos" OnItemCommand="rptVehiculos_ItemCommand">
+                                        <asp:Repeater runat="server" ID="rptVehiculos" OnItemCommand="rptVehiculos_ItemCommand" OnItemDataBound="rptVehiculos_ItemDataBound">
                                             <HeaderTemplate>
                                                 <tr>
                                                     <th>Marca</th>
@@ -87,6 +87,7 @@
                                                     <th>Asientos</th>
                                                     <th>Eliminar</th>
                                                     <th>Modificar</th>
+                                                    <th>Activo</th>
                                                 </tr>
                                             </HeaderTemplate>
                                             <ItemTemplate>
@@ -104,7 +105,11 @@
                                                     <td>
                                                         <asp:LinkButton CssClass="DeleteButton" ID="linkDetalle" CommandName="DELETE" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Eliminar" OnClientClick="return confirm('¿Desea eliminar el vehículo?');"></asp:LinkButton></td>
                                                     <td>
-                                                        <asp:LinkButton CssClass="UpdateButton" ID="LinkButton1" CommandName="UPDATE" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Modificar"></asp:LinkButton></td>
+                                                        <asp:LinkButton CssClass="UpdateButton" ID="LinkButton1" CommandName="UPDATE" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Modificar"></asp:LinkButton>
+                                                    </td>
+                                                    <td>
+                                                        <strong ><asp:Label runat="server" id="liEstadoVehiculo" /></strong>                                                
+                                                    </td> 
                                                     <%--<asp:Button  runat="server" ID="btnBorraVehiculo" OnClick="btnBorraVehiculo_Click" Text="X"/>   --%>
                                                 </tr>
                                             </ItemTemplate>
