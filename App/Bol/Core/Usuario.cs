@@ -497,6 +497,16 @@ namespace Bol
             catch (Exception e) { throw new Exception("Error en Update" + e.Message); }
         }
 
+        public static void EliminarUsuario(int id)
+        {
+            try
+            {
+                //Objetos
+                new Dal.Core.Usuario().EliminarUsuario(id);
+            }
+            catch (Exception e) { throw new Exception("Error en Update" + e.Message); }
+        }
+
         /// <summary>
         /// metodo que crea un postulacion cuando el
         /// </summary>
@@ -590,8 +600,6 @@ namespace Bol
             }
             catch (Exception e) { throw new Exception("Error en Eliminarion" + e.Message); }
         }
-
-
 
         public static void CambiarFotoPerfil(string path, int usuarioId)
         {

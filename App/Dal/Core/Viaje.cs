@@ -44,7 +44,7 @@ namespace Dal.Core
 
         private const string GET_ALL = @"SELECT * FROM Viajes";
 
-        private const string GET_ALL_BY_USUARIO_ID = @"SELECT * FROM Viajes WHERE usuarioId = {0}";
+        private const string GET_ALL_BY_USUARIO_ID = @"SELECT * FROM Viajes WHERE usuarioId = {0} ORDER BY FechaSalida";
 
         private const string GET_ALL_BY_VEHICULO_ID = @"select * from Viajes where VehiculoId = {0}";
 

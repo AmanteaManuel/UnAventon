@@ -96,6 +96,9 @@ namespace Dal.Core
 	                                                            SET ReputacionPasajero = ReputacionPasajero - 1
 	                                                            WHERE Id = @parUsuarioId";
 
+        private const string ELIMINAR_USUARIO = @"UPDATE Usuario SET SiActivo = 0, Email = null
+	                                                WHERE Id = {0}";
+
 
         #endregion
 
@@ -342,7 +345,20 @@ namespace Dal.Core
 
             //ejecución, retorna el valor del parámetro de retorno
             this.ExecuteNonQuery();
-        }     
+        }
+
+        public void EliminarUsuario(int id)
+        {
+            this.ExecuteCommandText = ELIMINAR_USUARIO;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", id);
+
+            //ejecución, retorna el valor del parámetro de retorno
+            this.ExecuteNonQuery();
+        }
 
         public void SumarReputacionPasajero(int usuarioId)
         {

@@ -157,5 +157,11 @@ namespace UnAventon.Usuario
             {
             }
         }
+
+        protected void lbeliminarCuenta_Click(object sender, EventArgs e)
+        {
+            Bol.Usuario.EliminarUsuario(ActiveUsuario.Id);
+            Response.Redirect("~/Home.aspx");
+        }
     }
 }

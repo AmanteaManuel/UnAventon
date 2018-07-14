@@ -89,8 +89,9 @@
             <div class="col-sm-12 col-lg-10 logoHeader">
                 <img  src="<%=Page.ResolveUrl("~/img/Logo.png")%>" alt="Logo Un Aventón">
             </div>
-            <div class="col-sm-12 col-lg-2"  align="center">
-                <div class="nomargin">
+
+            <div class="col-sm-12 col-lg-2" align="center">
+                <div class="nomargin" id="divDatosPerfil" runat="server">
                     <asp:Image ImageUrl="imageurl" runat="server" id="imgPerfil" alt="User Pic" class="img-circle" /><br />           
                     <strong><asp:Literal id="liNombreUsuario" runat="server" /></strong>
                     <strong><asp:Literal id="liApellido" runat="server" /></strong>

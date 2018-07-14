@@ -170,6 +170,9 @@ namespace UnAventon.Usuario
                     btnRegistrarse.Visible = true;
                     btnModificar.Visible = false;
 
+                    HtmlGenericControl divDatosPerfil = (HtmlGenericControl)this.Master.FindControl("divDatosPerfil");
+                    divDatosPerfil.Visible = false;
+
                     HtmlGenericControl divBody = (HtmlGenericControl)this.Master.FindControl("divBody");
                     divBody.Visible = false;                    
 

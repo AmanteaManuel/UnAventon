@@ -4,10 +4,19 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">    
 
 <div class="container margin-general">
-    <h3 class="panel-title"><strong>Mi Perfil</strong></h3>
-    <p><label>En esta página podrá ver el detalles de su perfil, administrar sus vehículos y ver sus postulaciones a viajes.</label></p>
+    <div class="row">
+        <div class="col-md-10 col-lg-10">
+            <h3 class="panel-title"><strong>Mi Perfil</strong></h3>    
+            <p><label>En esta página podrá ver el detalles de su perfil, administrar sus vehículos y ver sus postulaciones a viajes.</label></p>
+        </div>
+        <div class="col-md-2 col-lg-2 center">     
+            <br />
+             <strong>Eliminar Cuenta</strong>    
+            <asp:LinkButton ID="lbeliminarCuenta" CssClass="DeleteButton" runat="server" Text="Eliminar" OnClick="lbeliminarCuenta_Click" OnClientClick="return confirm('¿Esta seguro que desea eliminar la cuenta?');" />
+        </div>
+    </div>    
 	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-6 col-lg- " >
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 			<div class="panel panel-info">
 				<div class="panel-heading">			
                     <h3 class="panel-title"><strong>Perfil</strong></h3>
@@ -45,18 +54,13 @@
 										    <tr>
 											    <td><strong>Reputacion como Pasajero:</strong></td>
 											    <td><asp:Literal runat="server" ID="liReputacionPasajero" /></td>
-										    </tr>  
-                                            <tr>
-                                                <td><strong>Eliminar mi cuenta </strong></td>
-                                                <td> 
-                                                    <asp:Linkbutton ID="lbeliminarCuenta" CssClass="DeleteButton" CommandName="ELIMINARCUENTA" CommandArgument='<%# Eval("id") %>' runat="server" Text="Eliminar" OnClientClick="return confirm('¿Esta seguro que desea eliminar la cuenta?');" ></asp:Linkbutton>
-                                                </td>
-                                            </tr>
+										    </tr>
 									    </tbody>
 								        </table>
                                     </div>
                                 <hr/>
 							</div>
+
                         <%--<div class="col-md-3 col-lg-3 " align="center"></div>--%>
 						</div>
 					</div>            
