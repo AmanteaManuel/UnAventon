@@ -68,6 +68,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="%24trash\Pago.txt" />
     <Content Include="img\Change-Pick.png" />
     <Content Include="img\Fotos-Perfil\foto 2.jpg" />
     <Content Include="img\Fotos-Perfil\foto 3.jpg" />

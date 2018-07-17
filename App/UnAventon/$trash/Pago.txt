@@ -1,0 +1,109 @@
+<!doctype html>
+
+
+<!--aca empieza el pago -->
+<html lang="es" dir="ltr">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+    <title>onlinePago</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+<script src="js/jquery-1.11.3.js"></script>
+
+<script src="js/bootstrap.min.js" ></script>
+</head>
+<body>
+
+<form class="form-horizontal">
+<fieldset>
+<legend>Pago Viaje</legend>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="CardHolder">Nombre </label>  
+  <div class="col-md-8">
+  <input id="CardHolder" name="CardHolder" type="text" placeholder="Nombres Apellidos" class="form-control input-md" required="">
+  <span class="help-block">Ingrese Nombres y Apellidos igual que aparece en su tarjeta</span>  
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="tipo_tarjeta">Seleccione Tipo de Tarjeta</label>
+  <div class="col-md-8">
+    <select id="tipo_tarjeta" name="tipo_tarjeta" class="form-control">
+      <option value="VISA">VISA</option>
+      <option value="MASTER CARD">MASTER CARD</option>
+      <option value="OTRAS">OTRAS</option>
+    </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="CardNumber">Nro. Tarjeta</label>  
+  <div class="col-md-8">
+  <input id="CardNumber" name="CardNumber" type="text" placeholder="Ingrese Numero de tarjeta" class="form-control input-md" required="">
+  <span class="help-block">Numero de la tarjeta de crédito, sin espacios ni separadores.</span>  
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="ExpirationDate">Fecha de Vencimiento</label>  
+  <div class="col-md-8">
+  <input id="ExpirationDate" name="ExpirationDate" type="text" placeholder="MM/YYYY" class="form-control input-md" required="">
+  <span class="help-block">Fecha de expiración de la tarjeta en el formato mostrado en la misma MM/YYYY. Por Ejemplo: 10/2016.</span>  
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="cvc">CVC</label>  
+  <div class="col-md-8">
+  <input id="cvc" name="cvc" type="text" placeholder="CVC" class="form-control input-md" required="">
+  <span class="help-block">Ingrese : Código secreto de la Tarjeta de crédito, localizada en el dorso</span>  
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="City">Ciudad</label>  
+  <div class="col-md-8">
+  <input id="City" name="City" type="text" placeholder="Ciudad" class="form-control input-md">
+  <span class="help-block">Ciudad asociada a la tarjeta, Utilizada por algunos bancos para mayor seguridad.</span>  
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="ZipCode">Código Postal</label>  
+  <div class="col-md-8">
+  <input id="ZipCode" name="ZipCode" type="text" placeholder="Código Postal" class="form-control input-md">
+  <span class="help-block">Código Postal asociada a la tarjeta, Utilizada por algunos bancos para mayor seguridad.</span>  
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="Address">Direccion</label>  
+  <div class="col-md-8">
+  <input id="Address" name="Address" type="text" placeholder="Direccion" class="form-control input-md">
+  <span class="help-block">Estado o provincia asociada a la tarjeta, Utilizada por algunos bancos para mayor seguridad.</span>  
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="Amount">Monto</label>  
+  <div class="col-md-8">
+  <input id="Amount" name="Amount" type="text" placeholder="Monto" class="form-control input-md" required="">
+  <span class="help-block">Monto a Debitar, utilizando punto “.” como separador decimal. Por ejemplo: 200.00</span>  
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="singlebutton">Procesar Pago</label>
+  <div class="col-md-4">
+    <button id="singlebutton" name="singlebutton" class="btn btn-success">Pagar</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+</body>
+</html>
