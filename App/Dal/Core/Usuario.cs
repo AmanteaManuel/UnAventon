@@ -99,6 +99,9 @@ namespace Dal.Core
         private const string ELIMINAR_USUARIO = @"UPDATE Usuario SET SiActivo = 0, Email = null
 	                                                WHERE Id = {0}";
 
+        private const string INSERT_CALIFICACION = @"INSERT INTO Calificaciones (Comentario,puntaje,UsuarioId)
+                                                        VALUES (@parUsuarioId,@parcomentario,@parsiCalificacionBueno)";
+
 
         #endregion
 
@@ -381,6 +384,21 @@ namespace Dal.Core
             this.ExecuteParameters.Parameters.Clear();
 
             this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
+
+            //ejecución, retorna el valor del parámetro de retorno
+            this.ExecuteNonQuery();
+        }
+
+        public void InsertCalificacion(int usuarioId, string comentario, bool siCalificacionBueno)
+        {
+            this.ExecuteCommandText = INSERT_CALIFICACION;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
+            this.ExecuteParameters.Parameters.AddWithValue("@parcomentario", comentario);
+            this.ExecuteParameters.Parameters.AddWithValue("@parsiCalificacionBueno", siCalificacionBueno);
 
             //ejecución, retorna el valor del parámetro de retorno
             this.ExecuteNonQuery();

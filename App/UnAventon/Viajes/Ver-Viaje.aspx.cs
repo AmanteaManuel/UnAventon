@@ -19,6 +19,7 @@ namespace UnAventon.Viajes
             }
             set { ViewState["Viaje"] = value; }
         }
+        private int pasajerocalificacionId;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -72,7 +73,6 @@ namespace UnAventon.Viajes
                     btnEliminarViaje.CssClass = "boton_personalizado not-allowed";
                     btnEliminarViaje.ToolTip = "No se puede eliminar un viaje ya ocurrido";
                 }
-                   
 
                 divPostulacion.Visible = true;                
                 btnModificar.Visible = true;
@@ -98,6 +98,7 @@ namespace UnAventon.Viajes
                         btnPostularse.Visible = false;
                         divEstadoPostulacion.Visible = true;
 
+                        //seteo el estado del viaje
                         if (u.EstadoViaje == 1)
                         {
                             liEstado.Text = "Pendiente";
@@ -112,7 +113,7 @@ namespace UnAventon.Viajes
                         {
                             liEstado.Text = "Rechazado";
                             liEstado.CssClass = "font-Red";
-                        }
+                        }                        
                     }
 
                 }
@@ -218,8 +219,11 @@ namespace UnAventon.Viajes
                     liEmail.Text = " " + usuario.Email;
                     liNombre.Text = " "+usuario.Nombre;
                     liApellido.Text = " " + usuario.Apellido;
-                    liReputacion.Text = " " + Convert.ToString(usuario.ReputacioPasajero);
-
+                    liReputacion.Text = " " + Convert.ToString(usuario.ReputacioPasajero);                    
+                }
+                if (e.CommandName.ToUpper().Equals("DATOS"))
+                {                   
+                    pasajerocalificacionId = id;                    
                 }
             }
             catch (Exception ex)
@@ -252,7 +256,8 @@ namespace UnAventon.Viajes
                 LinkButton lbAceptar = (LinkButton)e.Item.FindControl("lbAceptar");
                 LinkButton lbRechazar = (LinkButton)e.Item.FindControl("lbRechazar");
                 LinkButton lbDatos = (LinkButton)e.Item.FindControl("lbDatos");
-                Label liEstado = (Label)e.Item.FindControl("liEstado");
+                Label liEstado = (Label)e.Item.FindControl("liEstado"); 
+                LinkButton lbCalifiacion = (LinkButton)e.Item.FindControl("lbCalifiacion");
 
                 //si el usuario logueado es igual al usuario que creo el viaje
                 if (Viaje.UsuarioId == ActiveUsuario.Id)
@@ -285,21 +290,30 @@ namespace UnAventon.Viajes
                         liEstado.Text = "Aceptado";
                         liEstado.CssClass = "font-Green";
                     }
-
                     //Usuario Rechazado
                     if (u.EstadoViaje == 3)
                     {
                         lbAceptar.CssClass = "UpdateButton not-allowed";
-                        lbRechazar.CssClass = "DeleteButton not-allowed";
-                        lbDatos.CssClass = "DeleteButton not-allowed";
-                        lbRechazar.ToolTip = "El postulante ya fue evaluado. ";
                         lbAceptar.ToolTip = "El postulante ya fue evaluado. ";
+
+                        lbRechazar.CssClass = "DeleteButton not-allowed";
+                        lbRechazar.ToolTip = "El postulante ya fue evaluado. ";
+
+                        lbDatos.CssClass = "DeleteButton not-allowed";
+                        
+                       
 
                         lbAceptar.Enabled = false;
                         lbRechazar.Enabled = false;
                         lbDatos.Enabled = false;
                         liEstado.Text = "Rechazado";
                         liEstado.CssClass = "font-Red";
+                    }
+                    if ((Viaje.FechaSalida.AddHours(Convert.ToDouble(Viaje.Duracion))) < DateTime.Now)//el viaje no paso
+                    {
+                        lbCalifiacion.Enabled = false;
+                        lbCalifiacion.CssClass = "UpdateButton not-allowed";
+                        lbCalifiacion.ToolTip = "El viaje aun no sucedio. ";
                     }
                 }                
             }
@@ -388,12 +402,51 @@ namespace UnAventon.Viajes
             }
         }
 
-        protected void btnResponder_Click(object sender, EventArgs e)
+        protected void btnAceptarComentario_Click(object sender, EventArgs e)
         {
+            try
+            {
+                //si no esta calificado
+                if (!radioCalificacionBuena.Checked || !radioCalificacionBuena.Checked)
+                    throw new Exception("Debe seleccionar una calificación");
+                else//esta calificado
+                { 
+                    //si hay al menos una calificaion
+                    if (radioCalificacionBuena.Checked || radioCalificacionBuena.Checked)
+                    {
+                        //si ingreso un comentario
+                        if (tbmessage.Text != "")
+                        {
+                            //sumo calificaion si fue buena 
+                            if (radioCalificacionBuena.Checked)
+                            {
+                                Bol.Usuario.SumarReputacionPasajero(pasajerocalificacionId);
+                                Bol.Usuario.InsertCalificacion(pasajerocalificacionId, tbmessage.Text,true);
+                            }                                                           
+                            else//resto si la calificaion fue mala
+                            {
+                                Bol.Usuario.RestarReputacionPasajero(pasajerocalificacionId);
+                                Bol.Usuario.InsertCalificacion(pasajerocalificacionId, tbmessage.Text, true);
+                            }
+                               
+                        }
+                        else
+                            throw new Exception("Debe ingresar un comentario");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = ex.Message;
+            }
+            
 
         }
 
-        protected void btnResponder_Click1(object sender, EventArgs e)
+        protected void btnResponder_Click(object sender, EventArgs e)
         {
 
         }

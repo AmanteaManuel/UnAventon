@@ -18,6 +18,10 @@ namespace Bol.Core
 
         public bool SiCalificado { get; set; }
 
+        public DateTime FechaSalida { get; set; }
+
+        public int Duracion { get; set; }
+
 
         internal static Postulacion FillObject(DataRow dr)
         {
@@ -36,6 +40,12 @@ namespace Bol.Core
 
                 if (dr.Table.Columns.Contains("SiCalificado") && !Convert.IsDBNull(dr["SiCalificado"]))
                     oBol.SiCalificado = Convert.ToBoolean(dr["SiCalificado"]);
+
+                if (dr.Table.Columns.Contains("FechaSalida") && !Convert.IsDBNull(dr["FechaSalida"]))
+                    oBol.FechaSalida = Convert.ToDateTime(dr["FechaSalida"]);
+
+                if (dr.Table.Columns.Contains("Duracion") && !Convert.IsDBNull(dr["Duracion"]))
+                    oBol.Duracion = Convert.ToInt32(dr["Duracion"]);
             }
             catch (Exception ex) { throw new Exception("Error en el metodo Fill" + ex.Message); }
 
@@ -55,6 +65,17 @@ namespace Bol.Core
             {
                 Dal.Core.Viaje dal = new Dal.Core.Viaje();
                 DataSet ds = dal.GetAllPostulacionesAceptados(usuarioId);
+                return FillList(ds);
+            }
+            catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
+        }
+
+        public static List<Postulacion> GetAllByUsuarioAddFechaId(int usuarioId)
+        {
+            try
+            {
+                Dal.Core.Viaje dal = new Dal.Core.Viaje();
+                DataSet ds = dal.GetAllByUsuarioAddFechaId(usuarioId);
                 return FillList(ds);
             }
             catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }

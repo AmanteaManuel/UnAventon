@@ -98,7 +98,7 @@
             </div>       
         <asp:Button Text="Eliminar" runat="server" ID="btnEliminarViaje" CssClass="boton_personalizado" OnClick="btnEliminarViaje_Click" OnClientClick="return confirm('¿Desea eliminar el viaje?, si el viaje posee pasajeros será penalizado.');" />
         <asp:Button Text="Modificar" runat="server" ID="btnModificar" CssClass="boton_personalizado" OnClick="btnModificar_Click" />
-        <asp:Button Text="Postularse" runat="server" ID="btnPostularse" CssClass="boton_personalizado" OnClick="btnPostularse_Click" OnClientClick="return confirm('¿Desea postularse al viaje?');" />
+        <asp:Button Text="Postularse" runat="server" ID="btnPostularse" CssClass="boton_personalizado" OnClick="btnPostularse_Click" OnClientClick="return confirm('¿Desea postularse al viaje?');" />        
         <div id="divEstadoPostulacion" class="Estado" runat="server">
             <h4><asp:Label runat="server" id="liEstado" /></h4>      
         </div>
@@ -127,6 +127,7 @@
                                                     <th>Eliminar</th>
                                                     <th>Datos</th>
                                                     <th>Estado</th>
+                                                    <th>Calificar Pasajero</th>
                                                <%-- </div>--%>
                                             </tr>
                                         </HeaderTemplate>
@@ -159,6 +160,9 @@
                                                     </td>
                                                     <td>
                                                         <strong ><asp:Label runat="server" id="liEstado" /></strong>                                                
+                                                    </td>
+                                                    <td>
+                                                        <asp:LinkButton CssClass="UpdateButton" data-toggle="modal" data-target="#exampleModal"  CommandName="CALIFICACION" CommandArgument='<%#Eval("Id") %>' runat="server" Text="Calificar" ID="lbCalifiacion"></asp:LinkButton>                                                        
                                                     </td>
                                                         
                                                 </div>
@@ -196,13 +200,47 @@
                                 <strong><asp:Label ID="lbPregunta" CssClass="pregunta"  Text="Hola que tal tenes aire acondicionado?" runat="server" /></strong><br /><br />
                                 <asp:Label ID="lbRespuesta" CssClass="respuesta" Text="Que te importa" runat="server" />
                             </div>
-                            <asp:Button Text="Responder" runat="server" ID="btnResponder" CssClass="boton_personalizado" OnClick="btnResponder_Click1"/><br /><br />                    
+                            <asp:Button Text="Responder" runat="server" ID="btnResponder" CssClass="boton_personalizado" OnClick="btnResponder_Click"/><br /><br />                    
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>
             <div class=" col-md-2 col-lg-2 "></div>
     </div>
     <%--FIN SECCION DE PREGUNTAS--%>
+
+    
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Calificar Pasajero</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Calificación:</label>
+              <br />
+               <label for="message-text" class="col-form-label">Buena</label>
+              <input type="radio" runat="server" id="radioCalificacionBuena" name="Calficiacion"/>
+              <label for="message-text" class="col-form-label">Mala</label>
+              <input runat="server" id="radioCalificacionMala" type="radio" name="Calficiacion"/>                   
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Comentario:</label>
+            <asp:TextBox runat="server" class="form-control" id="tbmessage"/> 
+        </form>
+      </div>
+      <div class="modal-footer">
+        <asp:Button type="button" class="btn btn-secondary" data-dismiss="modal" Text="Cancelar" runat="server" />
+        <asp:Button Text="Aceptar" type="button" class="btn btn-primary" runat="server" ID="btnAceptarComentario" OnClick="btnAceptarComentario_Click" />        
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>
 </asp:Content>

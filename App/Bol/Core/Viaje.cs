@@ -429,9 +429,6 @@ namespace Bol
                 if (dr.Table.Columns.Contains("SiActivo") && !Convert.IsDBNull(dr["SiActivo"]))
                     oBol.SiActivo = Convert.ToBoolean(dr["SiActivo"]);
 
-                if (dr.Table.Columns.Contains("SiActivo") && !Convert.IsDBNull(dr["SiActivo"]))
-                    oBol.SiActivo = Convert.ToBoolean(dr["SiActivo"]);
-
                 if (dr.Table.Columns.Contains("EstadoViaje") && !Convert.IsDBNull(dr["EstadoViaje"]))
                     oBol.EstadoViaje = Convert.ToInt32(dr["EstadoViaje"]);
 
@@ -617,15 +614,16 @@ namespace Bol
         public static bool ValidarCreacionDeViaje(int usuarioId)
         {
             List<Viaje> viajes = new Bol.Viaje().GetAllByUsuarioId(usuarioId);
-            List<Postulacion> postulaciones = Bol.Core.Postulacion.GetAllPostulacionesAceptados(usuarioId);
+            List<Postulacion> postulaciones = Bol.Core.Postulacion.GetAllByUsuarioAddFechaId(usuarioId);
 
             if (postulaciones != null)
             {
                 //si adeuda alguna calificacion
                 foreach (Postulacion p in postulaciones)
-                {
-                    if (p.SiCalificado == false)
-                        return false;
+                {                    
+                    if (p.FechaSalida.AddHours(p.Duracion) < DateTime.Now)
+                        if(p.SiCalificado == false)
+                            return false;
                 }
             }
 
@@ -634,8 +632,9 @@ namespace Bol
                 foreach (Viaje v in viajes)
                 {
                     //si hay algun viaje que no esta pagado retorno false
-                    if (v.SiPagado != true)
-                        return false;
+                    if (v.FechaSalida.AddHours(Convert.ToInt32(v.Duracion)) < DateTime.Now)
+                        if (v.SiPagado == false)
+                            return false;
                 }
             }
 

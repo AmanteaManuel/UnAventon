@@ -11,6 +11,7 @@ namespace UnAventon.Usuario
 {
     public partial class Ver_Perfil : UnAventonPage
     {
+        private int choferCalifacacionId;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -110,11 +111,20 @@ namespace UnAventon.Usuario
                     return;
 
                 Label liEstado = (Label)e.Item.FindControl("liEstado");
+                LinkButton lbCalifiacion = (LinkButton)e.Item.FindControl("lbCalifiacion");
+                LinkButton lbDatos = (LinkButton)e.Item.FindControl("lbDatos");
 
                 if (v.EstadoViaje == 1)
                 {
                     liEstado.Text = "Pendiente";
                     liEstado.CssClass = "font-Yellow";
+
+                    lbDatos.Enabled = false;
+                    lbDatos.CssClass = "UpdateButton not-allowed";
+
+                    lbCalifiacion.Enabled = false;
+                    lbCalifiacion.CssClass = "UpdateButton not-allowed";
+
                 }
                 if (v.EstadoViaje == 2)
                 {
@@ -125,6 +135,34 @@ namespace UnAventon.Usuario
                 {
                     liEstado.Text = "Rechazado";
                     liEstado.CssClass = "font-Red";
+                    lbDatos.Enabled = false;
+                    lbDatos.CssClass = "UpdateButton not-allowed";
+
+                    lbCalifiacion.Enabled = false;
+                    lbCalifiacion.CssClass = "UpdateButton not-allowed";
+                }
+                if (v.EstadoViaje == 4)
+                {
+                    liEstado.Text = "Eliminado";
+                    liEstado.CssClass = "font-Red";
+
+                    lbDatos.Enabled = false;
+                    lbDatos.CssClass = "UpdateButton not-allowed";
+
+                    lbCalifiacion.Enabled = false;
+                    lbCalifiacion.CssClass = "UpdateButton not-allowed";
+                    
+                }
+
+                if ((v.FechaSalida.AddHours(Convert.ToDouble(v.Duracion))) < DateTime.Now)//el viaje no paso
+                {
+                    if ((v.EstadoViaje == 2) || (v.EstadoViaje == 3) || (v.EstadoViaje == 4))
+                    {
+
+                    }
+                    lbCalifiacion.Enabled = false;
+                    lbCalifiacion.CssClass = "UpdateButton not-allowed";
+                    lbCalifiacion.ToolTip = "El viaje aun no sucedio. ";
                 }
 
             }
@@ -150,6 +188,9 @@ namespace UnAventon.Usuario
                     liNombre.Text = " " + "";
                     liApellido.Text = " " + "";
                     liReputacion.Text = " " + "";
+                }
+                if (e.CommandName.ToUpper().Equals("BAJA"))
+                {
 
                 }
             }
@@ -184,6 +225,47 @@ namespace UnAventon.Usuario
                     liEstadoVehiculo.Text = "Eliminado";
                     liEstadoVehiculo.CssClass = "font-Red";
                 }
+            }
+        }
+
+        protected void btnAceptarComentario_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //si no esta calificado
+                if (!radioCalificacionBuena.Checked || !radioCalificacionBuena.Checked)
+                    throw new Exception("Debe seleccionar una calificación");
+                else//esta calificado
+                {
+                    //si hay al menos una calificaion
+                    if (radioCalificacionBuena.Checked || radioCalificacionBuena.Checked)
+                    {
+                        //si ingreso un comentario
+                        if (tbmessage.Text != "")
+                        {
+                            //sumo calificaion si fue buena     
+                            if (radioCalificacionBuena.Checked)
+                            {
+                                Bol.Usuario.SumarReputacionChofer(choferCalifacacionId);
+                                Bol.Usuario.InsertCalificacion(choferCalifacacionId, tbmessage.Text, true);
+                            }                                                       
+                            else//resto si la calificaion fue mala
+                            {
+                                Bol.Usuario.RestarReputacionChofer(choferCalifacacionId);
+                                Bol.Usuario.InsertCalificacion(choferCalifacacionId, tbmessage.Text, true);
+                            }
+                        }
+                        else
+                            throw new Exception("Debe ingresar un comentario");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = ex.Message;
             }
         }
     }

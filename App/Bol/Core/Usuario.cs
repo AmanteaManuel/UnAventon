@@ -282,6 +282,11 @@ namespace Bol
             }
         }
 
+        public bool SiCalificado { get; set; }
+
+        public bool SiCalifico { get; set; }
+
+
         #endregion
 
         #region " Constructor "
@@ -348,6 +353,12 @@ namespace Bol
 
                 if (dr.Table.Columns.Contains("FotoPerfil") && !Convert.IsDBNull(dr["FotoPerfil"]))
                     oBol.FotoPerfil = Convert.ToString(dr["FotoPerfil"]);
+
+                if (dr.Table.Columns.Contains("SiCalifico") && !Convert.IsDBNull(dr["SiCalifico"]))
+                    oBol.SiCalifico = Convert.ToBoolean(dr["SiCalifico"]);
+
+                if (dr.Table.Columns.Contains("SiCalificado") && !Convert.IsDBNull(dr["SiCalificado"]))
+                    oBol.SiCalificado = Convert.ToBoolean(dr["SiCalificado"]);
 
 
             }
@@ -599,6 +610,15 @@ namespace Bol
                 new Dal.Core.Usuario().RestarReputacionPasajero(usuarioId);
             }
             catch (Exception e) { throw new Exception("Error en Eliminarion" + e.Message); }
+        }
+
+        public static void InsertCalificacion(int usuarioId,string comentario,bool SiCalificacionBueno)
+        {
+            try
+            {
+                new Dal.Core.Usuario().InsertCalificacion(usuarioId, comentario, SiCalificacionBueno);
+            }
+            catch (Exception e) { throw new Exception("Error al insertar calificacion"); }
         }
 
         public static void CambiarFotoPerfil(string path, int usuarioId)

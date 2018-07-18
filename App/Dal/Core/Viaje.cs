@@ -34,8 +34,8 @@ namespace Dal.Core
 			                                        @parLugaresDisponibles, 
                                                     @parLugaresDisponiblesActual, 
 			                                        @parDescripcion,
-                                                    0,
                                                     1,
+                                                    0,
                                                     @parUsuarioId)";
        
 
@@ -86,6 +86,10 @@ namespace Dal.Core
 
         private const string GET_ALL_POSTULACIONES_ACEPTADAS = @"select * from Postulantes where UsuarioId = {0}";
 
+        private const string GET_ALL_POSTULACIONES_ACEPTADAS_ADD_FECHA = @"select P.*, v.FechaSalida, v.Duracion from Postulantes p
+                                                                            INNER JOIN Viajes V on v.Id = p.ViajeId 
+                                                                            where p.UsuarioId = {0}";
+
         private const string GET_ALL_BY_FILTROS_AND_FROM_NOW_TO_ONE_MONTH = @"SELECT * FROM Viajes
 	                                                                            WHERE (FechaSalida BETWEEN '{2}' AND '{3}') AND CiudadOrigenId = {1} AND CiudadDestinoId = {0}
 	                                                                            ORDER BY FechaSalida";
@@ -107,6 +111,7 @@ namespace Dal.Core
             this.ExecuteParameters.Parameters.AddWithValue("@parDuracion", duracion);
 
             this.ExecuteParameters.Parameters.AddWithValue("@parLugaresDisponibles", lugaresDisponibles);
+
             this.ExecuteParameters.Parameters.AddWithValue("@parLugaresDisponiblesActual", lugaresDisponibles);
 
             this.ExecuteParameters.Parameters.AddWithValue("@parVehiculoId", vehiculoId);
@@ -164,6 +169,12 @@ namespace Dal.Core
         public DataSet GetAllByUsuarioId(int id)
         {
             this.SelectCommandText = string.Format(GET_ALL_BY_USUARIO_ID, id);
+            return this.Load();
+        }
+
+        public DataSet GetAllByUsuarioAddFechaId(int id)
+        {
+            this.SelectCommandText = string.Format(GET_ALL_POSTULACIONES_ACEPTADAS_ADD_FECHA, id);
             return this.Load();
         }
 
