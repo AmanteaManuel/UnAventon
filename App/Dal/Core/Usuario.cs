@@ -55,9 +55,9 @@ namespace Dal.Core
 
         private const string GET_POSTULANTES_BY_VIAJE_ID = @"SELECT * FROM Postulantes WHERE viajeId = {0}";
 
-        private const string CREATE_POSTULACION = @"INSERT INTO Postulantes (UsuarioId, ViajeId, EstadoViaje, SiCalificado) 
+        private const string CREATE_POSTULACION = @"INSERT INTO Postulantes (UsuarioId, ViajeId, EstadoViaje, SiCalificado,SiCalifico) 
 				                                                     output INSERTED.UsuarioId
-				                                                     VALUES (@parUsuarioId,@parViajeId, 1, 0)";
+				                                                     VALUES (@parUsuarioId,@parViajeId, 1, 0,0)";
 
         private const string ACEPTAR_POSTULACION = @"UPDATE Postulantes
                                                             SET EstadoViaje = @parEstado
