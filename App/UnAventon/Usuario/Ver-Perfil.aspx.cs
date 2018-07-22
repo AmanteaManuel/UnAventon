@@ -113,6 +113,7 @@ namespace UnAventon.Usuario
                 Label liEstado = (Label)e.Item.FindControl("liEstado");
                 LinkButton lbCalifiacion = (LinkButton)e.Item.FindControl("lbCalifiacion");
                 LinkButton lbDatos = (LinkButton)e.Item.FindControl("lbDatos");
+                LinkButton lbBaja = (LinkButton)e.Item.FindControl("lbBaja");
 
                 if (v.EstadoViaje == 1)
                 {
@@ -151,7 +152,9 @@ namespace UnAventon.Usuario
 
                     lbCalifiacion.Enabled = false;
                     lbCalifiacion.CssClass = "UpdateButton not-allowed";
-                    
+
+                    lbBaja.Enabled = false;
+                    lbBaja.CssClass = "UpdateButton not-allowed";
                 }
                
                 if ((v.FechaSalida.AddHours(Convert.ToDouble(v.Duracion))) > DateTime.Now)//el viaje no paso
@@ -192,8 +195,11 @@ namespace UnAventon.Usuario
                 }
                 if (e.CommandName.ToUpper().Equals("DATOS"))
                 {
+                    Bol.Viaje viaje = new Viaje().GetInstanceById(id);
+                    
+
                     divDatosChofer.Visible = true;
-                    Bol.Usuario usuario = new Bol.Usuario().GetInstanceById(id);
+                    Bol.Usuario usuario = new Bol.Usuario().GetInstanceById(viaje.UsuarioId);
                     liEmail.Text = " " + "";
                     liNombre.Text = " " + "";
                     liApellido.Text = " " + "";
@@ -201,7 +207,23 @@ namespace UnAventon.Usuario
                 }
                 if (e.CommandName.ToUpper().Equals("BAJA"))
                 {
+                    Bol.Viaje viaje = new Viaje().GetInstanceById(id);
+                    Bol.Core.Postulacion u = Bol.Core.Postulacion.GetByViajeANDusuarioId(id, viaje.Id);
 
+                    //Aceptado
+                    if (u.EstadoViaje == 2)
+                    {                        
+                        Bol.Usuario.EliminarPostulacion(id, viaje.Id);
+                        Bol.Viaje.SumarUnLUgar(viaje.Id);
+                        Bol.Usuario.RestarReputacionPasajero(ActiveUsuario.Id);
+                        Response.Redirect(Request.RawUrl);
+
+                    }
+                    else
+                    {
+                        Bol.Usuario.EliminarPostulacion(id, viaje.Id);
+                        Response.Redirect(Request.RawUrl);
+                    }
                 }
             }
             catch (Exception ex)

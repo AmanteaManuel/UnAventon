@@ -54,7 +54,7 @@ namespace Dal.Core
         private const string GET_PASAJEROS_BY_VIAJE_ID = @"SELECT * FROM Postulantes WHERE viajeId = {0} AND EstadoViaje = 2";
 
         private const string GET_POSTULANTES_BY_VIAJE_ID = @"SELECT * FROM Postulantes WHERE viajeId = {0}";
-
+       
         private const string CREATE_POSTULACION = @"INSERT INTO Postulantes (UsuarioId, ViajeId, EstadoViaje, SiCalificado,SiCalifico) 
 				                                                     output INSERTED.UsuarioId
 				                                                     VALUES (@parUsuarioId,@parViajeId, 1, 0,0)";
@@ -70,7 +70,9 @@ namespace Dal.Core
         private const string GET_POSTULANTE_BY_VIAJE_ID = @"SELECT * FROM Postulantes 
                                               Where UsuarioId = {0} AND ViajeId = {1}";
 
-        private const string DELETE_POSTULACION = @"DELETE FROM postulantes where UsuarioId = @parUsuarioId AND ViajeId = @parViajeId";
+        private const string DELETE_POSTULACION = @"Update Postulantes set EstadoViaje = 4 where UsuarioId = @parUsuarioId AND ViajeId = @parViajeId";
+
+        //private const string DELETE_POSTULACION = @"DELETE FROM postulantes where UsuarioId = @parUsuarioId AND ViajeId = @parViajeId";
 
         private const string RESTAR_REPUTACION_CHOFER = @"UPDATE Usuario
                                                             SET ReputacionChofer = ReputacionChofer-1
@@ -102,6 +104,7 @@ namespace Dal.Core
         private const string INSERT_CALIFICACION = @"INSERT INTO Calificaciones (Comentario,puntaje,UsuarioId)
                                                         VALUES (@parUsuarioId,@parcomentario,@parsiCalificacionBueno)";
 
+        private const string Get_By_Viaje_AND_usuarioId = @"select * from Postulantes where UsuarioId = {0} AND ViajeId = {1}";
 
         #endregion
 
@@ -151,6 +154,13 @@ namespace Dal.Core
             this.SelectCommandText = string.Format(GET_POSTULANTE_BY_VIAJE_ID, userid, viajeId);
             return this.Load();
         }
+
+        public DataSet GetByViajeANDusuarioId(int usuarioId, int viajeId)
+        {
+            this.SelectCommandText = string.Format(Get_By_Viaje_AND_usuarioId, usuarioId, viajeId);
+            return this.Load();
+        }
+
 
         #endregion
 

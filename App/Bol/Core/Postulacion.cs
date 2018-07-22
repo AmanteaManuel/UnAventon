@@ -75,6 +75,16 @@ namespace Bol.Core
             catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
         }
 
+        public static Postulacion GetByViajeANDusuarioId(int usuarioId, int viajeId)
+        {
+            DataSet userdr;
+            userdr = new Dal.Core.Usuario().GetByViajeANDusuarioId(usuarioId, viajeId);
+            if (userdr.Tables[0].Rows.Count > 0)
+                return FillObject(userdr.Tables[0].Rows[0]);
+            else
+                return null;            
+        }
+
         public static List<Postulacion> GetAllByUsuarioAddFechaId(int usuarioId)
         {
             try

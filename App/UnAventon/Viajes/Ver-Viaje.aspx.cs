@@ -264,7 +264,7 @@ namespace UnAventon.Viajes
 
                 //si el usuario logueado es igual al usuario que creo el viaje
                 if (Viaje.UsuarioId == ActiveUsuario.Id)
-                {      
+                {
                     liEstado.Visible = true;
                     liEstado.CssClass = "";
 
@@ -277,7 +277,7 @@ namespace UnAventon.Viajes
                         lbDatos.Enabled = false;
                         liEstado.Text = "Pendiente";
                         liEstado.CssClass = "font-Yellow";
-                        
+
                     }
 
                     //Usuario aceptado
@@ -303,8 +303,6 @@ namespace UnAventon.Viajes
                         lbRechazar.ToolTip = "El postulante ya fue evaluado. ";
 
                         lbDatos.CssClass = "DeleteButton not-allowed";
-                        
-                       
 
                         lbAceptar.Enabled = false;
                         lbRechazar.Enabled = false;
@@ -318,6 +316,25 @@ namespace UnAventon.Viajes
                         lbCalifiacion.CssClass = "UpdateButton not-allowed";
                         lbCalifiacion.ToolTip = "El viaje aun no sucedio. ";
                     }
+                    if (u.EstadoViaje == 4)
+                    {
+
+                        lbAceptar.CssClass = "UpdateButton not-allowed";
+                        lbAceptar.ToolTip = "El postulante ya fue evaluado. ";
+
+                        lbRechazar.CssClass = "DeleteButton not-allowed";
+                        lbRechazar.ToolTip = "El postulante ya fue evaluado. ";
+
+                        lbDatos.CssClass = "DeleteButton not-allowed";
+
+                        lbAceptar.Enabled = false;
+                        lbRechazar.Enabled = false;
+                        lbDatos.Enabled = false;
+                        liEstado.Text = "Eliminado";
+                        liEstado.CssClass = "font-Red";
+
+                    }
+
                 }                
             }
         }

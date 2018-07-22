@@ -52,7 +52,7 @@ namespace Dal.Core
 		                                                                WHERE FechaSalida BETWEEN '{0}' AND '{1}'
 							                                            ORDER BY FechaSalida";
 
-        private const string GET_ALL_BY_USUARIOID_AND_FECHA = @"SELECT * FROM Viajes WHERE UsuarioId = {0} AND FechaSalida = '{1}'";
+        private const string GET_ALL_BY_USUARIOID_AND_FECHA = @"SELECT * FROM Viajes WHERE UsuarioId = {0} AND FechaSalida = '{1}' AND SiActivo = 1";
 
         private const string UPDATE = @"UPDATE Viajes SET
 	                                                    CiudadOrigenId = @parOrigenId, 

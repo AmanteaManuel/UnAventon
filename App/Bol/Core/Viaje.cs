@@ -620,12 +620,12 @@ namespace Bol
             {
                 //si adeuda alguna calificacion
                 foreach (Postulacion p in postulaciones)
-                {                    
+                {
                     if (p.FechaSalida.AddHours(p.Duracion) < DateTime.Now)
-                        if(p.SiCalificado == false)
+                        if (p.SiCalificado == false)
                             return false;
                 }
-            }
+            }  
 
             if (viajes != null)
             {
