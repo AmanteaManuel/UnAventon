@@ -304,6 +304,17 @@ namespace Bol
             catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
         }
 
+        public static List<Viaje> GetAllViajesByVehiculoIdValidator(int id)
+        {
+            try
+            {
+                Dal.Core.Viaje dal = new Dal.Core.Viaje();
+                DataSet ds = dal.GetAllViajesByVehiculoIdValidator(id);
+                return FillList(ds);
+            }
+            catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
+        }
+
         public Viaje GetInstanceById(int id)
         {
             try

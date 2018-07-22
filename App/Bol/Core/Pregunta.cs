@@ -82,6 +82,8 @@ namespace Bol
 
         public int UsuarioId { get; set; }
 
+        public int? RespuestaId { get; set; }
+
 
         #endregion
 
@@ -116,6 +118,9 @@ namespace Bol
 
                 if (dr.Table.Columns.Contains("Fecha") && !Convert.IsDBNull(dr["Fecha"]))
                     oBol.Fecha = Convert.ToDateTime(dr["Fecha"]);
+
+                if (dr.Table.Columns.Contains("RespuestaId") && !Convert.IsDBNull(dr["RespuestaId"]))
+                    oBol.RespuestaId = Convert.ToInt32(dr["RespuestaId"]);
 
             }
             catch (Exception ex) { throw new Exception("Error en el metodo Fill" + ex.Message); }

@@ -68,6 +68,22 @@ namespace UnAventon.Viajes
                     btnEliminarViaje.Enabled = true;
                     btnEliminarViaje.CssClass = "boton_personalizado";
                     btnEliminarViaje.ToolTip = "";
+
+                    //si el viaje ya fue eleiminado
+                    if(Viaje.SiActivo == false)
+                    {
+                        btnEliminarViaje.Enabled = false;
+                        btnEliminarViaje.CssClass = "boton_personalizado not-allowed";
+
+                        btnModificar.Enabled = false;
+                        btnModificar.CssClass = "boton_personalizado not-allowed";
+
+                        //ocultar boton de pago.
+
+                        btnEliminarViaje.ToolTip = "El viaje ya fue eliminado";
+
+
+                    }
                 }
                 else
                 {
@@ -146,6 +162,17 @@ namespace UnAventon.Viajes
             liHora.Text = Viaje.HoraSalida;
             liLugares.Text = Viaje.LugaresDisponibles.ToString();
             liLugaresDisponibles.Text = Viaje.LugaresDisponiblesActual.ToString();
+
+            if(Viaje.SiActivo)
+            {
+                liEstadoDelViaje.Text = "Activo";
+                liEstadoDelViaje.CssClass = "font-Green";
+            }
+            else
+            {
+                liEstadoDelViaje.Text = "Eliminado";
+                liEstadoDelViaje.CssClass = "font-Red";
+            }
 
             Bol.Vehiculo v = Viaje.Vehiculo;
             liAuto.Text = v.Marca + " " + v.Modelo + " " + v.Patente;
@@ -535,5 +562,31 @@ namespace UnAventon.Viajes
 
         #endregion
 
+        protected void rptPreguntas_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+
+        }
+
+        protected void rptPreguntas_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            Bol.Pregunta pregunta = (Bol.Pregunta)e.Item.DataItem;
+            if (pregunta == null)
+                return;
+
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {                
+                Label lbPregunta = (Label)e.Item.FindControl("lbPregunta");
+                Label lbRespuesta = (Label)e.Item.FindControl("lbRespuesta");
+                LinkButton lbResponder = (LinkButton)e.Item.FindControl("lbResponder");
+
+
+                //si tiene respuesta
+                if(pregunta.RespuestaId != null)
+                {
+
+                }
+            }
+
+        }
     }
 }

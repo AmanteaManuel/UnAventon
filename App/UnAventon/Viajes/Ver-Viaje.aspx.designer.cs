@@ -103,6 +103,15 @@ namespace UnAventon.Viajes {
         protected global::System.Web.UI.WebControls.Literal liLugaresDisponibles;
         
         /// <summary>
+        /// liEstadoDelViaje control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label liEstadoDelViaje;
+        
+        /// <summary>
         /// divDescripcion control.
         /// </summary>
         /// <remarks>
@@ -236,6 +245,15 @@ namespace UnAventon.Viajes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal liReputacion;
+        
+        /// <summary>
+        /// rptPreguntas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptPreguntas;
         
         /// <summary>
         /// radioCalificacionBuena control.

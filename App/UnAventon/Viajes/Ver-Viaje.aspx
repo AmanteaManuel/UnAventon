@@ -75,6 +75,12 @@
                                                     <asp:Literal runat="server" id="liLugaresDisponibles"/>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td><strong>Estado del viaje:</strong></td>
+                                                <td>
+                                                    <strong><asp:label runat="server" id="liEstadoDelViaje"/></strong>
+                                                </td>
+                                            </tr>
                                             <%--<tr>
                                                 <td><strong>Reputacion Chofer:</strong></td>
                                                 <td>
@@ -195,13 +201,13 @@
     <div class="row">       
             <div class=" col-md-2 col-lg-2 "><asp:Panel runat="server" BackColor="Transparent"></asp:Panel></div>
                 <div class=" col-md-8 col-lg-8">
-                    <asp:Repeater runat="server">
+                    <asp:Repeater runat="server" ID="rptPreguntas" OnItemCommand="rptPreguntas_ItemCommand" OnItemDataBound="rptPreguntas_ItemDataBound">
                         <ItemTemplate>
                             <div class="divPreguntas">
                                 <strong><asp:Label ID="lbPregunta" CssClass="pregunta"  Text="Hola que tal tenes aire acondicionado?" runat="server" /></strong><br /><br />
                                 <asp:Label ID="lbRespuesta" CssClass="respuesta" Text="Que te importa" runat="server" />
                             </div>
-                            <asp:Button Text="Responder" runat="server" ID="btnResponder" CssClass="boton_personalizado" OnClick="btnResponder_Click"/><br /><br />                    
+                            <asp:LinkButton CssClass="boton_personalizado" CommandName="DATOS" CommandArgument='<%#Eval("Id")%>' runat="server" Text="Responder" ID="lbResponder"></asp:LinkButton>                                          
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>

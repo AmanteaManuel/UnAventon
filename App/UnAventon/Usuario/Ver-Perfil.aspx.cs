@@ -67,7 +67,7 @@ namespace UnAventon.Usuario
             {
                 int id;
                 int.TryParse(((LinkButton)e.CommandSource).CommandArgument, out id);
-                List<Viaje> viajes = Viaje.GetAllViajesByVehiculoId(id);
+                List<Viaje> viajes = Viaje.GetAllViajesByVehiculoIdValidator(id);
 
                 if (e.CommandName.ToUpper().Equals("DELETE"))
                 {
