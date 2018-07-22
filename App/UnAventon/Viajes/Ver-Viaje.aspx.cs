@@ -579,11 +579,12 @@ namespace UnAventon.Viajes
                 Label lbRespuesta = (Label)e.Item.FindControl("lbRespuesta");
                 LinkButton lbResponder = (LinkButton)e.Item.FindControl("lbResponder");
 
-
+                lbPregunta.Text = pregunta.Descripcion;
                 //si tiene respuesta
-                if(pregunta.RespuestaId != null)
+                if (pregunta.RespuestaId != null)
                 {
-
+                    Bol.Respuesta respuesta = new Bol.Respuesta();
+                    //lbRespuesta.Text = 
                 }
             }
 

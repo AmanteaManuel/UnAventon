@@ -4,8 +4,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    
-    <title> Home </title>   
+    <link rel="shortcut icon" href="~/img/logoicon.ico" />
+    <title> Un Aventón </title>   
     <meta charset="UTF-8" />
 
 

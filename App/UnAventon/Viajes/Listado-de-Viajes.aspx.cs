@@ -71,15 +71,28 @@ namespace UnAventon.Viajes
 
         protected void btnBuscar_Click1(object sender, EventArgs e)
         {
-            if ((ddlCiudadDestino.SelectedIndex != 0) && (ddlCiudadSalida.SelectedIndex != 0))
+            try
             {
-                DateTime fechaActual = DateTime.Now;
-                DateTime fechaUnMes = fechaActual.AddMonths(1);
+                if ((ddlCiudadDestino.SelectedIndex > 0) & (ddlCiudadSalida.SelectedIndex > 0))
+                {
+                    DateTime fechaActual = DateTime.Now;
+                    DateTime fechaUnMes = fechaActual.AddMonths(1);
 
-                List<Bol.Viaje> viajes = Bol.Viaje.GetAllByFiltrosAndNowToOneMonth(Convert.ToInt32(ddlCiudadDestino.SelectedValue), Convert.ToInt32(ddlCiudadSalida.SelectedValue), fechaActual, fechaUnMes);
+                    List<Bol.Viaje> viajes = Bol.Viaje.GetAllByFiltrosAndNowToOneMonth(Convert.ToInt32(ddlCiudadDestino.SelectedValue), Convert.ToInt32(ddlCiudadSalida.SelectedValue), fechaActual, fechaUnMes);
 
-                rptViajes.DataSource = viajes;
-                rptViajes.DataBind();
+                    rptViajes.DataSource = viajes;
+                    rptViajes.DataBind();
+                }
+                else
+                    throw new Exception("Debe seleccionar Origen y Destino para realizar una busqueda");
+
+            }      
+            catch (Exception ex)
+            {
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = ex.Message;
             }
         }
 

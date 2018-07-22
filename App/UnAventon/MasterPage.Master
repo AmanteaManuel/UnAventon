@@ -4,7 +4,7 @@
 
 <html>
 <head runat="server">
-    <title>Inicio</title>
+    <title>Un Aventón</title>
 
     <link rel="stylesheet" href="<%=Page.ResolveUrl("~/Content/bootstrap.css") %>">
     <link rel="stylesheet" href="<%=Page.ResolveUrl("~/Scripts/aMainCss.css") %>">

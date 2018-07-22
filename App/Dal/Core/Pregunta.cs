@@ -1,6 +1,7 @@
 ﻿using Dal.Core.Support;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace Dal.Core
@@ -17,6 +18,10 @@ namespace Dal.Core
 		                                                           @parFecha,
 		                                                           @parPreguntaId,
 		                                                           @parUsuarioId)";
+
+        private const string GET_ALL_BY_VIAJE_ID = @"select * from Pregunta where ViajeId = {0}";
+
+        private const string LOAD = @"select * from Pregunta where Id = {0}";
 
         public int Create(DateTime fecha, string descripcion, int usuarioId, int viajeId)
         {
@@ -38,6 +43,18 @@ namespace Dal.Core
 
             //ejecución, retorna el valor del parámetro de retorno
             return this.ExecuteNonEscalar();
+        }
+
+        public DataSet GetAllByViajeId(int id)
+        {
+            this.SelectCommandText = string.Format(GET_ALL_BY_VIAJE_ID, id);
+            return this.Load();
+        }
+
+        public DataSet GetInstanceById(int id)
+        {
+            this.SelectCommandText = string.Format(LOAD, id);
+            return this.Load();
         }
     }
 }

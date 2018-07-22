@@ -88,6 +88,30 @@ namespace Bol
         #endregion
 
         #region " Views "
+
+        public static List<Pregunta> GetAllByViajeId(int id)
+        {
+            try
+            {
+                Dal.Core.Pregunta dal = new Dal.Core.Pregunta();
+                DataSet ds = dal.GetAllByViajeId(id);
+                return FillList(ds);
+            }
+            catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
+        }
+
+        public Pregunta GetInstanceById(int id)
+        {
+            try
+            {
+                return FillObject((new Dal.Core.Pregunta().GetInstanceById(id)).Tables[0].Rows[0]);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al Cargar Viaje. " + ex.Message);
+            }
+        }
+
         #endregion
 
         #region " Fill "
