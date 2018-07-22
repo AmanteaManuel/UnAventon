@@ -66,5 +66,65 @@ namespace UnAventon.Viajes
             {
             }
         }
+
+        protected void rptMisViajes_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            Bol.Viaje v = (Bol.Viaje)e.Item.DataItem;
+            if (v == null)
+                return;
+            
+            List<Bol.Core.Postulacion> postulantes = Bol.Core.Postulacion.GetAllPostulacionesByViajeId(v.Id);
+            bool SiAdeudaCalificacion = true;
+            if (postulantes != null)
+            {
+                //si alguno de los usuarios no fue calificado
+                foreach (var p in postulantes)
+                {
+                    if (p.SiCalificado == false)
+                    {
+                        SiAdeudaCalificacion = true;
+                        break;
+                    }
+                }               
+            }
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Label lbSiPagado = (Label)e.Item.FindControl("lbSiPagado");
+                Label lbSiCalificado = (Label)e.Item.FindControl("lbSiCalificado");
+
+                //si el viaje ya fue pagado
+                if (v.SiPagado == true)
+                {
+                    lbSiPagado.Text = "Pagado";
+                    lbSiPagado.CssClass = "font-Green";
+                }
+                else
+                {
+                    lbSiPagado.CssClass = "font-Red";
+                    lbSiPagado.Text = "Pago Pendiente";
+                }
+
+                if (postulantes != null)
+                {
+                    //si adeuda al menos 1 calificacion
+                    if (SiAdeudaCalificacion == true)
+                    {
+                        lbSiCalificado.Text = "Calificacion Pendiente";
+                        lbSiCalificado.CssClass = "font-Red";
+                    }
+                    else
+                    {
+                        lbSiCalificado.Text = "Usuarios Calificados";
+                        lbSiCalificado.CssClass = "font-Green";
+                    }
+                }
+                else
+                {
+                    lbSiCalificado.Text = "Sin Postulantes";
+                    lbSiCalificado.CssClass = "font-Yellow";
+                }
+                
+            }
+        }
     }
 }

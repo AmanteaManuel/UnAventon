@@ -18,6 +18,8 @@ namespace Bol.Core
 
         public bool SiCalificado { get; set; }
 
+        public bool SiCalifico { get; set; }
+
         public DateTime FechaSalida { get; set; }
 
         public int Duracion { get; set; }
@@ -46,6 +48,9 @@ namespace Bol.Core
 
                 if (dr.Table.Columns.Contains("Duracion") && !Convert.IsDBNull(dr["Duracion"]))
                     oBol.Duracion = Convert.ToInt32(dr["Duracion"]);
+
+                if (dr.Table.Columns.Contains("SiCalifico") && !Convert.IsDBNull(dr["SiCalifico"]))
+                    oBol.SiCalifico = Convert.ToBoolean(dr["SiCalifico"]);
             }
             catch (Exception ex) { throw new Exception("Error en el metodo Fill" + ex.Message); }
 
@@ -80,6 +85,18 @@ namespace Bol.Core
             }
             catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
         }
+
+        public static List<Postulacion> GetAllPostulacionesByViajeId(int viajeId)
+        {
+            try
+            {
+                Dal.Core.Viaje dal = new Dal.Core.Viaje();
+                DataSet ds = dal.GetAllPostulacionesByViajeId(viajeId);
+                return FillList(ds);
+            }
+            catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
+        }
+
 
     }
 }

@@ -153,18 +153,28 @@ namespace UnAventon.Usuario
                     lbCalifiacion.CssClass = "UpdateButton not-allowed";
                     
                 }
-
-                if ((v.FechaSalida.AddHours(Convert.ToDouble(v.Duracion))) < DateTime.Now)//el viaje no paso
+               
+                if ((v.FechaSalida.AddHours(Convert.ToDouble(v.Duracion))) > DateTime.Now)//el viaje no paso
                 {
-                    if ((v.EstadoViaje == 2) || (v.EstadoViaje == 3) || (v.EstadoViaje == 4))
-                    {
-
-                    }
                     lbCalifiacion.Enabled = false;
                     lbCalifiacion.CssClass = "UpdateButton not-allowed";
                     lbCalifiacion.ToolTip = "El viaje aun no sucedio. ";
                 }
-
+                else//el viaje ya ocurrio
+                {
+                    if (v.EstadoViaje == 2)//si  fue aceptado
+                    {
+                        lbCalifiacion.Enabled = true;
+                        lbCalifiacion.CssClass = "UpdateButton";
+                        //show modal
+                    }
+                    else//si no fue aceptado
+                    {                        
+                        lbCalifiacion.Enabled = false;
+                        lbCalifiacion.CssClass = "UpdateButton not-allowed";
+                        lbCalifiacion.ToolTip = "Solo los usuarios que realizaron el viaje pueden calificar. ";
+                    }
+                }
             }
         }
 

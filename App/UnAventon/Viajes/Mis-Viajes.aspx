@@ -16,7 +16,7 @@
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <tbody>
-                                <asp:Repeater runat="server" ID="rptMisViajes" OnItemCommand="rptViajes_ItemCommand">
+                                <asp:Repeater runat="server" ID="rptMisViajes" OnItemCommand="rptViajes_ItemCommand" OnItemDataBound="rptMisViajes_ItemDataBound">
                                     <HeaderTemplate>
                                         <tr>
                                             <th>Origen</th>
@@ -26,6 +26,8 @@
                                             <th>Hora</th>
                                             <th>Lugares Disponibles</th>
                                             <th>Detalle</th>
+                                            <th>Pagado</th>
+                                            <th>Calificado</th>
                                         </tr>
                                     </HeaderTemplate>
                                     <ItemTemplate>
@@ -50,6 +52,13 @@
                                             <td>
                                                 <asp:LinkButton ID="lbDetalle" CssClass="links" CommandName="DETALLE" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Ver Detalle"></asp:LinkButton>
                                             </td>
+                                            <td>
+                                                <strong><asp:Label runat="server" ID="lbSiPagado"></asp:Label></strong>
+                                            </td>
+                                            <td>
+                                                <strong><asp:Label runat="server" ID="lbSiCalificado"></asp:Label></strong>
+                                            </td>
+                                            
                                         </tr>
                                     </ItemTemplate>
                                 </asp:Repeater>

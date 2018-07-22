@@ -98,6 +98,7 @@
             </div>       
         <asp:Button Text="Eliminar" runat="server" ID="btnEliminarViaje" CssClass="boton_personalizado" OnClick="btnEliminarViaje_Click" OnClientClick="return confirm('¿Desea eliminar el viaje?, si el viaje posee pasajeros será penalizado.');" />
         <asp:Button Text="Modificar" runat="server" ID="btnModificar" CssClass="boton_personalizado" OnClick="btnModificar_Click" />
+        <button id="btnPagar" runat="server" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" data-whatever="@getbootstrap">Pagar Viaje</button>        
         <asp:Button Text="Postularse" runat="server" ID="btnPostularse" CssClass="boton_personalizado" OnClick="btnPostularse_Click" OnClientClick="return confirm('¿Desea postularse al viaje?');" />        
         <div id="divEstadoPostulacion" class="Estado" runat="server">
             <h4><asp:Label runat="server" id="liEstado" /></h4>      
@@ -209,38 +210,99 @@
     <%--FIN SECCION DE PREGUNTAS--%>
 
     
+    <%--MODAL CALIFICAR PASAJERO--%>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Calificar Pasajero</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Calificar Pasajero</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Calificación:</label>
-              <br />
-               <label for="message-text" class="col-form-label">Buena</label>
-              <input type="radio" runat="server" id="radioCalificacionBuena" name="Calficiacion"/>
-              <label for="message-text" class="col-form-label">Mala</label>
-              <input runat="server" id="radioCalificacionMala" type="radio" name="Calficiacion"/>                   
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Comentario:</label>
-            <asp:TextBox runat="server" class="form-control" id="tbmessage"/> 
-        </form>
-      </div>
-      <div class="modal-footer">
-        <asp:Button type="button" class="btn btn-secondary" data-dismiss="modal" Text="Cancelar" runat="server" />
-        <asp:Button Text="Aceptar" type="button" class="btn btn-primary" runat="server" ID="btnAceptarComentario" OnClick="btnAceptarComentario_Click" />        
-      </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Calificación:</label>
+                            <br />
+                            <label for="message-text" class="col-form-label">Buena</label>
+                            <input type="radio" runat="server" id="radioCalificacionBuena" name="Calficiacion" />
+                            <label for="message-text" class="col-form-label">Mala</label>
+                            <input runat="server" id="radioCalificacionMala" type="radio" name="Calficiacion" />
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Comentario:</label>
+                            <asp:TextBox runat="server" class="form-control" ID="tbmessage" />
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button type="button" class="btn btn-secondary" data-dismiss="modal" Text="Cancelar" runat="server" />
+                    <asp:Button Text="Aceptar" type="button" class="btn btn-primary" runat="server" ID="btnAceptarComentario" OnClick="btnAceptarComentario_Click" />
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+    <%--FIN MODAL CALIFICAR PASAJERO--%>
+    
+    <%--MODAL PAGAR VIAJE--%>
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Pagar Viaje</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
 
+                            <strong><label for="recipient-name" class="col-form-label">Datos de Tarjeta:</label></strong>
+                            <br />
+
+                            <label for="message-text" class="col-form-label">Nombre</label><br />
+                            <asp:TextBox runat="server" id="tbNombreTarjeta" />
+                            <asp:CustomValidator id="cvtbNombreTarjeta" runat="server" OnServerValidate="cvtbNombreTarjeta_ServerValidate" ValidationGroup="Pago" /><br />
+
+
+                            <label for="message-text" class="col-form-label">Numero Tarjeta</label><br />
+                            <asp:TextBox runat="server" id="tbNumeroTarjeta" MaxLength="16" />
+                            <asp:CustomValidator  runat="server" ID="cvNumeroTarjeta"  OnServerValidate="cvNumeroTarjeta_ServerValidate" ValidationGroup="Pago" /><br />
+
+                            <label for="message-text" class="col-form-label" runat="server" >Banco</label><br />
+                            <asp:DropDownList runat="server" id="ddlBanco">
+                                <asp:ListItem Text="Seleccione" />
+                                <asp:ListItem Text="Visa" />
+                                <asp:ListItem Text="Master Card" />
+                                <asp:ListItem Text="Banco Provincia" />
+                                <asp:ListItem Text="ICBC" />
+                                <asp:ListItem Text="Banco Nacion" />
+                                <asp:ListItem Text="HSBC" />                                
+                            </asp:DropDownList><br />
+                            <asp:CustomValidator  ID="cvddlBanco" runat="server" OnServerValidate="cvddlBanco_ServerValidate" ValidationGroup="Pago" />  <br />
+
+                            <label for="message-text" class="col-form-label">Fecha Vencimiento</label><br />
+                            <asp:TextBox runat="server" id="tbFechaVencimiento" MaxLength="5" />
+                            <asp:CustomValidator ID="cvtbFechaVencimiento" runat="server" OnServerValidate="cvtbFechaVencimiento_ServerValidate" ValidationGroup="Pago" /><br />
+
+                            <label for="message-text" class="col-form-label">Codigo</label><br />
+                            <asp:TextBox runat="server" id="tbCodigoSeguridad" MaxLength="3" />
+                            <asp:CustomValidator ID="cvtbCodigoSeguridad" runat="server" OnServerValidate="cvtbCodigoSeguridad_ServerValidate" ValidationGroup="Pago" /><br />
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button type="button" class="btn btn-secondary" data-dismiss="modal" Text="Cancelar" runat="server" />
+                    <asp:Button Text="Pagar" type="button" class="btn btn-primary" runat="server" ID="Button1" OnClick="btnPagar_Click" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--FIN MODAL CALIFICAR PASAJERO--%>
 </div>
 </asp:Content>

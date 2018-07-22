@@ -65,6 +65,7 @@ namespace Dal.Core
 	                                                    HoraSalida = @parHoraSalida,
 	                                                    Descripcion = @parDescripcion
                                                     WHERE Id = @parViajeId;";
+        
 
         private const string RESTAR_LUGAR = @"UPDATE Viajes
                                                 SET LugaresDisponiblesActual = LugaresDisponiblesActual-1
@@ -93,6 +94,8 @@ namespace Dal.Core
         private const string GET_ALL_BY_FILTROS_AND_FROM_NOW_TO_ONE_MONTH = @"SELECT * FROM Viajes
 	                                                                            WHERE (FechaSalida BETWEEN '{2}' AND '{3}') AND CiudadOrigenId = {1} AND CiudadDestinoId = {0}
 	                                                                            ORDER BY FechaSalida";
+
+        private const string GET_ALL_BY_VIAJE_ID = @"select * from Postulantes where ViajeId = {0}";
 
         public int Create(int origenId, int destinoId, string duracion, int lugaresDisponibles, int vehiculoId, DateTime fechaSalida, string horaSalida, double precio, string descripcion, int UsuarioId)
         {
@@ -139,6 +142,12 @@ namespace Dal.Core
         public DataSet GetAll()
         {
             this.SelectCommandText = string.Format(GET_ALL);
+            return this.Load();
+        }
+
+        public DataSet GetAllPostulacionesByViajeId(int viajeId)
+        {
+            this.SelectCommandText = string.Format(GET_ALL_BY_VIAJE_ID, viajeId);
             return this.Load();
         }
 
@@ -271,6 +280,8 @@ namespace Dal.Core
 
             this.ExecuteNonQuery();
         }
+
+
     }
 }
 

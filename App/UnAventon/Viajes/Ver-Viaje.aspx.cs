@@ -60,7 +60,9 @@ namespace UnAventon.Viajes
         {             
             //si el usuario activo es el dueño del viaje
             if (Viaje.UsuarioId == ActiveUsuario.Id)
-            {
+            {                
+                btnPagar.Visible = true;
+
                 if(DateTime.Now.Date < Viaje.FechaSalida)
                 {
                     btnEliminarViaje.Enabled = true;
@@ -83,7 +85,8 @@ namespace UnAventon.Viajes
             {
                 divPostulacion.Visible = false;
                 btnEliminarViaje.Visible = false;
-                btnModificar.Visible = false;
+                btnModificar.Visible = false;               
+                btnPagar.Visible = true;
 
                 //obtengo postulantes del viaje
                 List<Bol.Usuario> postulantes = Bol.Usuario.GetPostulantesByViajeId(Viaje.Id);
@@ -450,5 +453,70 @@ namespace UnAventon.Viajes
         {
 
         }
+
+        protected void btnPagar_Click(object sender, EventArgs e)
+        {
+            //show modal
+            ValidarPago();
+            Bol.Viaje.Pagar(Viaje.Id);
+            
+        }
+
+        private void ValidarPago()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected void btnBorrarDatos_Click(object sender, EventArgs e)
+        {
+            tbNombreTarjeta.Text = "";
+            tbNumeroTarjeta.Text = "";
+            ddlBanco.SelectedIndex = 0;
+            tbFechaVencimiento.Text = "";
+            tbCodigoSeguridad.Text = "";
+        }
+
+        #region " Validation "
+
+        protected void cvtbNombreTarjeta_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+
+        }
+
+        protected void cvNumeroTarjeta_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+
+        }
+
+        protected void cvtbFechaVencimiento_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            tbFechaVencimiento.CssClass = "";
+
+            string[] vectorfecha = tbFechaVencimiento.Text.Split('/');            
+            DateTime fechaVencimiento = new DateTime(Convert.ToInt32(vectorfecha[1]), Convert.ToInt32(vectorfecha[0]), Convert.ToInt32(vectorfecha[1]));
+
+            if ((fechaVencimiento == DateTime.MinValue.Date) || (fechaVencimiento < DateTime.Now))
+            {
+                if (fechaVencimiento < DateTime.Now)
+                {
+                    cvtbFechaVencimiento.ErrorMessage = "La tarjeta esta vencida";
+                }
+                args.IsValid = false;
+                tbFechaVencimiento.CssClass = "error";
+            }
+        }
+
+        protected void cvtbCodigoSeguridad_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+
+        }
+
+        protected void cvddlBanco_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+
+        }
+
+        #endregion
+
     }
 }
