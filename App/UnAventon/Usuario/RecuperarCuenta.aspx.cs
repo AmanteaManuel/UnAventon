@@ -171,7 +171,7 @@ namespace UnAventon.Usuario
                         if
                             (
                             uexist.FechaNacimiento != Convert.ToDateTime(tbFechaNacimiento.Text) ||
-                            uexist.Contraseña != tbContrasenia.Text ||
+                            uexist.Contraseña != tbContraseniaVieja.Text ||
                             uexist.Email != tbEmail.Text
                             )
                         {
