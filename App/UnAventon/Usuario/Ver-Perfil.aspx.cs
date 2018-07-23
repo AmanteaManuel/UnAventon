@@ -233,8 +233,20 @@ namespace UnAventon.Usuario
 
         protected void lbeliminarCuenta_Click(object sender, EventArgs e)
         {
-            Bol.Usuario.EliminarUsuario(ActiveUsuario.Id);
-            Response.Redirect("~/Home.aspx");
+            try
+            {
+                Bol.Usuario.EliminarUsuario(ActiveUsuario.Id);
+                Response.Redirect("~/Home.aspx");
+            }
+            catch (Exception ex)
+            {
+
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = ex.Message;
+            }
+            
         }
 
         protected void rptVehiculos_ItemDataBound(object sender, RepeaterItemEventArgs e)

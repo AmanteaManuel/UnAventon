@@ -7,28 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UnAventon {
+namespace UnAventon.Usuario {
     
     
-    public partial class Home {
-        
-        /// <summary>
-        /// divMsjAlerta control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMsjAlerta;
-        
-        /// <summary>
-        /// liMensajeAlerta control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal liMensajeAlerta;
+    public partial class RecuperarCuenta {
         
         /// <summary>
         /// tbEmail control.
@@ -49,48 +31,93 @@ namespace UnAventon {
         protected global::System.Web.UI.WebControls.CustomValidator cvEmail;
         
         /// <summary>
-        /// tbPassword control.
+        /// divFechaNacimiento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbPassword;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divFechaNacimiento;
         
         /// <summary>
-        /// cvPassword control.
+        /// tbFechaNacimiento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cvPassword;
+        protected global::System.Web.UI.WebControls.TextBox tbFechaNacimiento;
         
         /// <summary>
-        /// idInciarSesion control.
+        /// cvFechaNacimiento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton idInciarSesion;
+        protected global::System.Web.UI.WebControls.CustomValidator cvFechaNacimiento;
         
         /// <summary>
-        /// btnRegistrar control.
+        /// tbContraseniaVieja control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnRegistrar;
+        protected global::System.Web.UI.WebControls.TextBox tbContraseniaVieja;
         
         /// <summary>
-        /// lbRecuperarCuenta control.
+        /// cvContraseniaVieja control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbRecuperarCuenta;
+        protected global::System.Web.UI.WebControls.CustomValidator cvContraseniaVieja;
+        
+        /// <summary>
+        /// tbContrasenia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbContrasenia;
+        
+        /// <summary>
+        /// cvContraseniaNueva control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvContraseniaNueva;
+        
+        /// <summary>
+        /// tbRepitaContraseña control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbRepitaContraseña;
+        
+        /// <summary>
+        /// cvRepitaContraseña control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvRepitaContraseña;
+        
+        /// <summary>
+        /// btnRegistrarse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegistrarse;
     }
 }

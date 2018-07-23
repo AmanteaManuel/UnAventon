@@ -52,7 +52,7 @@ namespace Dal.Core
             return this.Load();
         }
 
-        public DataSet GetInstanceById(int id)
+        public DataSet GetInstanceById(int? id)
         {
             this.SelectCommandText = string.Format(LOAD, id);
             return this.Load();

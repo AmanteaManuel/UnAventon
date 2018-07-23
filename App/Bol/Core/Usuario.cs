@@ -512,10 +512,28 @@ namespace Bol
         {
             try
             {
+                List<Bol.Viaje> viajes = new Bol.Viaje().GetAllByUsuarioId(id);
+                if (viajes != null)
+                {
+                    foreach (var v in viajes)
+                    {
+                        Bol.Viaje.Delete(v.Id);
+                    }
+                }
+
                 //Objetos
                 new Dal.Core.Usuario().EliminarUsuario(id);
             }
-            catch (Exception e) { throw new Exception("Error en Update" + e.Message); }
+            catch (Exception e) { throw new Exception("Error en Eliminar usuario"); }
+        }
+
+        public static void ReActivarUsuario(string text)
+        {
+            try
+            {                
+                new Dal.Core.Usuario().ReActivarUsuario(text);
+            }
+            catch (Exception e) { throw new Exception("Error al re activar usuario"); }
         }
 
         /// <summary>
@@ -642,17 +660,26 @@ namespace Bol
                 Usuario user = Bol.Usuario.GetUsuarioByEmail(username);
                 if (user != null)
                 {
-                    if (user.Contraseña == password && user.Email == username)
+                    if (user.SiActivo == true && user.Contraseña == password && user.Email == username)
                         return user;
                     else
-                        throw new Exception("Contraseña o email incorrectos");
+                    {
+                        if (user.SiActivo == false)
+                        {
+                            throw new Exception("El usuario fue eliminado.");
+                        }
+                        else
+                        {
+                            throw new Exception("Contraseña o email incorrectos");
+                        }
+                    }                        
                 }
                 else
                     throw new Exception("Usuario o contraseña incorrecto");
             }
             catch (Exception ex)
             {
-                throw new Exception("Usuario o contraseña incorrecto");
+                throw new Exception(ex.Message);
             }
         }
 

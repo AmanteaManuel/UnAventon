@@ -81,8 +81,6 @@ namespace UnAventon.Viajes
                         //ocultar boton de pago.
 
                         btnEliminarViaje.ToolTip = "El viaje ya fue eliminado";
-
-
                     }
                 }
                 else
@@ -188,8 +186,15 @@ namespace UnAventon.Viajes
                 Bol.Usuario pos = new Bol.Usuario().GetInstanceById(p.Id);
                 pos.EstadoViaje = estado;
                 postulantesCargados.Add(pos);
-
             }
+
+            List<Bol.Pregunta> preguntas = Bol.Pregunta.GetAllByViajeId(Viaje.Id);
+            if (preguntas != null && preguntas.Count > 0)
+            {
+                rptPreguntas.DataSource = preguntas;
+                rptPreguntas.DataBind();
+            }
+
             rptListaPostulantes.DataSource = postulantesCargados;
             rptListaPostulantes.DataBind();
 
@@ -564,7 +569,28 @@ namespace UnAventon.Viajes
 
         protected void rptPreguntas_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
+            try
+            {
+                //id de la pregunta
+                int id;
+                int.TryParse(((LinkButton)e.CommandSource).CommandArgument, out id);
 
+                if (e.CommandName.ToUpper().Equals("RESPUESTA"))
+                {
+                    Bol.Respuesta respuesta = new Bol.Respuesta();
+
+                    respuesta.Fecha = DateTime.Now;
+                    respuesta.UsuarioId = ActiveUsuario.Id;
+
+                    //dato del modal de las respuestas
+                    //respuesta.Descripcion = lbRespuesta.Text;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         protected void rptPreguntas_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -579,12 +605,20 @@ namespace UnAventon.Viajes
                 Label lbRespuesta = (Label)e.Item.FindControl("lbRespuesta");
                 LinkButton lbResponder = (LinkButton)e.Item.FindControl("lbResponder");
 
+                lbResponder.Visible = false;
                 lbPregunta.Text = pregunta.Descripcion;
                 //si tiene respuesta
                 if (pregunta.RespuestaId != null)
                 {
-                    Bol.Respuesta respuesta = new Bol.Respuesta();
-                    //lbRespuesta.Text = 
+                    Bol.Respuesta respuesta = Bol.Respuesta.GetInstanceById(pregunta.RespuestaId);
+                    lbRespuesta.Text = respuesta.Descripcion;
+                    lbResponder.Visible = false;
+                }
+                else
+                {
+                    if(ActiveUsuario.Id == Viaje.UsuarioId)
+                        lbResponder.Visible = true;                    
+                        
                 }
             }
 

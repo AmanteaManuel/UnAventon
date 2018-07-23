@@ -159,9 +159,7 @@ namespace UnAventon.Usuario
                     int IdDesencriptado = Convert.ToInt32(id);
                     Usuario = new Bol.Usuario().GetInstanceById(IdDesencriptado);
                 }
-
-                // si url vacia pagina es alta sino edicion           
-
+                // si url vacia pagina es alta sino edicion
                 //si es alta
                 if (Usuario == null)
                 {

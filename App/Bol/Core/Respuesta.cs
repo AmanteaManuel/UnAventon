@@ -80,6 +80,8 @@ namespace Bol
             }
         }
 
+        public int UsuarioId { get; set; }
+
         #endregion
 
         #region " Views "
@@ -95,7 +97,7 @@ namespace Bol
             catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
         }
 
-        public Respuesta GetInstanceById(int id)
+        public static Respuesta GetInstanceById(int? id)
         {
             try
             {
@@ -131,6 +133,9 @@ namespace Bol
 
                 if (dr.Table.Columns.Contains("PreguntaId") && !Convert.IsDBNull(dr["PreguntaId"]))
                     oBol._preguntaId = Convert.ToInt32(dr["PreguntaId"]);
+
+                if (dr.Table.Columns.Contains("UsuarioId") && !Convert.IsDBNull(dr["UsuarioId"]))
+                    oBol.UsuarioId = Convert.ToInt32(dr["UsuarioId"]);
 
                 if (dr.Table.Columns.Contains("Fecha") && !Convert.IsDBNull(dr["Fecha"]))
                     oBol.Fecha = Convert.ToDateTime(dr["Fecha"]);

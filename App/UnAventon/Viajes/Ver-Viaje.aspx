@@ -207,7 +207,7 @@
                                 <strong><asp:Label ID="lbPregunta" CssClass="pregunta"  Text="Hola que tal tenes aire acondicionado?" runat="server" /></strong><br /><br />
                                 <asp:Label ID="lbRespuesta" CssClass="respuesta" Text="Que te importa" runat="server" />
                             </div>
-                            <asp:LinkButton CssClass="boton_personalizado" CommandName="DATOS" CommandArgument='<%#Eval("Id")%>' runat="server" Text="Responder" ID="lbResponder"></asp:LinkButton>                                          
+                            <asp:LinkButton CssClass="boton_personalizado" CommandName="RESPUESTA" CommandArgument='<%#Eval("Id")%>' runat="server" Text="Responder" ID="lbResponder"></asp:LinkButton>                                          
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>
@@ -310,5 +310,6 @@
         </div>
     </div>
     <%--FIN MODAL CALIFICAR PASAJERO--%>
+
 </div>
 </asp:Content>

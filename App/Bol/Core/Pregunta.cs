@@ -100,7 +100,7 @@ namespace Bol
             catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
         }
 
-        public Pregunta GetInstanceById(int id)
+        public static Pregunta GetInstanceById(int id)
         {
             try
             {

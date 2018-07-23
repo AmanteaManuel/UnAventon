@@ -98,13 +98,14 @@ namespace Dal.Core
 	                                                            SET ReputacionPasajero = ReputacionPasajero - 1
 	                                                            WHERE Id = @parUsuarioId";
 
-        private const string ELIMINAR_USUARIO = @"UPDATE Usuario SET SiActivo = 0, Email = null
-	                                                WHERE Id = {0}";
+        private const string ELIMINAR_USUARIO = @"UPDATE Usuario SET SiActivo = 0 WHERE Id = @parUsuarioId";
 
         private const string INSERT_CALIFICACION = @"INSERT INTO Calificaciones (Comentario,puntaje,UsuarioId)
                                                         VALUES (@parUsuarioId,@parcomentario,@parsiCalificacionBueno)";
 
         private const string Get_By_Viaje_AND_usuarioId = @"select * from Postulantes where UsuarioId = {0} AND ViajeId = {1}";
+
+        private const string RE_ACTIVAR_USUARIO = @"update Usuario set SiActivo = 1 where Email = @parEmail";
 
         #endregion
 
@@ -355,6 +356,19 @@ namespace Dal.Core
             this.ExecuteParameters.Parameters.Clear();
 
             this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
+
+            //ejecución, retorna el valor del parámetro de retorno
+            this.ExecuteNonQuery();
+        }
+
+        public void ReActivarUsuario(string text)
+        {
+            this.ExecuteCommandText = RE_ACTIVAR_USUARIO;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parEmail", text);
 
             //ejecución, retorna el valor del parámetro de retorno
             this.ExecuteNonQuery();

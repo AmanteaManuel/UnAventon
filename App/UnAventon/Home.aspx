@@ -145,17 +145,20 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-lg-12">                                                
+                                            <div class="col-lg-12">                                                 
                                             </div>
                                         </div>
                                     </div>
                                 </div>                               
                             </div>
-                        </div>
+                        </div>                        
                     </div>
                 </div>
             </div>
         </div>
+        <h6 class="text-center Text-Shadow"  style="color:white" > Si usted tenia una cuenta y la quiere recuperar haga click              
+            <asp:LinkButton style="color:orangered" ID="lbRecuperarCuenta" OnClick="lbRecuperarCuenta_Click" runat="server"><b>aquí</b></asp:LinkButton>   
+        </h6>
     </div>
 </form>
 </div>    

@@ -104,5 +104,10 @@ namespace UnAventon
         {
             Response.Redirect("~/Viajes/Listado-de-Viajes-Publico.aspx");
         }
+
+        protected void lbRecuperarCuenta_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Usuario/RecuperarCuenta.aspx");
+        }
     }
 }
