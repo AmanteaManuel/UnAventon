@@ -634,7 +634,25 @@ namespace Bol
         {
             try
             {
-                new Dal.Core.Usuario().InsertCalificacion(usuarioId, comentario, SiCalificacionBueno);
+                new Dal.Core.Usuario().InsertCalificacion(usuarioId, comentario, SiCalificacionBueno);                
+            }
+            catch (Exception e) { throw new Exception("Error al insertar calificacion"); }
+        }
+
+        public static void SETSiCalifico(int ViajeId, int usuarioId)
+        {
+            try
+            {
+                new Dal.Core.Usuario().SiCalifico(ViajeId, usuarioId);
+            }
+            catch (Exception e) { throw new Exception("Error al insertar calificacion"); }
+        }
+
+        public static void SETSiCalificado(int ViajeId, int usuarioId)
+        {
+            try
+            {
+                new Dal.Core.Usuario().SiCalificado(ViajeId, usuarioId);
             }
             catch (Exception e) { throw new Exception("Error al insertar calificacion"); }
         }
@@ -647,6 +665,8 @@ namespace Bol
             }
             catch (Exception e) { throw new Exception("Error al cambiar la foto de perfil"); }
         }
+
+
 
         #endregion
 

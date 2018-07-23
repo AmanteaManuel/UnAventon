@@ -19,7 +19,20 @@ namespace UnAventon.Viajes
             }
             set { ViewState["Viaje"] = value; }
         }
-        private int pasajerocalificacionId;
+
+        public String pasajerocalificacionId
+        {
+            get
+            {
+                object o = ViewState["pasajerocalificacionId"];
+                return (o == null) ? String.Empty : (string)o;
+            }
+            set
+            {
+                ViewState["pasajerocalificacionId"] = value;
+            }
+        }
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -180,13 +193,21 @@ namespace UnAventon.Viajes
 
             List<Bol.Usuario> Postulantes = Bol.Usuario.GetPostulantesByViajeId(Viaje.Id);
             List<Bol.Usuario> postulantesCargados = new List<Bol.Usuario>();
+
             if (Postulantes == null || Postulantes.Count <= 0) return;
             int estado;
+            bool siCalificado;
+            bool siCalifico;
             foreach (var p in Postulantes)
             {
                 estado = p.EstadoViaje;
+                siCalificado = p.SiCalificado;
+                siCalifico = p.SiCalifico;
+
                 Bol.Usuario pos = new Bol.Usuario().GetInstanceById(p.Id);
                 pos.EstadoViaje = estado;
+                pos.SiCalificado = siCalificado;
+                pos.SiCalifico = siCalifico;
                 postulantesCargados.Add(pos);
             }
 
@@ -258,9 +279,11 @@ namespace UnAventon.Viajes
                     liApellido.Text = " " + usuario.Apellido;
                     liReputacion.Text = " " + Convert.ToString(usuario.ReputacioPasajero);                    
                 }
-                if (e.CommandName.ToUpper().Equals("DATOS"))
+                if (e.CommandName.ToUpper().Equals("CALIFICACION"))
                 {                   
-                    pasajerocalificacionId = id;                    
+                    pasajerocalificacionId = id.ToString();
+                    ClientScript.RegisterStartupScript(GetType(), "id", "Calificacion()", true);
+
                 }
             }
             catch (Exception ex)
@@ -312,6 +335,9 @@ namespace UnAventon.Viajes
                         liEstado.Text = "Pendiente";
                         liEstado.CssClass = "font-Yellow";
 
+                        lbCalifiacion.Enabled = false;
+                        lbCalifiacion.CssClass = "UpdateButton not-allowed";
+
                     }
 
                     //Usuario aceptado
@@ -326,6 +352,13 @@ namespace UnAventon.Viajes
                         lbRechazar.Enabled = false;
                         liEstado.Text = "Aceptado";
                         liEstado.CssClass = "font-Green";
+
+                        if (u.SiCalificado)
+                        {
+                            lbCalifiacion.Enabled = false;
+                            lbCalifiacion.CssClass = "UpdateButton not-allowed";
+                            lbCalifiacion.ToolTip = "El usuario ya fue calificado. ";
+                        }
                     }
                     //Usuario Rechazado
                     if (u.EstadoViaje == 3)
@@ -343,12 +376,9 @@ namespace UnAventon.Viajes
                         lbDatos.Enabled = false;
                         liEstado.Text = "Rechazado";
                         liEstado.CssClass = "font-Red";
-                    }
-                    if ((Viaje.FechaSalida.AddHours(Convert.ToDouble(Viaje.Duracion))) < DateTime.Now)//el viaje no paso
-                    {
+
                         lbCalifiacion.Enabled = false;
                         lbCalifiacion.CssClass = "UpdateButton not-allowed";
-                        lbCalifiacion.ToolTip = "El viaje aun no sucedio. ";
                     }
                     if (u.EstadoViaje == 4)
                     {
@@ -367,9 +397,17 @@ namespace UnAventon.Viajes
                         liEstado.Text = "Eliminado";
                         liEstado.CssClass = "font-Red";
 
-                    }
+                        lbCalifiacion.Enabled = false;
+                        lbCalifiacion.CssClass = "UpdateButton not-allowed";
 
-                }                
+                    }
+                    if ((Viaje.FechaSalida.AddHours(Convert.ToDouble(Viaje.Duracion))) < DateTime.Now)//el viaje no paso
+                    {
+                        lbCalifiacion.Enabled = false;
+                        lbCalifiacion.CssClass = "UpdateButton not-allowed";
+                        lbCalifiacion.ToolTip = "El viaje aun no sucedio. ";
+                    }
+                }              
             }
         }
 
@@ -471,16 +509,23 @@ namespace UnAventon.Viajes
                         //si ingreso un comentario
                         if (tbmessage.Text != "")
                         {
+                            int idpasajero = Convert.ToInt32(pasajerocalificacionId);
                             //sumo calificaion si fue buena 
                             if (radioCalificacionBuena.Checked)
                             {
-                                Bol.Usuario.SumarReputacionPasajero(pasajerocalificacionId);
-                                Bol.Usuario.InsertCalificacion(pasajerocalificacionId, tbmessage.Text,true);
+                                Bol.Usuario.SumarReputacionPasajero(idpasajero);
+                                Bol.Usuario.InsertCalificacion(idpasajero, tbmessage.Text,true);
+                                Bol.Usuario.SETSiCalificado(Viaje.Id, idpasajero);
+                                Bol.Usuario.SETSiCalifico(Viaje.Id, idpasajero);
+                                Response.Redirect(Request.RawUrl);
                             }                                                           
                             else//resto si la calificaion fue mala
                             {
-                                Bol.Usuario.RestarReputacionPasajero(pasajerocalificacionId);
-                                Bol.Usuario.InsertCalificacion(pasajerocalificacionId, tbmessage.Text, true);
+                                Bol.Usuario.RestarReputacionPasajero(idpasajero);
+                                Bol.Usuario.InsertCalificacion(idpasajero, tbmessage.Text, true);
+                                Bol.Usuario.SETSiCalificado(Viaje.Id, idpasajero);
+                                Bol.Usuario.SETSiCalifico(Viaje.Id, idpasajero);
+                                Response.Redirect(Request.RawUrl);
                             }
                                
                         }
@@ -507,15 +552,31 @@ namespace UnAventon.Viajes
 
         protected void btnPagar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                Validate("Pago");
+                if(Page.IsValid)
+                {
+                    Bol.Viaje.Pagar(Convert.ToInt32(tbHiddenId.Text));
+                }
+                else
+                    throw new Exception("Todos los campos del pago son obligatorios.");
+               
+            }
+            catch (Exception ex)
+            {
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = ex.Message;
+            }
             //show modal
-            ValidarPago();
-            Bol.Viaje.Pagar(Viaje.Id);
+            
             
         }
 
         private void ValidarPago()
-        {
-            throw new NotImplementedException();
+        {            
         }
 
         protected void btnBorrarDatos_Click(object sender, EventArgs e)
@@ -531,27 +592,51 @@ namespace UnAventon.Viajes
 
         protected void cvtbNombreTarjeta_ServerValidate(object source, ServerValidateEventArgs args)
         {
+            tbNombreTarjeta.CssClass = "";
+            cvtbNombreTarjeta.ErrorMessage = string.Empty;
 
+            if (string.IsNullOrEmpty(tbNombreTarjeta.Text))
+            {
+                args.IsValid = false;
+                tbNombreTarjeta.CssClass = "error";
+            }
         }
 
         protected void cvNumeroTarjeta_ServerValidate(object source, ServerValidateEventArgs args)
         {
+            tbNumeroTarjeta.CssClass = "";
+            cvNumeroTarjeta.ErrorMessage = string.Empty;
 
+            if (string.IsNullOrEmpty(tbNumeroTarjeta.Text) && Bol.Core.Service.Tools.IsNumber(tbNumeroTarjeta.Text))
+            {
+                args.IsValid = false;
+                tbNumeroTarjeta.CssClass = "error";
+            }
         }
 
         protected void cvtbFechaVencimiento_ServerValidate(object source, ServerValidateEventArgs args)
         {
             tbFechaVencimiento.CssClass = "";
+            string[] vectorfecha = new string[2];
+            DateTime fechaVencimiento = DateTime.MinValue.Date;
 
-            string[] vectorfecha = tbFechaVencimiento.Text.Split('/');            
-            DateTime fechaVencimiento = new DateTime(Convert.ToInt32(vectorfecha[1]), Convert.ToInt32(vectorfecha[0]), Convert.ToInt32(vectorfecha[1]));
-
-            if ((fechaVencimiento == DateTime.MinValue.Date) || (fechaVencimiento < DateTime.Now))
+            if (tbFechaVencimiento.Text != "")
             {
-                if (fechaVencimiento < DateTime.Now)
-                {
-                    cvtbFechaVencimiento.ErrorMessage = "La tarjeta esta vencida";
-                }
+                vectorfecha = tbFechaVencimiento.Text.Split('/');
+                fechaVencimiento = new DateTime(Convert.ToInt32(vectorfecha[1]), Convert.ToInt32(vectorfecha[0]), Convert.ToInt32(vectorfecha[1]));
+            }
+            else
+            {
+                args.IsValid = false;
+                tbFechaVencimiento.CssClass = "error";
+                cvtbFechaVencimiento.ErrorMessage = "";
+            }
+
+            if (fechaVencimiento < DateTime.Now)
+            {
+
+                cvtbFechaVencimiento.ErrorMessage = "La tarjeta esta vencida";
+
                 args.IsValid = false;
                 tbFechaVencimiento.CssClass = "error";
             }
@@ -559,12 +644,26 @@ namespace UnAventon.Viajes
 
         protected void cvtbCodigoSeguridad_ServerValidate(object source, ServerValidateEventArgs args)
         {
+            tbCodigoSeguridad.CssClass = "";
+            cvtbFechaVencimiento.ErrorMessage = string.Empty;
 
+            if (string.IsNullOrEmpty(tbCodigoSeguridad.Text) && Bol.Core.Service.Tools.IsNumber(tbCodigoSeguridad.Text))
+            {
+                args.IsValid = false;
+                tbCodigoSeguridad.CssClass = "error";
+            }
         }
 
         protected void cvddlBanco_ServerValidate(object source, ServerValidateEventArgs args)
         {
+            ddlBanco.CssClass = "";
+            cvddlBanco.ErrorMessage = string.Empty;
 
+            if (ddlBanco.SelectedIndex <= 0)
+            {
+                args.IsValid = false;
+                ddlBanco.CssClass = "error";
+            }
         }
 
         #endregion
@@ -583,7 +682,7 @@ namespace UnAventon.Viajes
 
                     respuesta.Fecha = DateTime.Now;
                     respuesta.UsuarioId = ActiveUsuario.Id;
-
+                    
                     //dato del modal de las respuestas
                     //respuesta.Descripcion = lbRespuesta.Text;
                 }

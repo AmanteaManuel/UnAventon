@@ -104,7 +104,7 @@
             </div>       
         <asp:Button Text="Eliminar" runat="server" ID="btnEliminarViaje" CssClass="boton_personalizado" OnClick="btnEliminarViaje_Click" OnClientClick="return confirm('¿Desea eliminar el viaje?, si el viaje posee pasajeros será penalizado.');" />
         <asp:Button Text="Modificar" runat="server" ID="btnModificar" CssClass="boton_personalizado" OnClick="btnModificar_Click" />
-        <button id="btnPagar" runat="server" type="button" class="btn btn-primary" data-toggle="modal"  onclient="prueba(); return false;" data-whatever="@getbootstrap">Pagar Viaje</button>        
+        <button id="btnPagar" runat="server" type="button" class="btn btn-primary" data-toggle="modal"  onclient="Pago(), return false" data-whatever="@getbootstrap">Pagar Viaje</button>        
         <asp:Button Text="Postularse" runat="server" ID="btnPostularse" CssClass="boton_personalizado" OnClick="btnPostularse_Click" OnClientClick="return confirm('¿Desea postularse al viaje?');" />        
         <div id="divEstadoPostulacion" class="Estado" runat="server">
             <h4><asp:Label runat="server" id="liEstado" /></h4>      
@@ -169,7 +169,8 @@
                                                         <strong ><asp:Label runat="server" id="liEstado" /></strong>                                                
                                                     </td>
                                                     <td>
-                                                        <asp:LinkButton CssClass="UpdateButton" data-toggle="modal" data-target="#exampleModal"  CommandName="CALIFICACION" CommandArgument='<%#Eval("Id") %>' runat="server" Text="Calificar" ID="lbCalifiacion"></asp:LinkButton>                                                        
+                                                       <%-- data-target="#exampleModal"   data-toggle="modal" --%>
+                                                        <asp:LinkButton CssClass="UpdateButton" CommandName="CALIFICACION" CommandArgument='<%#Eval("Id") %>' runat="server" Text="Calificar" ID="lbCalifiacion"></asp:LinkButton>                                                        
                                                     </td>
                                                         
                                                 </div>
@@ -316,13 +317,18 @@
 
 
     <script>
-        function prueba()
+        function Pago()
         {
-            alert($('#<%= tbHiddenId.ClientID %>').val());
-
+           <%-- alert($('#<%= tbHiddenId.ClientID %>').val());--%>
             $("#exampleModal1").modal("show")
+            //--data-target = "#exampleModal1"
+        }
 
-            //data-target="#exampleModal1"
+        function Calificacion()
+        {
+           <%-- alert($('#<%= tbHiddenId.ClientID %>').val());--%>
+            $("#exampleModal").modal("show")
+            //--data-target = "#exampleModal1"
         }
 
 

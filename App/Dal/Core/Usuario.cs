@@ -101,11 +101,15 @@ namespace Dal.Core
         private const string ELIMINAR_USUARIO = @"UPDATE Usuario SET SiActivo = 0 WHERE Id = @parUsuarioId";
 
         private const string INSERT_CALIFICACION = @"INSERT INTO Calificaciones (Comentario,puntaje,UsuarioId)
-                                                        VALUES (@parUsuarioId,@parcomentario,@parsiCalificacionBueno)";
+                                                        VALUES (@parcomentario,@parsiCalificacionBueno,@parUsuarioId)";
 
         private const string Get_By_Viaje_AND_usuarioId = @"select * from Postulantes where UsuarioId = {0} AND ViajeId = {1}";
 
         private const string RE_ACTIVAR_USUARIO = @"update Usuario set SiActivo = 1 where Email = @parEmail";
+
+        private const string SET_SICALIFICO = @"Update Postulantes set SiCalifico = 1 where ViajeId = @parViajeId AND UsuarioId = @parUsuarioId ";
+
+        private const string SET_SICALIFICADO = @"Update Postulantes set SiCalificado = 1 where ViajeId = @parViajeId AND UsuarioId = @parUsuarioId ";
 
         #endregion
 
@@ -423,6 +427,36 @@ namespace Dal.Core
             this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
             this.ExecuteParameters.Parameters.AddWithValue("@parcomentario", comentario);
             this.ExecuteParameters.Parameters.AddWithValue("@parsiCalificacionBueno", siCalificacionBueno);
+
+            //ejecución, retorna el valor del parámetro de retorno
+            this.ExecuteNonQuery();
+        }
+
+        public void SiCalifico(int usuarioId, int viajeId)
+        {
+            this.ExecuteCommandText = SET_SICALIFICO;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parViajeId", viajeId);
+
+            //ejecución, retorna el valor del parámetro de retorno
+            this.ExecuteNonQuery();
+        }
+
+        public void SiCalificado(int usuarioId, int viajeId)
+        {
+            this.ExecuteCommandText = SET_SICALIFICADO;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parUsuarioId", usuarioId);
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parViajeId", viajeId);
 
             //ejecución, retorna el valor del parámetro de retorno
             this.ExecuteNonQuery();
