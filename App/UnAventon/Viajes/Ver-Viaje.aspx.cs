@@ -60,7 +60,9 @@ namespace UnAventon.Viajes
         {             
             //si el usuario activo es el dueño del viaje
             if (Viaje.UsuarioId == ActiveUsuario.Id)
-            {                
+            {
+                tbHiddenId.Text = Viaje.Id.ToString();
+
                 btnPagar.Visible = true;
 
                 if(DateTime.Now.Date < Viaje.FechaSalida)
