@@ -64,8 +64,8 @@ namespace UnAventon.Usuario
         private void ClearPage()
         {
             tbContraseniaVieja.Text = string.Empty;
-            tbContrasenia.Text = string.Empty;
-            tbRepitaContraseña.Text = string.Empty;
+            //tbContrasenia.Text = string.Empty;
+            //tbRepitaContraseña.Text = string.Empty;
             tbFechaNacimiento.Text = string.Empty;         
             tbEmail.Text = string.Empty;
         }
@@ -73,9 +73,9 @@ namespace UnAventon.Usuario
         protected void cvContraseniaVieja_ServerValidate(object source, ServerValidateEventArgs args)
         {
             tbContraseniaVieja.CssClass = "form-control";
-            cvContraseniaNueva.ErrorMessage = string.Empty;
+            cvContraseniaVieja.ErrorMessage = string.Empty;
 
-            if (string.IsNullOrEmpty(tbContrasenia.Text))
+            if (string.IsNullOrEmpty(tbContraseniaVieja.Text))
             {
                 args.IsValid = false;
                 tbContraseniaVieja.CssClass = "form-control error";
@@ -127,35 +127,35 @@ namespace UnAventon.Usuario
             }
         }
 
-        protected void cvContraseniaNueva_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            tbContrasenia.CssClass = "form-control";
-            cvContraseniaNueva.ErrorMessage = string.Empty;
+        //protected void cvContraseniaNueva_ServerValidate(object source, ServerValidateEventArgs args)
+        //{
+        //    tbContrasenia.CssClass = "form-control";
+        //    cvContraseniaNueva.ErrorMessage = string.Empty;
 
-            if (string.IsNullOrEmpty(tbContrasenia.Text))
-            {
-                args.IsValid = false;
-                tbContrasenia.CssClass = "form-control error";
-                cvContraseniaNueva.ErrorMessage = "Debe ingresar la contraseña";
-            }
-        }
+        //    if (string.IsNullOrEmpty(tbContrasenia.Text))
+        //    {
+        //        args.IsValid = false;
+        //        tbContrasenia.CssClass = "form-control error";
+        //        cvContraseniaNueva.ErrorMessage = "Debe ingresar la contraseña";
+        //    }
+        //}
 
-        protected void cvRepitaContraseña_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            tbRepitaContraseña.CssClass = "form-control";
-            cvRepitaContraseña.ErrorMessage = string.Empty;
+        //protected void cvRepitaContraseña_ServerValidate(object source, ServerValidateEventArgs args)
+        //{
+        //    tbRepitaContraseña.CssClass = "form-control";
+        //    cvRepitaContraseña.ErrorMessage = string.Empty;
 
-            if (string.IsNullOrEmpty(tbRepitaContraseña.Text) || (tbContrasenia.Text != tbRepitaContraseña.Text))
-            {
-                if ((tbContrasenia.Text != tbRepitaContraseña.Text))
-                {
-                    cvRepitaContraseña.ErrorMessage = "Las contraseñas deben coincidir";
-                    tbContrasenia.CssClass = "form-control error";
-                }
-                args.IsValid = false;
-                tbRepitaContraseña.CssClass = "form-control error";
-            }
-        }
+        //    if (string.IsNullOrEmpty(tbRepitaContraseña.Text) || (tbContrasenia.Text != tbRepitaContraseña.Text))
+        //    {
+        //        if ((tbContrasenia.Text != tbRepitaContraseña.Text))
+        //        {
+        //            cvRepitaContraseña.ErrorMessage = "Las contraseñas deben coincidir";
+        //            tbContrasenia.CssClass = "form-control error";
+        //        }
+        //        args.IsValid = false;
+        //        tbRepitaContraseña.CssClass = "form-control error";
+        //    }
+        //}
 
         protected void btnRegistrarse_Click(object sender, EventArgs e)
         {

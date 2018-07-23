@@ -496,7 +496,10 @@ namespace Bol
                     return viaje.Id;
                 }
             }
-            catch (Exception e) { throw new Exception("Error al publicar viaje."); }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public static void Delete (int viajeId)
@@ -515,6 +518,7 @@ namespace Bol
 
             if (viajes != null)
             {
+                int cont = 0;
                 //por cada viaje obtenido
                 foreach (var v in viajes)
                 {
@@ -526,9 +530,11 @@ namespace Bol
 
                     //si la hora de salida del viaje a validar esta en el lapso de tiempo de otro viaje
                     //tiro error
-                    if (Convert.ToDateTime(viaje.HoraSalida) > horaInicio || Convert.ToDateTime(viaje.HoraSalida) < horaFin )
-                        throw new Exception("El viaje no pudo ser agregado porque el usuario ya tiene viajes agregados para esa hora. ");
+                    if (Convert.ToDateTime(viaje.HoraSalida) > horaInicio || Convert.ToDateTime(viaje.HoraSalida) < horaFin)
+                        cont++;
                 }
+                if(cont > 0 )
+                    throw new Exception(cont.ToString() + " Viajes no pudieron ser publicados por superpocición horaria ");
             }
             
         }

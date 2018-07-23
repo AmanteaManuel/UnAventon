@@ -28,12 +28,12 @@
 	            </div> 
 
                 <div class="form-group help-block" > 
-                    <label class="label-default-subTitle">Antigua Contraseña</label>
+                    <label class="label-default-subTitle">Contraseña</label>
 		            <asp:TextBox runat="server" ID="tbContraseniaVieja" type="password" PlaceHolder="Ejemplo: abc123"  CssClass ="form-control" width="200"/>
                     <asp:CustomValidator  id="cvContraseniaVieja" runat="server" ValidationGroup="CrearUsuario" OnServerValidate="cvContraseniaVieja_ServerValidate" CssClass="help-block"/>
 	            </div>
 
-	            <div class="form-group help-block" > 
+<%--	            <div class="form-group help-block" > 
                     <label class="label-default-subTitle">Nueva Contraseña</label>
 		            <asp:TextBox runat="server" ID="tbContrasenia" type="password" PlaceHolder="Ejemplo: abc123"  CssClass ="form-control" width="200"/>
                     <asp:CustomValidator  id="cvContraseniaNueva" runat="server" ValidationGroup="CrearUsuario" OnServerValidate="cvContraseniaNueva_ServerValidate" CssClass="help-block"/>
@@ -43,7 +43,7 @@
                     <label class="label-default-subTitle">Repita Contraseña</label>
 		            <asp:TextBox runat="server" ID="tbRepitaContraseña" type="password" PlaceHolder="Ejemplo: abc123" Cssclass="form-control" width="200"/>
                     <asp:CustomValidator id="cvRepitaContraseña" runat="server" ValidationGroup="CrearUsuario" OnServerValidate="cvRepitaContraseña_ServerValidate" CssClass="help-block"/>
-	            </div>  
+	            </div>  --%>
                 <div class="form-group help-block" >                        
                     <asp:Button Text="Recuperar" Visible="true" type="password" runat="server" ID="btnRegistrarse" CssClass="boton_personalizado" OnClick="btnRegistrarse_Click"  />
 	            </div> 

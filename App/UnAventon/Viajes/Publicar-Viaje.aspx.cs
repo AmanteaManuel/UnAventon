@@ -252,7 +252,7 @@ namespace UnAventon.Viajes
                             }
                         }
                         else
-                            throw new Exception("Error al publicar viaje.");
+                            throw new Exception("Los viajes que se colapsaban con viajes anteriormente publicados no fueron agregados.");
 
                     }
 

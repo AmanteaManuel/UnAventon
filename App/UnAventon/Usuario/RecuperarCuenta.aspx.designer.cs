@@ -76,42 +76,6 @@ namespace UnAventon.Usuario {
         protected global::System.Web.UI.WebControls.CustomValidator cvContraseniaVieja;
         
         /// <summary>
-        /// tbContrasenia control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbContrasenia;
-        
-        /// <summary>
-        /// cvContraseniaNueva control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cvContraseniaNueva;
-        
-        /// <summary>
-        /// tbRepitaContraseña control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbRepitaContraseña;
-        
-        /// <summary>
-        /// cvRepitaContraseña control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cvRepitaContraseña;
-        
-        /// <summary>
         /// btnRegistrarse control.
         /// </summary>
         /// <remarks>
