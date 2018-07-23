@@ -534,7 +534,7 @@ namespace Bol
                         cont++;
                 }
                 if(cont > 0 )
-                    throw new Exception(cont.ToString() + " Viajes no pudieron ser publicados por superpocición horaria ");
+                    throw new Exception("Los viajes que se colapsaban por superposicion horaria no fueron publicados.");
             }
             
         }
