@@ -323,15 +323,15 @@ namespace UnAventon.Usuario
                             {
                                 Bol.Usuario.SumarReputacionChofer(Convert.ToInt32(ChoferCalifacacionId));
                                 Bol.Usuario.InsertCalificacion(Convert.ToInt32(ChoferCalifacacionId), tbmessage.Text, true);
-                                Bol.Usuario.SETSiCalificado(ActiveUsuario.Id, Convert.ToInt32(ViajeACalificarId));
-                                Bol.Usuario.SETSiCalificado(ActiveUsuario.Id, Convert.ToInt32(ViajeACalificarId));
+                                Bol.Usuario.SETSiCalificado(Convert.ToInt32(ViajeACalificarId), ActiveUsuario.Id);
+                                Bol.Usuario.SETSiCalifico(Convert.ToInt32(ViajeACalificarId),ActiveUsuario.Id);
                             }
                             if (radioCalificacionMala.Checked)//resto si la calificaion fue mala
                             {
                                 Bol.Usuario.RestarReputacionChofer(Convert.ToInt32(ChoferCalifacacionId));
                                 Bol.Usuario.InsertCalificacion(Convert.ToInt32(ChoferCalifacacionId), tbmessage.Text, true);
-                                Bol.Usuario.SETSiCalificado(ActiveUsuario.Id, Convert.ToInt32(ViajeACalificarId));
-                                Bol.Usuario.SETSiCalificado(ActiveUsuario.Id, Convert.ToInt32(ViajeACalificarId));
+                                Bol.Usuario.SETSiCalificado(Convert.ToInt32(ViajeACalificarId), ActiveUsuario.Id);
+                                Bol.Usuario.SETSiCalifico(Convert.ToInt32(ViajeACalificarId), ActiveUsuario.Id);
                             }
                         }
                         else

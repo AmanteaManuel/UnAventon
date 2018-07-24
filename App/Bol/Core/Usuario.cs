@@ -652,7 +652,7 @@ namespace Bol
         {
             try
             {
-                new Dal.Core.Usuario().SiCalificado(ViajeId, usuarioId);
+                new Dal.Core.Usuario().SiCalificado(usuarioId, ViajeId);
             }
             catch (Exception e) { throw new Exception("Error al insertar calificacion"); }
         }

@@ -287,8 +287,6 @@ namespace UnAventon.Viajes
                 if (e.CommandName.ToUpper().Equals("CALIFICACION"))
                 {                   
                     pasajerocalificacionId = id.ToString();
-                    //Ejecutar();
-
                     ScriptManager.RegisterStartupScript(upGeneral, upGeneral.GetType(), "id", "Calificacion()",true);
                 }
             }
@@ -530,8 +528,7 @@ namespace UnAventon.Viajes
                                 Bol.Usuario.SumarReputacionPasajero(idpasajero);
                                 Bol.Usuario.InsertCalificacion(idpasajero, tbmessage.Text,true);
                                 Bol.Usuario.SETSiCalificado(Viaje.Id, idpasajero);
-                                Bol.Usuario.SETSiCalifico(Viaje.Id, idpasajero);
-                                upGeneral.Update();
+                                Bol.Usuario.SETSiCalifico(Viaje.Id, idpasajero);  
                             }                                                          
                             if(radioCalificacionMala.Checked)
                             {
@@ -539,12 +536,13 @@ namespace UnAventon.Viajes
                                 Bol.Usuario.InsertCalificacion(idpasajero, tbmessage.Text, true);
                                 Bol.Usuario.SETSiCalificado(Viaje.Id, idpasajero);
                                 Bol.Usuario.SETSiCalifico(Viaje.Id, idpasajero);
-                                upGeneral.Update();
                             }
                                
                         }
                         else
                             throw new Exception("Debe ingresar un comentario");
+
+                        Response.Redirect(Request.RawUrl);
                     }
                 }
             }
