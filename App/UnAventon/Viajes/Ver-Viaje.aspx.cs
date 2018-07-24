@@ -191,6 +191,22 @@ namespace UnAventon.Viajes
             liAuto.Text = v.Marca + " " + v.Modelo + " " + v.Patente;
 
 
+
+            List<Bol.Pregunta> preguntas = Bol.Pregunta.GetAllByViajeId(Viaje.Id);
+            if (preguntas != null && preguntas.Count > 0)
+            {
+                rptPreguntas.DataSource = preguntas;
+                rptPreguntas.DataBind();
+            }
+
+            Bol.Viaje viaje = Viaje;
+            cargarRptPostulantes(viaje);
+
+        }
+
+        public static void cargarRptPostulantes(Bol.Viaje Viaje)
+        {
+
             List<Bol.Usuario> Postulantes = Bol.Usuario.GetPostulantesByViajeId(Viaje.Id);
             List<Bol.Usuario> postulantesCargados = new List<Bol.Usuario>();
 
@@ -211,17 +227,8 @@ namespace UnAventon.Viajes
                 postulantesCargados.Add(pos);
             }
 
-            List<Bol.Pregunta> preguntas = Bol.Pregunta.GetAllByViajeId(Viaje.Id);
-            if (preguntas != null && preguntas.Count > 0)
-            {
-                rptPreguntas.DataSource = preguntas;
-                rptPreguntas.DataBind();
-            }
-
             rptListaPostulantes.DataSource = postulantesCargados;
             rptListaPostulantes.DataBind();
-
-
         }
 
         protected void rptListaPostulantes_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -239,7 +246,7 @@ namespace UnAventon.Viajes
                     {
                         Bol.Usuario.AceptarPostulacion(id, Viaje.Id);
                         Bol.Viaje.RestarUnLUgar(Viaje.Id);
-                        Response.Redirect(Request.RawUrl);
+                        rptListaPostulantes.DataBind();
                     }
                     else
                         throw new Exception("El Viaje no tiene asientos libres.");
@@ -247,7 +254,7 @@ namespace UnAventon.Viajes
                 if (e.CommandName.ToUpper().Equals("RECHAZAR"))
                 {
                     Bol.Usuario.RechazarPostulacion(id, Viaje.Id);
-                    Response.Redirect(Request.RawUrl);
+                    rptListaPostulantes.DataBind();
                 }
 
                 if (e.CommandName.ToUpper().Equals("ELIMINAR"))
@@ -260,13 +267,13 @@ namespace UnAventon.Viajes
                         Bol.Usuario.EliminarPostulacion(id, Viaje.Id);
                         Bol.Viaje.SumarUnLUgar(Viaje.Id);
                         Bol.Usuario.RestarReputacionChofer(ActiveUsuario.Id);
-                        Response.Redirect(Request.RawUrl);
+                        rptListaPostulantes.DataBind();
 
                     }
                     else
                     {
                         Bol.Usuario.EliminarPostulacion(id, Viaje.Id);
-                        Response.Redirect(Request.RawUrl);
+                        rptListaPostulantes.DataBind();
                     }
                                      
                 }
@@ -502,7 +509,7 @@ namespace UnAventon.Viajes
             try
             {
                 //si no esta calificado
-                if (!radioCalificacionBuena.Checked & !radioCalificacionBuena.Checked)
+                if (!radioCalificacionBuena.Checked & !radioCalificacionMala.Checked)
                     throw new Exception("Debe seleccionar una calificación");
                 else//esta calificado
                 { 
@@ -520,7 +527,7 @@ namespace UnAventon.Viajes
                                 Bol.Usuario.InsertCalificacion(idpasajero, tbmessage.Text,true);
                                 Bol.Usuario.SETSiCalificado(Viaje.Id, idpasajero);
                                 Bol.Usuario.SETSiCalifico(Viaje.Id, idpasajero);
-                                Response.Redirect(Request.RawUrl);
+                                rptListaPostulantes.DataBind();
                             }                                                          
                             if(radioCalificacionMala.Checked)
                             {
@@ -528,7 +535,7 @@ namespace UnAventon.Viajes
                                 Bol.Usuario.InsertCalificacion(idpasajero, tbmessage.Text, true);
                                 Bol.Usuario.SETSiCalificado(Viaje.Id, idpasajero);
                                 Bol.Usuario.SETSiCalifico(Viaje.Id, idpasajero);
-                                Response.Redirect(Request.RawUrl);
+                                rptListaPostulantes.DataBind();
                             }
                                
                         }
