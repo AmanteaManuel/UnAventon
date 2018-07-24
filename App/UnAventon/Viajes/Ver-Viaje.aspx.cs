@@ -337,6 +337,7 @@ namespace UnAventon.Viajes
 
                         lbCalifiacion.Enabled = false;
                         lbCalifiacion.CssClass = "UpdateButton not-allowed";
+                        lbCalifiacion.ToolTip = "No se puede calificar un pasajero que no fue aceptado. ";
 
                     }
 
@@ -379,6 +380,7 @@ namespace UnAventon.Viajes
 
                         lbCalifiacion.Enabled = false;
                         lbCalifiacion.CssClass = "UpdateButton not-allowed";
+                        lbCalifiacion.ToolTip = "No se puede calificar un pasajero rechazado. ";
                     }
                     if (u.EstadoViaje == 4)
                     {
@@ -399,9 +401,10 @@ namespace UnAventon.Viajes
 
                         lbCalifiacion.Enabled = false;
                         lbCalifiacion.CssClass = "UpdateButton not-allowed";
+                        lbCalifiacion.ToolTip = "No se puede calificar un pasajero Eliminado. ";
 
                     }
-                    if ((Viaje.FechaSalida.AddHours(Convert.ToDouble(Viaje.Duracion))) < DateTime.Now)//el viaje no paso
+                    if ((Viaje.FechaSalida.AddHours(Convert.ToDouble(Viaje.Duracion))) > DateTime.Now)//el viaje no paso
                     {
                         lbCalifiacion.Enabled = false;
                         lbCalifiacion.CssClass = "UpdateButton not-allowed";
