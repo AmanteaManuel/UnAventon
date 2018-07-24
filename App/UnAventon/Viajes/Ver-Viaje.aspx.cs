@@ -75,8 +75,14 @@ namespace UnAventon.Viajes
             if (Viaje.UsuarioId == ActiveUsuario.Id)
             {
                 tbHiddenId.Text = Viaje.Id.ToString();
-
+               
                 btnPagar.Visible = true;
+                if(Viaje.SiPagado == true)
+                {
+                    btnPagar.Visible = true;
+                    btnPagar.CssClass = "boton_personalizado not-allowed";
+                    btnPagar.ToolTip = "El viaje ya esta pagado.";
+                }
 
                 if(DateTime.Now.Date < Viaje.FechaSalida)
                 {
@@ -93,7 +99,7 @@ namespace UnAventon.Viajes
                         btnModificar.Enabled = false;
                         btnModificar.CssClass = "boton_personalizado not-allowed";
 
-                        //ocultar boton de pago.
+                        btnPagar.Visible = false;
 
                         btnEliminarViaje.ToolTip = "El viaje ya fue eliminado";
                     }
@@ -115,7 +121,7 @@ namespace UnAventon.Viajes
                 divPostulacion.Visible = false;
                 btnEliminarViaje.Visible = false;
                 btnModificar.Visible = false;               
-                btnPagar.Visible = true;
+                btnPagar.Visible = false;
 
                 //obtengo postulantes del viaje
                 List<Bol.Usuario> postulantes = Bol.Usuario.GetPostulantesByViajeId(Viaje.Id);
@@ -199,14 +205,6 @@ namespace UnAventon.Viajes
                 rptPreguntas.DataBind();
             }
 
-            Bol.Viaje viaje = Viaje;
-            cargarRptPostulantes(viaje);
-
-        }
-
-        public static void cargarRptPostulantes(Bol.Viaje Viaje)
-        {
-
             List<Bol.Usuario> Postulantes = Bol.Usuario.GetPostulantesByViajeId(Viaje.Id);
             List<Bol.Usuario> postulantesCargados = new List<Bol.Usuario>();
 
@@ -246,7 +244,7 @@ namespace UnAventon.Viajes
                     {
                         Bol.Usuario.AceptarPostulacion(id, Viaje.Id);
                         Bol.Viaje.RestarUnLUgar(Viaje.Id);
-                        rptListaPostulantes.DataBind();
+                        upGeneral.Update();
                     }
                     else
                         throw new Exception("El Viaje no tiene asientos libres.");
@@ -254,7 +252,7 @@ namespace UnAventon.Viajes
                 if (e.CommandName.ToUpper().Equals("RECHAZAR"))
                 {
                     Bol.Usuario.RechazarPostulacion(id, Viaje.Id);
-                    rptListaPostulantes.DataBind();
+                    upGeneral.Update();
                 }
 
                 if (e.CommandName.ToUpper().Equals("ELIMINAR"))
@@ -267,13 +265,13 @@ namespace UnAventon.Viajes
                         Bol.Usuario.EliminarPostulacion(id, Viaje.Id);
                         Bol.Viaje.SumarUnLUgar(Viaje.Id);
                         Bol.Usuario.RestarReputacionChofer(ActiveUsuario.Id);
-                        rptListaPostulantes.DataBind();
+                        upGeneral.Update();
 
                     }
                     else
                     {
                         Bol.Usuario.EliminarPostulacion(id, Viaje.Id);
-                        rptListaPostulantes.DataBind();
+                        upGeneral.Update();
                     }
                                      
                 }
@@ -289,8 +287,9 @@ namespace UnAventon.Viajes
                 if (e.CommandName.ToUpper().Equals("CALIFICACION"))
                 {                   
                     pasajerocalificacionId = id.ToString();
-                    ClientScript.RegisterStartupScript(GetType(), "id", "Calificacion()", true);
+                    //Ejecutar();
 
+                    ScriptManager.RegisterStartupScript(upGeneral, upGeneral.GetType(), "id", "Calificacion()",true);
                 }
             }
             catch (Exception ex)
@@ -300,6 +299,11 @@ namespace UnAventon.Viajes
                 Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
                 lialert.Text = ex.Message;
             }
+        }
+        private void Ejecutar()
+        {
+           
+            ClientScript.RegisterStartupScript(GetType(), "id", "Calificacion()", true);
         }
 
         protected void rptListaPostulantes_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -336,15 +340,15 @@ namespace UnAventon.Viajes
                     if (u.EstadoViaje == 1)
                     {
                         lbDatos.CssClass = "UpdateButton not-allowed";
-
-                        lbRechazar.ToolTip = "El postulante aun no fue evaluado. ";
+                        lbDatos.ToolTip = "No se pueden ver los datos de un usuario Pendiente";
                         lbDatos.Enabled = false;
+
                         liEstado.Text = "Pendiente";
                         liEstado.CssClass = "font-Yellow";
 
                         lbCalifiacion.Enabled = false;
                         lbCalifiacion.CssClass = "UpdateButton not-allowed";
-                        lbCalifiacion.ToolTip = "No se puede calificar un pasajero que no fue aceptado. ";
+                        lbCalifiacion.ToolTip = "No se puede calificar un pasajero que no fue Aceptado. ";
 
                     }
 
@@ -353,11 +357,11 @@ namespace UnAventon.Viajes
                     {
                         lbAceptar.CssClass = "UpdateButton not-allowed";
                         lbRechazar.CssClass = "DeleteButton not-allowed";
-
-                        lbRechazar.ToolTip = "El postulante ya fue evaluado. ";
-                        lbAceptar.ToolTip = "El postulante ya fue evaluado. ";
+                        lbRechazar.ToolTip = "El postulante ya fue Aceptado. ";
+                        lbAceptar.ToolTip = "El postulante ya fue Aceptado. ";
                         lbAceptar.Enabled = false;
                         lbRechazar.Enabled = false;
+
                         liEstado.Text = "Aceptado";
                         liEstado.CssClass = "font-Green";
 
@@ -372,10 +376,10 @@ namespace UnAventon.Viajes
                     if (u.EstadoViaje == 3)
                     {
                         lbAceptar.CssClass = "UpdateButton not-allowed";
-                        lbAceptar.ToolTip = "El postulante ya fue evaluado. ";
+                        lbAceptar.ToolTip = "El postulante ya fue Rechazado. ";
 
                         lbRechazar.CssClass = "DeleteButton not-allowed";
-                        lbRechazar.ToolTip = "El postulante ya fue evaluado. ";
+                        lbRechazar.ToolTip = "El postulante ya fue Rechazado. ";
 
                         lbDatos.CssClass = "DeleteButton not-allowed";
 
@@ -393,10 +397,10 @@ namespace UnAventon.Viajes
                     {
 
                         lbAceptar.CssClass = "UpdateButton not-allowed";
-                        lbAceptar.ToolTip = "El postulante ya fue evaluado. ";
+                        lbAceptar.ToolTip = "El postulante fue Eliminado. ";
 
                         lbRechazar.CssClass = "DeleteButton not-allowed";
-                        lbRechazar.ToolTip = "El postulante ya fue evaluado. ";
+                        lbRechazar.ToolTip = "El postulante fue Eliminado. ";
 
                         lbDatos.CssClass = "DeleteButton not-allowed";
 
@@ -527,7 +531,7 @@ namespace UnAventon.Viajes
                                 Bol.Usuario.InsertCalificacion(idpasajero, tbmessage.Text,true);
                                 Bol.Usuario.SETSiCalificado(Viaje.Id, idpasajero);
                                 Bol.Usuario.SETSiCalifico(Viaje.Id, idpasajero);
-                                rptListaPostulantes.DataBind();
+                                upGeneral.Update();
                             }                                                          
                             if(radioCalificacionMala.Checked)
                             {
@@ -535,7 +539,7 @@ namespace UnAventon.Viajes
                                 Bol.Usuario.InsertCalificacion(idpasajero, tbmessage.Text, true);
                                 Bol.Usuario.SETSiCalificado(Viaje.Id, idpasajero);
                                 Bol.Usuario.SETSiCalifico(Viaje.Id, idpasajero);
-                                rptListaPostulantes.DataBind();
+                                upGeneral.Update();
                             }
                                
                         }

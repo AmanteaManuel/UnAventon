@@ -2,8 +2,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">    
-<div class="container margin-general">
-            <div class="row">
+<div class="container margin-general">    
+            <div class="row">                
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
                     <div class="panel panel-info">
                         <div class="panel-heading">
@@ -110,6 +110,8 @@
             <h4><asp:Label runat="server" id="liEstado" /></h4>      
         </div>
 
+    <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="upGeneral">
+        <ContentTemplate>
     <!-- Lista de postulantes-->
     <div class="row" id="divPostulacion" runat="server">    
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
@@ -196,6 +198,8 @@
             <label><strong>Reputacion: </strong></label><asp:Literal runat="server" ID="liReputacion"/>
         </div>
      </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
     <%--SECCION DE PREGUNTAS--%>
     <br /><h3 class="panel-title">Preguntas</h3><br />    
@@ -314,23 +318,19 @@
 
     <asp:TextBox ID="tbHiddenId" style="display:none" runat="server" />
 </div>
-
-
-    <script>
+     <script>
         function Pago()
         {
-           <%-- alert($('#<%= tbHiddenId.ClientID %>').val());--%>
+            <%-- alert($('#<%= tbHiddenId.ClientID %>').val());--%>
             $("#exampleModal1").modal("show")
             //--data-target = "#exampleModal1"
         }
 
         function Calificacion()
         {
-           <%-- alert($('#<%= tbHiddenId.ClientID %>').val());--%>
+            <%-- alert($('#<%= tbHiddenId.ClientID %>').val());--%>
             $("#exampleModal").modal("show")
             //--data-target = "#exampleModal1"
         }
-
-
     </script>
 </asp:Content>
