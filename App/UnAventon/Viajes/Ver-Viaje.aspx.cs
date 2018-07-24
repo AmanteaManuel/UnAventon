@@ -724,5 +724,10 @@ namespace UnAventon.Viajes
             }
 
         }
+
+        protected void btnPagar_Click1(object sender, EventArgs e)
+        {
+            ClientScript.RegisterStartupScript(GetType(), "id", "Pago()", true);
+        }
     }
 }
