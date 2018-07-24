@@ -11,7 +11,31 @@ namespace UnAventon.Usuario
 {
     public partial class Ver_Perfil : UnAventonPage
     {
-        private int choferCalifacacionId;
+        public String ChoferCalifacacionId
+        {
+            get
+            {
+                object o = ViewState["ChoferCalifacacionId"];
+                return (o == null) ? String.Empty : (string)o;
+            }
+            set
+            {
+                ViewState["ChoferCalifacacionId"] = value;
+            }
+        }
+
+        public String ViajeACalificarId
+        {
+            get
+            {
+                object o = ViewState["ViajeACalificarId"];
+                return (o == null) ? String.Empty : (string)o;
+            }
+            set
+            {
+                ViewState["ViajeACalificarId"] = value;
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -156,7 +180,7 @@ namespace UnAventon.Usuario
                     lbBaja.Enabled = false;
                     lbBaja.CssClass = "UpdateButton not-allowed";
                 }
-               
+
                 if ((v.FechaSalida.AddHours(Convert.ToDouble(v.Duracion))) > DateTime.Now)//el viaje no paso
                 {
                     lbCalifiacion.Enabled = false;
@@ -172,7 +196,7 @@ namespace UnAventon.Usuario
                         //show modal
                     }
                     else//si no fue aceptado
-                    {                        
+                    {
                         lbCalifiacion.Enabled = false;
                         lbCalifiacion.CssClass = "UpdateButton not-allowed";
                         lbCalifiacion.ToolTip = "Solo los usuarios que realizaron el viaje pueden calificar. ";
@@ -196,7 +220,7 @@ namespace UnAventon.Usuario
                 if (e.CommandName.ToUpper().Equals("DATOS"))
                 {
                     Bol.Viaje viaje = new Viaje().GetInstanceById(id);
-                    
+
 
                     divDatosChofer.Visible = true;
                     Bol.Usuario usuario = new Bol.Usuario().GetInstanceById(viaje.UsuarioId);
@@ -212,7 +236,7 @@ namespace UnAventon.Usuario
 
                     //Aceptado
                     if (u.EstadoViaje == 2)
-                    {                        
+                    {
                         Bol.Usuario.EliminarPostulacion(id, viaje.Id);
                         Bol.Viaje.SumarUnLUgar(viaje.Id);
                         Bol.Usuario.RestarReputacionPasajero(ActiveUsuario.Id);
@@ -224,6 +248,13 @@ namespace UnAventon.Usuario
                         Bol.Usuario.EliminarPostulacion(id, viaje.Id);
                         Response.Redirect(Request.RawUrl);
                     }
+                }
+                if (e.CommandName.ToUpper().Equals("CALIFICACION"))
+                {
+                    Bol.Viaje v = new Viaje().GetInstanceById(id);
+                    ChoferCalifacacionId = v.UsuarioId.ToString();
+                    ViajeACalificarId = v.Id.ToString();
+                    ClientScript.RegisterStartupScript(GetType(), "id", "Calificacion()", true);
                 }
             }
             catch (Exception ex)
@@ -277,12 +308,12 @@ namespace UnAventon.Usuario
             try
             {
                 //si no esta calificado
-                if (!radioCalificacionBuena.Checked || !radioCalificacionBuena.Checked)
+                if (!radioCalificacionBuena.Checked & !radioCalificacionBuena.Checked)
                     throw new Exception("Debe seleccionar una calificación");
                 else//esta calificado
                 {
                     //si hay al menos una calificaion
-                    if (radioCalificacionBuena.Checked || radioCalificacionBuena.Checked)
+                    if (radioCalificacionBuena.Checked | radioCalificacionMala.Checked)
                     {
                         //si ingreso un comentario
                         if (tbmessage.Text != "")
@@ -290,13 +321,17 @@ namespace UnAventon.Usuario
                             //sumo calificaion si fue buena     
                             if (radioCalificacionBuena.Checked)
                             {
-                                Bol.Usuario.SumarReputacionChofer(choferCalifacacionId);
-                                Bol.Usuario.InsertCalificacion(choferCalifacacionId, tbmessage.Text, true);
-                            }                                                       
-                            else//resto si la calificaion fue mala
+                                Bol.Usuario.SumarReputacionChofer(Convert.ToInt32(ChoferCalifacacionId));
+                                Bol.Usuario.InsertCalificacion(Convert.ToInt32(ChoferCalifacacionId), tbmessage.Text, true);
+                                Bol.Usuario.SETSiCalificado(ActiveUsuario.Id, Convert.ToInt32(ViajeACalificarId));
+                                Bol.Usuario.SETSiCalificado(ActiveUsuario.Id, Convert.ToInt32(ViajeACalificarId));
+                            }
+                            if (radioCalificacionMala.Checked)//resto si la calificaion fue mala
                             {
-                                Bol.Usuario.RestarReputacionChofer(choferCalifacacionId);
-                                Bol.Usuario.InsertCalificacion(choferCalifacacionId, tbmessage.Text, true);
+                                Bol.Usuario.RestarReputacionChofer(Convert.ToInt32(ChoferCalifacacionId));
+                                Bol.Usuario.InsertCalificacion(Convert.ToInt32(ChoferCalifacacionId), tbmessage.Text, true);
+                                Bol.Usuario.SETSiCalificado(ActiveUsuario.Id, Convert.ToInt32(ViajeACalificarId));
+                                Bol.Usuario.SETSiCalificado(ActiveUsuario.Id, Convert.ToInt32(ViajeACalificarId));
                             }
                         }
                         else

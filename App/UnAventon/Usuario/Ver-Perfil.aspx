@@ -170,7 +170,7 @@
                                                     <asp:LinkButton ID="lbBaja" CssClass="DeleteButton" CommandName="BAJA" CommandArgument='<%# Eval("id") %>' runat="server" Text="Darme de Baja" OnClientClick="return confirm('¿Desea darse de baja? Si ya fue aceptado usted será penalizado.');"></asp:LinkButton>
                                                 </td>
                                                 <td>
-                                                    <asp:LinkButton CssClass="UpdateButton" data-toggle="modal" data-target="#exampleModal"  CommandName="CALIFICACION" CommandArgument='<%#Eval("Id") %>' runat="server" Text="Calificar" ID="lbCalifiacion"></asp:LinkButton>                                                        
+                                                    <asp:LinkButton CssClass="UpdateButton" CommandName="CALIFICACION" CommandArgument='<%#Eval("Id") %>' runat="server" Text="Calificar" ID="lbCalifiacion"></asp:LinkButton>  
                                                 </td>
                                             </tr>
                                         </ItemTemplate>
@@ -229,4 +229,15 @@
 </div>
 
 </div>
+     <script>
+
+        function Calificacion()
+        {
+           <%-- alert($('#<%= tbHiddenId.ClientID %>').val());--%>
+            $("#exampleModal").modal("show")
+            //--data-target = "#exampleModal1"
+        }
+
+
+    </script>
 </asp:Content>

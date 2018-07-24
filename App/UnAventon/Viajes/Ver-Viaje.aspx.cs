@@ -502,12 +502,12 @@ namespace UnAventon.Viajes
             try
             {
                 //si no esta calificado
-                if (!radioCalificacionBuena.Checked || !radioCalificacionBuena.Checked)
+                if (!radioCalificacionBuena.Checked & !radioCalificacionBuena.Checked)
                     throw new Exception("Debe seleccionar una calificación");
                 else//esta calificado
                 { 
                     //si hay al menos una calificaion
-                    if (radioCalificacionBuena.Checked || radioCalificacionBuena.Checked)
+                    if (radioCalificacionBuena.Checked | radioCalificacionMala.Checked)
                     {
                         //si ingreso un comentario
                         if (tbmessage.Text != "")
@@ -521,8 +521,8 @@ namespace UnAventon.Viajes
                                 Bol.Usuario.SETSiCalificado(Viaje.Id, idpasajero);
                                 Bol.Usuario.SETSiCalifico(Viaje.Id, idpasajero);
                                 Response.Redirect(Request.RawUrl);
-                            }                                                           
-                            else//resto si la calificaion fue mala
+                            }                                                          
+                            if(radioCalificacionMala.Checked)
                             {
                                 Bol.Usuario.RestarReputacionPasajero(idpasajero);
                                 Bol.Usuario.InsertCalificacion(idpasajero, tbmessage.Text, true);
