@@ -8,16 +8,11 @@ namespace Dal.Core
 {
     public class Respuesta : DalBase
     {
-        private const string INSERT_RESPUESTA = @"INSERT INTO [dbo].[Respuesta]
-                                                                   ([Descripcion]
-                                                                   ,[Fecha]
-                                                                   ,[PreguntaId]
-                                                                   ,[UsuarioId])
-                                                              VALUES
-                                                                   (@parDescripcion,
-		                                                           @parFecha,
-		                                                           @parPreguntaId,
-		                                                           @parUsuarioId)";
+        private const string INSERT_RESPUESTA = @" insert into Respuesta
+                                                     (Descripcion,Fecha,PreguntaId,UsuarioId)
+                                                     output INSERTED.Id
+                                                     values
+                                                     (@parDescripcion,@parFecha,@parPreguntaId,@parUsuarioId)";
 
         private const string GET_ALL_BY_VIAJE_ID = @"select * from Respuesta where ViajeId = {0}";
 

@@ -87,7 +87,7 @@ namespace UnAventon.Viajes
             if (Viaje.UsuarioId == ActiveUsuario.Id)
             {
                 tbHiddenId.Text = Viaje.Id.ToString();
-                tbPreguntar.Visible = false;
+                btnPregunta.Visible = false;
 
                 if(Viaje.FechaSalida > DateTime.Now)
                     btnPagar.Visible = true;
@@ -796,7 +796,7 @@ namespace UnAventon.Viajes
                 if (Page.IsValid)
                 {
                     Bol.Respuesta respuesta = new Bol.Respuesta();
-                    respuesta.Descripcion = tbPreguntar.;
+                    respuesta.Descripcion = tbPreguntar.Text;
                     respuesta.Fecha = DateTime.Now;
                     respuesta.UsuarioId = ActiveUsuario.Id;
                     respuesta.PreguntaId = Convert.ToInt32(PreguntaId);
