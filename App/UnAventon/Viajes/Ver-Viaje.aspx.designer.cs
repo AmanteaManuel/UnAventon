@@ -265,6 +265,15 @@ namespace UnAventon.Viajes {
         protected global::System.Web.UI.WebControls.Literal liReputacion;
         
         /// <summary>
+        /// btnPregunta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPregunta;
+        
+        /// <summary>
         /// rptPreguntas control.
         /// </summary>
         /// <remarks>
@@ -407,6 +416,42 @@ namespace UnAventon.Viajes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button1;
+        
+        /// <summary>
+        /// tbPreguntar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbPreguntar;
+        
+        /// <summary>
+        /// btnAceptarPregunta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAceptarPregunta;
+        
+        /// <summary>
+        /// tbResponder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbResponder;
+        
+        /// <summary>
+        /// btnAceptarRespuesta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAceptarRespuesta;
         
         /// <summary>
         /// tbHiddenId control.

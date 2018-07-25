@@ -82,6 +82,8 @@ namespace Bol
 
         public int UsuarioId { get; set; }
 
+        public int PreguntaId { get; set; }
+
         #endregion
 
         #region " Views "
@@ -132,7 +134,7 @@ namespace Bol
                     oBol.Descripcion = Convert.ToString(dr["Descripcion"]);
 
                 if (dr.Table.Columns.Contains("PreguntaId") && !Convert.IsDBNull(dr["PreguntaId"]))
-                    oBol._preguntaId = Convert.ToInt32(dr["PreguntaId"]);
+                    oBol.PreguntaId = Convert.ToInt32(dr["PreguntaId"]);
 
                 if (dr.Table.Columns.Contains("UsuarioId") && !Convert.IsDBNull(dr["UsuarioId"]))
                     oBol.UsuarioId = Convert.ToInt32(dr["UsuarioId"]);
@@ -171,8 +173,8 @@ namespace Bol
                 outId = new Dal.Core.Respuesta().Create(                
                 respuesta.Fecha,
                 respuesta.Descripcion,                
-                respuesta._usuarioId,
-                respuesta._preguntaId 
+                respuesta.UsuarioId,
+                respuesta.PreguntaId 
                 );
 
                 respuesta.Id = outId;

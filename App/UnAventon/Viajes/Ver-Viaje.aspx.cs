@@ -33,6 +33,18 @@ namespace UnAventon.Viajes
             }
         }
 
+        public String PreguntaId
+        {
+            get
+            {
+                object o = ViewState["PreguntaId"];
+                return (o == null) ? String.Empty : (string)o;
+            }
+            set
+            {
+                ViewState["PreguntaId"] = value;
+            }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -75,7 +87,8 @@ namespace UnAventon.Viajes
             if (Viaje.UsuarioId == ActiveUsuario.Id)
             {
                 tbHiddenId.Text = Viaje.Id.ToString();
-                
+                tbPreguntar.Visible = false;
+
                 if(Viaje.FechaSalida > DateTime.Now)
                     btnPagar.Visible = true;
 
@@ -124,6 +137,7 @@ namespace UnAventon.Viajes
                 btnEliminarViaje.Visible = false;
                 btnModificar.Visible = false;               
                 btnPagar.Visible = false;
+                tbPreguntar.Visible = true;
 
                 //obtengo postulantes del viaje
                 List<Bol.Usuario> postulantes = Bol.Usuario.GetPostulantesByViajeId(Viaje.Id);
@@ -595,9 +609,6 @@ namespace UnAventon.Viajes
                 Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
                 lialert.Text = ex.Message;
             }
-            //show modal
-            
-            
         }
 
         private void ValidarPago()
@@ -707,9 +718,9 @@ namespace UnAventon.Viajes
 
                     respuesta.Fecha = DateTime.Now;
                     respuesta.UsuarioId = ActiveUsuario.Id;
-                    
-                    //dato del modal de las respuestas
-                    //respuesta.Descripcion = lbRespuesta.Text;
+                    PreguntaId = id.ToString();
+
+                    ScriptManager.RegisterStartupScript(rptPreguntas, rptPreguntas.GetType(), "id", "Responder()", true);
                 }
             }
             catch (Exception)
@@ -729,30 +740,116 @@ namespace UnAventon.Viajes
             {                
                 Label lbPregunta = (Label)e.Item.FindControl("lbPregunta");
                 Label lbRespuesta = (Label)e.Item.FindControl("lbRespuesta");
-                LinkButton lbResponder = (LinkButton)e.Item.FindControl("lbResponder");
+                LinkButton btnResponder = (LinkButton)e.Item.FindControl("lbResponder");
 
-                lbResponder.Visible = false;
+                btnResponder.Visible = false;
                 lbPregunta.Text = pregunta.Descripcion;
+
                 //si tiene respuesta
                 if (pregunta.RespuestaId != null)
                 {
                     Bol.Respuesta respuesta = Bol.Respuesta.GetInstanceById(pregunta.RespuestaId);
                     lbRespuesta.Text = respuesta.Descripcion;
-                    lbResponder.Visible = false;
+                    btnResponder.Visible = false;
                 }
                 else
                 {
-                    if(ActiveUsuario.Id == Viaje.UsuarioId)
-                        lbResponder.Visible = true;                    
-                        
+                    lbRespuesta.Text = "";
+                    if (ActiveUsuario.Id == Viaje.UsuarioId)
+                        btnResponder.Visible = true; 
                 }
             }
 
         }
 
+        /// <summary>
+        /// abro script pago
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnPagar_Click1(object sender, EventArgs e)
         {
             ClientScript.RegisterStartupScript(GetType(), "id", "Pago()", true);
+        }
+
+        /// <summary>
+        /// abro modal pregunta
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void btnPregunta_Click(object sender, EventArgs e)
+        {
+            ClientScript.RegisterStartupScript(GetType(), "id", "Preguntar()", true);
+        }
+
+
+        /// <summary>
+        /// evento que la respuesta
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void btnAceptarRespuesta_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Validate("Respuesta");
+                if (Page.IsValid)
+                {
+                    Bol.Respuesta respuesta = new Bol.Respuesta();
+                    respuesta.Descripcion = tbPreguntar.;
+                    respuesta.Fecha = DateTime.Now;
+                    respuesta.UsuarioId = ActiveUsuario.Id;
+                    respuesta.PreguntaId = Convert.ToInt32(PreguntaId);
+
+                    Bol.Respuesta.Create(respuesta);
+                }
+                else
+                    throw new Exception("Ingrese un texto a Responder.");
+
+            }
+
+
+            catch (Exception ex)
+            {
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = ex.Message;
+            }
+        }
+
+        /// <summary>
+        /// evento que ejhecuta la pregunta
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void btnAceptarPregunta_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //TextBox tbPreguntar = (TextBox)Page.FindControl("tbPreguntar");
+                Validate("Pregunta");
+                if (Page.IsValid)
+                {
+                    Bol.Pregunta pregunta = new Bol.Pregunta();
+                    pregunta.Descripcion = tbPreguntar.Text;
+                    pregunta.Fecha = DateTime.Now;
+                    pregunta.UsuarioId = ActiveUsuario.Id;
+                    pregunta.ViajeId = Viaje.Id;
+
+                    Bol.Pregunta.Create(pregunta);
+                }
+                else
+                    throw new Exception("Ingrese un texto a Responder.");
+
+            }
+            catch (Exception ex)
+            {
+                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                divalert.Visible = true;
+                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                lialert.Text = ex.Message;
+            }
         }
     }
 }

@@ -11,12 +11,12 @@ namespace Dal.Core
         private const string INSERT_PREGUNTA = @"INSERT INTO [dbo].[Respuesta]
                                                                    ([Descripcion]
                                                                    ,[Fecha]
-                                                                   ,[PreguntaId]
+                                                                   ,[ViajeId]
                                                                    ,[UsuarioId])
                                                               VALUES
                                                                    (@parDescripcion,
 		                                                           @parFecha,
-		                                                           @parPreguntaId,
+		                                                           @parViajeId,
 		                                                           @parUsuarioId)";
 
         private const string GET_ALL_BY_VIAJE_ID = @"select * from Pregunta where ViajeId = {0}";

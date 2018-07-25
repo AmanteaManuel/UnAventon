@@ -209,16 +209,18 @@
 
     <%--SECCION DE PREGUNTAS--%>
     <br /><h3 class="panel-title">Preguntas</h3><br />    
+    <asp:Button id="btnPregunta" runat="server" Text="Preguntar" CssClass="boton_personalizado" OnClick="btnPregunta_Click" />   
     <div class="row">       
             <div class=" col-md-2 col-lg-2 "><asp:Panel runat="server" BackColor="Transparent"></asp:Panel></div>
                 <div class=" col-md-8 col-lg-8">
                     <asp:Repeater runat="server" ID="rptPreguntas" OnItemCommand="rptPreguntas_ItemCommand" OnItemDataBound="rptPreguntas_ItemDataBound">
                         <ItemTemplate>
                             <div class="divPreguntas">
-                                <strong><asp:Label ID="lbPregunta" CssClass="pregunta"  Text="Hola que tal tenes aire acondicionado?" runat="server" /></strong><br /><br />
-                                <asp:Label ID="lbRespuesta" CssClass="respuesta" Text="Que te importa" runat="server" />
-                            </div>
-                            <asp:LinkButton CssClass="boton_personalizado" CommandName="RESPUESTA" CommandArgument='<%#Eval("Id")%>' runat="server" Text="Responder" ID="lbResponder"></asp:LinkButton>                                          
+                                <strong><asp:Label ID="lbPregunta" CssClass="pregunta"  runat="server" /></strong><br /><br />
+                                <asp:Label ID="lbRespuesta" CssClass="respuesta" runat="server" />
+                            </div><br />
+                            <asp:LinkButton CssClass="UpdateButton" CommandName="RESPUESTA" CommandArgument='<%#Eval("Id")%>' runat="server" Text="Responder" ID="lbResponder"></asp:LinkButton>                                          
+                            <br /><hr />
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>
@@ -322,6 +324,61 @@
     </div>
     <%--FIN MODAL CALIFICAR PASAJERO--%>
 
+    <%--MODAL Preguntar --%>
+    <div class="modal fade" id="Preguntar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Preguntar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Comentario:</label>
+                            <asp:TextBox runat="server" TextMode="MultiLine" Height="75" CssClass="form-control" ID="tbPreguntar" />
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button type="button" class="btn btn-secondary" data-dismiss="modal" Text="Cancelar" runat="server" />
+                    <asp:Button Text="Aceptar" type="button" class="btn btn-primary" runat="server" ID="btnAceptarPregunta" OnClick="btnAceptarPregunta_Click" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--FIN MODAL Preguntar--%>
+
+    <%--MODAL Preguntar --%>
+    <div class="modal fade" id="Responder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel3">Responer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Comentario:</label>
+                            <asp:TextBox runat="server"  TextMode="MultiLine" Height="75" class="form-control" ID="tbResponder" />
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button type="button" class="btn btn-secondary" data-dismiss="modal" Text="Cancelar" runat="server" />
+                    <asp:Button Text="Aceptar" type="button" class="btn btn-primary" runat="server" ID="btnAceptarRespuesta" OnClick="btnAceptarRespuesta_Click" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--FIN MODAL Preguntar--%>
     <asp:TextBox ID="tbHiddenId" style="display:none" runat="server" />
 </div>
      <script>
@@ -336,6 +393,20 @@
         {
             <%-- alert($('#<%= tbHiddenId.ClientID %>').val());--%>
             $("#exampleModal").modal("show")
+            //--data-target = "#exampleModal1"
+         }
+
+        function Preguntar()
+        {
+            <%-- alert($('#<%= tbHiddenId.ClientID %>').val());--%>
+            $("#Preguntar").modal("show")
+            //--data-target = "#exampleModal1"
+         }
+
+        function Responder()
+        {
+            <%-- alert($('#<%= tbHiddenId.ClientID %>').val());--%>
+            $("#Responder").modal("show")
             //--data-target = "#exampleModal1"
         }
     </script>

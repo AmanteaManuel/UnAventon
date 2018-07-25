@@ -19,9 +19,9 @@ namespace Dal.Core
 		                                                           @parPreguntaId,
 		                                                           @parUsuarioId)";
 
-        private const string GET_ALL_BY_VIAJE_ID = @"select * from Pregunta where ViajeId = {0}";
+        private const string GET_ALL_BY_VIAJE_ID = @"select * from Respuesta where ViajeId = {0}";
 
-        private const string LOAD = @"select * from Pregunta where Id = {0}";
+        private const string LOAD = @"select * from Respuesta where Id = {0}";
 
 
         public int Create(DateTime fecha, string descripcion, int usuarioId, int preguntaId)

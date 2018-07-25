@@ -84,6 +84,8 @@ namespace Bol
 
         public int? RespuestaId { get; set; }
 
+        public int ViajeId { get; set; }
+
 
         #endregion
 
@@ -135,13 +137,16 @@ namespace Bol
                     oBol.Descripcion = Convert.ToString(dr["Descripcion"]);
 
                 if (dr.Table.Columns.Contains("ViajeId") && !Convert.IsDBNull(dr["ViajeId"]))
-                    oBol._viajeId = Convert.ToInt32(dr["ViajeId"]);
+                    oBol.ViajeId = Convert.ToInt32(dr["ViajeId"]);
 
                 if (dr.Table.Columns.Contains("UsuarioId") && !Convert.IsDBNull(dr["UsuarioId"]))
                     oBol.UsuarioId = Convert.ToInt32(dr["UsuarioId"]);
 
                 if (dr.Table.Columns.Contains("Fecha") && !Convert.IsDBNull(dr["Fecha"]))
                     oBol.Fecha = Convert.ToDateTime(dr["Fecha"]);
+
+                if (dr.Table.Columns.Contains("RespuestaId") && !Convert.IsDBNull(dr["RespuestaId"]))
+                    oBol.RespuestaId = Convert.ToInt32(dr["RespuestaId"]);
 
                 if (dr.Table.Columns.Contains("RespuestaId") && !Convert.IsDBNull(dr["RespuestaId"]))
                     oBol.RespuestaId = Convert.ToInt32(dr["RespuestaId"]);
@@ -177,8 +182,8 @@ namespace Bol
                 outId = new Dal.Core.Pregunta().Create(
                 pregunta.Fecha,
                 pregunta.Descripcion,
-                pregunta._usuarioId,
-                pregunta._viajeId
+                pregunta.UsuarioId,
+                pregunta.ViajeId
                 );
 
                 pregunta.Id = outId;
