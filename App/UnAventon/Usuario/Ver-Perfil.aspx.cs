@@ -138,6 +138,7 @@ namespace UnAventon.Usuario
                 LinkButton lbCalifiacion = (LinkButton)e.Item.FindControl("lbCalifiacion");
                 LinkButton lbDatos = (LinkButton)e.Item.FindControl("lbDatos");
                 LinkButton lbBaja = (LinkButton)e.Item.FindControl("lbBaja");
+                Bol.Core.Postulacion postulacion = Bol.Core.Postulacion.GetByViajeANDusuarioId(ActiveUsuario.Id, v.Id);
 
                 if (v.EstadoViaje == 1)
                 {
@@ -155,6 +156,13 @@ namespace UnAventon.Usuario
                 {
                     liEstado.Text = "Aceptado";
                     liEstado.CssClass = "font-Green";
+                    if(postulacion.SiCalifico)
+                    {
+                        lbCalifiacion.Enabled = false;
+                        lbCalifiacion.CssClass = "UpdateButton not-allowed";
+                        lbCalifiacion.ToolTip = "el chofer ya fue calificado";
+
+                    }
                 }
                 if (v.EstadoViaje == 3)
                 {
@@ -191,9 +199,17 @@ namespace UnAventon.Usuario
                 {
                     if (v.EstadoViaje == 2)//si  fue aceptado
                     {
-                        lbCalifiacion.Enabled = true;
-                        lbCalifiacion.CssClass = "UpdateButton";
-                        //show modal
+                        if (!postulacion.SiCalifico)
+                        {
+                            lbCalifiacion.Enabled = true;
+                            lbCalifiacion.CssClass = "UpdateButton";
+                        }
+                        else
+                        {
+                            lbCalifiacion.Enabled = false;
+                            lbCalifiacion.CssClass = "UpdateButton not-allowed";
+                            lbCalifiacion.ToolTip = "El Chofer ya fue calificado. ";
+                        }
                     }
                     else//si no fue aceptado
                     {
@@ -308,7 +324,7 @@ namespace UnAventon.Usuario
             try
             {
                 //si no esta calificado
-                if (!radioCalificacionBuena.Checked & !radioCalificacionBuena.Checked)
+                if (!radioCalificacionBuena.Checked & !radioCalificacionMala.Checked)
                     throw new Exception("Debe seleccionar una calificación");
                 else//esta calificado
                 {
@@ -325,6 +341,7 @@ namespace UnAventon.Usuario
                                 Bol.Usuario.InsertCalificacion(Convert.ToInt32(ChoferCalifacacionId), tbmessage.Text, true);
                                 Bol.Usuario.SETSiCalificado(Convert.ToInt32(ViajeACalificarId), ActiveUsuario.Id);
                                 Bol.Usuario.SETSiCalifico(Convert.ToInt32(ViajeACalificarId),ActiveUsuario.Id);
+                                Response.Redirect(Request.RawUrl);
                             }
                             if (radioCalificacionMala.Checked)//resto si la calificaion fue mala
                             {
@@ -332,6 +349,7 @@ namespace UnAventon.Usuario
                                 Bol.Usuario.InsertCalificacion(Convert.ToInt32(ChoferCalifacacionId), tbmessage.Text, true);
                                 Bol.Usuario.SETSiCalificado(Convert.ToInt32(ViajeACalificarId), ActiveUsuario.Id);
                                 Bol.Usuario.SETSiCalifico(Convert.ToInt32(ViajeACalificarId), ActiveUsuario.Id);
+                                Response.Redirect(Request.RawUrl);
                             }
                         }
                         else
