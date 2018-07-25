@@ -75,8 +75,10 @@ namespace UnAventon.Viajes
             if (Viaje.UsuarioId == ActiveUsuario.Id)
             {
                 tbHiddenId.Text = Viaje.Id.ToString();
-               
-                btnPagar.Visible = true;
+                
+                if(Viaje.FechaSalida > DateTime.Now)
+                    btnPagar.Visible = true;
+
                 if(Viaje.SiPagado == true)
                 {
                     btnPagar.Visible = true;
@@ -191,6 +193,17 @@ namespace UnAventon.Viajes
             {
                 liEstadoDelViaje.Text = "Eliminado";
                 liEstadoDelViaje.CssClass = "font-Red";
+            }
+
+            if(Viaje.SiPagado)
+            {
+                liPagado.Text = "Pagado";
+                liPagado.CssClass = "font-Green";
+            }
+            else
+            {
+                liPagado.Text = "Adeuda Pago";
+                liPagado.CssClass = "font-Red";
             }
 
             Bol.Vehiculo v = Viaje.Vehiculo;

@@ -289,6 +289,15 @@ namespace Bol
                 return Bol.Usuario.GetPasajerosByViajeId(Id);
             }
         }
+
+        public string NombreChofer
+        {
+            get
+            {
+                Bol.Usuario u = new Bol.Usuario().GetInstanceById(UsuarioId);
+                return u.Nombre + " " + u.Apellido;
+            }
+        }
         #endregion
 
         #region " Views "

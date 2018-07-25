@@ -49,6 +49,7 @@
                             <tr>
                                 <th>Origen</th>
                                 <th>Destino</th>
+                                <th>Chofer</th>
                                 <th>Precio</th>
                                 <th>Fecha</th>
                                 <th>Hora</th>
@@ -63,6 +64,9 @@
                                 </td>
                                 <td>
                                     <asp:Literal Text='<%# Eval("Destino.Descripcion") %>' runat="server" ID="liDestino" />
+                                </td>
+                                <td>
+                                    <asp:Literal Text='<%# Eval("NombreChofer") %>' runat="server" ID="Literal1" />
                                 </td>
                                 <td>
                                     $<asp:Literal Text='<%# Eval("Precio") %>' runat="server" ID="liPrecio" />

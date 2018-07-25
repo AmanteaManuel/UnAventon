@@ -81,6 +81,12 @@
                                                     <strong><asp:label runat="server" id="liEstadoDelViaje"/></strong>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td><strong>Viaje Pagado:</strong></td>
+                                                <td>
+                                                    <strong><asp:label runat="server" id="liPagado"/></strong>
+                                                </td>
+                                            </tr>
                                             <%--<tr>
                                                 <td><strong>Reputacion Chofer:</strong></td>
                                                 <td>
