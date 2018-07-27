@@ -240,10 +240,10 @@ namespace UnAventon.Usuario
 
                     divDatosChofer.Visible = true;
                     Bol.Usuario usuario = new Bol.Usuario().GetInstanceById(viaje.UsuarioId);
-                    liEmail.Text = " " + "";
-                    liNombre.Text = " " + "";
-                    liApellido.Text = " " + "";
-                    liReputacion.Text = " " + "";
+                    liEmail1.Text = " " + usuario.Email;
+                    liNombre1.Text = " " + usuario.Nombre;
+                    liApellido1.Text = " " + usuario.Apellido;
+                    liReputacion1.Text = " " + Convert.ToString(usuario.ReputacionChofer);
                 }
                 if (e.CommandName.ToUpper().Equals("BAJA"))
                 {

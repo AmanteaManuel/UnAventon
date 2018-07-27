@@ -188,10 +188,10 @@
         <div class="alert alert-success" role="alert">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <div class="center"><label><strong>Datos del Chofer</strong></label></div> <br>                       
-            <label><strong>Email: </strong></label> <asp:Literal runat="server" ID="Literal1" /><br>   
-            <label><strong>Nombre: </strong></label><asp:Literal runat="server" ID="Literal2" /><br>   
-            <label><strong>Apellido: </strong></label><asp:Literal runat="server" ID="Literal3" /><br>  
-            <label><strong>Reputacion: </strong></label><asp:Literal runat="server" ID="liReputacion"/>
+            <label><strong>Email: </strong></label> <asp:Literal runat="server" ID="liEmail1" /><br>   
+            <label><strong>Nombre: </strong></label><asp:Literal runat="server" ID="liNombre1" /><br>   
+            <label><strong>Apellido: </strong></label><asp:Literal runat="server" ID="liApellido1" /><br>  
+            <label><strong>Reputacion: </strong></label><asp:Literal runat="server" ID="liReputacion1"/>
         </div>
      </div>
 

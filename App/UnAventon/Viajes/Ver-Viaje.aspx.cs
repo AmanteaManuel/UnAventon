@@ -272,14 +272,17 @@ namespace UnAventon.Viajes
                         Bol.Usuario.AceptarPostulacion(id, Viaje.Id);
                         Bol.Viaje.RestarUnLUgar(Viaje.Id);
                         upGeneral.Update();
+                        Response.Redirect(Request.RawUrl); // agregue esto por las dudas haya cagado algo
                     }
                     else
                         throw new Exception("El Viaje no tiene asientos libres.");
+                    
                 }
                 if (e.CommandName.ToUpper().Equals("RECHAZAR"))
                 {
                     Bol.Usuario.RechazarPostulacion(id, Viaje.Id);
                     upGeneral.Update();
+                    Response.Redirect(Request.RawUrl); // agregue esto por las dudas haya cagado algo
                 }
 
                 if (e.CommandName.ToUpper().Equals("ELIMINAR"))
@@ -293,12 +296,13 @@ namespace UnAventon.Viajes
                         Bol.Viaje.SumarUnLUgar(Viaje.Id);
                         Bol.Usuario.RestarReputacionChofer(ActiveUsuario.Id);
                         upGeneral.Update();
-
+                        Response.Redirect(Request.RawUrl); // agregue esto por las dudas haya cagado algo
                     }
                     else
                     {
                         Bol.Usuario.EliminarPostulacion(id, Viaje.Id);
                         upGeneral.Update();
+                        Response.Redirect(Request.RawUrl); // agregue esto por las dudas haya cagado algo
                     }
                                      
                 }
