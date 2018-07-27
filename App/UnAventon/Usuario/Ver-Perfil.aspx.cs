@@ -156,6 +156,7 @@ namespace UnAventon.Usuario
                 {
                     liEstado.Text = "Aceptado";
                     liEstado.CssClass = "font-Green";
+
                     if(postulacion.SiCalifico)
                     {
                         lbCalifiacion.Enabled = false;
@@ -186,7 +187,7 @@ namespace UnAventon.Usuario
                     lbCalifiacion.CssClass = "UpdateButton not-allowed";
 
                     lbBaja.Enabled = false;
-                    lbBaja.CssClass = "UpdateButton not-allowed";
+                    lbBaja.CssClass = "DeleteButton not-allowed";
                 }
 
                 if ((v.FechaSalida.AddHours(Convert.ToDouble(v.Duracion))) > DateTime.Now)//el viaje no paso
@@ -233,6 +234,7 @@ namespace UnAventon.Usuario
                     string idenc = new Bol.Core.Service.Tools().Encripta(id.ToString());
                     Response.Redirect(Page.ResolveUrl("~/Viajes/Ver-Viaje.aspx?Id=" + idenc), true);
                 }
+
                 if (e.CommandName.ToUpper().Equals("DATOS"))
                 {
                     Bol.Viaje viaje = new Viaje().GetInstanceById(id);
@@ -245,6 +247,7 @@ namespace UnAventon.Usuario
                     liApellido1.Text = " " + usuario.Apellido;
                     liReputacion1.Text = " " + Convert.ToString(usuario.ReputacionChofer);
                 }
+
                 if (e.CommandName.ToUpper().Equals("BAJA"))
                 {
                     Bol.Viaje viaje = new Viaje().GetInstanceById(id);
@@ -265,6 +268,7 @@ namespace UnAventon.Usuario
                         Response.Redirect(Request.RawUrl);
                     }
                 }
+
                 if (e.CommandName.ToUpper().Equals("CALIFICACION"))
                 {
                     Bol.Viaje v = new Viaje().GetInstanceById(id);

@@ -432,7 +432,7 @@ namespace Dal.Core
             this.ExecuteNonQuery();
         }
 
-        public void SiCalifico(int usuarioId, int viajeId)
+        public void SiCalifico(int viajeId, int usuarioId)
         {
             this.ExecuteCommandText = SET_SICALIFICO;
 
