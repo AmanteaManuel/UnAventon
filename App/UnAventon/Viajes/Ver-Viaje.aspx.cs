@@ -355,6 +355,7 @@ namespace UnAventon.Viajes
             {   
                 LinkButton lbAceptar = (LinkButton)e.Item.FindControl("lbAceptar");
                 LinkButton lbRechazar = (LinkButton)e.Item.FindControl("lbRechazar");
+                LinkButton lbEliminar = (LinkButton)e.Item.FindControl("lbEliminar"); //Agruegue esto 
                 LinkButton lbDatos = (LinkButton)e.Item.FindControl("lbDatos");
                 Label liEstado = (Label)e.Item.FindControl("liEstado"); 
                 LinkButton lbCalifiacion = (LinkButton)e.Item.FindControl("lbCalifiacion");
@@ -410,10 +411,14 @@ namespace UnAventon.Viajes
                         lbRechazar.CssClass = "DeleteButton not-allowed";
                         lbRechazar.ToolTip = "El postulante ya fue Rechazado. ";
 
+                        lbEliminar.CssClass = "DeleteButton not-allowed";  //Agregue esto
+
+
                         lbDatos.CssClass = "DeleteButton not-allowed";
 
                         lbAceptar.Enabled = false;
                         lbRechazar.Enabled = false;
+                        lbEliminar.Enabled = false;                       //Agregue esto
                         lbDatos.Enabled = false;
                         liEstado.Text = "Rechazado";
                         liEstado.CssClass = "font-Red";
@@ -422,6 +427,7 @@ namespace UnAventon.Viajes
                         lbCalifiacion.CssClass = "UpdateButton not-allowed";
                         lbCalifiacion.ToolTip = "No se puede calificar un pasajero rechazado. ";
                     }
+                    //Usuario Eliminado
                     if (u.EstadoViaje == 4)
                     {
 
@@ -431,10 +437,14 @@ namespace UnAventon.Viajes
                         lbRechazar.CssClass = "DeleteButton not-allowed";
                         lbRechazar.ToolTip = "El postulante fue Eliminado. ";
 
+                        lbEliminar.CssClass = "DeleteButton not-allowed";
+                        lbEliminar.ToolTip = "El postulante ya fue Eliminado";  // Agregue esto
+
                         lbDatos.CssClass = "DeleteButton not-allowed";
 
                         lbAceptar.Enabled = false;
                         lbRechazar.Enabled = false;
+                        lbEliminar.Enabled = false;                                     //Agregue esto
                         lbDatos.Enabled = false;
                         liEstado.Text = "Eliminado";
                         liEstado.CssClass = "font-Red";
