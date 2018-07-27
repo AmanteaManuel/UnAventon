@@ -284,12 +284,12 @@
                             <br />
 
                             <label for="message-text" class="col-form-label">Nombre</label><br />
-                            <asp:TextBox runat="server" id="tbNombreTarjeta" />
+                            <asp:TextBox runat="server" id="tbNombreTarjeta" PlaceHolder="Ej: Juan" />
                             <asp:CustomValidator id="cvtbNombreTarjeta" runat="server" OnServerValidate="cvtbNombreTarjeta_ServerValidate" ValidationGroup="Pago" /><br />
 
 
                             <label for="message-text" class="col-form-label">Numero Tarjeta</label><br />
-                            <asp:TextBox runat="server" id="tbNumeroTarjeta" MaxLength="16" />
+                            <asp:TextBox runat="server" id="tbNumeroTarjeta" MaxLength="16" PlaceHolder="Ej: 1234567890" />
                             <asp:CustomValidator  runat="server" ID="cvNumeroTarjeta"  OnServerValidate="cvNumeroTarjeta_ServerValidate" ValidationGroup="Pago" /><br />
 
                             <label for="message-text" class="col-form-label" runat="server" >Banco</label><br />
@@ -305,11 +305,11 @@
                             <asp:CustomValidator  ID="cvddlBanco" runat="server" OnServerValidate="cvddlBanco_ServerValidate" ValidationGroup="Pago" />  <br />
 
                             <label for="message-text" class="col-form-label">Fecha Vencimiento</label><br />
-                            <asp:TextBox runat="server" id="tbFechaVencimiento" MaxLength="5" />
+                            <asp:TextBox runat="server" id="tbFechaVencimiento" MaxLength="5" PlaceHolder="Ej: 12/20"/>
                             <asp:CustomValidator ID="cvtbFechaVencimiento" runat="server" OnServerValidate="cvtbFechaVencimiento_ServerValidate" ValidationGroup="Pago" /><br />
 
                             <label for="message-text" class="col-form-label">Codigo</label><br />
-                            <asp:TextBox runat="server" id="tbCodigoSeguridad" MaxLength="3" />
+                            <asp:TextBox runat="server" id="tbCodigoSeguridad" MaxLength="3" PlaceHolder="Ej: 123"/>
                             <asp:CustomValidator ID="cvtbCodigoSeguridad" runat="server" OnServerValidate="cvtbCodigoSeguridad_ServerValidate" ValidationGroup="Pago" /><br />
 
                         </div>
