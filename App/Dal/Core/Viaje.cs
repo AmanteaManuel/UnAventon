@@ -99,6 +99,8 @@ namespace Dal.Core
 
         private const string GET_ALL_BY_VIAJE_ID = @"select * from Postulantes where ViajeId = {0}";
 
+        private const string HACER_TRAMAPA = @"Update Postulantes set SiCalificado = 0, SiCalifico = 0 where UsuarioId = @parpasajeroId AND ViajeId = @parviajeId";
+
         public int Create(int origenId, int destinoId, string duracion, int lugaresDisponibles, int vehiculoId, DateTime fechaSalida, string horaSalida, double precio, string descripcion, int UsuarioId)
         {
             //query a ejecutar
@@ -289,6 +291,18 @@ namespace Dal.Core
             this.ExecuteNonQuery();
         }
 
+        public void MetodoQueHaceTrampa(int pasajeroId, int viajeId)
+        {
+            this.ExecuteCommandText = HACER_TRAMAPA;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parviajeId", viajeId);
+            this.ExecuteParameters.Parameters.AddWithValue("@parpasajeroId", pasajeroId);
+
+            this.ExecuteNonQuery();
+        }
 
     }
 }

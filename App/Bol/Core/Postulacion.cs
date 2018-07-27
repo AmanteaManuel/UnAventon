@@ -107,6 +107,22 @@ namespace Bol.Core
             catch (Exception ex) { throw new Exception("Error al generar una la lista. " + ex.Message); }
         }
 
-
+        /// <summary>
+        /// Este metodo vuelve atras el estado de las calificaciones para que un usuario pueda calificar
+        /// a su chofer, y al mismo tiempo ser calificado
+        /// </summary>
+        /// <param name="pasajeroId"></param>
+        /// <param name="viajeId"></param>
+        public static void MetodoQueHaceTrampa(int pasajeroId, int viajeId)
+        {
+            try
+            {
+                new Dal.Core.Viaje().MetodoQueHaceTrampa(pasajeroId, viajeId);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error en la 'calificacion'. ");
+            }
+        }
     }
 }

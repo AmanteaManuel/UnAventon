@@ -24,6 +24,19 @@ namespace UnAventon.Usuario
             }
         }
 
+        public String ContadorMagico
+        {
+            get
+            {
+                object o = ViewState["ContadorMagico"];
+                return (o == null) ? String.Empty : (string)o;
+            }
+            set
+            {
+                ViewState["ContadorMagico"] = value;
+            }
+        }
+
         public String ViajeACalificarId
         {
             get
@@ -41,9 +54,10 @@ namespace UnAventon.Usuario
             try
             {
                 if (!Page.IsPostBack)
-                {
+                {                    
                     PreparePage();
                 }
+
             }
             catch (Exception ex)
             {
@@ -55,7 +69,8 @@ namespace UnAventon.Usuario
         }
 
         private void PreparePage()
-        {
+        {            
+
             #region " Datos Personales "
 
             liApellido.Text = ActiveUsuario.Apellido;
@@ -80,9 +95,7 @@ namespace UnAventon.Usuario
             rptPostulaciones.DataSource = postulaciones;
             rptPostulaciones.DataBind();
 
-            divDatosChofer.Visible = false;
-
-
+            divDatosChofer.Visible = false;            
         }
 
         protected void rptVehiculos_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -157,8 +170,19 @@ namespace UnAventon.Usuario
                     liEstado.Text = "Aceptado";
                     liEstado.CssClass = "font-Green";
 
-                    if(postulacion.SiCalifico)
+                    #region " ACA HACEMOS TRAMPA "
+
+                    if (ActiveUsuario.Id == 4009)
                     {
+                        int viajeId = 7030;
+                        int pasajeroId = 4009;
+                        Bol.Core.Postulacion.MetodoQueHaceTrampa(pasajeroId, viajeId);
+                    }
+
+                    #endregion
+                    if (postulacion.SiCalifico)
+                    {
+
                         lbCalifiacion.Enabled = false;
                         lbCalifiacion.CssClass = "UpdateButton not-allowed";
                         lbCalifiacion.ToolTip = "el chofer ya fue calificado";
@@ -199,7 +223,7 @@ namespace UnAventon.Usuario
                 else//el viaje ya ocurrio
                 {
                     if (v.EstadoViaje == 2)//si  fue aceptado
-                    {
+                    {           
                         if (!postulacion.SiCalifico)
                         {
                             lbCalifiacion.Enabled = true;
@@ -274,6 +298,7 @@ namespace UnAventon.Usuario
                     Bol.Viaje v = new Viaje().GetInstanceById(id);
                     ChoferCalifacacionId = v.UsuarioId.ToString();
                     ViajeACalificarId = v.Id.ToString();
+
                     ClientScript.RegisterStartupScript(GetType(), "id", "Calificacion()", true);
                 }
             }
@@ -337,7 +362,7 @@ namespace UnAventon.Usuario
                     {
                         //si ingreso un comentario
                         if (tbmessage.Text != "")
-                        {
+                        {                            
                             //sumo calificaion si fue buena     
                             if (radioCalificacionBuena.Checked)
                             {
