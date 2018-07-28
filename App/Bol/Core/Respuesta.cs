@@ -177,10 +177,26 @@ namespace Bol
                 respuesta.PreguntaId 
                 );
 
+                
                 respuesta.Id = outId;
+                Bol.Respuesta.ActulizarPreguntaId(respuesta.PreguntaId, respuesta.Id);
                 return respuesta.Id;
             }
-            catch (Exception e) { throw new Exception("Error en Insert" + e.Message); }
+            catch (Exception) { throw new Exception("Error en Insert  Respuesta"); }
+        }
+
+        private static void ActulizarPreguntaId(int preguntaId, int RespuestaId)
+        {
+            {
+                try
+                {
+                    new Dal.Core.Respuesta().ActulizarPreguntaId(preguntaId, RespuestaId);
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Error en Insert rel Pregunta");
+                }
+            }
         }
 
         #endregion

@@ -220,6 +220,7 @@
           <div class="form-group">
             <label for="message-text" class="col-form-label">Comentario:</label>
             <asp:TextBox runat="server" class="form-control" id="tbmessage"/> 
+        </div>
         </form>
       </div>
       <div class="modal-footer">

@@ -18,6 +18,8 @@ namespace Dal.Core
 
         private const string LOAD = @"select * from Respuesta where Id = {0}";
 
+        private const string Update_Pregunta = @"update pregunta set RespuestaId = @parRespuestaId where Id = @parPreguntaId;";
+
 
         public int Create(DateTime fecha, string descripcion, int usuarioId, int preguntaId)
         {
@@ -53,6 +55,20 @@ namespace Dal.Core
             return this.Load();
         }
 
+        public void ActulizarPreguntaId(int preguntaId, int parRespuestaId)
+        {
+            //query a ejecutar
+            this.ExecuteCommandText = Update_Pregunta;
+
+            //Limpio los parámetros
+            this.ExecuteParameters.Parameters.Clear();
+
+            this.ExecuteParameters.Parameters.AddWithValue("@parRespuestaId", preguntaId);
+            this.ExecuteParameters.Parameters.AddWithValue("@parPreguntaId", preguntaId);
+
+            //ejecución, retorna el valor del parámetro de retorno
+            this.ExecuteNonQuery();
+        }
     }
 }
 

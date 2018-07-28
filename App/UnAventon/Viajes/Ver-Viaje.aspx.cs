@@ -48,36 +48,39 @@ namespace UnAventon.Viajes
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
+            if (!Page.IsPostBack)
             {
-                //oculto los mensajes
-                HtmlGenericControl divMsjOk = (HtmlGenericControl)this.Master.FindControl("divMsjOk");
-                divMsjOk.Visible = false;
-                HtmlGenericControl divMsjAlerta = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
-                divMsjAlerta.Visible = false;
-
-                if (!IsPostBack)
+                try
                 {
-                    if (Request.QueryString["id"] != null)
-                    {                  
-                        string idEncriptado = Request.QueryString["id"];
-                        int id = Convert.ToInt32(new Bol.Core.Service.Tools().Desencripta(idEncriptado));
-                        int IdDesencriptado = Convert.ToInt32(id);
-                        Viaje = new Bol.Viaje().GetInstanceById(IdDesencriptado);
-                        PreparePage();
-                        
-                       
+                    //oculto los mensajes
+                    HtmlGenericControl divMsjOk = (HtmlGenericControl)this.Master.FindControl("divMsjOk");
+                    divMsjOk.Visible = false;
+                    HtmlGenericControl divMsjAlerta = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                    divMsjAlerta.Visible = false;
+
+                    if (!IsPostBack)
+                    {
+                        if (Request.QueryString["id"] != null)
+                        {
+                            string idEncriptado = Request.QueryString["id"];
+                            int id = Convert.ToInt32(new Bol.Core.Service.Tools().Desencripta(idEncriptado));
+                            int IdDesencriptado = Convert.ToInt32(id);
+                            Viaje = new Bol.Viaje().GetInstanceById(IdDesencriptado);
+                            PreparePage();
+
+
+                        }
+                        else
+                            throw new Exception("Error en la Url. ");
                     }
-                    else
-                        throw new Exception("Error en la Url. ");
                 }
-            }
-            catch (Exception ex)
-            {
-                HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
-                divalert.Visible = true;
-                Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
-                lialert.Text = ex.Message;
+                catch (Exception ex)
+                {
+                    HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                    divalert.Visible = true;
+                    Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                    lialert.Text = ex.Message;
+                }
             }
         }
 
@@ -606,11 +609,12 @@ namespace UnAventon.Viajes
         protected void btnPagar_Click(object sender, EventArgs e)
         {
             try
-            {
-                Validate("Pago");
+            {               
+                ValidarPago();
                 if(Page.IsValid)
                 {
                     Bol.Viaje.Pagar(Convert.ToInt32(tbHiddenId.Text));
+                    Response.Redirect(Request.RawUrl);
                 }
                 else
                     throw new Exception("Todos los campos del pago son obligatorios.");
@@ -626,7 +630,71 @@ namespace UnAventon.Viajes
         }
 
         private void ValidarPago()
-        {            
+        {
+            
+            tbNombreTarjeta.CssClass = "";
+            
+            //Nombre
+            if (string.IsNullOrEmpty(tbNombreTarjeta.Text))
+            {                
+                tbNombreTarjeta.CssClass = "error";
+                throw new Exception("Ingrese el Nombre de la tarjeta.");
+            }
+
+            //Numero
+            tbNumeroTarjeta.CssClass = "";
+            if (string.IsNullOrEmpty(tbNumeroTarjeta.Text) && Bol.Core.Service.Tools.IsNumber(tbNumeroTarjeta.Text))
+            {
+                if (tbNumeroTarjeta.Text.Count() != 16)
+                {
+                    tbNumeroTarjeta.CssClass = "error";
+                    throw new Exception("Numero de tarjeta invalido.");                    
+                    
+                }
+            }
+
+            //Fecha
+            tbFechaVencimiento.CssClass = "";
+            string[] vectorfecha = new string[2];
+            DateTime fechaVencimiento = DateTime.MinValue.Date;
+
+            if (tbFechaVencimiento.Text != "")
+            {
+                if (!tbFechaVencimiento.Text.Contains('/'))
+                    throw new Exception("Formato de fecha invalido.");
+                vectorfecha = tbFechaVencimiento.Text.Split('/');
+                fechaVencimiento = new DateTime(Convert.ToInt32("20" + vectorfecha[1]), Convert.ToInt32(vectorfecha[0]), 1);
+            }
+            else
+            {               
+                tbFechaVencimiento.CssClass = "error";
+                throw new Exception("Ingrese la fecha de vencimiento.");
+            }
+
+            if (fechaVencimiento < DateTime.Now)
+            {                        
+                tbFechaVencimiento.CssClass = "error";
+                throw new Exception("La tarjeta esta vencida");
+            }
+
+            tbCodigoSeguridad.CssClass = "";
+
+            if (string.IsNullOrEmpty(tbCodigoSeguridad.Text) && Bol.Core.Service.Tools.IsNumber(tbCodigoSeguridad.Text))
+            {
+                if (tbCodigoSeguridad.Text.Count() != 3)
+                {
+                    tbCodigoSeguridad.CssClass = "error";
+                    throw new Exception("Codigo incorrecto, debe ser numero y de 3 digitos");
+                }
+            }
+
+            ddlBanco.CssClass = "";          
+
+            if (ddlBanco.SelectedIndex <= 0)
+            {                
+                ddlBanco.CssClass = "error";
+                throw new Exception("Debe elegir un banco.");
+            }            
         }
 
         protected void btnBorrarDatos_Click(object sender, EventArgs e)
@@ -638,85 +706,6 @@ namespace UnAventon.Viajes
             tbCodigoSeguridad.Text = "";
         }
 
-        #region " Validation "
-
-        protected void cvtbNombreTarjeta_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            tbNombreTarjeta.CssClass = "";
-            cvtbNombreTarjeta.ErrorMessage = string.Empty;
-
-            if (string.IsNullOrEmpty(tbNombreTarjeta.Text))
-            {
-                args.IsValid = false;
-                tbNombreTarjeta.CssClass = "error";
-            }
-        }
-
-        protected void cvNumeroTarjeta_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            tbNumeroTarjeta.CssClass = "";
-            cvNumeroTarjeta.ErrorMessage = string.Empty;
-
-            if (string.IsNullOrEmpty(tbNumeroTarjeta.Text) && Bol.Core.Service.Tools.IsNumber(tbNumeroTarjeta.Text))
-            {
-                args.IsValid = false;
-                tbNumeroTarjeta.CssClass = "error";
-            }
-        }
-
-        protected void cvtbFechaVencimiento_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            tbFechaVencimiento.CssClass = "";
-            string[] vectorfecha = new string[2];
-            DateTime fechaVencimiento = DateTime.MinValue.Date;
-
-            if (tbFechaVencimiento.Text != "")
-            {
-                vectorfecha = tbFechaVencimiento.Text.Split('/');
-                fechaVencimiento = new DateTime(Convert.ToInt32(vectorfecha[1]), Convert.ToInt32(vectorfecha[0]), Convert.ToInt32(vectorfecha[1]));
-            }
-            else
-            {
-                args.IsValid = false;
-                tbFechaVencimiento.CssClass = "error";
-                cvtbFechaVencimiento.ErrorMessage = "";
-            }
-
-            if (fechaVencimiento < DateTime.Now)
-            {
-
-                cvtbFechaVencimiento.ErrorMessage = "La tarjeta esta vencida";
-
-                args.IsValid = false;
-                tbFechaVencimiento.CssClass = "error";
-            }
-        }
-
-        protected void cvtbCodigoSeguridad_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            tbCodigoSeguridad.CssClass = "";
-            cvtbFechaVencimiento.ErrorMessage = string.Empty;
-
-            if (string.IsNullOrEmpty(tbCodigoSeguridad.Text) && Bol.Core.Service.Tools.IsNumber(tbCodigoSeguridad.Text))
-            {
-                args.IsValid = false;
-                tbCodigoSeguridad.CssClass = "error";
-            }
-        }
-
-        protected void cvddlBanco_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            ddlBanco.CssClass = "";
-            cvddlBanco.ErrorMessage = string.Empty;
-
-            if (ddlBanco.SelectedIndex <= 0)
-            {
-                args.IsValid = false;
-                ddlBanco.CssClass = "error";
-            }
-        }
-
-        #endregion
 
         protected void rptPreguntas_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
@@ -806,16 +795,16 @@ namespace UnAventon.Viajes
         {
             try
             {
-                Validate("Respuesta");
-                if (Page.IsValid)
+                if (tbResponder.Text != "")
                 {
                     Bol.Respuesta respuesta = new Bol.Respuesta();
-                    respuesta.Descripcion = tbPreguntar.Text;
+                    respuesta.Descripcion = tbResponder.Text;
                     respuesta.Fecha = DateTime.Now;
                     respuesta.UsuarioId = ActiveUsuario.Id;
                     respuesta.PreguntaId = Convert.ToInt32(PreguntaId);
 
                     Bol.Respuesta.Create(respuesta);
+                    Response.Redirect(Request.RawUrl);
                 }
                 else
                     throw new Exception("Ingrese un texto a Responder.");
@@ -841,9 +830,7 @@ namespace UnAventon.Viajes
         {
             try
             {
-                //TextBox tbPreguntar = (TextBox)Page.FindControl("tbPreguntar");
-                Validate("Pregunta");
-                if (Page.IsValid)
+                if (tbPreguntar.Text != "")
                 {
                     Bol.Pregunta pregunta = new Bol.Pregunta();
                     pregunta.Descripcion = tbPreguntar.Text;
@@ -852,9 +839,10 @@ namespace UnAventon.Viajes
                     pregunta.ViajeId = Viaje.Id;
 
                     Bol.Pregunta.Create(pregunta);
+                    Response.Redirect(Request.RawUrl);
                 }
                 else
-                    throw new Exception("Ingrese un texto a Responder.");
+                    throw new Exception("Ingrese un texto a Preguntar.");
 
             }
             catch (Exception ex)

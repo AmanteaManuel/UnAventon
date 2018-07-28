@@ -396,10 +396,10 @@ namespace UnAventon.Usuario
         {
             #region " ACA HACEMOS TRAMPA "
 
-            if (ActiveUsuario.Id == 4009)
+            if (ActiveUsuario.Id == 6009)
             {
-                int viajeId = 7030;
-                int pasajeroId = 4009;
+                int viajeId = 7036;
+                int pasajeroId = 6009;
                 Bol.Core.Postulacion.MetodoQueHaceTrampa(pasajeroId, viajeId);
                 Response.Redirect(Request.RawUrl);
             }

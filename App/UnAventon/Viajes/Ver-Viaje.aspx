@@ -240,7 +240,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <div>
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Calificación:</label>
@@ -255,7 +255,7 @@
                             <asp:TextBox runat="server" class="form-control" ID="tbmessage" />
                         </div>
 
-                    </form>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <asp:Button type="button" class="btn btn-secondary" data-dismiss="modal" Text="Cancelar" runat="server" />
@@ -277,21 +277,14 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <div>
                         <div class="form-group">
 
-                            <strong><label for="recipient-name" class="col-form-label">Datos de Tarjeta:</label></strong>
-                            <br />
-
+                            <strong><label for="recipient-name" class="col-form-label">Datos de Tarjeta:</label></strong> <br />       
                             <label for="message-text" class="col-form-label">Nombre</label><br />
-                            <asp:TextBox runat="server" id="tbNombreTarjeta" PlaceHolder="Ej: Juan" />
-                            <asp:CustomValidator id="cvtbNombreTarjeta" runat="server" OnServerValidate="cvtbNombreTarjeta_ServerValidate" ValidationGroup="Pago" /><br />
-
-
-                            <label for="message-text" class="col-form-label">Numero Tarjeta</label><br />
-                            <asp:TextBox runat="server" id="tbNumeroTarjeta" MaxLength="16" PlaceHolder="Ej: 1234567890" />
-                            <asp:CustomValidator  runat="server" ID="cvNumeroTarjeta"  OnServerValidate="cvNumeroTarjeta_ServerValidate" ValidationGroup="Pago" /><br />
-
+                            <asp:TextBox runat="server" id="tbNombreTarjeta" PlaceHolder="Ej: Juan" /><br />
+                            <label for="message-text" class="col-form-label">Número Tarjeta</label><br />
+                            <asp:TextBox runat="server" id="tbNumeroTarjeta" MaxLength="16" PlaceHolder="Ej: 1234567890" /><br />
                             <label for="message-text" class="col-form-label" runat="server" >Banco</label><br />
                             <asp:DropDownList runat="server" id="ddlBanco">
                                 <asp:ListItem Text="Seleccione" />
@@ -302,18 +295,12 @@
                                 <asp:ListItem Text="Banco Nacion" />
                                 <asp:ListItem Text="HSBC" />                                
                             </asp:DropDownList><br />
-                            <asp:CustomValidator  ID="cvddlBanco" runat="server" OnServerValidate="cvddlBanco_ServerValidate" ValidationGroup="Pago" />  <br />
-
                             <label for="message-text" class="col-form-label">Fecha Vencimiento</label><br />
-                            <asp:TextBox runat="server" id="tbFechaVencimiento" MaxLength="5" PlaceHolder="Ej: 12/20"/>
-                            <asp:CustomValidator ID="cvtbFechaVencimiento" runat="server" OnServerValidate="cvtbFechaVencimiento_ServerValidate" ValidationGroup="Pago" /><br />
-
+                            <asp:TextBox runat="server" id="tbFechaVencimiento" MaxLength="5" PlaceHolder="Ej: 12/20"/><br />
                             <label for="message-text" class="col-form-label">Codigo</label><br />
                             <asp:TextBox runat="server" id="tbCodigoSeguridad" MaxLength="3" PlaceHolder="Ej: 123"/>
-                            <asp:CustomValidator ID="cvtbCodigoSeguridad" runat="server" OnServerValidate="cvtbCodigoSeguridad_ServerValidate" ValidationGroup="Pago" /><br />
-
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <asp:Button type="button" class="btn btn-secondary" data-dismiss="modal" Text="Cancelar" runat="server" />
@@ -335,13 +322,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Comentario:</label>
                             <asp:TextBox runat="server" TextMode="MultiLine" Height="75" CssClass="form-control" ID="tbPreguntar" />
                         </div>
 
-                    </form>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <asp:Button type="button" class="btn btn-secondary" data-dismiss="modal" Text="Cancelar" runat="server" />
@@ -363,13 +350,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="message-text" class="col-form-label">Comentario:</label>
-                            <asp:TextBox runat="server"  TextMode="MultiLine" Height="75" class="form-control" ID="tbResponder" />
+                    <div>
+                        <div class="form-group">                            
+                            <label for="recipient-name" class="col-form-label">Comentario:</label>
+                            <asp:TextBox runat="server" class="form-control" id="tbResponder"/> 
                         </div>
-
-                    </form>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <asp:Button type="button" class="btn btn-secondary" data-dismiss="modal" Text="Cancelar" runat="server" />
