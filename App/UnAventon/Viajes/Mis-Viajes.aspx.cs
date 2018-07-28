@@ -23,11 +23,6 @@ namespace UnAventon.Viajes
                     if (viajes == null || viajes.Count <= 0)
                         throw new Exception("El usuario no tiene viajes publicados.");
 
-
-                    #region " Pruebas "
-
-                    #endregion                   
-
                     //Bindeo el objeto
                     rptMisViajes.DataSource = viajes;
                     rptMisViajes.DataBind();
@@ -74,7 +69,7 @@ namespace UnAventon.Viajes
                 return;
             
             List<Bol.Core.Postulacion> postulantes = Bol.Core.Postulacion.GetAllPostulacionesByViajeId(v.Id);
-            bool SiAdeudaCalificacion = true;
+            bool SiAdeudaCalificacion = false;
             if (postulantes != null)
             {
                 //si alguno de los usuarios no fue calificado

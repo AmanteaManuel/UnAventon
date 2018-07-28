@@ -131,6 +131,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title"><strong>Mis postulaciones</strong></h3>
+                    <asp:LinkButton runat="server" OnClick="MagicEvent_Click" BackColor="Transparent" Width="1090" Height="20"></asp:LinkButton>
                 </div>
                 <div class="panel-body">
                     <div class="row ">
@@ -149,30 +150,31 @@
                                                 <th>Datos de Contacto</th>
                                                 <th>Baja del viaje</th>
                                                 <th>Calificar Chofer</th>
+                                                <th></th>
                                             </tr>
                                         </HeaderTemplate>
-                                        <ItemTemplate>
-                                            <tr>
-                                                <td><asp:Literal Text='<%# Eval("Origen.Descripcion") %>' runat="server"/></td>
-                                                <td><asp:Literal Text='<%# Eval("Destino.Descripcion") %>' runat="server"/></td>                                       
-                                                <td><asp:Literal Text='<%# Eval("ShortDate") %>' runat="server"/></td>                   
-                                                <td><asp:Literal Text='<%# Eval("HoraSalida") %>' runat="server"/></td>                                                
-                                                <td>
-                                                    <strong ><asp:Label runat="server" id="liEstado" /></strong>                                                
-                                                </td> 
-                                                <td>
-                                                    <asp:LinkButton ID="lbDetalle" CssClass="links" CommandName="DETALLE" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Ver Detalle"></asp:LinkButton>
-                                                </td>
-                                                <td>
-                                                    <asp:LinkButton ID="lbDatos" CssClass="UpdateButton" CommandName="DATOS" CommandArgument='<%# Eval("id") %>' runat="server" Text="Contacto Chofer"></asp:LinkButton>
-                                                </td>
-                                                <td>
-                                                    <asp:LinkButton ID="lbBaja" CssClass="DeleteButton" CommandName="BAJA" CommandArgument='<%# Eval("id") %>' runat="server" Text="Darme de Baja" OnClientClick="return confirm('¿Desea darse de baja? Si ya fue aceptado usted será penalizado.');"></asp:LinkButton>
-                                                </td>
-                                                <td>
-                                                    <asp:LinkButton CssClass="UpdateButton" CommandName="CALIFICACION" CommandArgument='<%#Eval("Id") %>' runat="server" Text="Calificar" ID="lbCalifiacion"></asp:LinkButton>  
-                                                </td>
-                                            </tr>
+                                        <ItemTemplate>                                           
+                                                <tr>
+                                                    <td><asp:Literal Text='<%# Eval("Origen.Descripcion") %>' runat="server"/></td>
+                                                    <td><asp:Literal Text='<%# Eval("Destino.Descripcion") %>' runat="server"/></td>                                       
+                                                    <td><asp:Literal Text='<%# Eval("ShortDate") %>' runat="server"/></td>                   
+                                                    <td><asp:Literal Text='<%# Eval("HoraSalida") %>' runat="server"/></td>                                                
+                                                    <td>
+                                                        <strong ><asp:Label runat="server" id="liEstado" /></strong>                                                
+                                                    </td> 
+                                                    <td>
+                                                        <asp:LinkButton ID="lbDetalle" CssClass="links" CommandName="DETALLE" CommandArgument='<%# Eval("Id") %>' runat="server" Text="Ver Detalle"></asp:LinkButton>
+                                                    </td>
+                                                    <td>
+                                                        <asp:LinkButton ID="lbDatos" CssClass="UpdateButton" CommandName="DATOS" CommandArgument='<%# Eval("id") %>' runat="server" Text="Contacto Chofer"></asp:LinkButton>
+                                                    </td>
+                                                    <td>
+                                                        <asp:LinkButton ID="lbBaja" CssClass="DeleteButton" CommandName="BAJA" CommandArgument='<%# Eval("id") %>' runat="server" Text="Darme de Baja" OnClientClick="return confirm('¿Desea darse de baja? Si ya fue aceptado usted será penalizado.');"></asp:LinkButton>
+                                                    </td>
+                                                    <td>
+                                                        <asp:LinkButton CssClass="UpdateButton" CommandName="CALIFICACION" CommandArgument='<%#Eval("Id") %>' runat="server" Text="Calificar" ID="lbCalifiacion"></asp:LinkButton>  
+                                                    </td>                                                   
+                                                </tr>                                           
                                         </ItemTemplate>
                                     </asp:Repeater>
                                 </table>
@@ -181,7 +183,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>        
     </div>
     <!-- Aca termina la lista de Postulaciones-->
      <div class="row" id="divDatosChofer" runat="server">

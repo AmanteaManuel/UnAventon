@@ -169,17 +169,7 @@ namespace UnAventon.Usuario
                 {
                     liEstado.Text = "Aceptado";
                     liEstado.CssClass = "font-Green";
-
-                    #region " ACA HACEMOS TRAMPA "
-
-                    if (ActiveUsuario.Id == 4009)
-                    {
-                        int viajeId = 7030;
-                        int pasajeroId = 4009;
-                        Bol.Core.Postulacion.MetodoQueHaceTrampa(pasajeroId, viajeId);
-                    }
-
-                    #endregion
+                    
                     if (postulacion.SiCalifico)
                     {
 
@@ -242,6 +232,8 @@ namespace UnAventon.Usuario
                         lbCalifiacion.CssClass = "UpdateButton not-allowed";
                         lbCalifiacion.ToolTip = "Solo los usuarios que realizaron el viaje pueden calificar. ";
                     }
+                    lbBaja.CssClass = "DeleteButton not-allowed";
+                    lbBaja.Enabled = false;
                 }
             }
         }
@@ -263,7 +255,6 @@ namespace UnAventon.Usuario
                 {
                     Bol.Viaje viaje = new Viaje().GetInstanceById(id);
 
-
                     divDatosChofer.Visible = true;
                     Bol.Usuario usuario = new Bol.Usuario().GetInstanceById(viaje.UsuarioId);
                     liEmail1.Text = " " + usuario.Email;
@@ -275,12 +266,11 @@ namespace UnAventon.Usuario
                 if (e.CommandName.ToUpper().Equals("BAJA"))
                 {
                     Bol.Viaje viaje = new Viaje().GetInstanceById(id);
-                    Bol.Core.Postulacion u = Bol.Core.Postulacion.GetByViajeANDusuarioId(id, viaje.Id);
-
+                    Bol.Core.Postulacion u = Bol.Core.Postulacion.GetByViajeANDusuarioId(ActiveUsuario.Id, id);
                     //Aceptado
                     if (u.EstadoViaje == 2)
                     {
-                        Bol.Usuario.EliminarPostulacion(id, viaje.Id);
+                        Bol.Usuario.EliminarPostulacion(ActiveUsuario.Id, id);
                         Bol.Viaje.SumarUnLUgar(viaje.Id);
                         Bol.Usuario.RestarReputacionPasajero(ActiveUsuario.Id);
                         Response.Redirect(Request.RawUrl);
@@ -288,7 +278,7 @@ namespace UnAventon.Usuario
                     }
                     else
                     {
-                        Bol.Usuario.EliminarPostulacion(id, viaje.Id);
+                        Bol.Usuario.EliminarPostulacion(ActiveUsuario.Id, id);
                         Response.Redirect(Request.RawUrl);
                     }
                 }
@@ -300,6 +290,13 @@ namespace UnAventon.Usuario
                     ViajeACalificarId = v.Id.ToString();
 
                     ClientScript.RegisterStartupScript(GetType(), "id", "Calificacion()", true);
+                }
+                if (e.CommandName.ToUpper().Equals("TRAMPA"))
+                {
+                    HtmlGenericControl divalert = (HtmlGenericControl)this.Master.FindControl("divMsjAlerta");
+                    divalert.Visible = true;
+                    Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
+                    lialert.Text = "Trampa detectada";
                 }
             }
             catch (Exception ex)
@@ -393,6 +390,21 @@ namespace UnAventon.Usuario
                 Literal lialert = (Literal)this.Master.FindControl("liMensajeAlerta");
                 lialert.Text = ex.Message;
             }
+        }
+
+        protected void MagicEvent_Click(object sender, EventArgs e)
+        {
+            #region " ACA HACEMOS TRAMPA "
+
+            if (ActiveUsuario.Id == 4009)
+            {
+                int viajeId = 7030;
+                int pasajeroId = 4009;
+                Bol.Core.Postulacion.MetodoQueHaceTrampa(pasajeroId, viajeId);
+                Response.Redirect(Request.RawUrl);
+            }
+
+            #endregion
         }
     }
 }
