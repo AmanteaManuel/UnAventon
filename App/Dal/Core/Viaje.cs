@@ -52,7 +52,7 @@ namespace Dal.Core
 
         private const string GET_ALL_FROM_NOW_TO_ONE_MONTH = @"SELECT * FROM Viajes
 		                                                                WHERE FechaSalida BETWEEN '{0}' AND '{1}'
-							                                            ORDER BY FechaSalida";
+							                                            ORDER BY FechaSalida, HoraSalida";
 
         private const string GET_ALL_BY_USUARIOID_AND_FECHA = @"SELECT * FROM Viajes WHERE UsuarioId = {0} AND FechaSalida = '{1}' AND SiActivo = 1";
 
